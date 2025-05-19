@@ -30,3 +30,21 @@ a {
 a:hover {
   text-decoration: underline;
 }
+nav ul {
+  background: #333;
+  list-style: none;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+nav ul li {
+  margin: 0 20px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav ul li a:hover {
+  text-decoration: underline;
+}
