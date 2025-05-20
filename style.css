@@ -48,3 +48,15 @@ nav ul li a {
 nav ul li a:hover {
   text-decoration: underline;
 }
+.quiz-box {
+  background: #f8f9fa;
+  padding: 20px;
+  margin: 20px 0;
+  border-left: 5px solid #007bff;
+}
+.quiz-box h2 {
+  color: #333;
+}
+.quiz-box ul li {
+  margin: 5px 0;
+}
