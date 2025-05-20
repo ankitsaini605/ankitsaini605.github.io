@@ -101,3 +101,10 @@ form button {
   padding: 10px 20px;
   border: none;
 }
+.card {
+  padding: 20px;
+  margin: 20px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-left: 5px solid #007bff;
+}
