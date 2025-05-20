@@ -75,3 +75,18 @@ nav ul li a:hover {
 .card a:hover {
   text-decoration: underline;
 }
+.hero-banner {
+  background: linear-gradient(to right, #003973, #e5e5be);
+  color: white;
+  padding: 50px;
+  text-align: center;
+}
+.hero-banner a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: white;
+  color: #003973;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+}
