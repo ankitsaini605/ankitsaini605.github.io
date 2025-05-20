@@ -9,6 +9,16 @@
 <header><h1>EduIgnite</h1></header>
 <main>
   <h2>JavaScript Basics</h2>
+  <script>
+let i = 0;
+const slides = document.querySelectorAll(".slide");
+function showSlide() {
+  slides.forEach((s, index) => s.style.display = index === i ? "block" : "none");
+  i = (i + 1) % slides.length;
+}
+setInterval(showSlide, 3000);
+</script>
+
   <p>JavaScript is a lightweight scripting language used to add interactivity to web pages.</p>
 </main>
 <footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
