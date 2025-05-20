@@ -1,64 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="EduIgnite - Learn smart with blogs, MCQs, programming notes, and current affairs." />
-<meta name="keywords" content="study tips, c programming, aptitude, current affairs, edutech, competitive exams" />
-<meta name="author" content="Ankit Saini" />
-<meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EduIgnite - Learn Smart. Rise Faster.</title>
+  <meta charset="UTF-8">
+  <title>EduIgnite – Learn Better, Faster</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-btns button { margin: 5px; padding: 10px; border: none; background: #003366; color: #fff; }
+    .post-card { display: block; border-left: 4px solid #007bff; margin: 10px 0; padding: 10px; background: #f8f8f8; }
+    .post-card.hide { display: none; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to EduIgnite</h1>
-    <p>Crack Exams • Learn Concepts • Practice Daily</p>
-  </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog-122.html">Blogs</a></li>
-      <li><a href="aptitude-topic-98.html">Aptitude</a></li>
-      <li><a href="programming-topic-90.html">Programming</a></li>
-      <li><a href="contact.html">Contact</a></li>
-       <a href="#blog">Blogs</a>
-  <a href="#aptitude">Aptitude</a>
-  <a href="#programming">Programming</a>
-  <a href="#contact">Contact</a>
-    </ul>
-  </nav>
+<h1>📚 EduIgnite – Blog Central</h1>
 
-  <section class="cards">
-    <div class="card">
-      <h2>Latest Blog</h2>
-      <p>How to Study 6 Hours Without Losing Focus</p>
-      <a href="blog-90.html">Read More →</a>
-    </div>
-    <div class="card">
-      <h2>Aptitude Tip</h2>
-      <p>Shortcuts for Ratio & Profit-Loss problems</p>
-      <a href="aptitude-topic-90.html">Practice Now →</a>
-    </div>
-    <div class="card">
-      <h2>Programming</h2>
-      <p>Master Loops, Functions & Arrays in C++</p>
-      <a href="programming-topic-90.html">Start Coding →</a>
-    </div>
-    <div class="card">
-  <h3>Study Techniques</h3>
-  <p>Learn how toppers revise and stay consistent...</p>
-  <a href="blog-68.html">Read More →</a>
+<div class="filter-btns">
+  <button onclick="filterPosts('all')">All</button>
+  <button onclick="filterPosts('study')">Study</button>
+  <button onclick="filterPosts('aptitude')">Aptitude</button>
+  <button onclick="filterPosts('coding')">Programming</button>
 </div>
 
-  </section>
-  <section class="hero-banner">
-  <h1>Welcome to EduIgnite</h1>
-  <p>Crack Exams, Learn Concepts, Master Coding</p>
-  <a href="blog-67.html">📚 Start Learning</a>
-</section>
-<footer>
-    <p>© 2025 EduIgnite | Follow @eduignite_official</p>
-  </footer>
+<div class="post-card study"><h3>Study Plan – Blog #81</h3><p>How to focus 6+ hours</p></div>
+<div class="post-card aptitude"><h3>Aptitude #111 – Ratio Tricks</h3><p>Easy solving ratio questions</p></div>
+<div class="post-card coding"><h3>Programming #102 – Functions</h3><p>Syntax + Output in C++</p></div>
+<div class="post-card study"><h3>Study Secrets – Blog #82</h3><p>Memory Hacks + Pomodoro</p></div>
+
+<script>
+function filterPosts(category) {
+  const posts = document.querySelectorAll('.post-card');
+  posts.forEach(card => {
+    if (category === 'all' || card.classList.contains(category)) {
+      card.classList.remove('hide');
+    } else {
+      card.classList.add('hide');
+    }
+  });
+}
+</script>
+
 </body>
 </html>
