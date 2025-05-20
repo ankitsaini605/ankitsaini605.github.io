@@ -60,3 +60,18 @@ nav ul li a:hover {
 .quiz-box ul li {
   margin: 5px 0;
 }
+.card {
+  background: #fff;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-left: 4px solid #007bff;
+}
+.card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.card a:hover {
+  text-decoration: underline;
+}
