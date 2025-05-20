@@ -108,3 +108,4 @@ form button {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-left: 5px solid #007bff;
 }
+.slide { width: 100%; display: none; }
