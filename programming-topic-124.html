@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>C++ Inheritance + Encapsulation</title></head>
+<body>
+<h1>🔐 OOP Concepts: Inheritance & Encapsulation</h1>
+
+<h2>🧬 Inheritance</h2>
+<pre>
+class Animal {
+public:
+  void speak() { cout << "Sound"; }
+};
+
+class Dog : public Animal {
+public:
+  void bark() { cout << "Bark"; }
+};
+
+int main() {
+  Dog d;
+  d.speak();  // Output: Sound
+  d.bark();   // Output: Bark
+}
+</pre>
+
+<h2>🛡️ Encapsulation</h2>
+<pre>
+class Student {
+private:
+  int age;
+public:
+  void setAge(int a) { age = a; }
+  int getAge() { return age; }
+};
+</pre>
+
+<p>Encapsulation = Wrapping data using private members</p>
+</body></html>
