@@ -109,3 +109,14 @@ form button {
   border-left: 5px solid #007bff;
 }
 .slide { width: 100%; display: none; }
+.slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+}
+.slide {
+  min-width: 250px;
+  background: #f5f5f5;
+  padding: 20px;
+  border-left: 4px solid #007bff;
+}
