@@ -12,64 +12,26 @@
 </head>
 <body>
 
-<h1>📚 EduIgnite – Blog Central</h1>
-
-<div class="filter-btns">
-  <button onclick="filterPosts('all')">All</button>
-  <button onclick="filterPosts('study')">Study</button>
-  <button onclick="filterPosts('aptitude')">Aptitude</button>
-  <button onclick="filterPosts('coding')">Programming</button>
-</div>
-<div class="carousel">
-  <img src="img1.jpg" class="slide" style="display:block;">
-  <img src="img2.jpg" class="slide">
-  <img src="img3.jpg" class="slide">
-</div>
-
-<div class="post-card study"><h3>Study Plan – Blog #81</h3><p>How to focus 6+ hours</p></div>
-<div class="post-card aptitude"><h3>Aptitude #111 – Ratio Tricks</h3><p>Easy solving ratio questions</p></div>
-<div class="post-card coding"><h3>Programming #102 – Functions</h3><p>Syntax + Output in C++</p></div>
-<div class="post-card study"><h3>Study Secrets – Blog #82</h3><p>Memory Hacks + Pomodoro</p></div>
 <section class="hero">
-  <h1>📚 Welcome to EduIgnite</h1>
-  <p>Your learning partner for exams, coding & aptitude.</p>
-  <a href="blogs.html" class="btn">Explore Blogs</a>
+  <h1>Welcome to EduIgnite</h1>
+  <p>India's smartest platform for study plans, aptitude, coding, and growth.</p>
 </section>
-  <section class="explore">
-  <h2>🔥 Explore Topics</h2>
-  <div class="card">Study Timetable</div>
-  <div class="card">Aptitude Tricks</div>
-  <div class="card">C++ Programs</div>
-</section>
-<section class="testimonials">
-  <h2>⭐ What Students Say</h2>
-  <blockquote>“EduIgnite helped me top my class in Aptitude.” – Riya</blockquote>
-  <blockquote>“The C++ crash course is gold!” – Aman</blockquote>
-</section>
-  <section class="explore-slider">
-  <h2>🔥 Explore Popular Topics</h2>
+
+<section class="explore">
+  <h2>Explore Categories</h2>
   <div class="slider">
-    <div class="slide">Study Timetable</div>
-    <div class="slide">Aptitude Booster</div>
-    <div class="slide">C++ Crash Course</div>
-    <div class="slide">Interview Prep</div>
+    <div class="card">📘 Study Techniques</div>
+    <div class="card">📊 Aptitude Tricks</div>
+    <div class="card">💻 Programming C++</div>
+    <div class="card">📈 Career Planning</div>
   </div>
 </section>
 
+<footer>
+  <p>Follow us: @eduignite_official | t.me/eduigniteofficial</p>
+  <p>&copy; 2025 EduIgnite. All Rights Reserved.</p>
+</footer>
 
-
-<script>
-function filterPosts(category) {
-  const posts = document.querySelectorAll('.post-card');
-  posts.forEach(card => {
-    if (category === 'all' || card.classList.contains(category)) {
-      card.classList.remove('hide');
-    } else {
-      card.classList.add('hide');
-    }
-  });
-}
-</script>
 
 </body>
 </html>
