@@ -120,3 +120,21 @@ form button {
   padding: 20px;
   border-left: 4px solid #007bff;
 }
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 10px;
+  }
+  header, footer, nav, .card, .slide {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
+  .slide {
+    min-width: 100%;
+  }
+}
