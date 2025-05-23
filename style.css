@@ -48,3 +48,12 @@ footer {
   background: #f4f4f4;
   margin-top: 40px;
 }
+@media (max-width: 768px) {
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
+  .slider {
+    flex-direction: column;
+  }
+}
