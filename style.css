@@ -138,3 +138,24 @@ form button {
     min-width: 100%;
   }
 }
+.hero {
+  background: linear-gradient(to right, #007bff, #003366);
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+.explore {
+  padding: 30px;
+  background: #f9f9f9;
+}
+.slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  min-width: 250px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
