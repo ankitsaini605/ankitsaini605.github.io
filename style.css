@@ -159,3 +159,9 @@ form button {
   min-width: 250px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
