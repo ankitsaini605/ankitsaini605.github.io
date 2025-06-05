@@ -2,19 +2,1402 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Java Introduction</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Introduction to Java programming language. Simple, secure, and platform-independent.">
-  <meta name="keywords" content="java basics, java intro, java programming, eduignite">
-  <meta name="author" content="Ankit Saini">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Java Programming | Complete Beginner's Guide | EduIgnite</title>
+  <meta name="description" content="Master Java programming from scratch with EduIgnite's comprehensive guide. Learn core concepts, syntax, object-oriented programming, and build your first Java application with interactive examples and exercises.">
+  <meta name="keywords" content="java basics, java tutorial, java programming, java for beginners, object-oriented programming, java syntax, java examples, java exercises, JVM, java applications">
+  <meta name="author" content="Ankit Saini">
+  <link rel="stylesheet" href="../EduIgnite/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <style>
+    /* Page-specific styles */
+    .concept-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .feature-title {
+      color: var(--secondary-color);
+      margin: 10px 0;
+      font-size: 1.2rem;
+    }
+    
+    .code-block {
+      background-color: #282c34;
+      border-radius: 8px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+    
+    .code-header {
+      background-color: #21252b;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #abb2bf;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    
+    .code-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .code-action {
+      background: none;
+      border: none;
+      color: #abb2bf;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .code-action:hover {
+      color: white;
+    }
+    
+    .code-content {
+      padding: 15px;
+      overflow-x: auto;
+    }
+    
+    pre {
+      margin: 0;
+    }
+    
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .output-block {
+      background-color: #f1f1f1;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: 'Courier New', monospace;
+      color: #333;
+    }
+    
+    .output-header {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+    
+    .example-section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 30px 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .example-section h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .explanation {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    
+    .explanation h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+    }
+    
+    .explanation ul {
+      margin-bottom: 0;
+    }
+    
+    .explanation li {
+      margin-bottom: 8px;
+    }
+    
+    .tip-box {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    
+    .tip-box h4 {
+      color: #856404;
+      margin-top: 0;
+    }
+    
+    .warning-box {
+      background-color: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    
+    .warning-box h4 {
+      color: #721c24;
+      margin-top: 0;
+    }
+    
+    .practice-exercise {
+      background-color: #e8f4ff;
+      border: 1px solid #c8e1ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 30px 0;
+    }
+    
+    .practice-exercise h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+    }
+    
+    .practice-exercise ol {
+      padding-left: 20px;
+    }
+    
+    .practice-exercise li {
+      margin-bottom: 10px;
+    }
+    
+    .solution-toggle {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    
+    .solution-toggle:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .solution {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+    
+    .timeline-container {
+      padding: 10px 40px;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+    }
+    
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -13px;
+      background-color: white;
+      border: 4px solid var(--accent-color);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    .left {
+      left: 0;
+    }
+    
+    .right {
+      left: 50%;
+    }
+    
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid var(--primary-color);
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent var(--primary-color);
+    }
+    
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid var(--primary-color);
+      border-width: 10px 10px 10px 0;
+      border-color: transparent var(--primary-color) transparent transparent;
+    }
+    
+    .right::after {
+      left: -12px;
+    }
+    
+    .timeline-content {
+      padding: 20px 30px;
+      background-color: white;
+      position: relative;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    .timeline-date {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    
+    .resource-links {
+      margin: 30px 0;
+    }
+    
+    .resource-link {
+      display: block;
+      padding: 10px 15px;
+      background-color: #f8f9fa;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    
+    .resource-link:hover {
+      background-color: #e9ecef;
+      transform: translateX(5px);
+    }
+    
+    .resource-link i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    .progress-container {
+      width: 100%;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    
+    .progress-bar {
+      width: 0;
+      height: 30px;
+      background-color: var(--primary-color);
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      transition: width 0.5s ease;
+    }
+    
+    .quiz-container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 30px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .quiz-question {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+    
+    .quiz-question:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .quiz-question h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    
+    .options {
+      margin-left: 20px;
+    }
+    
+    .option {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .option:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .option.correct {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    
+    .option.incorrect {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    
+    .explanation {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+      display: none;
+    }
+    
+    .show-explanation {
+      display: block;
+    }
+    
+    .score-display {
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 20px 0;
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .timeline-container::before {
+        left: 60px;
+        border: medium solid var(--primary-color);
+        border-width: 10px 10px 10px 0;
+        border-color: transparent var(--primary-color) transparent transparent;
+      }
+      
+      .left::after, .right::after {
+        left: 18px;
+      }
+      
+      .right {
+        left: 0%;
+      }
+      
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>What is Java?</h2>
-  <p>Java is a high-level, object-oriented programming language developed by Sun Microsystems. It is platform-independent thanks to the JVM (Java Virtual Machine).</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
+    </div>
+    <div class="search-container">
+      <form action="#" method="get" id="search-form">
+        <input type="text" placeholder="Search topics..." name="search" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../EduIgnite/index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="../EduIgnite/programming.html" class="active"><i class="fas fa-code"></i> Programming</a></li>
+      <li><a href="../EduIgnite/aptitude.html"><i class="fas fa-brain"></i> Aptitude</a></li>
+      <li><a href="../EduIgnite/current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
+      <li><a href="../EduIgnite/blog.html"><i class="fas fa-book-reader"></i> Study Blog</a></li>
+      <li><a href="../EduIgnite/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x800/?java');">
+      <div class="hero-content">
+        <h2>Introduction to Java Programming</h2>
+        <p>Master the fundamentals of Java, one of the world's most popular and versatile programming languages.</p>
+        <div class="cta-buttons">
+          <a href="#java-basics" class="cta-button primary">Learn Basics</a>
+          <a href="#java-examples" class="cta-button secondary">See Examples</a>
+        </div>
+      </div>
+    </section>
+    
+    <div class="container">
+      <section id="java-basics">
+        <h2>What is Java?</h2>
+        
+        <div class="concept-box">
+          <p>Java is a high-level, class-based, object-oriented programming language that was developed by James Gosling at Sun Microsystems (which has since been acquired by Oracle Corporation) and released in 1995. Java is designed to be platform-independent, following the principle of "Write Once, Run Anywhere" (WORA), which means that compiled Java code can run on all platforms that support Java without the need for recompilation.</p>
+          
+          <p>Java applications are typically compiled to bytecode that can run on any Java Virtual Machine (JVM) regardless of the underlying computer architecture. This makes Java one of the most versatile and widely used programming languages in the world, powering everything from web applications and mobile apps to enterprise software and embedded systems.</p>
+        </div>
+        
+        <h3>Key Features of Java</h3>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h4 class="feature-title">Platform Independence</h4>
+            <p>Java's "Write Once, Run Anywhere" capability allows code to run on any device with a Java Virtual Machine, regardless of the underlying hardware or operating system.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4 class="feature-title">Security</h4>
+            <p>Java provides multiple layers of security, including its bytecode verification process, strong memory management, and built-in exception handling to prevent system crashes.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-cubes"></i>
+            </div>
+            <h4 class="feature-title">Object-Oriented</h4>
+            <p>Java follows object-oriented programming principles, organizing code into classes and objects that model real-world entities, promoting code reusability and maintainability.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <h4 class="feature-title">Robust Networking</h4>
+            <p>Java includes extensive libraries for networking, making it easy to develop distributed applications that communicate across networks.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-memory"></i>
+            </div>
+            <h4 class="feature-title">Automatic Memory Management</h4>
+            <p>Java's garbage collection automatically reclaims memory occupied by unused objects, reducing memory leaks and improving reliability.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h4 class="feature-title">Multithreading</h4>
+            <p>Java provides built-in support for multithreaded programming, allowing developers to create applications that can perform multiple tasks simultaneously.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section id="java-architecture">
+        <h2>Java Architecture</h2>
+        
+        <div class="concept-box">
+          <p>Understanding Java's architecture is essential for grasping how Java programs work. The Java architecture consists of several key components that work together to enable the "Write Once, Run Anywhere" capability.</p>
+        </div>
+        
+        <h3>The Java Ecosystem</h3>
+        
+        <div class="timeline">
+          <div class="timeline-container left">
+            <div class="timeline-content">
+              <div class="timeline-date">Java Development Kit (JDK)</div>
+              <p>The JDK is a software development environment used for developing Java applications. It includes the Java Runtime Environment (JRE), an interpreter/loader (Java), a compiler (javac), an archiver (jar), a documentation generator (Javadoc), and other tools needed for Java development.</p>
+            </div>
+          </div>
+          <div class="timeline-container right">
+            <div class="timeline-content">
+              <div class="timeline-date">Java Runtime Environment (JRE)</div>
+              <p>The JRE provides the libraries, Java Virtual Machine, and other components necessary to run Java applications. It's included in the JDK, but can also be installed separately if you only need to run Java programs, not develop them.</p>
+            </div>
+          </div>
+          <div class="timeline-container left">
+            <div class="timeline-content">
+              <div class="timeline-date">Java Virtual Machine (JVM)</div>
+              <p>The JVM is an abstract computing machine that enables a computer to run Java programs. It provides a runtime environment in which Java bytecode can be executed. The JVM is the cornerstone of the Java platform's "Write Once, Run Anywhere" principle.</p>
+            </div>
+          </div>
+          <div class="timeline-container right">
+            <div class="timeline-content">
+              <div class="timeline-date">Bytecode</div>
+              <p>Java source code is compiled into bytecode, which is a highly optimized set of instructions designed to be executed by the JVM. This intermediate representation is what makes Java platform-independent.</p>
+            </div>
+          </div>
+          <div class="timeline-container left">
+            <div class="timeline-content">
+              <div class="timeline-date">Java API (Application Programming Interface)</div>
+              <p>The Java API is a large collection of ready-made software components that provide many useful capabilities, such as graphical user interface (GUI) widgets, networking, and input/output functionality.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="java-examples">
+        <h2>Your First Java Program</h2>
+        
+        <div class="example-section">
+          <h3>Hello World Example</h3>
+          
+          <p>Let's start with the traditional "Hello World" program to understand the basic structure of a Java application:</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span>HelloWorld.java</span>
+              <div class="code-actions">
+                <button class="code-action" onclick="copyCode(this)"><i class="far fa-copy"></i> Copy</button>
+              </div>
+            </div>
+            <div class="code-content">
+              <pre><code class="language-java">public class HelloWorld {
+    public static void main(String[] args) {
+        // This is a comment
+        System.out.println("Hello, World!");
+    }
+}</code></pre>
+            </div>
+          </div>
+          
+          <div class="output-block">
+            <div class="output-header">Output:</div>
+            <div class="output-content">
+              Hello, World!
+            </div>
+          </div>
+          
+          <div class="explanation">
+            <h4>Code Explanation:</h4>
+            <ul>
+              <li><code>public class HelloWorld</code> - Defines a class named HelloWorld. In Java, every application must have at least one class, and the class name must match the filename (HelloWorld.java).</li>
+              <li><code>public static void main(String[] args)</code> - This is the main method, which is the entry point for any Java application. The Java runtime starts execution from this method.</li>
+              <li><code>// This is a comment</code> - Comments in Java start with // for single-line comments or /* */ for multi-line comments.</li>
+              <li><code>System.out.println("Hello, World!");</code> - This statement prints the text "Hello, World!" to the console. The <code>System.out</code> is an output stream connected to the console, and <code>println</code> is a method that prints a line of text.</li>
+            </ul>
+          </div>
+          
+          <div class="tip-box">
+            <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+            <p>In Java, every statement must end with a semicolon (;). Forgetting this is a common mistake for beginners. Also, Java is case-sensitive, so <code>System</code> is different from <code>system</code>.</p>
+          </div>
+        </div>
+        
+        <div class="example-section">
+          <h3>Variables and Data Types</h3>
+          
+          <p>Java is a strongly-typed language, which means you must declare the type of a variable before using it. Here's an example that demonstrates various data types in Java:</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span>DataTypes.java</span>
+              <div class="code-actions">
+                <button class="code-action" onclick="copyCode(this)"><i class="far fa-copy"></i> Copy</button>
+              </div>
+            </div>
+            <div class="code-content">
+              <pre><code class="language-java">public class DataTypes {
+    public static void main(String[] args) {
+        // Primitive data types
+        int age = 25;                  // Integer (whole number)
+        double salary = 50000.50;      // Floating point number
+        char grade = 'A';              // Single character
+        boolean isEmployed = true;     // Boolean value
+        
+        // String is not a primitive type, it's a class
+        String name = "John Doe";
+        
+        // Printing the values
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Salary: $" + salary);
+        System.out.println("Grade: " + grade);
+        System.out.println("Employed: " + isEmployed);
+        
+        // Arithmetic operations
+        int a = 10;
+        int b = 5;
+        System.out.println("a + b = " + (a + b));
+        System.out.println("a - b = " + (a - b));
+        System.out.println("a * b = " + (a * b));
+        System.out.println("a / b = " + (a / b));
+        System.out.println("a % b = " + (a % b));  // Modulus (remainder)
+    }
+}</code></pre>
+            </div>
+          </div>
+          
+          <div class="output-block">
+            <div class="output-header">Output:</div>
+            <div class="output-content">
+              Name: John Doe<br>
+              Age: 25<br>
+              Salary: $50000.5<br>
+              Grade: A<br>
+              Employed: true<br>
+              a + b = 15<br>
+              a - b = 5<br>
+              a * b = 50<br>
+              a / b = 2<br>
+              a % b = 0
+            </div>
+          </div>
+          
+          <div class="explanation">
+            <h4>Java Data Types:</h4>
+            <ul>
+              <li><strong>Primitive Types:</strong> These are the most basic data types available in Java.
+                <ul>
+                  <li><code>byte</code>: 8-bit integer (-128 to 127)</li>
+                  <li><code>short</code>: 16-bit integer (-32,768 to 32,767)</li>
+                  <li><code>int</code>: 32-bit integer (-2^31 to 2^31-1)</li>
+                  <li><code>long</code>: 64-bit integer (-2^63 to 2^63-1)</li>
+                  <li><code>float</code>: 32-bit floating-point</li>
+                  <li><code>double</code>: 64-bit floating-point</li>
+                  <li><code>char</code>: 16-bit Unicode character</li>
+                  <li><code>boolean</code>: true or false</li>
+                </ul>
+              </li>
+              <li><strong>Reference Types:</strong> These are more complex types like classes, interfaces, and arrays.
+                <ul>
+                  <li><code>String</code>: A sequence of characters</li>
+                  <li><code>Array</code>: A collection of similar type variables</li>
+                  <li><code>Class</code>: User-defined blueprint from which objects are created</li>
+                  <li><code>Interface</code>: A reference type that can contain only constants, method signatures, default methods, static methods, and nested types</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="example-section">
+          <h3>Control Flow Statements</h3>
+          
+          <p>Java provides several control flow statements to control the flow of execution in your programs:</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span>ControlFlow.java</span>
+              <div class="code-actions">
+                <button class="code-action" onclick="copyCode(this)"><i class="far fa-copy"></i> Copy</button>
+              </div>
+            </div>
+            <div class="code-content">
+              <pre><code class="language-java">public class ControlFlow {
+    public static void main(String[] args) {
+        // If-else statement
+        int score = 85;
+        
+        if (score >= 90) {
+            System.out.println("Grade: A");
+        } else if (score >= 80) {
+            System.out.println("Grade: B");
+        } else if (score >= 70) {
+            System.out.println("Grade: C");
+        } else if (score >= 60) {
+            System.out.println("Grade: D");
+        } else {
+            System.out.println("Grade: F");
+        }
+        
+        // Switch statement
+        char grade = 'B';
+        
+        switch (grade) {
+            case 'A':
+                System.out.println("Excellent!");
+                break;
+            case 'B':
+                System.out.println("Good job!");
+                break;
+            case 'C':
+                System.out.println("Satisfactory");
+                break;
+            case 'D':
+                System.out.println("Needs improvement");
+                break;
+            case 'F':
+                System.out.println("Failed");
+                break;
+            default:
+                System.out.println("Invalid grade");
+                break;
+        }
+        
+        // For loop
+        System.out.println("Counting from 1 to 5:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        
+        // While loop
+        System.out.println("Counting down from 5 to 1:");
+        int count = 5;
+        while (count > 0) {
+            System.out.print(count + " ");
+            count--;
+        }
+        System.out.println();
+        
+        // Do-while loop
+        System.out.println("Do-while example:");
+        int num = 1;
+        do {
+            System.out.print(num + " ");
+            num++;
+        } while (num <= 5);
+        System.out.println();
+    }
+}</code></pre>
+            </div>
+          </div>
+          
+          <div class="output-block">
+            <div class="output-header">Output:</div>
+            <div class="output-content">
+              Grade: B<br>
+              Good job!<br>
+              Counting from 1 to 5:<br>
+              1 2 3 4 5 <br>
+              Counting down from 5 to 1:<br>
+              5 4 3 2 1 <br>
+              Do-while example:<br>
+              1 2 3 4 5 
+            </div>
+          </div>
+          
+          <div class="explanation">
+            <h4>Control Flow Statements:</h4>
+            <ul>
+              <li><strong>If-else:</strong> Used for conditional execution based on a boolean expression.</li>
+              <li><strong>Switch:</strong> Used for selecting one of many code blocks to be executed.</li>
+              <li><strong>For loop:</strong> Used when you know how many times you want to execute a statement or a block of statements.</li>
+              <li><strong>While loop:</strong> Repeats a statement or block of statements while a given condition is true. It tests the condition before executing the loop body.</li>
+              <li><strong>Do-while loop:</strong> Similar to a while loop, but it tests the condition at the end of the loop body, which means the loop body will execute at least once.</li>
+            </ul>
+          </div>
+          
+          <div class="warning-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Common Pitfall</h4>
+            <p>Be careful with infinite loops! Always ensure that your loop condition will eventually become false, or use a <code>break</code> statement to exit the loop when needed.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section id="java-oop">
+        <h2>Object-Oriented Programming in Java</h2>
+        
+        <div class="concept-box">
+          <p>Java is fundamentally an object-oriented programming (OOP) language. OOP is a programming paradigm based on the concept of "objects," which can contain data and code: data in the form of fields (often known as attributes or properties), and code in the form of procedures (often known as methods).</p>
+        </div>
+        
+        <div class="example-section">
+          <h3>Classes and Objects</h3>
+          
+          <p>Here's an example of a simple class and how to create objects from it:</p>
+          
+          <div class="code-block">
+            <div class="code-header">
+              <span>Person.java</span>
+              <div class="code-actions">
+                <button class="code-action" onclick="copyCode(this)"><i class="far fa-copy"></i> Copy</button>
+              </div>
+            </div>
+            <div class="code-content">
+              <pre><code class="language-java">public class Person {
+    // Fields (attributes)
+    private String name;
+    private int age;
+    
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Methods
+    public void introduce() {
+        System.out.println("Hello, my name is " + name + " and I am " + age + " years old.");
+    }
+    
+    public void celebrateBirthday() {
+        age++;
+        System.out.println("Happy Birthday! Now I am " + age + " years old.");
+    }
+    
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public void setAge(int age) {
+        if (age > 0) {  // Basic validation
+            this.age = age;
+        }
+    }
+    
+    // Main method to test the Person class
+    public static void main(String[] args) {
+        // Creating objects of Person class
+        Person person1 = new Person("Alice", 25);
+        Person person2 = new Person("Bob", 30);
+        
+        // Calling methods on the objects
+        person1.introduce();
+        person2.introduce();
+        
+        // Modifying object state
+        person1.celebrateBirthday();
+        person2.setName("Robert");
+        
+        // Checking the changes
+        person1.introduce();
+        person2.introduce();
+    }
+}</code></pre>
+            </div>
+          </div>
+          
+          <div class="output-block">
+            <div class="output-header">Output:</div>
+            <div class="output-content">
+              Hello, my name is Alice and I am 25 years old.<br>
+              Hello, my name is Bob and I am 30 years old.<br>
+              Happy Birthday! Now I am 26 years old.<br>
+              Hello, my name is Alice and I am 26 years old.<br>
+              Hello, my name is Robert and I am 30 years old.
+            </div>
+          </div>
+          
+          <div class="explanation">
+            <h4>Key OOP Concepts in Java:</h4>
+            <ul>
+              <li><strong>Class:</strong> A blueprint for creating objects. It defines a datatype by bundling data and methods that work on that data.</li>
+              <li><strong>Object:</strong> An instance of a class. When a class is defined, no memory is allocated, but when it is instantiated (i.e., an object is created), memory is allocated.</li>
+              <li><strong>Encapsulation:</strong> The bundling of data with the methods that operate on that data. It restricts direct access to some of an object's components, which is a means of preventing accidental interference and misuse of the data.</li>
+              <li><strong>Inheritance:</strong> The mechanism by which one class can inherit the fields and methods of another class.</li>
+              <li><strong>Polymorphism:</strong> The ability of different classes to be treated as instances of the same class through inheritance.</li>
+              <li><strong>Abstraction:</strong> The concept of hiding the complex implementation details and showing only the necessary features of an object.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section id="java-practice">
+        <h2>Practice Exercises</h2>
+        
+        <div class="practice-exercise">
+          <h3>Exercise 1: Simple Calculator</h3>
+          <p>Create a simple calculator program that can perform addition, subtraction, multiplication, and division operations on two numbers.</p>
+          
+          <ol>
+            <li>Create a class named <code>Calculator</code>.</li>
+            <li>Implement methods for each operation: <code>add</code>, <code>subtract</code>, <code>multiply</code>, and <code>divide</code>.</li>
+            <li>Each method should take two parameters and return the result of the operation.</li>
+            <li>In the <code>main</code> method, create a <code>Calculator</code> object and test each operation with sample values.</li>
+            <li>For the <code>divide</code> method, handle the case where the second parameter is zero (division by zero).</li>
+          </ol>
+          
+          <button class="solution-toggle" onclick="toggleSolution(this)">Show Solution</button>
+          
+          <div class="solution">
+            <div class="code-block">
+              <div class="code-header">
+                <span>Calculator.java</span>
+                <div class="code-actions">
+                  <button class="code-action" onclick="copyCode(this)"><i class="far fa-copy"></i> Copy</button>
+                </div>
+              </div>
+              <div class="code-content">
+                <pre><code class="language-java">public class Calculator {
+    // Method to add two numbers
+    public double add(double a, double b) {
+        return a + b;
+    }
+    
+    // Method to subtract two numbers
+    public double subtract(double a, double b) {
+        return a - b;
+    }
+    
+    // Method to multiply two numbers
+    public double multiply(double a, double b) {
+        return a * b;
+    }
+    
+    // Method to divide two numbers
+    public double divide(double a, double b) {
+        if (b == 0) {
+            System.out.println("Error: Division by zero is not allowed.");
+            return 0;
+        }
+        return a / b;
+    }
+    
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        
+        // Test the calculator
+        double num1 = 10.0;
+        double num2 = 5.0;
+        
+        System.out.println(num1 + " + " + num2 + " = " + calc.add(num1, num2));
+        System.out.println(num1 + " - " + num2 + " = " + calc.subtract(num1, num2));
+        System.out.println(num1 + " * " + num2 + " = " + calc.multiply(num1, num2));
+        System.out.println(num1 + " / " + num2 + " = " + calc.divide(num1, num2));
+        
+        // Test division by zero
+        System.out.println(num1 + " / 0 = ");
+        calc.divide(num1, 0);
+    }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="practice-exercise">
+          <h3>Exercise 2: Student Grade Tracker</h3>
+          <p>Create a program that tracks student grades and calculates their average.</p>
+          
+          <ol>
+            <li>Create a class named <code>Student</code> with fields for name and an array of grades.</li>
+            <li>Implement a constructor that initializes the name and creates an empty array for grades.</li>
+            <li>Implement a method to add a grade to the student's record.</li>
+            <li>Implement a method to calculate and return the average grade.</li>
+            <li>Implement a method to display the student's information, including name, all grades, and the average.</li>
+            <li>In the <code>main</code> method, create a few <code>Student</code> objects, add some grades, and display their information.</li>
+          </ol>
+          
+          <button class="solution-toggle" onclick="toggleSolution(this)">Show Solution</button>
+          
+          <div class="solution">
+            <div class="code-block">
+              <div class="code-header">
+                <span>Student.java</span>
+                <div class="code-actions">
+                  <button class="code-action" onclick="copyCode(this)"><i class="far fa-copy"></i> Copy</button>
+                </div>
+              </div>
+              <div class="code-content">
+                <pre><code class="language-java">import java.util.ArrayList;
+
+public class Student {
+    private String name;
+    private ArrayList<Double> grades;
+    
+    // Constructor
+    public Student(String name) {
+        this.name = name;
+        this.grades = new ArrayList<>();
+    }
+    
+    // Method to add a grade
+    public void addGrade(double grade) {
+        grades.add(grade);
+    }
+    
+    // Method to calculate average grade
+    public double calculateAverage() {
+        if (grades.isEmpty()) {
+            return 0.0;
+        }
+        
+        double sum = 0.0;
+        for (Double grade : grades) {
+            sum += grade;
+        }
+        
+        return sum / grades.size();
+    }
+    
+    // Method to display student information
+    public void displayInfo() {
+        System.out.println("Student: " + name);
+        System.out.print("Grades: ");
+        
+        if (grades.isEmpty()) {
+            System.out.println("No grades yet.");
+        } else {
+            for (Double grade : grades) {
+                System.out.print(grade + " ");
+            }
+            System.out.println();
+            System.out.println("Average: " + calculateAverage());
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        // Create students
+        Student student1 = new Student("Alice");
+        Student student2 = new Student("Bob");
+        
+        // Add grades for Alice
+        student1.addGrade(85.5);
+        student1.addGrade(92.0);
+        student1.addGrade(78.5);
+        
+        // Add grades for Bob
+        student2.addGrade(90.0);
+        student2.addGrade(88.5);
+        student2.addGrade(95.0);
+        
+        // Display student information
+        student1.displayInfo();
+        student2.displayInfo();
+    }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="java-quiz">
+        <h2>Test Your Knowledge</h2>
+        
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar">0%</div>
+        </div>
+        
+        <div class="score-display" id="score-display">Score: 0/5</div>
+        
+        <div class="quiz-container">
+          <div class="quiz-question" id="question-1">
+            <h4>1. What is the main advantage of Java's "Write Once, Run Anywhere" feature?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">It allows Java programs to run faster than programs written in other languages.</div>
+              <div class="option" data-correct="true">It allows Java programs to run on any device with a Java Virtual Machine, regardless of the underlying hardware or operating system.</div>
+              <div class="option" data-correct="false">It allows Java programs to be written once and automatically translated into other programming languages.</div>
+              <div class="option" data-correct="false">It allows Java programs to be written without any syntax errors.</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Java's "Write Once, Run Anywhere" (WORA) principle means that compiled Java code (bytecode) can run on any platform that has a Java Virtual Machine (JVM), without needing to be recompiled for each specific platform. This platform independence is one of Java's key features.</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-2">
+            <h4>2. Which of the following is NOT a primitive data type in Java?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">int</div>
+              <div class="option" data-correct="false">boolean</div>
+              <div class="option" data-correct="false">char</div>
+              <div class="option" data-correct="true">String</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> String is not a primitive data type in Java; it's a class. The eight primitive data types in Java are: byte, short, int, long, float, double, char, and boolean. String is a reference type that represents a sequence of characters.</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-3">
+            <h4>3. What is the output of the following code?<br><code>int x = 5;<br>System.out.println(x++ + ++x);</code></h4>
+            <div class="options">
+              <div class="option" data-correct="false">10</div>
+              <div class="option" data-correct="false">11</div>
+              <div class="option" data-correct="true">12</div>
+              <div class="option" data-correct="false">13</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Let's break this down step by step:</p>
+              <p>1. <code>x++</code> is a post-increment operator, which means it uses the current value of x (5) in the expression and then increments x to 6.</p>
+              <p>2. <code>++x</code> is a pre-increment operator, which means it first increments x to 7 and then uses this value in the expression.</p>
+              <p>3. So, the expression becomes <code>5 + 7 = 12</code>.</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-4">
+            <h4>4. Which keyword is used to inherit a class in Java?</h4>
+            <div class="options">
+              <div class="option" data-correct="true">extends</div>
+              <div class="option" data-correct="false">implements</div>
+              <div class="option" data-correct="false">inherits</div>
+              <div class="option" data-correct="false">super</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> In Java, the <code>extends</code> keyword is used to inherit a class. For example, <code>class Child extends Parent</code> means that the Child class inherits from the Parent class. The <code>implements</code> keyword is used to implement an interface, not to inherit a class.</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-5">
+            <h4>5. What is the purpose of the JVM in Java?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">To compile Java source code into machine code</div>
+              <div class="option" data-correct="false">To provide a set of libraries for Java programs</div>
+              <div class="option" data-correct="true">To execute Java bytecode on different platforms</div>
+              <div class="option" data-correct="false">To optimize Java code for better performance</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> The Java Virtual Machine (JVM) is an abstract computing machine that enables a computer to run Java programs. It executes Java bytecode, which is the compiled form of Java source code. The JVM is the cornerstone of the Java platform's "Write Once, Run Anywhere" principle, as it allows the same bytecode to run on any device with a compatible JVM, regardless of the underlying hardware or operating system.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="resource-links">
+        <h2>Additional Resources</h2>
+        <a href="#" class="resource-link"><i class="fas fa-book"></i> Java Programming Fundamentals eBook</a>
+        <a href="#" class="resource-link"><i class="fas fa-file-code"></i> 100 Java Coding Exercises for Beginners</a>
+        <a href="#" class="resource-link"><i class="fas fa-video"></i> Video Tutorial: Object-Oriented Programming in Java</a>
+        <a href="#" class="resource-link"><i class="fas fa-project-diagram"></i> Java Project Ideas for Practice</a>
+        <a href="#" class="resource-link"><i class="fas fa-graduation-cap"></i> Advanced Java Concepts Course</a>
+      </section>
+    </div>
+    
+    <section class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for the latest Java tutorials, tips, and resources.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+      <p class="form-message"></p>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../EduIgnite/index.html">Home</a></li>
+          <li><a href="../EduIgnite/programming.html">Programming</a></li>
+          <li><a href="../EduIgnite/aptitude.html">Aptitude</a></li>
+          <li><a href="../EduIgnite/current-affairs.html">Current Affairs</a></li>
+          <li><a href="../EduIgnite/blog.html">Study Blog</a></li>
+          <li><a href="../EduIgnite/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
+    </div>
+  </footer>
+  
+  <script>
+    // Toggle mobile menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Copy code function
+    function copyCode(button) {
+      const codeBlock = button.closest('.code-block').querySelector('code');
+      const textArea = document.createElement('textarea');
+      textArea.value = codeBlock.textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      // Change button text temporarily
+      const originalText = button.innerHTML;
+      button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      setTimeout(() => {
+        button.innerHTML = originalText;
+      }, 2000);
+    }
+    
+    // Toggle solution visibility
+    function toggleSolution(button) {
+      const solution = button.nextElementSibling;
+      if (solution.style.display === 'block') {
+        solution.style.display = 'none';
+        button.textContent = 'Show Solution';
+      } else {
+        solution.style.display = 'block';
+        button.textContent = 'Hide Solution';
+      }
+    }
+    
+    // Quiz functionality
+    let score = 0;
+    let questionsAnswered = 0;
+    
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', function() {
+        // Check if this question has already been answered
+        const questionDiv = this.closest('.quiz-question');
+        if (questionDiv.classList.contains('answered')) return;
+        
+        // Mark question as answered
+        questionDiv.classList.add('answered');
+        questionsAnswered++;
+        
+        // Check if answer is correct
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        if (isCorrect) {
+          this.classList.add('correct');
+          score++;
+        } else {
+          this.classList.add('incorrect');
+          // Highlight the correct answer
+          questionDiv.querySelectorAll('.option').forEach(opt => {
+            if (opt.getAttribute('data-correct') === 'true') {
+              opt.classList.add('correct');
+            }
+          });
+        }
+        
+        // Show explanation
+        questionDiv.querySelector('.explanation').classList.add('show-explanation');
+        
+        // Update progress and score
+        updateProgress();
+      });
+    });
+    
+    function updateProgress() {
+      const totalQuestions = document.querySelectorAll('.quiz-question').length;
+      const progressPercentage = (questionsAnswered / totalQuestions) * 100;
+      
+      document.getElementById('progress-bar').style.width = progressPercentage + '%';
+      document.getElementById('progress-bar').textContent = Math.round(progressPercentage) + '%';
+      
+      document.getElementById('score-display').textContent = 'Score: ' + score + '/' + totalQuestions;
+    }
+    
+    // Newsletter form submission
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      const messageElement = document.querySelector('.form-message');
+      
+      // Simple validation
+      if (email) {
+        // In a real application, you would send this to your server
+        messageElement.textContent = 'Thank you for subscribing!';
+        messageElement.style.color = 'green';
+        this.reset();
+        
+        // Hide the message after 3 seconds
+        setTimeout(() => {
+          messageElement.textContent = '';
+        }, 3000);
+      }
+    });
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+  </script>
 </body>
 </html>

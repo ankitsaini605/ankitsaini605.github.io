@@ -2,24 +2,710 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Percentage - Aptitude</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Percentage concept and aptitude questions with answers.">
-  <meta name="keywords" content="percentage, aptitude quiz, eduignite, percentage problems">
-  <meta name="author" content="Ankit Saini">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastering Percentage Concepts - Aptitude Training | EduIgnite</title>
+  <meta name="description" content="Master percentage concepts with EduIgnite's comprehensive guide. Learn formulas, shortcuts, and practice with interactive quizzes and solved examples for competitive exams.">
+  <meta name="keywords" content="percentage problems, aptitude quiz, percentage formulas, percentage shortcuts, competitive exam preparation, percentage tricks, quantitative aptitude, percentage calculation">
+  <meta name="author" content="Ankit Saini">
+  <link rel="stylesheet" href="../EduIgnite/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Page-specific styles */
+    .concept-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .formula-box {
+      background-color: #e8f4ff;
+      border: 1px solid #c8e1ff;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .formula-box h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+    }
+    
+    .formula {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 1.2rem;
+      background-color: white;
+      padding: 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 10px 0;
+    }
+    
+    .example-box {
+      background-color: white;
+      border-radius: 5px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .example-box h3 {
+      color: var(--secondary-color);
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    
+    .step-by-step {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+    
+    .step {
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+    }
+    
+    .step:before {
+      content: "→";
+      position: absolute;
+      left: 5px;
+      color: var(--primary-color);
+    }
+    
+    .quiz-container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 30px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .quiz-question {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+    
+    .quiz-question:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .quiz-question h4 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    
+    .options {
+      margin-left: 20px;
+    }
+    
+    .option {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .option:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .option.correct {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    
+    .option.incorrect {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    
+    .explanation {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+      display: none;
+    }
+    
+    .show-explanation {
+      display: block;
+    }
+    
+    .tip-box {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    
+    .tip-box h3 {
+      color: #856404;
+      margin-top: 0;
+    }
+    
+    .shortcut-box {
+      background-color: #d1ecf1;
+      border-left: 4px solid #17a2b8;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    
+    .shortcut-box h3 {
+      color: #0c5460;
+      margin-top: 0;
+    }
+    
+    .practice-set {
+      margin: 30px 0;
+    }
+    
+    .practice-question {
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .toggle-answer {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .toggle-answer:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .answer {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      display: none;
+    }
+    
+    .progress-container {
+      width: 100%;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    
+    .progress-bar {
+      width: 0;
+      height: 30px;
+      background-color: var(--primary-color);
+      border-radius: 5px;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      transition: width 0.5s ease;
+    }
+    
+    .score-display {
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 20px 0;
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+    
+    .resource-links {
+      margin: 30px 0;
+    }
+    
+    .resource-link {
+      display: block;
+      padding: 10px 15px;
+      background-color: #f8f9fa;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    
+    .resource-link:hover {
+      background-color: #e9ecef;
+      transform: translateX(5px);
+    }
+    
+    .resource-link i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .formula {
+        font-size: 1rem;
+        padding: 8px;
+      }
+      
+      .quiz-container, .example-box {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Percentage – Concept & Quiz</h2>
-  <p>Percentage is a number or ratio expressed as a fraction of 100.</p>
-  <ol>
-    <li>Q: What is 25% of 200?<br><strong>Ans:</strong> 50</li>
-    <li>Q: A number is increased by 20% and then decreased by 20%. What is the net change?<br><strong>Ans:</strong> 4% decrease</li>
-    <li>Q: If 60% of students passed, how many failed out of 500?<br><strong>Ans:</strong> 200</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
+    </div>
+    <div class="search-container">
+      <form action="#" method="get" id="search-form">
+        <input type="text" placeholder="Search topics..." name="search" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../EduIgnite/index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="../EduIgnite/programming.html"><i class="fas fa-code"></i> Programming</a></li>
+      <li><a href="../EduIgnite/aptitude.html" class="active"><i class="fas fa-brain"></i> Aptitude</a></li>
+      <li><a href="../EduIgnite/current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
+      <li><a href="../EduIgnite/blog.html"><i class="fas fa-book-reader"></i> Study Blog</a></li>
+      <li><a href="../EduIgnite/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x800/?mathematics');">
+      <div class="hero-content">
+        <h2>Mastering Percentage Concepts</h2>
+        <p>A comprehensive guide to understanding percentage problems, formulas, shortcuts, and applications for competitive exams.</p>
+        <div class="cta-buttons">
+          <a href="#concepts" class="cta-button primary">Learn Concepts</a>
+          <a href="#practice" class="cta-button secondary">Practice Questions</a>
+        </div>
+      </div>
+    </section>
+    
+    <div class="container">
+      <section id="concepts">
+        <h2>Percentage – Core Concepts</h2>
+        
+        <div class="concept-box">
+          <h3>What is Percentage?</h3>
+          <p>A percentage is a number or ratio expressed as a fraction of 100. It is denoted by the symbol "%". The word percentage comes from the Latin word 'per centum' which means 'by the hundred'.</p>
+          <p>For example, 45% represents 45 out of 100, or the ratio 45:100, or the fraction 45/100.</p>
+        </div>
+        
+        <div class="formula-box">
+          <h3>Basic Percentage Formulas</h3>
+          <div class="formula">Percentage = (Value / Total Value) × 100%</div>
+          <div class="formula">Value = (Percentage × Total Value) / 100%</div>
+          <div class="formula">Total Value = (Value × 100%) / Percentage</div>
+        </div>
+        
+        <div class="example-box">
+          <h3>Example 1: Finding a Percentage</h3>
+          <p><strong>Question:</strong> What is 25% of 200?</p>
+          <div class="step-by-step">
+            <div class="step">Identify the percentage (25%) and the total value (200).</div>
+            <div class="step">Use the formula: Value = (Percentage × Total Value) / 100%</div>
+            <div class="step">Value = (25 × 200) / 100 = 5000 / 100 = 50</div>
+            <div class="step"><strong>Answer:</strong> 25% of 200 is 50.</div>
+          </div>
+        </div>
+        
+        <div class="example-box">
+          <h3>Example 2: Percentage Change</h3>
+          <p><strong>Question:</strong> A number is increased by 20% and then decreased by 20%. What is the net change?</p>
+          <div class="step-by-step">
+            <div class="step">Let's assume the original number is x.</div>
+            <div class="step">After a 20% increase, the new value becomes: x + 20% of x = x + 0.2x = 1.2x</div>
+            <div class="step">After a 20% decrease from 1.2x, the final value becomes: 1.2x - 20% of 1.2x = 1.2x - 0.2(1.2x) = 1.2x - 0.24x = 0.96x</div>
+            <div class="step">The net change is 0.96x - x = -0.04x, which is a 4% decrease.</div>
+            <div class="step"><strong>Answer:</strong> There is a net decrease of 4%.</div>
+          </div>
+        </div>
+        
+        <div class="example-box">
+          <h3>Example 3: Finding the Original Value</h3>
+          <p><strong>Question:</strong> If 60% of students passed, how many failed out of 500?</p>
+          <div class="step-by-step">
+            <div class="step">If 60% passed, then 100% - 60% = 40% failed.</div>
+            <div class="step">Use the formula: Value = (Percentage × Total Value) / 100%</div>
+            <div class="step">Number of failed students = (40 × 500) / 100 = 20,000 / 100 = 200</div>
+            <div class="step"><strong>Answer:</strong> 200 students failed.</div>
+          </div>
+        </div>
+        
+        <div class="tip-box">
+          <h3><i class="fas fa-lightbulb"></i> Pro Tips for Percentage Problems</h3>
+          <ul>
+            <li><strong>Fraction to Percentage:</strong> To convert a fraction to a percentage, multiply by 100%. For example, 3/4 = 3/4 × 100% = 75%.</li>
+            <li><strong>Decimal to Percentage:</strong> To convert a decimal to a percentage, multiply by 100%. For example, 0.35 = 0.35 × 100% = 35%.</li>
+            <li><strong>Percentage to Fraction:</strong> To convert a percentage to a fraction, divide by 100%. For example, 25% = 25/100 = 1/4.</li>
+            <li><strong>Percentage to Decimal:</strong> To convert a percentage to a decimal, divide by 100%. For example, 75% = 75/100 = 0.75.</li>
+          </ul>
+        </div>
+        
+        <div class="shortcut-box">
+          <h3><i class="fas fa-bolt"></i> Quick Calculation Shortcuts</h3>
+          <ul>
+            <li><strong>Finding 10%:</strong> Simply move the decimal point one place to the left. For example, 10% of 250 = 25.</li>
+            <li><strong>Finding 5%:</strong> Find 10% and then divide by 2. For example, 5% of 250 = 10% of 250 ÷ 2 = 25 ÷ 2 = 12.5.</li>
+            <li><strong>Finding 20%:</strong> Find 10% and then multiply by 2. For example, 20% of 250 = 10% of 250 × 2 = 25 × 2 = 50.</li>
+            <li><strong>Finding 25%:</strong> Divide by 4. For example, 25% of 250 = 250 ÷ 4 = 62.5.</li>
+            <li><strong>Finding 50%:</strong> Divide by 2. For example, 50% of 250 = 250 ÷ 2 = 125.</li>
+          </ul>
+        </div>
+      </section>
+      
+      <section id="applications">
+        <h2>Real-World Applications</h2>
+        
+        <div class="concept-box">
+          <h3>Percentage in Daily Life</h3>
+          <ul>
+            <li><strong>Discounts and Sales:</strong> "20% off" means you pay 80% of the original price.</li>
+            <li><strong>Interest Rates:</strong> Banks offer interest rates as percentages of your deposit or loan amount.</li>
+            <li><strong>Tax Calculations:</strong> Income tax, sales tax, and GST are all calculated using percentages.</li>
+            <li><strong>Academic Grading:</strong> Exam scores are often expressed as percentages.</li>
+            <li><strong>Statistics and Data Analysis:</strong> Percentages are used to represent proportions in data.</li>
+          </ul>
+        </div>
+        
+        <div class="example-box">
+          <h3>Example: Discount Calculation</h3>
+          <p><strong>Question:</strong> A shirt is priced at ₹1,200 and is on sale for 15% off. What is the sale price?</p>
+          <div class="step-by-step">
+            <div class="step">Calculate the discount amount: 15% of ₹1,200 = (15 × 1,200) / 100 = ₹180</div>
+            <div class="step">Subtract the discount from the original price: ₹1,200 - ₹180 = ₹1,020</div>
+            <div class="step"><strong>Answer:</strong> The sale price is ₹1,020.</div>
+          </div>
+        </div>
+        
+        <div class="example-box">
+          <h3>Example: Simple Interest</h3>
+          <p><strong>Question:</strong> If you deposit ₹10,000 in a bank that offers 6% annual simple interest, how much interest will you earn after 2 years?</p>
+          <div class="step-by-step">
+            <div class="step">Use the simple interest formula: Interest = Principal × Rate × Time</div>
+            <div class="step">Interest = ₹10,000 × 6% × 2 = ₹10,000 × 0.06 × 2 = ₹1,200</div>
+            <div class="step"><strong>Answer:</strong> You will earn ₹1,200 in interest after 2 years.</div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="practice" class="practice-set">
+        <h2>Interactive Practice Questions</h2>
+        
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar">0%</div>
+        </div>
+        
+        <div class="score-display" id="score-display">Score: 0/5</div>
+        
+        <div class="quiz-container">
+          <div class="quiz-question" id="question-1">
+            <h4>1. If the price of a book is first increased by 10% and then reduced by 10%, the net effect on the price is:</h4>
+            <div class="options">
+              <div class="option" data-correct="false">No change in price</div>
+              <div class="option" data-correct="true">1% decrease in price</div>
+              <div class="option" data-correct="false">1% increase in price</div>
+              <div class="option" data-correct="false">2% decrease in price</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Let's say the original price is x.</p>
+              <p>After 10% increase: x + 10% of x = x + 0.1x = 1.1x</p>
+              <p>After 10% decrease from the new price: 1.1x - 10% of 1.1x = 1.1x - 0.11x = 0.99x</p>
+              <p>The final price is 0.99x, which is 1% less than the original price x.</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-2">
+            <h4>2. In an examination, 80% of the students passed in English, 85% passed in Mathematics, and 75% passed in both subjects. What percentage of students failed in both subjects?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">15%</div>
+              <div class="option" data-correct="false">20%</div>
+              <div class="option" data-correct="true">10%</div>
+              <div class="option" data-correct="false">5%</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Let's use the formula: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</p>
+              <p>Where P(A) = percentage passed in English = 80%</p>
+              <p>P(B) = percentage passed in Mathematics = 85%</p>
+              <p>P(A ∩ B) = percentage passed in both = 75%</p>
+              <p>P(A ∪ B) = percentage passed in at least one subject = 80% + 85% - 75% = 90%</p>
+              <p>Therefore, percentage failed in both subjects = 100% - 90% = 10%</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-3">
+            <h4>3. A man spends 30% of his income on food, 20% on rent, and 10% on travel. What percentage of his income is left for other expenses?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">30%</div>
+              <div class="option" data-correct="true">40%</div>
+              <div class="option" data-correct="false">50%</div>
+              <div class="option" data-correct="false">60%</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Total percentage spent = 30% + 20% + 10% = 60%</p>
+              <p>Percentage left for other expenses = 100% - 60% = 40%</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-4">
+            <h4>4. If the population of a town increases by 5% annually, by what percentage will it increase after 2 years?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">10%</div>
+              <div class="option" data-correct="true">10.25%</div>
+              <div class="option" data-correct="false">10.5%</div>
+              <div class="option" data-correct="false">11%</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Let's say the initial population is P.</p>
+              <p>After 1 year: P + 5% of P = P + 0.05P = 1.05P</p>
+              <p>After 2 years: 1.05P + 5% of 1.05P = 1.05P + 0.05(1.05P) = 1.05P + 0.0525P = 1.1025P</p>
+              <p>The percentage increase after 2 years = (1.1025P - P) / P × 100% = 0.1025 × 100% = 10.25%</p>
+            </div>
+          </div>
+          
+          <div class="quiz-question" id="question-5">
+            <h4>5. A shopkeeper marks his goods 25% above the cost price and gives a discount of 10% on the marked price. What is his profit percentage?</h4>
+            <div class="options">
+              <div class="option" data-correct="false">10%</div>
+              <div class="option" data-correct="false">12.5%</div>
+              <div class="option" data-correct="true">12.5%</div>
+              <div class="option" data-correct="false">15%</div>
+            </div>
+            <div class="explanation">
+              <p><strong>Explanation:</strong> Let's say the cost price is ₹100.</p>
+              <p>Marked price = ₹100 + 25% of ₹100 = ₹100 + ₹25 = ₹125</p>
+              <p>Discount = 10% of ₹125 = ₹12.5</p>
+              <p>Selling price = ₹125 - ₹12.5 = ₹112.5</p>
+              <p>Profit = ₹112.5 - ₹100 = ₹12.5</p>
+              <p>Profit percentage = (₹12.5 / ₹100) × 100% = 12.5%</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="additional-practice">
+        <h2>Additional Practice Problems</h2>
+        
+        <div class="practice-question">
+          <p><strong>Question 1:</strong> In a class of 50 students, 40% are girls. How many boys are there in the class?</p>
+          <button class="toggle-answer" onclick="toggleAnswer(this)">Show Answer</button>
+          <div class="answer">
+            <p><strong>Solution:</strong></p>
+            <p>Number of girls = 40% of 50 = (40 × 50) / 100 = 20</p>
+            <p>Number of boys = 50 - 20 = 30</p>
+            <p><strong>Answer:</strong> There are 30 boys in the class.</p>
+          </div>
+        </div>
+        
+        <div class="practice-question">
+          <p><strong>Question 2:</strong> A man's salary increases by 10% every year. If his starting salary is ₹20,000, what will be his salary after 3 years?</p>
+          <button class="toggle-answer" onclick="toggleAnswer(this)">Show Answer</button>
+          <div class="answer">
+            <p><strong>Solution:</strong></p>
+            <p>Starting salary = ₹20,000</p>
+            <p>After 1 year: ₹20,000 + 10% of ₹20,000 = ₹20,000 + ₹2,000 = ₹22,000</p>
+            <p>After 2 years: ₹22,000 + 10% of ₹22,000 = ₹22,000 + ₹2,200 = ₹24,200</p>
+            <p>After 3 years: ₹24,200 + 10% of ₹24,200 = ₹24,200 + ₹2,420 = ₹26,620</p>
+            <p><strong>Answer:</strong> His salary after 3 years will be ₹26,620.</p>
+          </div>
+        </div>
+        
+        <div class="practice-question">
+          <p><strong>Question 3:</strong> A shopkeeper bought an article for ₹800 and sold it at a profit of 25%. What is the selling price?</p>
+          <button class="toggle-answer" onclick="toggleAnswer(this)">Show Answer</button>
+          <div class="answer">
+            <p><strong>Solution:</strong></p>
+            <p>Cost price = ₹800</p>
+            <p>Profit = 25% of ₹800 = (25 × 800) / 100 = ₹200</p>
+            <p>Selling price = Cost price + Profit = ₹800 + ₹200 = ₹1,000</p>
+            <p><strong>Answer:</strong> The selling price is ₹1,000.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="resource-links">
+        <h2>Additional Resources</h2>
+        <a href="#" class="resource-link"><i class="fas fa-file-pdf"></i> Download Percentage Formula Sheet</a>
+        <a href="#" class="resource-link"><i class="fas fa-file-alt"></i> 100 Practice Problems on Percentages</a>
+        <a href="#" class="resource-link"><i class="fas fa-video"></i> Video Tutorial: Mastering Percentage Shortcuts</a>
+        <a href="#" class="resource-link"><i class="fas fa-book"></i> Advanced Percentage Problems for Competitive Exams</a>
+      </section>
+    </div>
+    
+    <section class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for the latest aptitude tips, tricks, and practice questions.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+      <p class="form-message"></p>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../EduIgnite/index.html">Home</a></li>
+          <li><a href="../EduIgnite/programming.html">Programming</a></li>
+          <li><a href="../EduIgnite/aptitude.html">Aptitude</a></li>
+          <li><a href="../EduIgnite/current-affairs.html">Current Affairs</a></li>
+          <li><a href="../EduIgnite/blog.html">Study Blog</a></li>
+          <li><a href="../EduIgnite/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
+    </div>
+  </footer>
+  
+  <script>
+    // Toggle mobile menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Toggle answer visibility
+    function toggleAnswer(button) {
+      const answer = button.nextElementSibling;
+      if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        button.textContent = 'Show Answer';
+      } else {
+        answer.style.display = 'block';
+        button.textContent = 'Hide Answer';
+      }
+    }
+    
+    // Quiz functionality
+    let score = 0;
+    let questionsAnswered = 0;
+    
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', function() {
+        // Check if this question has already been answered
+        const questionDiv = this.closest('.quiz-question');
+        if (questionDiv.classList.contains('answered')) return;
+        
+        // Mark question as answered
+        questionDiv.classList.add('answered');
+        questionsAnswered++;
+        
+        // Check if answer is correct
+        const isCorrect = this.getAttribute('data-correct') === 'true';
+        if (isCorrect) {
+          this.classList.add('correct');
+          score++;
+        } else {
+          this.classList.add('incorrect');
+          // Highlight the correct answer
+          questionDiv.querySelectorAll('.option').forEach(opt => {
+            if (opt.getAttribute('data-correct') === 'true') {
+              opt.classList.add('correct');
+            }
+          });
+        }
+        
+        // Show explanation
+        questionDiv.querySelector('.explanation').classList.add('show-explanation');
+        
+        // Update progress and score
+        updateProgress();
+      });
+    });
+    
+    function updateProgress() {
+      const totalQuestions = document.querySelectorAll('.quiz-question').length;
+      const progressPercentage = (questionsAnswered / totalQuestions) * 100;
+      
+      document.getElementById('progress-bar').style.width = progressPercentage + '%';
+      document.getElementById('progress-bar').textContent = Math.round(progressPercentage) + '%';
+      
+      document.getElementById('score-display').textContent = 'Score: ' + score + '/' + totalQuestions;
+    }
+    
+    // Newsletter form submission
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      const messageElement = document.querySelector('.form-message');
+      
+      // Simple validation
+      if (email) {
+        // In a real application, you would send this to your server
+        messageElement.textContent = 'Thank you for subscribing!';
+        messageElement.style.color = 'green';
+        this.reset();
+        
+        // Hide the message after 3 seconds
+        setTimeout(() => {
+          messageElement.textContent = '';
+        }, 3000);
+      }
+    });
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+  </script>
 </body>
 </html>

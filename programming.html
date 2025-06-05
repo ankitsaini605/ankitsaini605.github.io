@@ -1,42 +1,952 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="EduIgnite – Learn smart with MCQs, coding tutorials, study blogs, and current affairs. Crack your exams with confidence." />
-<meta name="keywords" content="EduIgnite, study tips, competitive exams, C programming, aptitude quiz, current affairs, coding MCQ, ankit saini website" />
-<meta name="author" content="Ankit Saini" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8"><title>Programming</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn programming with EduIgnite - Comprehensive tutorials on Python, Java, C++, JavaScript and more for beginners and advanced learners.">
+  <meta name="keywords" content="programming, coding, python, java, c++, javascript, web development, data science">
+  <meta name="author" content="Ankit Saini">
+  <title>Programming Tutorials - EduIgnite</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Programming page specific styles */
+    .language-card {
+      border: 1px solid #e0e0e0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      background-color: white;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .language-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .language-header {
+      padding: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+    }
+    
+    .language-header i {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    
+    .language-content {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    
+    .language-content ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+    
+    .language-content li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .language-content li:last-child {
+      border-bottom: none;
+    }
+    
+    .language-content li i {
+      color: var(--accent-color);
+      margin-right: 10px;
+    }
+    
+    .language-footer {
+      padding: 15px 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    
+    .language-footer .btn {
+      display: inline-block;
+      padding: 8px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+    
+    .language-footer .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+    
+    .code-example {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      margin: 20px 0;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .code-example pre {
+      margin: 0;
+    }
+    
+    .code-example .comment {
+      color: #75715e;
+    }
+    
+    .code-example .keyword {
+      color: #f92672;
+    }
+    
+    .code-example .string {
+      color: #a6e22e;
+    }
+    
+    .code-example .function {
+      color: #66d9ef;
+    }
+    
+    .code-example .variable {
+      color: #fd971f;
+    }
+    
+    .code-tabs {
+      margin: 30px 0;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      overflow-x: auto;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .tab-button {
+      padding: 10px 20px;
+      background-color: #f5f5f5;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+    
+    .tab-button.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      border-top: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .progress-container {
+      margin: 30px 0;
+    }
+    
+    .progress-bar {
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: var(--accent-color);
+      width: 0;
+      transition: width 1s ease;
+    }
+    
+    .quiz-container {
+      background-color: #f5f9ff;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      margin: 40px 0;
+    }
+    
+    .quiz-question {
+      margin-bottom: 20px;
+    }
+    
+    .quiz-options {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .quiz-option {
+      padding: 15px;
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      border-radius: var(--border-radius);
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .quiz-option:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .quiz-option.selected {
+      background-color: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    
+    .quiz-option.correct {
+      background-color: #4caf50;
+      color: white;
+      border-color: #4caf50;
+    }
+    
+    .quiz-option.incorrect {
+      background-color: #f44336;
+      color: white;
+      border-color: #f44336;
+    }
+    
+    .quiz-feedback {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      display: none;
+    }
+    
+    .quiz-feedback.correct {
+      background-color: rgba(76, 175, 80, 0.1);
+      color: #4caf50;
+      border: 1px solid #4caf50;
+    }
+    
+    .quiz-feedback.incorrect {
+      background-color: rgba(244, 67, 54, 0.1);
+      color: #f44336;
+      border: 1px solid #f44336;
+    }
+    
+    .quiz-buttons {
+      margin-top: 20px;
+      text-align: right;
+    }
+    
+    .quiz-button {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+    
+    .quiz-button:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .quiz-button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .resource-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .resource-icon {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .resource-icon i {
+      font-size: 3rem;
+    }
+    
+    .resource-content {
+      padding: 20px;
+    }
+    
+    .resource-content h3 {
+      margin-top: 0;
+      color: var(--secondary-color);
+    }
+    
+    .resource-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    
+    .resource-link i {
+      margin-left: 5px;
+      transition: var(--transition);
+    }
+    
+    .resource-link:hover i {
+      transform: translateX(5px);
+    }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main><h2>Programming Zone</h2>
-<ul>
-  <li>C Programming</li>
-  <li>Java Basics</li>
-  <li>Python Essentials</li>
-  <li><a href="c-programming-1.html">C Programming – Basic Concepts</a></li>
-  <li><a href="c-quiz-1.html">C Programming – MCQ Quiz Set 1</a></li>
-  <li><a href="java-intro.html">Java Introduction</a></li>
-  <li><a href="python-syntax.html">Python Syntax Basics</a></li>
-  <li><a href="cpp-basic.html">Introduction to C++</a></li>
-  <li><a href="javascript-basics.html">JavaScript Basics</a></li>
-  <li><a href="html-tags.html">Basic HTML Tags</a></li>
-  <li><a href="programming-topic-1.html">Programming Topic 1</a></li>
-<li><a href="programming-topic-2.html">Programming Topic 2</a></li>
-<li><a href="programming-topic-3.html">Programming Topic 3</a></li>
-<li><a href="programming-topic-4.html">Programming Topic 4</a></li>
-<li><a href="programming-topic-5.html">Programming Topic 5</a></li>
-  <li><a href="programming-topic-11.html">Programming Topic 11</a></li>
-<li><a href="programming-topic-12.html">Programming Topic 12</a></li>
-<li><a href="programming-topic-13.html">Programming Topic 13</a></li>
-<li><a href="programming-topic-14.html">Programming Topic 14</a></li>
-<li><a href="programming-topic-15.html">Programming Topic 15</a></li>
-<li><a href="programming-topic-16.html">Programming Topic 16</a></li>
-<li><a href="programming-topic-17.html">Programming Topic 17</a></li>
-<li><a href="programming-topic-18.html">Programming Topic 18</a></li>
-<li><a href="programming-topic-19.html">Programming Topic 19</a></li>
-<li><a href="programming-topic-20.html">Programming Topic 20</a></li>
-</ul>
-</main>
-<footer>&copy; 2025 EduIgnite</footer>
-</body></html>
+  <header>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
+    </div>
+    <div class="search-container">
+      <form action="#" method="get" id="search-form">
+        <input type="text" placeholder="Search topics..." name="search" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="programming.html" class="active"><i class="fas fa-code"></i> Programming</a></li>
+      <li><a href="aptitude.html"><i class="fas fa-brain"></i> Aptitude</a></li>
+      <li><a href="current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
+      <li><a href="blog.html"><i class="fas fa-book-reader"></i> Study Blog</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x800/?coding');">
+      <div class="hero-content">
+        <h2>Master Programming</h2>
+        <p>From beginner to expert, our comprehensive programming tutorials will help you build a strong foundation and advance your coding skills.</p>
+        <div class="cta-buttons">
+          <a href="#languages" class="cta-button primary">Explore Languages</a>
+          <a href="#resources" class="cta-button secondary">Learning Resources</a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="languages">
+      <h2>Programming Languages</h2>
+      <p class="section-intro">Choose from a variety of programming languages to start or advance your coding journey. Each language comes with comprehensive tutorials, examples, and practice exercises.</p>
+      
+      <div class="course-cards">
+        <div class="language-card">
+          <div class="language-header">
+            <i class="fab fa-python"></i>
+            <h3>Python</h3>
+          </div>
+          <div class="language-content">
+            <p>Python is a versatile, easy-to-learn programming language popular in web development, data science, AI, and automation.</p>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Beginner-friendly syntax</li>
+              <li><i class="fas fa-check-circle"></i> Extensive library support</li>
+              <li><i class="fas fa-check-circle"></i> Versatile applications</li>
+              <li><i class="fas fa-check-circle"></i> High demand in job market</li>
+            </ul>
+          </div>
+          <div class="language-footer">
+            <a href="#python-section" class="btn">Start Learning</a>
+          </div>
+        </div>
+        
+        <div class="language-card">
+          <div class="language-header">
+            <i class="fab fa-java"></i>
+            <h3>Java</h3>
+          </div>
+          <div class="language-content">
+            <p>Java is a robust, object-oriented language used for enterprise applications, Android development, and more.</p>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Platform independence</li>
+              <li><i class="fas fa-check-circle"></i> Strong OOP principles</li>
+              <li><i class="fas fa-check-circle"></i> Enterprise-grade security</li>
+              <li><i class="fas fa-check-circle"></i> Android development</li>
+            </ul>
+          </div>
+          <div class="language-footer">
+            <a href="#java-section" class="btn">Start Learning</a>
+          </div>
+        </div>
+        
+        <div class="language-card">
+          <div class="language-header">
+            <i class="fab fa-js"></i>
+            <h3>JavaScript</h3>
+          </div>
+          <div class="language-content">
+            <p>JavaScript is the language of the web, essential for creating interactive websites and modern web applications.</p>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Front-end development</li>
+              <li><i class="fas fa-check-circle"></i> Back-end with Node.js</li>
+              <li><i class="fas fa-check-circle"></i> Dynamic web content</li>
+              <li><i class="fas fa-check-circle"></i> Modern frameworks</li>
+            </ul>
+          </div>
+          <div class="language-footer">
+            <a href="#javascript-section" class="btn">Start Learning</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="python-section">
+      <h2>Python Programming</h2>
+      
+      <div class="progress-container">
+        <h3>Your Learning Progress</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="python-progress"></div>
+        </div>
+      </div>
+      
+      <div class="code-tabs">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="python-basics">Python Basics</button>
+          <button class="tab-button" data-tab="python-data-structures">Data Structures</button>
+          <button class="tab-button" data-tab="python-functions">Functions</button>
+          <button class="tab-button" data-tab="python-oop">Object-Oriented Programming</button>
+        </div>
+        
+        <div class="tab-content active" id="python-basics">
+          <h3>Getting Started with Python</h3>
+          <p>Python is known for its simplicity and readability, making it an excellent choice for beginners. Let's start with the classic "Hello, World!" program:</p>
+          
+          <div class="code-example">
+            <pre><span class="comment"># This is a simple Python program</span>
+<span class="keyword">print</span>(<span class="string">"Hello, World!"</span>)</pre>
+          </div>
+          
+          <p>Python uses indentation to define code blocks. Here's an example of a simple conditional statement:</p>
+          
+          <div class="code-example">
+            <pre><span class="variable">age</span> = 18
+
+<span class="keyword">if</span> <span class="variable">age</span> >= 18:
+    <span class="keyword">print</span>(<span class="string">"You are an adult."</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"You are a minor."</span>)</pre>
+          </div>
+          
+          <h4>Variables and Data Types</h4>
+          <p>Python has several built-in data types:</p>
+          <ul>
+            <li><strong>Integers:</strong> Whole numbers like 1, 100, -10</li>
+            <li><strong>Floats:</strong> Decimal numbers like 3.14, -0.001</li>
+            <li><strong>Strings:</strong> Text enclosed in quotes like "Hello" or 'Python'</li>
+            <li><strong>Booleans:</strong> True or False values</li>
+            <li><strong>Lists:</strong> Ordered collections of items [1, 2, 3]</li>
+            <li><strong>Tuples:</strong> Immutable ordered collections (1, 2, 3)</li>
+            <li><strong>Dictionaries:</strong> Key-value pairs {'name': 'John', 'age': 30}</li>
+          </ul>
+          
+          <div class="code-example">
+            <pre><span class="comment"># Examples of different data types</span>
+<span class="variable">integer_var</span> = 10
+<span class="variable">float_var</span> = 3.14
+<span class="variable">string_var</span> = <span class="string">"Python is awesome"</span>
+<span class="variable">boolean_var</span> = <span class="keyword">True</span>
+<span class="variable">list_var</span> = [1, 2, 3, 4, 5]
+<span class="variable">tuple_var</span> = (1, 2, 3)
+<span class="variable">dict_var</span> = {<span class="string">"name"</span>: <span class="string">"John"</span>, <span class="string">"age"</span>: 30}</pre>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="python-data-structures">
+          <h3>Python Data Structures</h3>
+          <p>Python provides several built-in data structures that are essential for efficient programming.</p>
+          
+          <h4>Lists</h4>
+          <p>Lists are ordered, mutable collections that can contain items of different types:</p>
+          
+          <div class="code-example">
+            <pre><span class="comment"># Creating and manipulating lists</span>
+<span class="variable">fruits</span> = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]
+
+<span class="comment"># Accessing elements</span>
+<span class="keyword">print</span>(<span class="variable">fruits</span>[0])  <span class="comment"># Output: apple</span>
+
+<span class="comment"># Adding elements</span>
+<span class="variable">fruits</span>.append(<span class="string">"orange"</span>)
+<span class="keyword">print</span>(<span class="variable">fruits</span>)  <span class="comment"># Output: ['apple', 'banana', 'cherry', 'orange']</span>
+
+<span class="comment"># Removing elements</span>
+<span class="variable">fruits</span>.remove(<span class="string">"banana"</span>)
+<span class="keyword">print</span>(<span class="variable">fruits</span>)  <span class="comment"># Output: ['apple', 'cherry', 'orange']</span>
+
+<span class="comment"># List comprehension</span>
+<span class="variable">numbers</span> = [1, 2, 3, 4, 5]
+<span class="variable">squared</span> = [<span class="variable">x</span>**2 <span class="keyword">for</span> <span class="variable">x</span> <span class="keyword">in</span> <span class="variable">numbers</span>]
+<span class="keyword">print</span>(<span class="variable">squared</span>)  <span class="comment"># Output: [1, 4, 9, 16, 25]</span></pre>
+          </div>
+          
+          <h4>Dictionaries</h4>
+          <p>Dictionaries store key-value pairs and provide fast lookups:</p>
+          
+          <div class="code-example">
+            <pre><span class="comment"># Creating and using dictionaries</span>
+<span class="variable">student</span> = {
+    <span class="string">"name"</span>: <span class="string">"John Smith"</span>,
+    <span class="string">"age"</span>: 20,
+    <span class="string">"courses"</span>: [<span class="string">"Math"</span>, <span class="string">"Science"</span>, <span class="string">"History"</span>]
+}
+
+<span class="comment"># Accessing values</span>
+<span class="keyword">print</span>(<span class="variable">student</span>[<span class="string">"name"</span>])  <span class="comment"># Output: John Smith</span>
+
+<span class="comment"># Adding new key-value pairs</span>
+<span class="variable">student</span>[<span class="string">"email"</span>] = <span class="string">"john@example.com"</span>
+
+<span class="comment"># Iterating through a dictionary</span>
+<span class="keyword">for</span> <span class="variable">key</span>, <span class="variable">value</span> <span class="keyword">in</span> <span class="variable">student</span>.items():
+    <span class="keyword">print</span>(<span class="variable">key</span>, <span class="string">":"</span>, <span class="variable">value</span>)</pre>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="python-functions">
+          <h3>Python Functions</h3>
+          <p>Functions are reusable blocks of code that perform specific tasks. They help in organizing code and promoting reusability.</p>
+          
+          <div class="code-example">
+            <pre><span class="comment"># Defining a simple function</span>
+<span class="keyword">def</span> <span class="function">greet</span>(<span class="variable">name</span>):
+    <span class="keyword">return</span> <span class="string">f"Hello, {name}!"</span>
+
+<span class="comment"># Calling the function</span>
+<span class="variable">message</span> = <span class="function">greet</span>(<span class="string">"Alice"</span>)
+<span class="keyword">print</span>(<span class="variable">message</span>)  <span class="comment"># Output: Hello, Alice!</span>
+
+<span class="comment"># Function with default parameters</span>
+<span class="keyword">def</span> <span class="function">power</span>(<span class="variable">base</span>, <span class="variable">exponent</span>=2):
+    <span class="keyword">return</span> <span class="variable">base</span> ** <span class="variable">exponent</span>
+
+<span class="keyword">print</span>(<span class="function">power</span>(5))      <span class="comment"># Output: 25 (5^2)</span>
+<span class="keyword">print</span>(<span class="function">power</span>(2, 3))   <span class="comment"># Output: 8 (2^3)</span>
+
+<span class="comment"># Lambda functions (anonymous functions)</span>
+<span class="variable">square</span> = <span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span> * <span class="variable">x</span>
+<span class="keyword">print</span>(<span class="variable">square</span>(4))  <span class="comment"># Output: 16</span></pre>
+          </div>
+          
+          <h4>Function Arguments</h4>
+          <p>Python provides flexible ways to handle function arguments:</p>
+          
+          <div class="code-example">
+            <pre><span class="comment"># *args for variable number of positional arguments</span>
+<span class="keyword">def</span> <span class="function">sum_all</span>(*<span class="variable">args</span>):
+    <span class="keyword">return</span> <span class="function">sum</span>(<span class="variable">args</span>)
+
+<span class="keyword">print</span>(<span class="function">sum_all</span>(1, 2, 3, 4, 5))  <span class="comment"># Output: 15</span>
+
+<span class="comment"># **kwargs for variable number of keyword arguments</span>
+<span class="keyword">def</span> <span class="function">print_info</span>(**<span class="variable">kwargs</span>):
+    <span class="keyword">for</span> <span class="variable">key</span>, <span class="variable">value</span> <span class="keyword">in</span> <span class="variable">kwargs</span>.items():
+        <span class="keyword">print</span>(<span class="string">f"{key}: {value}"</span>)
+
+<span class="function">print_info</span>(name=<span class="string">"John"</span>, age=30, city=<span class="string">"New York"</span>)</pre>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="python-oop">
+          <h3>Object-Oriented Programming in Python</h3>
+          <p>Python supports object-oriented programming (OOP) with classes and objects.</p>
+          
+          <div class="code-example">
+            <pre><span class="comment"># Defining a class</span>
+<span class="keyword">class</span> <span class="function">Person</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">name</span>, <span class="variable">age</span>):
+        <span class="variable">self</span>.name = <span class="variable">name</span>
+        <span class="variable">self</span>.age = <span class="variable">age</span>
+    
+    <span class="keyword">def</span> <span class="function">greet</span>(<span class="variable">self</span>):
+        <span class="keyword">return</span> <span class="string">f"Hello, my name is {self.name} and I am {self.age} years old."</span>
+
+<span class="comment"># Creating an object</span>
+<span class="variable">person1</span> = <span class="function">Person</span>(<span class="string">"Alice"</span>, 30)
+<span class="keyword">print</span>(<span class="variable">person1</span>.greet())
+
+<span class="comment"># Inheritance</span>
+<span class="keyword">class</span> <span class="function">Student</span>(<span class="function">Person</span>):
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">name</span>, <span class="variable">age</span>, <span class="variable">student_id</span>):
+        <span class="function">super</span>().<span class="function">__init__</span>(<span class="variable">name</span>, <span class="variable">age</span>)
+        <span class="variable">self</span>.student_id = <span class="variable">student_id</span>
+    
+    <span class="keyword">def</span> <span class="function">study</span>(<span class="variable">self</span>, <span class="variable">subject</span>):
+        <span class="keyword">return</span> <span class="string">f"{self.name} is studying {subject}."</span>
+
+<span class="variable">student1</span> = <span class="function">Student</span>(<span class="string">"Bob"</span>, 20, <span class="string">"S12345"</span>)
+<span class="keyword">print</span>(<span class="variable">student1</span>.greet())
+<span class="keyword">print</span>(<span class="variable">student1</span>.study(<span class="string">"Python"</span>))</pre>
+          </div>
+          
+          <h4>Special Methods</h4>
+          <p>Python classes can implement special methods (also called dunder methods) to customize behavior:</p>
+          
+          <div class="code-example">
+            <pre><span class="keyword">class</span> <span class="function">Point</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">x</span>, <span class="variable">y</span>):
+        <span class="variable">self</span>.x = <span class="variable">x</span>
+        <span class="variable">self</span>.y = <span class="variable">y</span>
+    
+    <span class="keyword">def</span> <span class="function">__str__</span>(<span class="variable">self</span>):
+        <span class="keyword">return</span> <span class="string">f"Point({self.x}, {self.y})"</span>
+    
+    <span class="keyword">def</span> <span class="function">__add__</span>(<span class="variable">self</span>, <span class="variable">other</span>):
+        <span class="keyword">return</span> <span class="function">Point</span>(<span class="variable">self</span>.x + <span class="variable">other</span>.x, <span class="variable">self</span>.y + <span class="variable">other</span>.y)
+
+<span class="variable">p1</span> = <span class="function">Point</span>(1, 2)
+<span class="variable">p2</span> = <span class="function">Point</span>(3, 4)
+<span class="variable">p3</span> = <span class="variable">p1</span> + <span class="variable">p2</span>  <span class="comment"># Uses __add__ method</span>
+<span class="keyword">print</span>(<span class="variable">p3</span>)  <span class="comment"># Output: Point(4, 6)</span></pre>
+          </div>
+        </div>
+      </div>
+      
+      <div class="quiz-container">
+        <h3>Test Your Python Knowledge</h3>
+        <div class="quiz-question">
+          <h4>1. What will be the output of the following code?</h4>
+          <div class="code-example">
+            <pre><span class="variable">x</span> = 5
+<span class="keyword">def</span> <span class="function">func</span>():
+    <span class="variable">x</span> = 10
+    <span class="keyword">print</span>(<span class="string">"Inside function:"</span>, <span class="variable">x</span>)
+<span class="function">func</span>()
+<span class="keyword">print</span>(<span class="string">"Outside function:"</span>, <span class="variable">x</span>)</pre>
+          </div>
+          <ul class="quiz-options">
+            <li class="quiz-option" data-correct="true">Inside function: 10<br>Outside function: 5</li>
+            <li class="quiz-option">Inside function: 5<br>Outside function: 5</li>
+            <li class="quiz-option">Inside function: 10<br>Outside function: 10</li>
+            <li class="quiz-option">Inside function: 5<br>Outside function: 10</li>
+          </ul>
+          <div class="quiz-feedback"></div>
+        </div>
+        
+        <div class="quiz-buttons">
+          <button class="quiz-button" id="check-answer">Check Answer</button>
+          <button class="quiz-button" id="next-question" disabled>Next Question</button>
+        </div>
+      </div>
+    </section>
+    
+    <section id="java-section">
+      <h2>Java Programming</h2>
+      <p>Java is a class-based, object-oriented programming language designed to have as few implementation dependencies as possible. It's used for developing applications for a wide range of platforms.</p>
+      
+      <div class="code-example">
+        <pre><span class="comment">// A simple Java program</span>
+<span class="keyword">public class</span> <span class="function">HelloWorld</span> {
+    <span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {
+        System.out.println(<span class="string">"Hello, World!"</span>);
+    }
+}</pre>
+      </div>
+      
+      <p>Java is known for its "Write Once, Run Anywhere" (WORA) capability, meaning that compiled Java code can run on all platforms that support Java without recompilation.</p>
+      
+      <h3>Key Features of Java</h3>
+      <ul>
+        <li><strong>Object-Oriented:</strong> Java is based on the concept of objects, which can contain data and methods.</li>
+        <li><strong>Platform Independent:</strong> Java code runs on any device that has the Java Virtual Machine (JVM).</li>
+        <li><strong>Secure:</strong> Java has built-in security features designed to allow safe execution of code.</li>
+        <li><strong>Robust:</strong> Java emphasizes early checking for possible errors and runtime checking.</li>
+        <li><strong>Multithreaded:</strong> Java supports concurrent programming with its built-in threading capabilities.</li>
+      </ul>
+      
+      <p>More detailed Java tutorials coming soon!</p>
+    </section>
+    
+    <section id="javascript-section">
+      <h2>JavaScript Programming</h2>
+      <p>JavaScript is a versatile programming language primarily used for creating interactive effects within web browsers. It's an essential technology for web development.</p>
+      
+      <div class="code-example">
+        <pre><span class="comment">// A simple JavaScript example</span>
+<span class="keyword">function</span> <span class="function">greet</span>(<span class="variable">name</span>) {
+    <span class="keyword">return</span> <span class="string">`Hello, ${name}!`</span>;
+}
+
+<span class="keyword">const</span> <span class="variable">message</span> = <span class="function">greet</span>(<span class="string">'World'</span>);
+console.log(<span class="variable">message</span>);  <span class="comment">// Output: Hello, World!</span></pre>
+      </div>
+      
+      <h3>What Can JavaScript Do?</h3>
+      <ul>
+        <li>Change HTML content and attributes</li>
+        <li>Change CSS styles</li>
+        <li>Hide and show HTML elements</li>
+        <li>Validate user input before submitting to a server</li>
+        <li>Create cookies to store and retrieve data</li>
+        <li>Respond to user events like clicks, form submissions, and key presses</li>
+      </ul>
+      
+      <p>More detailed JavaScript tutorials coming soon!</p>
+    </section>
+    
+    <section id="resources">
+      <h2>Learning Resources</h2>
+      <p>Enhance your programming skills with these carefully selected resources.</p>
+      
+      <div class="resource-grid">
+        <div class="resource-card">
+          <div class="resource-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="resource-content">
+            <h3>Recommended Books</h3>
+            <p>Curated list of programming books for all skill levels.</p>
+            <a href="#" class="resource-link">Explore Books <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="resource-card">
+          <div class="resource-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="resource-content">
+            <h3>Online Courses</h3>
+            <p>Free and paid courses from top educational platforms.</p>
+            <a href="#" class="resource-link">Find Courses <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="resource-card">
+          <div class="resource-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <div class="resource-content">
+            <h3>Coding Challenges</h3>
+            <p>Practice your skills with interactive coding challenges.</p>
+            <a href="#" class="resource-link">Start Practicing <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="resource-card">
+          <div class="resource-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="resource-content">
+            <h3>Community Forums</h3>
+            <p>Connect with other programmers and get help with your code.</p>
+            <a href="#" class="resource-link">Join Community <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for weekly updates on new programming tutorials, tips, and resources.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+      <p class="form-message"></p>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="aptitude.html">Aptitude</a></li>
+          <li><a href="current-affairs.html">Current Affairs</a></li>
+          <li><a href="blog.html">Study Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
+    </div>
+  </footer>
+  
+  <script>
+    // Toggle mobile menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Tab functionality
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons and contents
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding content
+        button.classList.add('active');
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+        
+        // Update progress
+        updateProgress();
+      });
+    });
+    
+    // Progress bar animation
+    function updateProgress() {
+      const progressFill = document.getElementById('python-progress');
+      const activeTabIndex = Array.from(tabButtons).findIndex(btn => btn.classList.contains('active'));
+      const progressPercentage = ((activeTabIndex + 1) / tabButtons.length) * 100;
+      
+      progressFill.style.width = `${progressPercentage}%`;
+    }
+    
+    // Initialize progress
+    updateProgress();
+    
+    // Quiz functionality
+    const checkAnswerButton = document.getElementById('check-answer');
+    const nextQuestionButton = document.getElementById('next-question');
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    const quizFeedback = document.querySelector('.quiz-feedback');
+    
+    quizOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        // Remove selected class from all options
+        quizOptions.forEach(opt => opt.classList.remove('selected'));
+        
+        // Add selected class to clicked option
+        option.classList.add('selected');
+      });
+    });
+    
+    checkAnswerButton.addEventListener('click', () => {
+      const selectedOption = document.querySelector('.quiz-option.selected');
+      
+      if (!selectedOption) {
+        alert('Please select an answer!');
+        return;
+      }
+      
+      // Check if the answer is correct
+      const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+      
+      // Mark the option as correct or incorrect
+      if (isCorrect) {
+        selectedOption.classList.add('correct');
+        quizFeedback.textContent = 'Correct! Well done!';
+        quizFeedback.className = 'quiz-feedback correct';
+      } else {
+        selectedOption.classList.add('incorrect');
+        
+        // Show the correct answer
+        document.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+        
+        quizFeedback.textContent = 'Incorrect. Try again!';
+        quizFeedback.className = 'quiz-feedback incorrect';
+      }
+      
+      quizFeedback.style.display = 'block';
+      
+      // Disable options and check button, enable next button
+      quizOptions.forEach(opt => opt.style.pointerEvents = 'none');
+      checkAnswerButton.disabled = true;
+      nextQuestionButton.disabled = false;
+    });
+    
+    nextQuestionButton.addEventListener('click', () => {
+      alert('More questions coming soon!');
+    });
+    
+    // Newsletter form submission
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      const messageElement = document.querySelector('.form-message');
+      
+      // Simple validation
+      if (email) {
+        // In a real application, you would send this to your server
+        messageElement.textContent = 'Thank you for subscribing!';
+        messageElement.style.color = 'green';
+        this.reset();
+        
+        // Hide the message after 3 seconds
+        setTimeout(() => {
+          messageElement.textContent = '';
+        }, 3000);
+      }
+    });
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+  </script>
+</body>
+</html>

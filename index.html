@@ -2,64 +2,255 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>EduIgnite – India's Learning Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EduIgnite is your smart study partner for exams, aptitude, coding & productivity." />
-  <meta name="keywords" content="EduIgnite, study, aptitude, C++, programming, competitive exam, blog, tips" />
-  <meta name="author" content="Ankit Saini" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="EduIgnite - Your comprehensive platform for programming, aptitude, and exam preparation. Learn smart and rise faster with our expert resources.">
+  <meta name="keywords" content="programming, aptitude, exam preparation, coding, education, learning">
+  <meta name="author" content="Ankit Saini">
+  <title>EduIgnite - Learn Smart. Rise Faster.</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
   <header>
-    <h1>📚 EduIgnite</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="aptitude.html">Aptitude</a>
-      <a href="programming.html">Programming</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h2>Welcome to EduIgnite</h2>
-    <p>Master study plans, crack aptitude, code with confidence.</p>
-    <img src="study-plan.jpg" alt="Study Plan for Students" />
-  </section>
-
-  <section class="explore">
-    <h2>🔥 Explore Categories</h2>
-    <div class="slider">
-      <div class="card">📘 Study Techniques</div>
-      <div class="card">📊 Aptitude Tricks</div>
-      <div class="card">💻 C++ Crash Course</div>
-      <div class="card">📈 Career Planning</div>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
     </div>
-  </section>
-
-  <section class="blog-preview">
-    <h2>📝 Latest Blog Posts</h2>
-    <ul>
-      <li><a href="blog-121.html">Time Blocking for Toppers</a></li>
-      <li><a href="blog-122.html">1-3-7 Revision Strategy</a></li>
-      <li><a href="blog-123.html">30-Day Study Challenge</a></li>
+    <div class="search-container">
+      <form action="#" method="get" id="search-form">
+        <input type="text" placeholder="Search topics..." name="search" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="programming.html"><i class="fas fa-code"></i> Programming</a></li>
+      <li><a href="aptitude.html"><i class="fas fa-brain"></i> Aptitude</a></li>
+      <li><a href="current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
+      <li><a href="blog.html"><i class="fas fa-book-reader"></i> Study Blog</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
     </ul>
-  </section>
-
-  <section class="aptitude-preview">
-    <h2>📊 Aptitude Topics</h2>
-    <ul>
-      <li><a href="aptitude-topic-121.html"> Profit & Loss</a></li>
-      <li><a href="aptitude-topic-122.html"> Time, Speed, Distance</a></li>
-      <li><a href="aptitude-topic-123.html"> Pipes & Cisterns</a></li>
-    </ul>
-  </section>
-
+  </nav>
+  
+  <div class="hero-section">
+    <div class="hero-content">
+      <h2>Ignite Your Learning Journey</h2>
+      <p>Master programming, ace aptitude tests, and stay updated with current affairs - all in one place.</p>
+      <div class="cta-buttons">
+        <a href="programming.html" class="cta-button primary">Start Coding</a>
+        <a href="aptitude.html" class="cta-button secondary">Improve Aptitude</a>
+      </div>
+    </div>
+  </div>
+  
+  <main>
+    <section class="features">
+      <h2>Why Choose EduIgnite?</h2>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <i class="fas fa-laptop-code"></i>
+          <h3>Programming Excellence</h3>
+          <p>Master multiple programming languages with our structured learning paths, from basics to advanced concepts.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-calculator"></i>
+          <h3>Aptitude Mastery</h3>
+          <p>Sharpen your logical and mathematical skills with our comprehensive aptitude training materials.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-globe"></i>
+          <h3>Current Affairs</h3>
+          <p>Stay updated with the latest happenings around the world that matter for your exams and interviews.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="popular-courses">
+      <h2>Popular Learning Paths</h2>
+      <div class="course-cards">
+        <div class="course-card">
+          <div class="course-image" style="background-image: url('https://source.unsplash.com/random/300x200/?python')"></div>
+          <div class="course-content">
+            <h3>Python Programming</h3>
+            <p>Learn Python from scratch and master its powerful libraries for data science and web development.</p>
+            <a href="programming.html" class="read-more">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-image" style="background-image: url('https://source.unsplash.com/random/300x200/?math')"></div>
+          <div class="course-content">
+            <h3>Quantitative Aptitude</h3>
+            <p>Enhance your problem-solving skills with our comprehensive aptitude training materials.</p>
+            <a href="aptitude.html" class="read-more">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-image" style="background-image: url('https://source.unsplash.com/random/300x200/?news')"></div>
+          <div class="course-content">
+            <h3>Current Affairs Digest</h3>
+            <p>Stay updated with our weekly digest of important events and developments around the world.</p>
+            <a href="current-affairs.html" class="read-more">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="testimonials">
+      <h2>What Our Students Say</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>"EduIgnite helped me crack my coding interview at a top tech company. The programming tutorials are simply outstanding!"</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student">
+            <div>
+              <h4>Rahul Sharma</h4>
+              <p>Software Engineer</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>"The aptitude section is a goldmine for anyone preparing for competitive exams. I improved my score by 35% in just two months!"</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Student">
+            <div>
+              <h4>Priya Patel</h4>
+              <p>Bank PO</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
+    
+    <section class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for weekly updates on new courses, study materials, and exam tips.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+      <p class="form-message"></p>
+    </section>
+  </main>
+  
   <footer>
-    <p>📌 Follow: @eduignite_official | t.me/eduigniteofficial</p>
-    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="aptitude.html">Aptitude</a></li>
+          <li><a href="current-affairs.html">Current Affairs</a></li>
+          <li><a href="blog.html">Study Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
+    </div>
   </footer>
-
+  
+  <script>
+    // Toggle mobile menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Newsletter form submission
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      const messageElement = document.querySelector('.form-message');
+      
+      // Simple validation
+      if (email) {
+        // In a real application, you would send this to your server
+        messageElement.textContent = 'Thank you for subscribing!';
+        messageElement.style.color = 'green';
+        this.reset();
+        
+        // Hide the message after 3 seconds
+        setTimeout(() => {
+          messageElement.textContent = '';
+        }, 3000);
+      }
+    });
+    
+    // Simple testimonial slider
+    let currentSlide = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.dot');
+    
+    function showSlide(index) {
+      testimonials.forEach(testimonial => testimonial.style.display = 'none');
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      testimonials[index].style.display = 'block';
+      dots[index].classList.add('active');
+    }
+    
+    // Initialize the slider
+    showSlide(currentSlide);
+    
+    // Add click event to dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+    
+    // Auto-rotate testimonials
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % testimonials.length;
+      showSlide(currentSlide);
+    }, 5000);
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+  </script>
 </body>
 </html>

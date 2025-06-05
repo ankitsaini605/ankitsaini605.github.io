@@ -2,24 +2,869 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Aptitude Topic #99 – Percentages, SI, CI</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastering Percentages, Simple Interest & Compound Interest | EduIgnite Aptitude</title>
+  <meta name="description" content="Master the concepts of Percentages, Simple Interest, and Compound Interest with comprehensive formulas, step-by-step examples, shortcuts, and practice problems for competitive exams.">
+  <meta name="keywords" content="percentages, simple interest, compound interest, aptitude, competitive exams, banking exams, SSC, formulas, shortcuts, practice problems">
+  <meta name="author" content="Ankit Saini">
+  <link rel="stylesheet" href="../EduIgnite/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script>
+  <style>
+    /* Page-specific styles */
+    .concept-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .concept-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .concept-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .concept-icon {
+      font-size: 1.8rem;
+      margin-right: 15px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .concept-title {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    .concept-body {
+      padding: 20px;
+    }
+    
+    .formula-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--accent-color);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    
+    .formula {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    
+    .formula-explanation {
+      margin-top: 10px;
+      color: #666;
+    }
+    
+    .example-box {
+      background-color: #e8f4ff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    
+    .example-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+    
+    .step-by-step {
+      margin-top: 15px;
+    }
+    
+    .step {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .step:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+    }
+    
+    .shortcut-box {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    
+    .shortcut-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #856404;
+    }
+    
+    .application-box {
+      background-color: #d1ecf1;
+      border-left: 4px solid #17a2b8;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    
+    .application-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #0c5460;
+    }
+    
+    .practice-problems {
+      margin-top: 30px;
+    }
+    
+    .problem {
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .problem-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+    
+    .toggle-solution {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    
+    .toggle-solution:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .solution {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      display: none;
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    .comparison-table th, .comparison-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    
+    .comparison-table th {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .comparison-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    
+    .comparison-table tr:hover {
+      background-color: #f1f1f1;
+    }
+    
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 5px 0;
+    }
+    
+    .resource-links {
+      margin-top: 30px;
+    }
+    
+    .resource-link {
+      display: block;
+      padding: 10px 15px;
+      background-color: #f8f9fa;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+    
+    .resource-link:hover {
+      background-color: #e9ecef;
+      transform: translateX(5px);
+    }
+    
+    .resource-link i {
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .concept-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .concept-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      
+      .comparison-table {
+        font-size: 0.9rem;
+      }
+      
+      .comparison-table th, .comparison-table td {
+        padding: 8px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-<header><h1>Aptitude Concepts – Percentages, Interest</h1></header>
-<main>
-  <h2>📘 Percentages</h2>
-  <p><strong>Formula:</strong> (Value × Percentage) ÷ 100</p>
-  <p><strong>Example:</strong> 25% of 480 = (480 × 25)/100 = 120</p>
-
-  <h2>📘 Simple Interest</h2>
-  <p><strong>Formula:</strong> SI = (P × R × T)/100</p>
-  <p><strong>Q:</strong> P=5000, R=6%, T=2 years → SI = ₹600</p>
-
-  <h2>📘 Compound Interest</h2>
-  <p><strong>Formula:</strong> A = P(1 + R/100)^T</p>
-  <p><strong>Q:</strong> P=5000, R=10%, T=2 → A = 5000×1.1×1.1 = ₹6050</p>
-</main>
-<footer>Join @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+  <header>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
+    </div>
+    <div class="search-container">
+      <form action="#" method="get" id="search-form">
+        <input type="text" placeholder="Search topics..." name="search" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../EduIgnite/index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="../EduIgnite/programming.html"><i class="fas fa-code"></i> Programming</a></li>
+      <li><a href="../EduIgnite/aptitude.html" class="active"><i class="fas fa-brain"></i> Aptitude</a></li>
+      <li><a href="../EduIgnite/current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
+      <li><a href="../EduIgnite/blog.html"><i class="fas fa-book-reader"></i> Study Blog</a></li>
+      <li><a href="../EduIgnite/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x800/?mathematics');">
+      <div class="hero-content">
+        <h2>Mastering Percentages & Interest Calculations</h2>
+        <p>Comprehensive guide to understanding and solving problems on Percentages, Simple Interest, and Compound Interest for competitive exams.</p>
+        <div class="cta-buttons">
+          <a href="#percentages" class="cta-button primary">Percentages</a>
+          <a href="#simple-interest" class="cta-button secondary">Simple Interest</a>
+          <a href="#compound-interest" class="cta-button secondary">Compound Interest</a>
+        </div>
+      </div>
+    </section>
+    
+    <div class="container">
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>Percentages, Simple Interest, and Compound Interest are fundamental concepts in quantitative aptitude that appear frequently in various competitive exams including banking, SSC, railways, and other government recruitment tests. These topics are not only important for exams but also have practical applications in everyday financial decisions.</p>
+        
+        <p>In this comprehensive guide, we'll cover each concept in detail with formulas, step-by-step examples, shortcuts, and practice problems to help you master these topics.</p>
+      </section>
+      
+      <section id="percentages" class="concept-card">
+        <div class="concept-header">
+          <div class="concept-icon">
+            <i class="fas fa-percent"></i>
+          </div>
+          <h2 class="concept-title">Percentages</h2>
+        </div>
+        
+        <div class="concept-body">
+          <p>Percentage is a number or ratio expressed as a fraction of 100. It is denoted by the symbol "%". The word percentage comes from the Latin word 'per centum' which means 'by the hundred'.</p>
+          
+          <div class="formula-box">
+            <p class="formula">Percentage = (Value / Total Value) × 100%</p>
+            <p class="formula">Value = (Percentage × Total Value) / 100%</p>
+            <p class="formula">Total Value = (Value × 100%) / Percentage</p>
+            <div class="formula-explanation">
+              <p>Where:</p>
+              <ul>
+                <li><strong>Value</strong> is the quantity you want to express as a percentage</li>
+                <li><strong>Total Value</strong> is the whole amount</li>
+                <li><strong>Percentage</strong> is the ratio expressed per hundred</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 1: Finding a Percentage</p>
+            <p><strong>Question:</strong> What is 25% of 480?</p>
+            <div class="step-by-step">
+              <div class="step">Identify the percentage (25%) and the total value (480).</div>
+              <div class="step">Use the formula: Value = (Percentage × Total Value) / 100%</div>
+              <div class="step">Value = (25 × 480) / 100 = 12,000 / 100 = 120</div>
+              <div class="step"><strong>Answer:</strong> 25% of 480 is 120.</div>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 2: Finding What Percentage One Number is of Another</p>
+            <p><strong>Question:</strong> 36 is what percentage of 144?</p>
+            <div class="step-by-step">
+              <div class="step">Identify the value (36) and the total value (144).</div>
+              <div class="step">Use the formula: Percentage = (Value / Total Value) × 100%</div>
+              <div class="step">Percentage = (36 / 144) × 100% = 0.25 × 100% = 25%</div>
+              <div class="step"><strong>Answer:</strong> 36 is 25% of 144.</div>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 3: Finding the Total Value</p>
+            <p><strong>Question:</strong> 42 is 35% of what number?</p>
+            <div class="step-by-step">
+              <div class="step">Identify the value (42) and the percentage (35%).</div>
+              <div class="step">Use the formula: Total Value = (Value × 100%) / Percentage</div>
+              <div class="step">Total Value = (42 × 100%) / 35% = 4,200 / 35 = 120</div>
+              <div class="step"><strong>Answer:</strong> 42 is 35% of 120.</div>
+            </div>
+          </div>
+          
+          <div class="shortcut-box">
+            <p class="shortcut-title"><i class="fas fa-bolt"></i> Percentage Shortcuts</p>
+            <ul>
+              <li><strong>Finding 10%:</strong> Simply move the decimal point one place to the left. For example, 10% of 250 = 25.</li>
+              <li><strong>Finding 5%:</strong> Find 10% and then divide by 2. For example, 5% of 250 = 10% of 250 ÷ 2 = 25 ÷ 2 = 12.5.</li>
+              <li><strong>Finding 20%:</strong> Find 10% and then multiply by 2. For example, 20% of 250 = 10% of 250 × 2 = 25 × 2 = 50.</li>
+              <li><strong>Finding 25%:</strong> Divide by 4. For example, 25% of 250 = 250 ÷ 4 = 62.5.</li>
+              <li><strong>Finding 50%:</strong> Divide by 2. For example, 50% of 250 = 250 ÷ 2 = 125.</li>
+              <li><strong>Finding 75%:</strong> Find 50% and add 25%. For example, 75% of 250 = 125 + 62.5 = 187.5.</li>
+            </ul>
+          </div>
+          
+          <div class="application-box">
+            <p class="application-title"><i class="fas fa-lightbulb"></i> Real-World Applications</p>
+            <ul>
+              <li><strong>Discounts and Sales:</strong> "20% off" means you pay 80% of the original price.</li>
+              <li><strong>Tax Calculations:</strong> Income tax, sales tax, and GST are all calculated using percentages.</li>
+              <li><strong>Academic Grading:</strong> Exam scores are often expressed as percentages.</li>
+              <li><strong>Business:</strong> Profit and loss are calculated as percentages of cost price.</li>
+              <li><strong>Statistics:</strong> Data analysis often involves percentage calculations.</li>
+            </ul>
+          </div>
+          
+          <div class="practice-problems">
+            <h3>Practice Problems</h3>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 1:</p>
+              <p>If the price of a shirt is marked as ₹800 after a 20% increase, what was its original price?</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let the original price be x.</p>
+                <p>After 20% increase, the new price = x + 20% of x = x + 0.2x = 1.2x</p>
+                <p>Given that 1.2x = ₹800</p>
+                <p>Therefore, x = ₹800 / 1.2 = ₹666.67</p>
+                <p><strong>Answer:</strong> The original price was ₹666.67</p>
+              </div>
+            </div>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 2:</p>
+              <p>In an examination, 70% of the students passed in Mathematics and 80% passed in Science. If 10% of the students failed in both subjects, what percentage of students passed in both subjects?</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let's denote:</p>
+                <p>- Students who passed in Mathematics: 70%</p>
+                <p>- Students who passed in Science: 80%</p>
+                <p>- Students who failed in both: 10%</p>
+                <p>Students who failed in Mathematics = 100% - 70% = 30%</p>
+                <p>Students who failed in Science = 100% - 80% = 20%</p>
+                <p>Using the formula: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</p>
+                <p>Where P(A ∪ B) is the percentage of students who passed in at least one subject.</p>
+                <p>We know that students who failed in both = 10%, so students who passed in at least one subject = 100% - 10% = 90%</p>
+                <p>90% = 70% + 80% - P(both)</p>
+                <p>P(both) = 70% + 80% - 90% = 60%</p>
+                <p><strong>Answer:</strong> 60% of students passed in both subjects.</p>
+              </div>
+            </div>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 3:</p>
+              <p>A shopkeeper marks his goods 25% above the cost price and gives a discount of 10% on the marked price. What is his profit percentage?</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let's say the cost price is ₹100.</p>
+                <p>Marked price = ₹100 + 25% of ₹100 = ₹100 + ₹25 = ₹125</p>
+                <p>Discount = 10% of ₹125 = ₹12.5</p>
+                <p>Selling price = ₹125 - ₹12.5 = ₹112.5</p>
+                <p>Profit = ₹112.5 - ₹100 = ₹12.5</p>
+                <p>Profit percentage = (₹12.5 / ₹100) × 100% = 12.5%</p>
+                <p><strong>Answer:</strong> The profit percentage is 12.5%.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="simple-interest" class="concept-card">
+        <div class="concept-header">
+          <div class="concept-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <h2 class="concept-title">Simple Interest</h2>
+        </div>
+        
+        <div class="concept-body">
+          <p>Simple Interest is the interest calculated only on the initial principal amount. It does not take into account the accumulated interest of previous periods.</p>
+          
+          <div class="formula-box">
+            <p class="formula">SI = (P × R × T) / 100</p>
+            <p class="formula">A = P + SI = P + (P × R × T) / 100 = P(1 + RT/100)</p>
+            <div class="formula-explanation">
+              <p>Where:</p>
+              <ul>
+                <li><strong>SI</strong> = Simple Interest</li>
+                <li><strong>P</strong> = Principal (initial amount)</li>
+                <li><strong>R</strong> = Rate of interest per annum (%)</li>
+                <li><strong>T</strong> = Time period (in years)</li>
+                <li><strong>A</strong> = Amount (Principal + Interest)</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 1: Calculating Simple Interest</p>
+            <p><strong>Question:</strong> Calculate the simple interest on ₹5,000 at 6% per annum for 2 years.</p>
+            <div class="step-by-step">
+              <div class="step">Identify the principal (P = ₹5,000), rate (R = 6%), and time (T = 2 years).</div>
+              <div class="step">Use the formula: SI = (P × R × T) / 100</div>
+              <div class="step">SI = (5,000 × 6 × 2) / 100 = 60,000 / 100 = ₹600</div>
+              <div class="step"><strong>Answer:</strong> The simple interest is ₹600.</div>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 2: Finding the Principal</p>
+            <p><strong>Question:</strong> The simple interest on a sum of money for 3 years at 8% per annum is ₹1,200. Find the principal amount.</p>
+            <div class="step-by-step">
+              <div class="step">Identify the simple interest (SI = ₹1,200), rate (R = 8%), and time (T = 3 years).</div>
+              <div class="step">Use the formula: SI = (P × R × T) / 100 and solve for P.</div>
+              <div class="step">1,200 = (P × 8 × 3) / 100</div>
+              <div class="step">1,200 = 24P / 100</div>
+              <div class="step">P = (1,200 × 100) / 24 = 120,000 / 24 = ₹5,000</div>
+              <div class="step"><strong>Answer:</strong> The principal amount is ₹5,000.</div>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 3: Finding the Rate of Interest</p>
+            <p><strong>Question:</strong> A sum of ₹8,000 amounts to ₹9,600 in 4 years at simple interest. Find the rate of interest per annum.</p>
+            <div class="step-by-step">
+              <div class="step">Identify the principal (P = ₹8,000), amount (A = ₹9,600), and time (T = 4 years).</div>
+              <div class="step">Calculate the simple interest: SI = A - P = ₹9,600 - ₹8,000 = ₹1,600</div>
+              <div class="step">Use the formula: SI = (P × R × T) / 100 and solve for R.</div>
+              <div class="step">1,600 = (8,000 × R × 4) / 100</div>
+              <div class="step">1,600 = 32,000R / 100</div>
+              <div class="step">R = (1,600 × 100) / 32,000 = 160,000 / 32,000 = 5%</div>
+              <div class="step"><strong>Answer:</strong> The rate of interest is 5% per annum.</div>
+            </div>
+          </div>
+          
+          <div class="shortcut-box">
+            <p class="shortcut-title"><i class="fas fa-bolt"></i> Simple Interest Shortcuts</p>
+            <ul>
+              <li><strong>When R × T = 100:</strong> SI = P (This means the interest equals the principal)</li>
+              <li><strong>When P = 100:</strong> SI = R × T (The interest equals the product of rate and time)</li>
+              <li><strong>For monthly calculations:</strong> SI = (P × R × T) / (100 × 12) where T is in months</li>
+              <li><strong>For daily calculations:</strong> SI = (P × R × T) / (100 × 365) where T is in days</li>
+            </ul>
+          </div>
+          
+          <div class="application-box">
+            <p class="application-title"><i class="fas fa-lightbulb"></i> Real-World Applications</p>
+            <ul>
+              <li><strong>Fixed Deposits:</strong> Banks often use simple interest for short-term deposits.</li>
+              <li><strong>Loans:</strong> Some personal loans and short-term loans use simple interest.</li>
+              <li><strong>Treasury Bills:</strong> Government securities often use simple interest.</li>
+              <li><strong>Savings Accounts:</strong> Some savings accounts calculate interest using simple interest.</li>
+            </ul>
+          </div>
+          
+          <div class="practice-problems">
+            <h3>Practice Problems</h3>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 1:</p>
+              <p>A sum of money becomes ₹13,000 after 3 years and ₹15,000 after 5 years at simple interest. Find the sum and the rate of interest.</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let the principal be P and the rate of interest be R%.</p>
+                <p>After 3 years: P + (P × R × 3) / 100 = 13,000</p>
+                <p>After 5 years: P + (P × R × 5) / 100 = 15,000</p>
+                <p>From the first equation: P(1 + 3R/100) = 13,000 ... (1)</p>
+                <p>From the second equation: P(1 + 5R/100) = 15,000 ... (2)</p>
+                <p>Dividing equation (2) by equation (1):</p>
+                <p>(1 + 5R/100) / (1 + 3R/100) = 15,000 / 13,000 = 15/13</p>
+                <p>13(1 + 5R/100) = 15(1 + 3R/100)</p>
+                <p>13 + 13(5R/100) = 15 + 15(3R/100)</p>
+                <p>13 + 65R/100 = 15 + 45R/100</p>
+                <p>65R/100 - 45R/100 = 15 - 13</p>
+                <p>20R/100 = 2</p>
+                <p>R = 10%</p>
+                <p>Substituting R = 10% in equation (1):</p>
+                <p>P(1 + 3 × 10/100) = 13,000</p>
+                <p>P(1 + 0.3) = 13,000</p>
+                <p>1.3P = 13,000</p>
+                <p>P = 13,000 / 1.3 = 10,000</p>
+                <p><strong>Answer:</strong> The principal is ₹10,000 and the rate of interest is 10% per annum.</p>
+              </div>
+            </div>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 2:</p>
+              <p>A sum of money lent out at simple interest amounts to ₹720 after 2 years and to ₹1,020 after 5 years. Find the sum and the rate of interest.</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let the principal be P and the rate of interest be R%.</p>
+                <p>After 2 years: P + (P × R × 2) / 100 = 720</p>
+                <p>After 5 years: P + (P × R × 5) / 100 = 1,020</p>
+                <p>From the first equation: P(1 + 2R/100) = 720 ... (1)</p>
+                <p>From the second equation: P(1 + 5R/100) = 1,020 ... (2)</p>
+                <p>Subtracting equation (1) from equation (2):</p>
+                <p>P(1 + 5R/100) - P(1 + 2R/100) = 1,020 - 720</p>
+                <p>P(5R/100 - 2R/100) = 300</p>
+                <p>P(3R/100) = 300</p>
+                <p>3PR/100 = 300</p>
+                <p>PR = 10,000</p>
+                <p>Substituting in equation (1):</p>
+                <p>P + 2PR/100 = 720</p>
+                <p>P + 2(10,000)/100 = 720</p>
+                <p>P + 200 = 720</p>
+                <p>P = 520</p>
+                <p>Since PR = 10,000, R = 10,000/520 = 19.23%</p>
+                <p><strong>Answer:</strong> The principal is ₹520 and the rate of interest is 19.23% per annum.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="compound-interest" class="concept-card">
+        <div class="concept-header">
+          <div class="concept-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h2 class="concept-title">Compound Interest</h2>
+        </div>
+        
+        <div class="concept-body">
+          <p>Compound Interest is the interest calculated on the initial principal and also on the accumulated interest of previous periods. It's essentially "interest on interest."</p>
+          
+          <div class="formula-box">
+            <p class="formula">A = P(1 + R/100)^T</p>
+            <p class="formula">CI = A - P = P[(1 + R/100)^T - 1]</p>
+            <div class="formula-explanation">
+              <p>Where:</p>
+              <ul>
+                <li><strong>A</strong> = Final amount (Principal + Interest)</li>
+                <li><strong>P</strong> = Principal (initial amount)</li>
+                <li><strong>R</strong> = Rate of interest per annum (%)</li>
+                <li><strong>T</strong> = Time period (in years)</li>
+                <li><strong>CI</strong> = Compound Interest</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 1: Calculating Compound Interest</p>
+            <p><strong>Question:</strong> Calculate the compound interest on ₹5,000 at 10% per annum for 2 years, compounded annually.</p>
+            <div class="step-by-step">
+              <div class="step">Identify the principal (P = ₹5,000), rate (R = 10%), and time (T = 2 years).</div>
+              <div class="step">Use the formula: A = P(1 + R/100)^T</div>
+              <div class="step">A = 5,000(1 + 10/100)^2 = 5,000(1.1)^2 = 5,000 × 1.21 = ₹6,050</div>
+              <div class="step">CI = A - P = ₹6,050 - ₹5,000 = ₹1,050</div>
+              <div class="step"><strong>Answer:</strong> The compound interest is ₹1,050.</div>
+            </div>
+          </div>
+          
+          <div class="example-box">
+            <p class="example-title">Example 2: Compound Interest with Different Compounding Periods</p>
+            <p><strong>Question:</strong> Calculate the compound interest on ₹10,000 at 8% per annum for 2 years, compounded quarterly.</p>
+            <div class="step-by-step">
+              <div class="step">Identify the principal (P = ₹10,000), rate (R = 8%), and time (T = 2 years).</div>
+              <div class="step">For quarterly compounding, we need to adjust the formula: A = P(1 + R/(100 × 4))^(4T)</div>
+              <div class="step">A = 10,000(1 + 8/(100 × 4))^(4 × 2) = 10,000(1 + 0.02)^8 = 10,000(1.02)^8</div>
+              <div class="step">A = 10,000 × 1.1717 = ₹11,717</div>
+              <div class="step">CI = A - P = ₹11,717 - ₹10,000 = ₹1,717</div>
+              <div class="step"><strong>Answer:</strong> The compound interest is ₹1,717.</div>
+            </div>
+          </div>
+          
+          <div class="shortcut-box">
+            <p class="shortcut-title"><i class="fas fa-bolt"></i> Compound Interest Shortcuts</p>
+            <ul>
+              <li><strong>For 2 years at R%:</strong> CI ≈ SI + (SI × R) / 100</li>
+              <li><strong>For doubling money:</strong> Rule of 72 - Time to double ≈ 72 / R</li>
+              <li><strong>For small rates and short periods:</strong> CI ≈ SI + (SI × R × T(T-1)) / (2 × 100)</li>
+              <li><strong>For half-yearly compounding:</strong> Use R/2 as rate and 2T as time in the formula</li>
+              <li><strong>For quarterly compounding:</strong> Use R/4 as rate and 4T as time in the formula</li>
+            </ul>
+          </div>
+          
+          <div class="application-box">
+            <p class="application-title"><i class="fas fa-lightbulb"></i> Real-World Applications</p>
+            <ul>
+              <li><strong>Bank Deposits:</strong> Most banks use compound interest for fixed deposits and recurring deposits.</li>
+              <li><strong>Loans:</strong> Home loans, car loans, and credit card interest are typically calculated using compound interest.</li>
+              <li><strong>Investments:</strong> Mutual funds, stocks, and other investments grow through compound interest.</li>
+              <li><strong>Retirement Planning:</strong> Compound interest plays a crucial role in retirement planning and pension funds.</li>
+            </ul>
+          </div>
+          
+          <div class="comparison-table">
+            <h3>Simple Interest vs. Compound Interest</h3>
+            <table class="comparison-table">
+              <tr>
+                <th>Feature</th>
+                <th>Simple Interest</th>
+                <th>Compound Interest</th>
+              </tr>
+              <tr>
+                <td>Interest Calculation</td>
+                <td>Only on principal</td>
+                <td>On principal and accumulated interest</td>
+              </tr>
+              <tr>
+                <td>Formula</td>
+                <td>SI = (P × R × T) / 100</td>
+                <td>CI = P[(1 + R/100)^T - 1]</td>
+              </tr>
+              <tr>
+                <td>Growth</td>
+                <td>Linear growth</td>
+                <td>Exponential growth</td>
+              </tr>
+              <tr>
+                <td>Amount after T years</td>
+                <td>A = P(1 + RT/100)</td>
+                <td>A = P(1 + R/100)^T</td>
+              </tr>
+              <tr>
+                <td>Typical Applications</td>
+                <td>Short-term loans, treasury bills</td>
+                <td>Bank deposits, home loans, investments</td>
+              </tr>
+              <tr>
+                <td>Benefit to Investor</td>
+                <td>Lower returns</td>
+                <td>Higher returns over long periods</td>
+              </tr>
+              <tr>
+                <td>Benefit to Borrower</td>
+                <td>Lower cost of borrowing</td>
+                <td>Higher cost of borrowing</td>
+              </tr>
+            </table>
+          </div>
+          
+          <div class="practice-problems">
+            <h3>Practice Problems</h3>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 1:</p>
+              <p>A sum of money invested at compound interest amounts to ₹16,000 after 2 years and to ₹17,280 after 3 years. Find the rate of interest and the sum.</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let the principal be P and the rate of interest be R%.</p>
+                <p>After 2 years: P(1 + R/100)^2 = 16,000 ... (1)</p>
+                <p>After 3 years: P(1 + R/100)^3 = 17,280 ... (2)</p>
+                <p>Dividing equation (2) by equation (1):</p>
+                <p>(1 + R/100) = 17,280 / 16,000 = 1.08</p>
+                <p>1 + R/100 = 1.08</p>
+                <p>R/100 = 0.08</p>
+                <p>R = 8%</p>
+                <p>Substituting R = 8% in equation (1):</p>
+                <p>P(1 + 8/100)^2 = 16,000</p>
+                <p>P(1.08)^2 = 16,000</p>
+                <p>P × 1.1664 = 16,000</p>
+                <p>P = 16,000 / 1.1664 = 13,717.42</p>
+                <p><strong>Answer:</strong> The principal is approximately ₹13,717 and the rate of interest is 8% per annum.</p>
+              </div>
+            </div>
+            
+            <div class="problem">
+              <p class="problem-title">Problem 2:</p>
+              <p>The difference between compound interest and simple interest on a certain sum for 2 years at 5% per annum is ₹25. Find the sum.</p>
+              <button class="toggle-solution" onclick="toggleSolution(this)">Show Solution</button>
+              <div class="solution">
+                <p>Let the principal be P.</p>
+                <p>Simple Interest for 2 years at 5%: SI = (P × 5 × 2) / 100 = P × 0.1</p>
+                <p>Amount after 2 years with Simple Interest: P + SI = P + P × 0.1 = 1.1P</p>
+                <p>Amount after 2 years with Compound Interest: P(1 + 5/100)^2 = P(1.05)^2 = P × 1.1025</p>
+                <p>Compound Interest: CI = P × 1.1025 - P = 0.1025P</p>
+                <p>Given that CI - SI = 25:</p>
+                <p>0.1025P - 0.1P = 25</p>
+                <p>0.0025P = 25</p>
+                <p>P = 25 / 0.0025 = 10,000</p>
+                <p><strong>Answer:</strong> The sum is ₹10,000.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="resource-links">
+        <h2>Additional Resources</h2>
+        <a href="#" class="resource-link"><i class="fas fa-file-pdf"></i> Download Percentage & Interest Formula Sheet</a>
+        <a href="#" class="resource-link"><i class="fas fa-file-alt"></i> 100 Practice Problems on Percentages</a>
+        <a href="#" class="resource-link"><i class="fas fa-file-alt"></i> 100 Practice Problems on Simple & Compound Interest</a>
+        <a href="#" class="resource-link"><i class="fas fa-video"></i> Video Tutorial: Mastering Percentage Shortcuts</a>
+        <a href="#" class="resource-link"><i class="fas fa-video"></i> Video Tutorial: Simple vs Compound Interest Explained</a>
+        <a href="#" class="resource-link"><i class="fas fa-calculator"></i> Interest Calculator Tool</a>
+      </section>
+    </div>
+    
+    <section class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter for the latest aptitude tips, tricks, and practice questions.</p>
+      <form id="newsletter-form" class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+      <p class="form-message"></p>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="https://t.me/eduigniteofficial"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="../EduIgnite/index.html">Home</a></li>
+          <li><a href="../EduIgnite/programming.html">Programming</a></li>
+          <li><a href="../EduIgnite/aptitude.html">Aptitude</a></li>
+          <li><a href="../EduIgnite/current-affairs.html">Current Affairs</a></li>
+          <li><a href="../EduIgnite/blog.html">Study Blog</a></li>
+          <li><a href="../EduIgnite/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
+    </div>
+  </footer>
+  
+  <script>
+    // Toggle mobile menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Toggle solution visibility
+    function toggleSolution(button) {
+      const solution = button.nextElementSibling;
+      if (solution.style.display === 'block') {
+        solution.style.display = 'none';
+        button.textContent = 'Show Solution';
+      } else {
+        solution.style.display = 'block';
+        button.textContent = 'Hide Solution';
+      }
+    }
+    
+    // Render math expressions using KaTeX
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false}
+        ]
+      });
+    });
+    
+    // Newsletter form submission
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      const messageElement = document.querySelector('.form-message');
+      
+      // Simple validation
+      if (email) {
+        // In a real application, you would send this to your server
+        messageElement.textContent = 'Thank you for subscribing!';
+        messageElement.style.color = 'green';
+        this.reset();
+        
+        // Hide the message after 3 seconds
+        setTimeout(() => {
+          messageElement.textContent = '';
+        }, 3000);
+      }
+    });
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+  </script>
 </body>
 </html>

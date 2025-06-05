@@ -1,4 +1,79 @@
 https://ankitsaini605.github.io/
-https://ankitsaini605.github.io/blog.html
-https://ankitsaini605.github.io/aptitude.html
+https://ankitsaini605.github.io/index.html
 https://ankitsaini605.github.io/programming.html
+https://ankitsaini605.github.io/aptitude.html
+https://ankitsaini605.github.io/current-affairs.html
+https://ankitsaini605.github.io/blog.html
+https://ankitsaini605.github.io/contact.html
+
+# Programming Topics
+https://ankitsaini605.github.io/programming/java-introduction.html
+https://ankitsaini605.github.io/programming/python-basics.html
+https://ankitsaini605.github.io/programming/cpp-fundamentals.html
+https://ankitsaini605.github.io/programming/data-structures.html
+https://ankitsaini605.github.io/programming/algorithms.html
+https://ankitsaini605.github.io/programming/web-development.html
+https://ankitsaini605.github.io/programming/mobile-app-development.html
+https://ankitsaini605.github.io/programming/database-systems.html
+https://ankitsaini605.github.io/programming/machine-learning.html
+https://ankitsaini605.github.io/programming/artificial-intelligence.html
+
+# Aptitude Topics
+https://ankitsaini605.github.io/aptitude/percentage.html
+https://ankitsaini605.github.io/aptitude/profit-loss.html
+https://ankitsaini605.github.io/aptitude/simple-compound-interest.html
+https://ankitsaini605.github.io/aptitude/time-work.html
+https://ankitsaini605.github.io/aptitude/time-speed-distance.html
+https://ankitsaini605.github.io/aptitude/number-series.html
+https://ankitsaini605.github.io/aptitude/probability.html
+https://ankitsaini605.github.io/aptitude/permutation-combination.html
+https://ankitsaini605.github.io/aptitude/data-interpretation.html
+https://ankitsaini605.github.io/aptitude/logical-reasoning.html
+
+# Current Affairs
+https://ankitsaini605.github.io/current-affairs/daily-updates.html
+https://ankitsaini605.github.io/current-affairs/weekly-digest.html
+https://ankitsaini605.github.io/current-affairs/monthly-compilation.html
+https://ankitsaini605.github.io/current-affairs/government-schemes.html
+https://ankitsaini605.github.io/current-affairs/international-relations.html
+https://ankitsaini605.github.io/current-affairs/economy-finance.html
+https://ankitsaini605.github.io/current-affairs/science-technology.html
+https://ankitsaini605.github.io/current-affairs/sports-entertainment.html
+https://ankitsaini605.github.io/current-affairs/environment-ecology.html
+https://ankitsaini605.github.io/current-affairs/awards-honors.html
+
+# Blog Articles
+https://ankitsaini605.github.io/blog/exam-hacks-top-students.html
+https://ankitsaini605.github.io/blog/memory-techniques.html
+https://ankitsaini605.github.io/blog/effective-note-taking.html
+https://ankitsaini605.github.io/blog/managing-exam-stress.html
+https://ankitsaini605.github.io/blog/perfect-study-schedule.html
+https://ankitsaini605.github.io/blog/books-every-student-should-read.html
+https://ankitsaini605.github.io/blog/finding-motivation.html
+https://ankitsaini605.github.io/blog/time-management-tips.html
+https://ankitsaini605.github.io/blog/group-study-benefits.html
+https://ankitsaini605.github.io/blog/digital-tools-for-students.html
+
+# Resources
+https://ankitsaini605.github.io/resources/formula-sheets.html
+https://ankitsaini605.github.io/resources/cheat-sheets.html
+https://ankitsaini605.github.io/resources/practice-questions.html
+https://ankitsaini605.github.io/resources/mock-tests.html
+https://ankitsaini605.github.io/resources/video-tutorials.html
+https://ankitsaini605.github.io/resources/ebooks.html
+https://ankitsaini605.github.io/resources/study-planners.html
+
+# User Pages
+https://ankitsaini605.github.io/user/login.html
+https://ankitsaini605.github.io/user/register.html
+https://ankitsaini605.github.io/user/dashboard.html
+https://ankitsaini605.github.io/user/progress-tracker.html
+https://ankitsaini605.github.io/user/bookmarks.html
+https://ankitsaini605.github.io/user/settings.html
+
+# Legal Pages
+https://ankitsaini605.github.io/about-us.html
+https://ankitsaini605.github.io/privacy-policy.html
+https://ankitsaini605.github.io/terms-of-service.html
+https://ankitsaini605.github.io/cookie-policy.html
+https://ankitsaini605.github.io/disclaimer.html

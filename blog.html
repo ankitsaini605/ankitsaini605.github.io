@@ -1,50 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="EduIgnite – Learn smart with MCQs, coding tutorials, study blogs, and current affairs. Crack your exams with confidence." />
-<meta name="keywords" content="EduIgnite, study tips, competitive exams, C programming, aptitude quiz, current affairs, coding MCQ, ankit saini website" />
-<meta name="author" content="Ankit Saini" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8"><title>Study Blog</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore EduIgnite's Study Blog for effective study techniques, productivity hacks, exam preparation strategies, and student motivation to excel in your academic journey.">
+  <meta name="keywords" content="study tips, productivity, exam preparation, student motivation, learning techniques, memory improvement, time management">
+  <meta name="author" content="Ankit Saini">
+  <title>Study Blog - EduIgnite</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Blog page specific styles */
+    .blog-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      margin-bottom: 30px;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .blog-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .blog-content {
+      padding: 25px;
+    }
+    
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .blog-meta > div {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    
+    .blog-meta i {
+      margin-right: 5px;
+      color: var(--primary-color);
+    }
+    
+    .blog-title {
+      font-size: 1.5rem;
+      margin: 0 0 15px 0;
+      color: var(--secondary-color);
+    }
+    
+    .blog-excerpt {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .blog-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .blog-tag {
+      background-color: #f5f5f5;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #666;
+      transition: var(--transition);
+    }
+    
+    .blog-tag:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .read-more {
+      display: inline-block;
+      padding: 8px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+    
+    .read-more:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+    
+    .sidebar {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 25px;
+      box-shadow: var(--box-shadow);
+      position: sticky;
+      top: 30px;
+    }
+    
+    .sidebar h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .popular-posts {
+      margin-bottom: 30px;
+    }
+    
+    .popular-post {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .popular-post:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .popular-post-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      margin-right: 15px;
+    }
+    
+    .popular-post-content h4 {
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+    }
+    
+    .popular-post-content a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .popular-post-content a:hover {
+      color: var(--primary-color);
+    }
+    
+    .popular-post-date {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .categories ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .categories li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .categories li:last-child {
+      border-bottom: none;
+    }
+    
+    .categories a {
+      color: #666;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+    
+    .categories a:hover {
+      color: var(--primary-color);
+    }
+    
+    .categories .count {
+      background-color: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      transition: var(--transition);
+    }
+    
+    .categories a:hover .count {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .tag {
+      background-color: #f5f5f5;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #666;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .tag:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .search-box {
+      margin-bottom: 30px;
+    }
+    
+    .search-box form {
+      display: flex;
+    }
+    
+    .search-box input {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      outline: none;
+    }
+    
+    .search-box button {
+      padding: 10px 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .search-box button:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .featured-post {
+      position: relative;
+      margin-bottom: 40px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+    
+    .featured-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    
+    .featured-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: white;
+    }
+    
+    .featured-title {
+      font-size: 2rem;
+      margin: 0 0 15px 0;
+    }
+    
+    .featured-excerpt {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    
+    .featured-meta > div {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    
+    .featured-meta i {
+      margin-right: 5px;
+      color: var(--accent-color);
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    
+    .pagination a {
+      display: inline-block;
+      padding: 8px 15px;
+      margin: 0 5px;
+      background-color: white;
+      color: var(--secondary-color);
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--box-shadow);
+    }
+    
+    .pagination a:hover, .pagination a.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .newsletter-box {
+      background-color: #f5f9ff;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      margin-bottom: 30px;
+    }
+    
+    .newsletter-box h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    
+    .newsletter-box p {
+      margin-bottom: 20px;
+      color: #666;
+    }
+    
+    .newsletter-form {
+      display: flex;
+    }
+    
+    .newsletter-form input {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      outline: none;
+    }
+    
+    .newsletter-form button {
+      padding: 10px 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .newsletter-form button:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .blog-container {
+        flex-direction: column;
+      }
+      
+      .blog-main {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 30px;
+      }
+      
+      .blog-sidebar {
+        width: 100%;
+      }
+      
+      .featured-image {
+        height: 300px;
+      }
+      
+      .featured-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main><h2>Study Hacks & Motivation</h2>
-<ul>
-  <li><a href="blog-1.html">How to Study for 6 Hours Without Losing Focus</a></li>
-  <li><a href="blog-2.html">Best Morning Routine for Students</a></li>
-  <li><a href="blog-3.html">5 Exam Hacks Toppers Use Daily</a></li>
-  <li><a href="blog-4.html">Top 3 Study Timetable Formats</a></li>
-  <li><a href="blog-5.html">Why Most Students Fail in Exams</a></li>
-  <li><a href="blog-6.html">Scientific Way to Revise</a></li>
-  <li><a href="blog-7.html">Focus Like a Monk</a></li>
-  <li><a href="blog-8.html">Blog Post #8 – EduIgnite</a></li>
-  <li><a href="blog-9.html">Blog Post #9 – EduIgnite</a></li>
-  <li><a href="blog-10.html">Blog Post #10 – EduIgnite</a></li>
-  <li><a href="blog-11.html">Blog Post #11 – EduIgnite</a></li>
-  <li><a href="blog-12.html">Blog Post #12 – EduIgnite</a></li>
-  <li><a href="blog-13.html">Blog Post #13 – EduIgnite</a></li>
-  <li><a href="blog-14.html">Blog Post #14 – EduIgnite</a></li>
-  <li><a href="blog-15.html">Blog Post #15 – EduIgnite</a></li>
-  <li><a href="blog-16.html">Blog Post #16 – EduIgnite</a></li>
-  <li><a href="blog-17.html">Blog Post #17 – EduIgnite</a></li>
-<li><a href="blog-28.html">Blog Post 28</a></li>
-<li><a href="blog-29.html">Blog Post 29</a></li>
-<li><a href="blog-30.html">Blog Post 30</a></li>
-<li><a href="blog-31.html">Blog Post 31</a></li>
-<li><a href="blog-32.html">Blog Post 32</a></li>
-<li><a href="blog-33.html">Blog Post 33</a></li>
-<li><a href="blog-34.html">Blog Post 34</a></li>
-<li><a href="blog-35.html">Blog Post 35</a></li>
-<li><a href="blog-36.html">Blog Post 36</a></li>
-<li><a href="blog-37.html">Blog Post 37</a></li>
-<li><a href="blog-38.html">Blog Post 38</a></li>
-<li><a href="blog-39.html">Blog Post 39</a></li>
-<li><a href="blog-40.html">Blog Post 40</a></li>
-<li><a href="blog-41.html">Blog Post 41</a></li>
-<li><a href="blog-42.html">Blog Post 42</a></li>
-
-</ul>
-</main>
-<footer>&copy; 2025 EduIgnite</footer>
-</body></html>
+  <header>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
+    </div>
+    <div class="search-container">
+      <form action="#" method="get" id="search-form">
+        <input type="text" placeholder="Search topics..." name="search" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="programming.html"><i class="fas fa-code"></i> Programming</a></li>
+      <li><a href="aptitude.html"><i class="fas fa-brain"></i> Aptitude</a></li>
+      <li><a href="current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
+      <li><a href="blog.html" class="active"><i class="fas fa-book-reader"></i> Study Blog</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x800/?study');">
+      <div class="hero-content">
+        <h2>Study Hacks & Motivation</h2>
+        <p>Discover effective study techniques, productivity hacks, and motivation to excel in your academic journey.</p>
+        <div class="cta-buttons">
+          <a href="#featured" class="cta-button primary">Featured Articles</a>
+          <a href="#categories" class="cta-button secondary">Browse Categories</a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="featured" class="featured-post">
+      <img src="https://source.unsplash.com/random/1200x600/?study-desk" alt="Featured Post" class="featured-image">
+      <div class="featured-content">
+        <div class="featured-meta">
+          <div><i class="far fa-calendar"></i> June 15, 2025</div>
+          <div><i class="far fa-user"></i> Ankit Saini</div>
+          <div><i class="far fa-comment"></i> 24 Comments</div>
+        </div>
+        <h2 class="featured-title">The Science of Effective Learning: Evidence-Based Study Techniques</h2>
+        <p class="featured-excerpt">Discover scientifically-proven study methods that can dramatically improve your learning efficiency and retention. Learn how to implement spaced repetition, active recall, and other powerful techniques.</p>
+        <a href="#" class="read-more">Read Article</a>
+      </div>
+    </section>
+    
+    <div class="container">
+      <div class="blog-container" style="display: flex; gap: 30px;">
+        <div class="blog-main" style="flex: 2;">
+          <div class="blog-card">
+            <img src="https://source.unsplash.com/random/800x500/?focus" alt="Study Focus" class="blog-image">
+            <div class="blog-content">
+              <div class="blog-meta">
+                <div><i class="far fa-calendar"></i> June 12, 2025</div>
+                <div><i class="far fa-user"></i> Ankit Saini</div>
+                <div><i class="far fa-comment"></i> 18 Comments</div>
+              </div>
+              <h3 class="blog-title">How to Study for 6 Hours Without Losing Focus</h3>
+              <p class="blog-excerpt">Maintaining focus during long study sessions can be challenging. This article explores practical strategies to help you stay focused and productive during extended study periods, including the Pomodoro Technique, environment optimization, and mental preparation.</p>
+              <div class="blog-tags">
+                <span class="blog-tag">Focus</span>
+                <span class="blog-tag">Productivity</span>
+                <span class="blog-tag">Study Techniques</span>
+              </div>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+          
+          <div class="blog-card">
+            <img src="https://source.unsplash.com/random/800x500/?morning-routine" alt="Morning Routine" class="blog-image">
+            <div class="blog-content">
+              <div class="blog-meta">
+                <div><i class="far fa-calendar"></i> June 10, 2025</div>
+                <div><i class="far fa-user"></i> Priya Sharma</div>
+                <div><i class="far fa-comment"></i> 15 Comments</div>
+              </div>
+              <h3 class="blog-title">Best Morning Routine for Students: Start Your Day Right</h3>
+              <p class="blog-excerpt">How you start your morning sets the tone for the entire day. This article outlines an optimal morning routine specifically designed for students, incorporating elements like hydration, light exercise, mindfulness, and effective planning to maximize productivity and well-being.</p>
+              <div class="blog-tags">
+                <span class="blog-tag">Morning Routine</span>
+                <span class="blog-tag">Productivity</span>
+                <span class="blog-tag">Student Life</span>
+              </div>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+          
+          <div class="blog-card">
+            <img src="https://source.unsplash.com/random/800x500/?memory" alt="Memory Techniques" class="blog-image">
+            <div class="blog-content">
+              <div class="blog-meta">
+                <div><i class="far fa-calendar"></i> June 8, 2025</div>
+                <div><i class="far fa-user"></i> Rahul Verma</div>
+                <div><i class="far fa-comment"></i> 22 Comments</div>
+              </div>
+              <h3 class="blog-title">Memory Techniques That Actually Work for Students</h3>
+              <p class="blog-excerpt">Struggling to remember important information for exams? This article explores powerful memory techniques including the Method of Loci, spaced repetition, memory palaces, chunking, and mnemonic devices that can significantly improve your ability to retain and recall information.</p>
+              <div class="blog-tags">
+                <span class="blog-tag">Memory</span>
+                <span class="blog-tag">Study Techniques</span>
+                <span class="blog-tag">Exam Preparation</span>
+              </div>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+          
+          <div class="blog-card">
+            <img src="https://source.unsplash.com/random/800x500/?notes" alt="Note Taking" class="blog-image">
+            <div class="blog-content">
+              <div class="blog-meta">
+                <div><i class="far fa-calendar"></i> June 5, 2025</div>
+                <div><i class="far fa-user"></i> Neha Patel</div>
+                <div><i class="far fa-comment"></i> 12 Comments</div>
+              </div>
+              <h3 class="blog-title">The Art of Effective Note-Taking: Beyond Just Writing</h3>
+              <p class="blog-excerpt">Note-taking is more than just copying information. This article delves into advanced note-taking methods like the Cornell Method, Mind Mapping, the Outline Method, and digital note-taking strategies that can transform how you capture, organize, and review information.</p>
+              <div class="blog-tags">
+                <span class="blog-tag">Note-Taking</span>
+                <span class="blog-tag">Organization</span>
+                <span class="blog-tag">Study Skills</span>
+              </div>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+          
+          <div class="blog-card">
+            <img src="https://source.unsplash.com/random/800x500/?stress" alt="Exam Stress" class="blog-image">
+            <div class="blog-content">
+              <div class="blog-meta">
+                <div><i class="far fa-calendar"></i> June 3, 2025</div>
+                <div><i class="far fa-user"></i> Ankit Saini</div>
+                <div><i class="far fa-comment"></i> 28 Comments</div>
+              </div>
+              <h3 class="blog-title">Managing Exam Stress: Strategies for Staying Calm and Focused</h3>
+              <p class="blog-excerpt">Exam anxiety can significantly impact your performance. This comprehensive guide provides practical strategies for managing exam stress, including preparation techniques, mindfulness practices, physical well-being tips, and cognitive approaches to maintain calm and focus during high-pressure situations.</p>
+              <div class="blog-tags">
+                <span class="blog-tag">Stress Management</span>
+                <span class="blog-tag">Exam Preparation</span>
+                <span class="blog-tag">Mental Health</span>
+              </div>
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+          
+          <div class="pagination">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#"><i class="fas fa-angle-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="blog-sidebar" style="flex: 1;">
+          <div class="sidebar">
+            <div class="search-box">
+              <form action="#">
+                <input type="text" placeholder="Search articles...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+              </form>
+            </div>
+            
+            <div class="popular-posts">
+              <h3>Popular Posts</h3>
+              <div class="popular-post">
+                <img src="https://source.unsplash.com/random/160x160/?study" alt="Popular Post" class="popular-post-image">
+                <div class="popular-post-content">
+                  <h4><a href="#">How to Create the Perfect Study Schedule</a></h4>
+                  <div class="popular-post-date">June 1, 2025</div>
+                </div>
+              </div>
+              <div class="popular-post">
+                <img src="https://source.unsplash.com/random/160x160/?books" alt="Popular Post" class="popular-post-image">
+                <div class="popular-post-content">
+                  <h4><a href="#">10 Books Every Student Should Read</a></h4>
+                  <div class="popular-post-date">May 28, 2025</div>
+                </div>
+              </div>
+              <div class="popular-post">
+                <img src="https://source.unsplash.com/random/160x160/?motivation" alt="Popular Post" class="popular-post-image">
+                <div class="popular-post-content">
+                  <h4><a href="#">Finding Motivation When You Feel Burnt Out</a></h4>
+                  <div class="popular-post-date">May 25, 2025</div>
+                </div>
+              </div>
+            </div>
+            
+            <div id="categories" class="categories">
+              <h3>Categories</h3>
+              <ul>
+                <li><a href="#">Study Techniques <span class="count">15</span></a></li>
+                <li><a href="#">Productivity <span class="count">12</span></a></li>
+                <li><a href="#">Exam Preparation <span class="count">10</span></a></li>
+                <li><a href="#">Student Life <span class="count">8</span></a></li>
+                <li><a href="#">Memory Improvement <span class="count">7</span></a></li>
+                <li><a href="#">Time Management <span class="count">6</span></a></li>
+                <li><a href="#">Mental Health <span class="count">5</span></a></li>
+              </ul>
+            </div>
+            
+            <div class="newsletter-box">
+              <h3>Subscribe to Our Newsletter</h3>
+              <p>Get the latest study tips and articles delivered straight to your inbox.</p>
+              <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+              </form>
+            </div>
+            
+            <div class="tags">
+              <h3>Popular Tags</h3>
+              <div class="tags">
+                <a href="#" class="tag">Study Tips</a>
+                <a href="#" class="tag">Productivity</a>
+                <a href="#" class="tag">Focus</a>
+                <a href="#" class="tag">Memory</a>
+                <a href="#" class="tag">Exams</a>
+                <a href="#" class="tag">Note-Taking</a>
+                <a href="#" class="tag">Time Management</a>
+                <a href="#" class="tag">Motivation</a>
+                <a href="#" class="tag">Student Life</a>
+                <a href="#" class="tag">Learning</a>
+                <a href="#" class="tag">Mental Health</a>
+                <a href="#" class="tag">Organization</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="aptitude.html">Aptitude</a></li>
+          <li><a href="current-affairs.html">Current Affairs</a></li>
+          <li><a href="blog.html">Study Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
+        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
+    </div>
+  </footer>
+  
+  <script>
+    // Toggle mobile menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+    
+    // Newsletter form submission
+    document.querySelectorAll('.newsletter-form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        // Simple validation
+        if (email) {
+          // In a real application, you would send this to your server
+          alert('Thank you for subscribing! You will now receive our latest articles in your inbox.');
+          this.reset();
+        }
+      });
+    });
+    
+    // Search functionality
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+    
+    // Sidebar search
+    document.querySelector('.search-box form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const searchTerm = this.querySelector('input').value.toLowerCase();
+      
+      if (searchTerm) {
+        // In a real application, you would implement proper search functionality
+        alert('Searching for: ' + searchTerm);
+        // You could redirect to a search results page
+        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
+      }
+    });
+  </script>
+</body>
+</html>
