@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  …
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EduIgnite - Your platform for Programming, Aptitude, and Exam Preparation." />
+  <meta name="keywords" content="programming, aptitude, exam preparation, coding, education" />
+  <meta name="author" content="Ankit Saini" />
+  <title>EduIgnite - Learn Smart. Rise Faster.</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
+  <!-- Structured Data for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -9,41 +27,104 @@
     "name": "EduIgnite",
     "url": "https://ankitsaini605.github.io/",
     "logo": "https://ankitsaini605.github.io/images/logo.png",
-    "sameAs": ["https://www.instagram.com/eduignite_official","https://t.me/EduIgniteOfficial"]
+    "sameAs": [
+      "https://www.instagram.com/eduignite_official",
+      "https://t.me/EduIgniteOfficial"
+    ]
   }
   </script>
 </head>
+
 <body>
-  … <!-- existing header & nav & hero -->
-
-  <main>
-    <!-- latest blogs -->
-    <section class="latest-blog-posts">
-      <h2>Latest Blog Posts</h2>
-      <ul>
-        <li><a href="blog-1.html">Top 10 Coding Interview Questions</a></li>
-        <li><a href="blog-2.html">Master Data Structures for Placements</a></li>
-        <li><a href="blog-3.html">Daily Current Affairs – {{currentMonth}} {{currentYear}}</a></li>
-      </ul>
-    </section>
-    …
-
-  </main>
-  <footer>
-    …
-    <div class="footer-section links">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <!-- rest -->
-      </ul>
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <h1>EduIgnite</h1>
+      <p class="tagline">Learn Smart. Rise Faster.</p>
     </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="aptitude.html">Aptitude</a></li>
+        <li><a href="current-affairs.html">Current Affairs</a></li>
+        <li><a href="blog.html">Study Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2>Ignite Your Learning Journey</h2>
+      <p>Master programming, ace aptitude tests, and stay updated with current affairs - all in one place.</p>
+      <div class="cta-buttons">
+        <a href="programming.html" class="cta-button primary">Start Coding</a>
+        <a href="aptitude.html" class="cta-button secondary">Improve Aptitude</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2>Why Choose EduIgnite?</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <i class="fas fa-laptop-code"></i>
+        <h3>Programming Excellence</h3>
+        <p>Master programming languages with structured learning paths from basics to advanced concepts.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-calculator"></i>
+        <h3>Aptitude Mastery</h3>
+        <p>Sharpen your logical and mathematical skills with our comprehensive aptitude training materials.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-globe"></i>
+        <h3>Current Affairs</h3>
+        <p>Stay updated with the latest happenings around the world that matter for your exams and interviews.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About EduIgnite</h3>
+        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/eduignite_official" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/EduIgniteOfficial" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="mailto:ankitsaini24082002@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="aptitude.html">Aptitude</a></li>
+          <li><a href="current-affairs.html">Current Affairs</a></li>
+          <li><a href="blog.html">Study Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:ankitsaini24082002@gmail.com">ankitsaini24082002@gmail.com</a></p>
+        <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/eduignite_official" target="_blank">@eduignite_official</a></p>
+        <p><i class="fab fa-telegram"></i> <a href="https://t.me/EduIgniteOfficial" target="_blank">EduIgnite Official</a></p>
+      </div>
+    </div>
+
     <div class="footer-bottom">
-      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini |
-      <a href="privacy-policy.html">Privacy Policy</a> |
-      <a href="terms.html">Terms & Conditions</a> | All Rights Reserved
+      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
     </div>
   </footer>
+
 </body>
 </html>
