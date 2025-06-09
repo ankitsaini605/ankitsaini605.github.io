@@ -1,20 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 4 - Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aptitude Topic 4: Percentage - Concepts, Formulas & Practice Problems for Competitive Exams." />
+  <meta name="keywords" content="Percentage, Aptitude, Math, Competitive Exams, Formulas, Practice Questions" />
+  <meta name="author" content="Ankit Saini" />
+  <title>Aptitude - Percentage | Formulas & Practice</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 4 – Quiz</h2>
-  <ol>
-    <li>Q: Sample Question 1<br><strong>Ans:</strong> Option A</li>
-    <li>Q: Sample Question 2<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Sample Question 3<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <h1>Aptitude - Percentage</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude Topics</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>What is Percentage?</h2>
+      <p>Percentage is a way of expressing a number as a fraction of 100. It is widely used in daily life as well as in competitive exams.</p>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul>
+        <li><strong>Percentage Formula:</strong> (Part / Whole) × 100%</li>
+        <li><strong>Increase/Decrease Percentage:</strong> ((New Value - Original Value) / Original Value) × 100%</li>
+        <li><strong>Successive Percentage Change:</strong> Use multiplication of respective multipliers.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Important Formulas</h2>
+      <ul>
+        <li>Percentage = (Value × 100) / Total</li>
+        <li>Value = (Percentage × Total) / 100</li>
+        <li>Successive Change = (1 + p/100)(1 + q/100) - 1, where p and q are percentages</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Practice Problems</h2>
+
+      <article>
+        <h3>Problem 1</h3>
+        <p>If 40% of a number is 80, what is the number?</p>
+        <button onclick="toggleAnswer('answer1')">Show Answer</button>
+        <div id="answer1" style="display:none;">
+          <p>Let the number be x.</p>
+          <p>40% of x = 80</p>
+          <p>(40/100) × x = 80</p>
+          <p>x = (80 × 100) / 40 = 200</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>Problem 2</h3>
+        <p>The price of an article is increased by 20% and then decreased by 10%. What is the net percentage change in price?</p>
+        <button onclick="toggleAnswer('answer2')">Show Answer</button>
+        <div id="answer2" style="display:none;">
+          <p>Net change = (1 + 20/100)(1 - 10/100) - 1</p>
+          <p>= (1.2)(0.9) - 1 = 1.08 - 1 = 0.08 = 8%</p>
+          <p>Therefore, price increases by 8% overall.</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Convert percentage problems into fractions or decimals for easier calculation.</li>
+        <li>For successive changes, multiply multipliers instead of adding percentages directly.</li>
+        <li>Practice word problems to understand real-life applications.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
