@@ -1,20 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 25 - Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aptitude Topic 25: Compound Interest - Concepts, Formulas & Practice Questions for competitive exam preparation." />
+  <meta name="keywords" content="Compound Interest, Aptitude, Math Problems, Competitive Exams, Practice Questions" />
+  <meta name="author" content="Ankit Saini" />
+  <title>Aptitude - Compound Interest | Formulas & Practice Problems</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 25 – Quiz</h2>
-  <ol>
-    <li>Q: What is the solution to question A?<br><strong>Ans:</strong> Option A</li>
-    <li>Q: What is the trick behind question B?<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Question C explanation?<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <h1>Aptitude - Compound Interest</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude Topics</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Introduction</h2>
+      <p>Compound Interest (CI) is the interest calculated on the principal amount and also on the accumulated interest of previous periods.</p>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul>
+        <li><strong>Principal (P):</strong> The initial amount invested or loaned.</li>
+        <li><strong>Rate (R):</strong> Annual interest rate (in percentage).</li>
+        <li><strong>Time (T):</strong> Number of years the money is invested or borrowed.</li>
+        <li><strong>Compound Interest (CI):</strong> Interest earned on both principal and accumulated interest.</li>
+        <li><strong>Amount (A):</strong> Total sum after interest = Principal + Compound Interest.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Formulas</h2>
+      <ul>
+        <li>Amount (A) = P × (1 + R/100)<sup>T</sup></li>
+        <li>Compound Interest (CI) = A - P</li>
+        <li>When compounded half-yearly: A = P × (1 + R/200)<sup>2T</sup></li>
+        <li>When compounded quarterly: A = P × (1 + R/400)<sup>4T</sup></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Practice Problems</h2>
+
+      <article>
+        <h3>Problem 1</h3>
+        <p>If ₹10,000 is invested at 8% per annum compounded annually, what will be the amount after 3 years?</p>
+        <button onclick="toggleAnswer('answer1')">Show Answer</button>
+        <div id="answer1" style="display:none;">
+          <p>A = 10000 × (1 + 8/100)<sup>3</sup> = 10000 × (1.08)<sup>3</sup> = ₹12597.92</p>
+          <p>Compound Interest = 12597.92 - 10000 = ₹2597.92</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>Problem 2</h3>
+        <p>Find the compound interest on ₹15,000 at 10% per annum compounded half-yearly for 2 years.</p>
+        <button onclick="toggleAnswer('answer2')">Show Answer</button>
+        <div id="answer2" style="display:none;">
+          <p>Rate per half-year = 10/2 = 5%</p>
+          <p>Number of periods = 2 × 2 = 4</p>
+          <p>A = 15000 × (1 + 5/100)<sup>4</sup> = 15000 × (1.05)<sup>4</sup> = ₹18289.06</p>
+          <p>Compound Interest = 18289.06 - 15000 = ₹3289.06</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Convert the rate and time according to the compounding frequency.</li>
+        <li>Remember CI is always more than SI for the same rate and time.</li>
+        <li>Use approximation techniques for faster calculations.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
+
