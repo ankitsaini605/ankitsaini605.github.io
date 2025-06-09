@@ -1,20 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 24 - Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aptitude Topic 24: Simple Interest - Concepts, Formulas, and Practice Questions for competitive exams preparation." />
+  <meta name="keywords" content="Simple Interest, Aptitude, Math Problems, Competitive Exams, Practice Questions" />
+  <meta name="author" content="Ankit Saini" />
+  <title>Aptitude - Simple Interest | Formulas & Practice Problems</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 24 – Quiz</h2>
-  <ol>
-    <li>Q: What is the solution to question A?<br><strong>Ans:</strong> Option A</li>
-    <li>Q: What is the trick behind question B?<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Question C explanation?<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <h1>Aptitude - Simple Interest</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude Topics</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Introduction</h2>
+      <p>Simple Interest (SI) is the interest calculated only on the principal amount, or on that portion of the principal amount which remains unpaid.</p>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul>
+        <li><strong>Principal (P):</strong> The initial amount of money invested or loaned.</li>
+        <li><strong>Rate (R):</strong> The percentage of interest charged or earned annually.</li>
+        <li><strong>Time (T):</strong> The time period for which the money is invested or borrowed, usually in years.</li>
+        <li><strong>Simple Interest (SI):</strong> The interest earned or paid on the principal only.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Formulas</h2>
+      <ul>
+        <li>Simple Interest: <strong>SI = (P × R × T) / 100</strong></li>
+        <li>Amount: <strong>A = P + SI</strong></li>
+        <li>Principal: <strong>P = (SI × 100) / (R × T)</strong></li>
+        <li>Rate: <strong>R = (SI × 100) / (P × T)</strong></li>
+        <li>Time: <strong>T = (SI × 100) / (P × R)</strong></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Practice Problems</h2>
+
+      <article>
+        <h3>Problem 1</h3>
+        <p>If ₹10,000 is invested at a simple interest rate of 5% per annum for 3 years, what is the total interest earned?</p>
+        <button onclick="toggleAnswer('answer1')">Show Answer</button>
+        <div id="answer1" style="display:none;">
+          <p>SI = (P × R × T) / 100 = (10000 × 5 × 3) / 100 = ₹1500</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>Problem 2</h3>
+        <p>A sum of ₹12,000 amounts to ₹13,800 in 3 years at simple interest. Find the rate of interest.</p>
+        <button onclick="toggleAnswer('answer2')">Show Answer</button>
+        <div id="answer2" style="display:none;">
+          <p>SI = 13800 - 12000 = ₹1800<br />
+          Using SI formula: R = (SI × 100) / (P × T) = (1800 × 100) / (12000 × 3) = 5%</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Convert time to years if given in months or days.</li>
+        <li>Always remember to convert rate to percentage if given in decimal.</li>
+        <li>Use the formula carefully to avoid common mistakes.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
+
