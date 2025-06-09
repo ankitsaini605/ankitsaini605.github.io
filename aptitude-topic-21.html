@@ -1,20 +1,90 @@
+<!-- aptitude-topic-21.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 21 - Quiz</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Practice aptitude topic - Pipes and Cisterns problems with solutions and tricks.">
+    <meta name="keywords" content="Aptitude, Pipes and Cisterns, Problems, Solutions, Competitive Exams, Practice Questions">
+    <meta name="author" content="Ankit Saini">
+    <title>Aptitude - Pipes and Cisterns | Practice Problems & Solutions</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 21 – Quiz</h2>
-  <ol>
-    <li>Q: What is the solution to question A?<br><strong>Ans:</strong> Option A</li>
-    <li>Q: What is the trick behind question B?<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Question C explanation?<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+    <header>
+        <h1>Aptitude - Pipes and Cisterns</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude Topics</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Introduction to Pipes and Cisterns</h2>
+            <p>This topic deals with problems related to filling or emptying tanks with the help of pipes. Pipes can be inlet (filling) or outlet (emptying).</p>
+        </section>
+
+        <section>
+            <h2>Formulas to Remember</h2>
+            <ul>
+                <li>Inlet pipe work = positive work</li>
+                <li>Outlet pipe work = negative work</li>
+                <li>If a pipe fills a tank in X hours, then its 1 hour work = 1/X</li>
+                <li>If a pipe empties a tank in Y hours, then its 1 hour work = -1/Y</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Practice Problems</h2>
+            <article>
+                <h3>Problem 1</h3>
+                <p>A pipe can fill a tank in 6 hours, and another can empty it in 8 hours. If both are opened together, how long will it take to fill the tank?</p>
+                <button onclick="toggleAnswer('answer1')">Show Answer</button>
+                <div id="answer1" style="display:none;">
+                    <p>Filling pipe's 1 hr work = 1/6<br>
+                    Emptying pipe's 1 hr work = -1/8<br>
+                    Combined 1 hr work = (1/6 - 1/8) = (4-3)/24 = 1/24<br>
+                    Time taken = 24 hours.</p>
+                </div>
+            </article>
+
+            <article>
+                <h3>Problem 2</h3>
+                <p>Two pipes can fill a tank in 10 hours and 12 hours respectively. How long will it take if both are opened together?</p>
+                <button onclick="toggleAnswer('answer2')">Show Answer</button>
+                <div id="answer2" style="display:none;">
+                    <p>First pipe's 1 hr work = 1/10<br>
+                    Second pipe's 1 hr work = 1/12<br>
+                    Combined 1 hr work = (6+5)/60 = 11/60<br>
+                    Time taken = 60/11 ≈ 5.45 hours (~5 hours 27 minutes).</p>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h2>Tips & Tricks</h2>
+            <ul>
+                <li>Identify inlet and outlet pipes carefully.</li>
+                <li>Convert every operation into work done per hour.</li>
+                <li>Practice different scenarios — alternate pipes, delayed opening, part filling, etc.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const elem = document.getElementById(id);
+            elem.style.display = (elem.style.display === "none") ? "block" : "none";
+        }
+    </script>
 </body>
 </html>
+
