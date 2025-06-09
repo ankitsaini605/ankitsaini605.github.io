@@ -1,20 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 27 - Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aptitude Topic 27: Profit and Loss - Basic Concepts, Formulas, and Solved Examples for Competitive Exams." />
+  <meta name="keywords" content="Profit and Loss, Aptitude, Profit Percentage, Loss Percentage, Cost Price, Selling Price, Competitive Exams" />
+  <meta name="author" content="Ankit Saini" />
+  <title>Aptitude - Profit and Loss | Formulas & Practice Problems</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 27 – Quiz</h2>
-  <ol>
-    <li>Q: What is the solution to question A?<br><strong>Ans:</strong> Option A</li>
-    <li>Q: What is the trick behind question B?<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Question C explanation?<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <h1>Aptitude - Profit and Loss</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude Topics</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Introduction</h2>
+      <p>Profit and Loss questions form a major part of competitive exams. These problems involve understanding cost price, selling price, profit, and loss along with their percentages.</p>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul>
+        <li><strong>Cost Price (CP):</strong> The price at which an article is purchased.</li>
+        <li><strong>Selling Price (SP):</strong> The price at which an article is sold.</li>
+        <li><strong>Profit:</strong> When SP > CP, Profit = SP - CP.</li>
+        <li><strong>Loss:</strong> When CP > SP, Loss = CP - SP.</li>
+        <li><strong>Profit Percentage:</strong> (Profit / CP) × 100%</li>
+        <li><strong>Loss Percentage:</strong> (Loss / CP) × 100%</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Formulas</h2>
+      <ul>
+        <li>Profit = SP - CP</li>
+        <li>Loss = CP - SP</li>
+        <li>Profit % = (Profit / CP) × 100</li>
+        <li>Loss % = (Loss / CP) × 100</li>
+        <li>SP = CP + Profit</li>
+        <li>SP = CP - Loss</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Practice Problems</h2>
+
+      <article>
+        <h3>Problem 1</h3>
+        <p>A trader buys an article for ₹500 and sells it for ₹600. Find the profit percentage.</p>
+        <button onclick="toggleAnswer('answer1')">Show Answer</button>
+        <div id="answer1" style="display:none;">
+          <p>Profit = 600 - 500 = ₹100</p>
+          <p>Profit % = (100 / 500) × 100 = 20%</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>Problem 2</h3>
+        <p>A shopkeeper sells an article at a loss of 12%. If the cost price of the article is ₹1500, find the selling price.</p>
+        <button onclick="toggleAnswer('answer2')">Show Answer</button>
+        <div id="answer2" style="display:none;">
+          <p>Loss = 12% of 1500 = 0.12 × 1500 = ₹180</p>
+          <p>Selling Price = Cost Price - Loss = 1500 - 180 = ₹1320</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Always remember the basic formulas.</li>
+        <li>Convert percentages into decimals when calculating.</li>
+        <li>Check if it's a profit or loss scenario before applying formulas.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleAnswer(id) {
+      const element = document.getElementById(id);
+      element.style.display = element.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
+
