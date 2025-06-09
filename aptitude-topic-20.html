@@ -1,20 +1,88 @@
+<!-- aptitude-topic-20.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 20 - Quiz</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Practice aptitude topic - Work and Time problems with solutions and tricks.">
+    <meta name="keywords" content="Aptitude, Work and Time, Problems, Solutions, Competitive Exams, Practice Questions">
+    <meta name="author" content="Ankit Saini">
+    <title>Aptitude - Work and Time | Practice Problems & Solutions</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 20 – Quiz</h2>
-  <ol>
-    <li>Q: What is the solution to question A?<br><strong>Ans:</strong> Option A</li>
-    <li>Q: What is the trick behind question B?<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Question C explanation?<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+    <header>
+        <h1>Aptitude - Work and Time</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aptitude.html">Aptitude Topics</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Introduction to Work and Time</h2>
+            <p>Work and Time is an important topic in aptitude exams where you solve problems related to efficiency, time taken to complete a task, combined work, etc.</p>
+        </section>
+
+        <section>
+            <h2>Formulas to Remember</h2>
+            <ul>
+                <li>Work = Rate × Time</li>
+                <li>Rate = Work / Time</li>
+                <li>If A can do a piece of work in X days, then A’s 1 day work = 1/X</li>
+                <li>If A is m times as efficient as B, then ratio of times taken = 1:m</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Practice Problems</h2>
+            <article>
+                <h3>Problem 1</h3>
+                <p>A can do a work in 10 days and B can do the same work in 15 days. How long will they take if they work together?</p>
+                <button onclick="toggleAnswer('answer1')">Show Answer</button>
+                <div id="answer1" style="display:none;">
+                    <p>A’s 1 day work = 1/10, B’s 1 day work = 1/15<br>
+                    Combined 1 day work = (1/10 + 1/15) = (3+2)/30 = 5/30 = 1/6<br>
+                    Time taken = 6 days.</p>
+                </div>
+            </article>
+
+            <article>
+                <h3>Problem 2</h3>
+                <p>Two pipes can fill a tank in 12 hours and 16 hours respectively. How long will it take to fill the tank if both are opened together?</p>
+                <button onclick="toggleAnswer('answer2')">Show Answer</button>
+                <div id="answer2" style="display:none;">
+                    <p>1st pipe's 1 hour work = 1/12, 2nd pipe's 1 hour work = 1/16<br>
+                    Combined 1 hour work = (1/12 + 1/16) = (4+3)/48 = 7/48<br>
+                    Time taken = 48/7 ≈ 6.86 hours (~6 hours 52 minutes).</p>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h2>Tips & Tricks</h2>
+            <ul>
+                <li>Always convert given information into "work per day" format.</li>
+                <li>Be careful with efficiency comparisons and negative work (in pipes & cisterns).</li>
+                <li>Practice different types of problems like combined work, alternate days, part of work, etc.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAnswer(id) {
+            const elem = document.getElementById(id);
+            elem.style.display = (elem.style.display === "none") ? "block" : "none";
+        }
+    </script>
 </body>
 </html>
+
