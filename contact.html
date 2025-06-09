@@ -1,139 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Contact Eduignite - Get in touch with us for any queries or support." />
-    <title>Contact Us | Eduignite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .contact-form input, .contact-form textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        .contact-form button {
-            padding: 12px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .contact-form button:hover {
-            background-color: #45a049;
-        }
-        .contact-info {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .contact-info a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-        .social-links {
-            margin-top: 15px;
-            display: flex;
-            gap: 15px;
-        }
-        .social-links a {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: #fff;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .social-links a:hover {
-            background-color: #45a049;
-        }
-        footer {
-            background-color: #222;
-            color: #aaa;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 30px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | EduIgnite Official</title>
+    <meta name="description" content="Contact Ankit Saini for collaborations, queries, and support." />
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+    <!-- Header -->
+    <header>
+        <h1>EduIgnite Official</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="programming.html">Programming</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
 
-<header>
-    <h1>Contact Eduignite</h1>
-</header>
+    <!-- Main Contact Section -->
+    <main>
+        <section class="contact-section">
+            <h2>Contact Ankit Saini</h2>
+            <p>Have questions, suggestions, or collaboration ideas? Feel free to contact me using the form below or via social platforms.</p>
 
-<div class="container">
-    <h2>Get in Touch</h2>
-    <p>If you have any questions, feel free to reach out to us using the form below:</p>
-    
-    <form class="contact-form" action="#" method="post">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <input type="text" name="subject" placeholder="Subject" required />
-        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:ankitsaini24082002@gmail.com">ankitsaini24082002@gmail.com</a></p>
+            </div>
 
-    <div class="contact-info">
-        <h3>Contact Information</h3>
-        <p>Email: <a href="mailto:ankitsaini24082002@gmail.com">ankitsaini24082002@gmail.com</a></p>
-        <p>We will respond to your queries as soon as possible.</p>
+            <!-- Contact Form -->
+            <form class="contact-form" action="mailto:ankitsaini24082002@gmail.com" method="POST" enctype="text/plain">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required />
 
-        <h3>Follow Us:</h3>
-        <div class="social-links">
-            <a href="https://www.instagram.com/eduignite_official" target="_blank">Instagram</a>
-            <a href="https://t.me/eduignite_official" target="_blank">Telegram</a>
-        </div>
-    </div>
-</div>
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required />
 
-<footer>
-    &copy; 2025 Eduignite. All Rights Reserved.
-</footer>
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
 
+                <button type="submit">Send Message</button>
+            </form>
+
+            <!-- Follow Me On -->
+            <div class="social-links">
+                <h3>Follow Me On:</h3>
+                <p>
+                    <a href="https://www.instagram.com/eduignite_official" target="_blank">Instagram</a> |
+                    <a href="https://t.me/eduignite_official" target="_blank">Telegram</a> |
+                    <a href="https://www.linkedin.com/in/ankit-saini-512a252b6" target="_blank">LinkedIn</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 EduIgnite Official | Created by Ankit Saini | All Rights Reserved.</p>
+    </footer>
 </body>
+
 </html>
