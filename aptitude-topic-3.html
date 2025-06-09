@@ -1,20 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 3 - Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aptitude Topic 3: Ratio and Proportion - Basic Concepts, Formulas, and Examples for Competitive Exams." />
+  <meta name="keywords" content="Ratio and Proportion, Aptitude, Competitive Exams, Mathematics, Practice Problems" />
+  <meta name="author" content="Ankit Saini" />
+  <title>Aptitude - Ratio and Proportion | Formulas & Practice</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 3 – Quiz</h2>
-  <ol>
-    <li>Q: Sample Question 1<br><strong>Ans:</strong> Option A</li>
-    <li>Q: Sample Question 2<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Sample Question 3<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <h1>Aptitude - Ratio and Proportion</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude Topics</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Introduction</h2>
+      <p>Ratio and Proportion are fundamental topics in quantitative aptitude. Understanding these concepts is essential for solving a wide range of mathematical problems in competitive exams.</p>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul>
+        <li><strong>Ratio:</strong> The comparison of two quantities by division.</li>
+        <li><strong>Proportion:</strong> When two ratios are equal, they are said to be in proportion.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Important Formulas</h2>
+      <ul>
+        <li>Ratio = a : b = a/b</li>
+        <li>Proportion: a/b = c/d</li>
+        <li>Mean proportional between a and b = √(ab)</li>
+        <li>Continued proportion: If a : b = b : c, then b² = ac</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Practice Problems</h2>
+
+      <article>
+        <h3>Problem 1</h3>
+        <p>The ratio of boys to girls in a class is 3:4. If there are 21 boys, how many girls are there?</p>
+        <button onclick="toggleAnswer('answer1')">Show Answer</button>
+        <div id="answer1" style="display:none;">
+          <p>Ratio of boys:girls = 3:4</p>
+          <p>Boys = 21</p>
+          <p>Girls = (4/3) × 21 = 28</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>Problem 2</h3>
+        <p>If a : b = 5 : 6 and b : c = 4 : 7, find the ratio a : b : c.</p>
+        <button onclick="toggleAnswer('answer2')">Show Answer</button>
+        <div id="answer2" style="display:none;">
+          <p>b is common, so multiply ratios accordingly.</p>
+          <p>a : b = 5 : 6 = 20 : 24</p>
+          <p>b : c = 4 : 7 = 24 : 42</p>
+          <p>So, a : b : c = 20 : 24 : 42</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Always simplify ratios to their lowest terms.</li>
+        <li>Use cross-multiplication for proportion problems.</li>
+        <li>Practice with real-life scenarios for better understanding.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
