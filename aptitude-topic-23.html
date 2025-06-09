@@ -1,20 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic 23 - Quiz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aptitude Topic 23: Ratio and Proportion – Concepts, Formulas, and Practice Questions for competitive exams preparation." />
+  <meta name="keywords" content="Aptitude, Ratio and Proportion, Competitive Exams, Practice Questions, Math Problems" />
+  <meta name="author" content="Ankit Saini" />
+  <title>Aptitude - Ratio and Proportion | Practice Problems & Solutions</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Aptitude Topic 23 – Quiz</h2>
-  <ol>
-    <li>Q: What is the solution to question A?<br><strong>Ans:</strong> Option A</li>
-    <li>Q: What is the trick behind question B?<br><strong>Ans:</strong> Option B</li>
-    <li>Q: Question C explanation?<br><strong>Ans:</strong> Option C</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <header>
+    <h1>Aptitude - Ratio and Proportion</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude Topics</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Introduction</h2>
+      <p>Ratio and Proportion are fundamental mathematical concepts often used in various aptitude tests. Understanding how to compare quantities and solve proportion problems is critical for competitive exams.</p>
+    </section>
+
+    <section>
+      <h2>Key Concepts</h2>
+      <ul>
+        <li><strong>Ratio:</strong> A comparison of two quantities expressed as a:b or a/b.</li>
+        <li><strong>Proportion:</strong> An equation stating that two ratios are equal.</li>
+        <li>Cross multiplication is used to solve proportion problems.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Formulas</h2>
+      <ul>
+        <li>If a:b = c:d, then ad = bc.</li>
+        <li>Mean Proportional between a and b = √(ab).</li>
+        <li>If a:b = c:d, then a/c = b/d.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Practice Problems</h2>
+
+      <article>
+        <h3>Problem 1</h3>
+        <p>The ratio of boys to girls in a class is 5:6. If there are 30 boys, how many girls are there?</p>
+        <button onclick="toggleAnswer('answer1')">Show Answer</button>
+        <div id="answer1" style="display:none;">
+          <p>Given boys:girls = 5:6 and boys = 30.<br />
+          Let girls = x.<br />
+          5/6 = 30/x → 5x = 180 → x = 36.<br />
+          Therefore, there are 36 girls.</p>
+        </div>
+      </article>
+
+      <article>
+        <h3>Problem 2</h3>
+        <p>In a recipe, the ratio of flour to sugar is 3:1. If you want to make 16 cups of mixture, how much flour and sugar will you need?</p>
+        <button onclick="toggleAnswer('answer2')">Show Answer</button>
+        <div id="answer2" style="display:none;">
+          <p>Ratio flour:sugar = 3:1 → total parts = 4.<br />
+          Total mixture = 16 cups.<br />
+          Flour = (3/4) × 16 = 12 cups.<br />
+          Sugar = (1/4) × 16 = 4 cups.</p>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Always simplify ratios before solving.</li>
+        <li>Use cross multiplication for quick solutions.</li>
+        <li>Check your answer by verifying both sides of the proportion.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ankit Saini | All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function toggleAnswer(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
 </body>
 </html>
+
