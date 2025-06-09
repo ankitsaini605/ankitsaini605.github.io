@@ -1,24 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta name="description" content="EduIgnite – Learn smart with MCQs, coding tutorials, study blogs, and current affairs. Crack your exams with confidence." />
-<meta name="keywords" content="EduIgnite, study tips, competitive exams, C programming, aptitude quiz, current affairs, coding MCQ, ankit saini website" />
-<meta name="author" content="Ankit Saini" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8" />
-  <title>Time & Work Quiz - Set 1</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Test your Aptitude skills with this Profit & Loss Quiz. Practice online with multiple-choice questions for competitive exams.">
+    <meta name="keywords" content="Aptitude Quiz, Profit and Loss Quiz, Aptitude practice, MCQ quiz, EduIgnite">
+    <meta name="author" content="Ankit Saini">
+    <meta property="og:title" content="Aptitude Quiz - Profit & Loss | EduIgnite" />
+    <meta property="og:description" content="Practice your Profit & Loss skills in Aptitude with this online quiz. Sharpen your preparation for competitive exams.">
+    <meta property="og:image" content="study-plan.jpg" />
+    <meta property="og:url" content="https://your-website-url.com/aptitude-quiz-1.html" />
+    <title>Aptitude Quiz - Profit & Loss | EduIgnite</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
 </head>
+
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Time & Work - MCQ Set 1</h2>
-  <ol>
-    <li>Q: A can do a piece of work in 20 days. B can do it in 30 days. In how many days will they complete it together?<br><strong>Ans:</strong> 12 days</li>
-    <li>Q: If 12 men can complete a work in 15 days, how many men are required to complete it in 10 days?<br><strong>Ans:</strong> 18 men</li>
-    <li>Q: If A is twice as good a workman as B, then working together they can finish a work in 12 days. In how many days will A alone finish the work?<br><strong>Ans:</strong> 18 days</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+    <header>
+        <h1>Aptitude Quiz - Profit & Loss</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="programming.html">Programming</a>
+            <a href="aptitude.html">Aptitude</a>
+            <a href="current-affairs.html">Current Affairs</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>📝 Quick Instructions:</h2>
+            <ul>
+                <li>Each question has 4 options.</li>
+                <li>Select the correct answer.</li>
+                <li>Click 'Submit' to check your answers.</li>
+            </ul>
+        </section>
+
+        <section>
+            <form id="quizForm">
+                <h3>Question 1:</h3>
+                <p>A shopkeeper gains 25% by selling an article for ₹250. What is the cost price?</p>
+                <input type="radio" name="q1" value="a" /> ₹200<br />
+                <input type="radio" name="q1" value="b" /> ₹180<br />
+                <input type="radio" name="q1" value="c" /> ₹190<br />
+                <input type="radio" name="q1" value="d" /> ₹220<br />
+
+                <h3>Question 2:</h3>
+                <p>If the cost price is ₹500 and loss % is 20%, what is the selling price?</p>
+                <input type="radio" name="q2" value="a" /> ₹400<br />
+                <input type="radio" name="q2" value="b" /> ₹420<br />
+                <input type="radio" name="q2" value="c" /> ₹450<br />
+                <input type="radio" name="q2" value="d" /> ₹480<br />
+
+                <h3>Question 3:</h3>
+                <p>An article is marked at ₹600 and sold at 10% discount. If the cost price is ₹450, find the gain %.</p>
+                <input type="radio" name="q3" value="a" /> 20%<br />
+                <input type="radio" name="q3" value="b" /> 15%<br />
+                <input type="radio" name="q3" value="c" /> 25%<br />
+                <input type="radio" name="q3" value="d" /> 10%<br />
+
+                <br />
+                <button type="button" onclick="checkAnswers()">Submit</button>
+            </form>
+
+            <h3 id="result"></h3>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 EduIgnite | Built by Ankit Saini</p>
+        <p>Follow us on: 
+            <a href="https://www.instagram.com/eduignite_official" target="_blank">Instagram</a> | 
+            <a href="https://t.me/eduignite_official" target="_blank">Telegram</a>
+        </p>
+    </footer>
+
+    <script>
+        function checkAnswers() {
+            var score = 0;
+
+            if (document.querySelector('input[name="q1"]:checked')?.value === 'a') score++;
+            if (document.querySelector('input[name="q2"]:checked')?.value === 'a') score++;
+            if (document.querySelector('input[name="q3"]:checked')?.value === 'a') score++;
+
+            document.getElementById('result').innerText = `Your Score: ${score}/3`;
+        }
+    </script>
 </body>
+
 </html>
