@@ -1,17 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #85</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Geometry & Mensuration: Interactive tools, login, dark mode, quiz, recommendations — EduIgnite"/>
+  <title>Geometry & Mensuration – Pro Tools | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {font-family:sans-serif; margin:0; padding:0; background:#fff; color:#000;}
+    body.dark {background:#121212; color:#eee;}
+    header, footer {padding:1rem; background:#003366; color:white;}
+    nav a {margin:0 0.5rem; color:white; text-decoration:none;}
+    .main {padding:1rem; max-width:1000px; margin:auto;}
+    .btn {padding:0.5rem 1rem; margin:0.5rem; border:none; border-radius:4px; cursor:pointer;}
+    .btn-primary {background:#3399ff; color:white;}
+    .btn-dark {background:#555; color:white;}
+    .section {margin:2rem 0;}
+    .quiz-box, .graph-box, .tool-box {background:#eef; padding:1rem; border-radius:8px; margin:1rem 0;}
+    #circleDiag {border:1px solid #ccc; margin-top:1rem;}
+    .bookmark {cursor:pointer; color:#f39c12;}
+    .affiliate {background:#fffae6; border:1px solid #ffd35a; padding:1rem; margin:1rem 0;}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude #85 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+  <header>
+    <h1>EduIgnite – Geometry & Mensuration 🎯</h1>
+    <div style="float:right;">
+      <button onclick="setLang('en')" class="btn">EN</button>
+      <button onclick="setLang('hi')" class="btn">HI</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="aptitude.html">Aptitude</a> |
+      <a href="#" id="loginBtn">Login</a> |
+      <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+    </nav>
+  </header>
+
+  <div class="main">
+    <div id="userSection" class="section hidden">
+      Welcome, <span id="usernameDisplay">User</span>! <button id="logoutBtn" class="btn btn-dark">Logout</button>
+    </div>
+
+    <section class="section">
+      <h2 id="heading_concept">🔷 Concept: Circle Area & Perimeter</h2>
+      <p id="desc_concept">Understanding formula: Area = πr², Perimeter = 2πr</p>
+      <div class="tool-box">
+        <h3 id="tool_heading">📏 Circle Calculator</h3>
+        <label>Radius: <input id="radiusInput" type="number" placeholder="e.g. 7"></label>
+        <button onclick="calcCircle()" class="btn btn-primary">Calculate</button>
+        <p id="circleResult">Area = --, Perimeter = --</p>
+        <canvas id="circleGraph" width="400" height="200"></canvas>
+      </div>
+    </section>
+
+    <section class="section quiz-section">
+      <h2 id="heading_quiz">📝 Quiz: Geometry</h2>
+      <p id="quizQ">The radius of a circle is 5. What is its area? (Use π=3.14)</p>
+      <ul>
+        <li><button onclick="answerQuiz(1)" class="btn btn-primary">78.5</button></li>
+        <li><button onclick="answerQuiz(2)" class="btn btn-primary">31.4</button></li>
+        <li><button onclick="answerQuiz(3)" class="btn btn-primary">157</button></li>
+        <li><button onclick="answerQuiz(4)" class="btn btn-primary">10π</button></li>
+      </ul>
+      <p id="quizFeedback"></p>
+      <span id="bookmarkQuiz" class="bookmark">★ Bookmark this question</span>
+      <section class="affiliate">
+        <p><strong>Check this advanced Geometry ebook: </strong>
+        <a href="#" target="_blank">[Affiliate Link Placeholder]</a></p>
+      </section>
+    </section>
+
+    <section class="section graph-box">
+      <h2 id="heading_graph">📊 Quiz Performance</h2>
+      <canvas id="progressGraph" width="400" height="200"></canvas>
+    </section>
+
+    <section class="section">
+      <a href="geometry_cheatsheet.pdf" download>
+        <button class="btn btn-primary">📥 Download PDF Cheat Sheet</button>
+      </a>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 EduIgnite. All Rights Reserved.</p>
+    <p>Follow us: <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> | <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a></p>
+    <p>Built with ❤️ by Ankit Saini</p>
+  </footer>
+
+  <script>
+    // Language toggle
+    const texts = {
+      en: {
+        heading_concept:"🔷 Concept: Circle Area & Perimeter",
+        desc_concept:"Understanding formula: Area = πr², Perimeter = 2πr",
+        tool_heading:"📏 Circle Calculator",
+        heading_quiz:"📝 Quiz: Geometry",
+        quizQ:"The radius of a circle is 5. What is its area? (π=3.14)"
+      },
+      hi: {
+        heading_concept:"🔷 अवधारणा: वृत्त क्षेत्रफल और परिधि",
+        desc_concept:"फ़र्मूला: क्षेत्रफल = πr², परिधि = 2πr समझें",
+        tool_heading:"📏 वृत्त कैलकुलेटर",
+        heading_quiz:"📝 प्रश्न: ज्यामिति",
+        quizQ:"एक वृत्त की त्रिज्या 5 है। इसका क्षेत्रफल क्या होगा? (π=3.14)"
+      }
+    };
+    function setLang(lang){
+      document.getElementById('heading_concept').innerText = texts[lang].heading_concept;
+      document.getElementById('desc_concept').innerText = texts[lang].desc_concept;
+      document.getElementById('tool_heading').innerText = texts[lang].tool_heading;
+      document.getElementById('heading_quiz').innerText = texts[lang].heading_quiz;
+      document.getElementById('quizQ').innerText = texts[lang].quizQ;
+    }
+
+    // Dark Mode
+    const dmBtn = document.getElementById('darkModeToggle');
+    dmBtn.addEventListener('click',()=>{
+      document.body.classList.toggle('dark');
+      dmBtn.innerText = document.body.classList.contains('dark')?'Light Mode':'Dark Mode';
+      localStorage.setItem('darkMode',document.body.classList.contains('dark'));
+    });
+    if(localStorage.getItem('darkMode')==='true')dmBtn.click();
+
+    // Quiz logic
+    const correctAnswer = 1;
+    let correct=0, attempted=0;
+    document.getElementById('bookmarkQuiz').addEventListener('click',()=>{
+      localStorage.setItem('bookmark_geo_q1','true');
+      alert('Saved to bookmarks!');
+    });
+    function answerQuiz(choice){
+      attempted++;
+      updateGraph();
+      const fb = document.getElementById('quizFeedback');
+      if(choice===correctAnswer){
+        correct++; fb.innerHTML='<span style="color:green">✔️ Correct!</span>';
+      } else fb.innerHTML='<span style="color:red">❌ Incorrect</span>';
+    }
+
+    // Progress Graph
+    const pgCtx = document.getElementById('progressGraph').getContext('2d');
+    const progressChart = new Chart(pgCtx, {
+      type:'bar',
+      data:{labels:['Attempted','Correct'], datasets:[{ label:'Quiz Stats', data:[0,0], backgroundColor:['#ff9999','#99ff99']}]},
+      options:{responsive:true, scales:{y:{beginAtZero:true}}}
+    });
+    function updateGraph(){
+      progressChart.data.datasets[0].data = [attempted, correct];
+      progressChart.update();
+    }
+
+    // Circle calculator & graph
+    function calcCircle(){
+      const r=parseFloat(document.getElementById('radiusInput').value);
+      if(!r){alert('Enter valid radius'); return;}
+      const area = (3.14*r*r).toFixed(2), peri = (2*3.14*r).toFixed(2);
+      document.getElementById('circleResult').innerText = `Area = ${area}, Perimeter = ${peri}`;
+      drawCircleGraph(r);
+    }
+    function drawCircleGraph(r){
+      const ctx = document.getElementById('circleGraph').getContext('2d');
+      const diameter=r*2;
+      new Chart(ctx, {
+        type:'doughnut',
+        data:{
+          labels:['Radius','Diameter'],
+          datasets:[{data:[r,diameter], backgroundColor:['#3399ff','#ffcc00'] }]
+        },
+        options:{responsive:true}
+      });
+    }
+
+    // Login flow
+    const loginBtn=document.getElementById('loginBtn'), logoutBtn=document.getElementById('logoutBtn'), userSection=document.getElementById('userSection'), uDisp=document.getElementById('usernameDisplay');
+    loginBtn.addEventListener('click',()=>{
+      const name=prompt('Enter name to login');
+      if(name){localStorage.setItem('username',name); location.reload();}
+    });
+    logoutBtn.addEventListener('click',()=>{
+      localStorage.removeItem('username');
+      location.reload();
+    });
+    window.addEventListener('load',()=>{
+      const name=localStorage.getItem('username');
+      if(name){uDisp.innerText=name; userSection.classList.remove('hidden'); loginBtn.style.display='none';}
+    });
+
+    // Push notification demo
+    if('Notification' in window){
+      Notification.requestPermission().then(perm => {
+        if(perm === 'granted'){
+          setTimeout(() => {
+            new Notification('EduIgnite Reminder', {
+              body: 'Check out new quizzes in Geometry!',
+            });
+          }, 5000);
+        }
+      });
+    }
+
+  </script>
 </body>
 </html>
