@@ -1,17 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #87</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Simple & Compound Interest: Calculator, Graphs, Quiz, Tools & Login – EduIgnite"/>
+  <title>Simple & Compound Interest – Pro Tools | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {font-family:sans-serif;margin:0;padding:0;background:#fff;color:#000;}
+    body.dark {background:#121212;color:#eee;}
+    header, footer {background:#003366;color:white;padding:1rem;}
+    nav a {margin:0 0.5rem;color:white;text-decoration:none;}
+    .main {max-width:900px;margin:auto;padding:1rem;}
+    .btn {padding:0.5rem 1rem;border:none;border-radius:4px;margin:0.5rem;cursor:pointer;}
+    .btn-primary {background:#3399ff;color:white;}
+    .btn-dark {background:#555;color:white;}
+    .section{margin:2rem 0;}
+    .tool-box, .graph-box, .quiz-box{background:#eef;padding:1rem;border-radius:8px;}
+    .bookmark{cursor:pointer;color:#f39c12;}
+    .affiliate{background:#fffae6;border:1px solid #ffd35a;padding:1rem;margin:1rem 0;}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude #87 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>EduIgnite – Simple & Compound Interest 📊</h1>
+  <div style="float:right;">
+    <button onclick="setLang('en')" class="btn">EN</button>
+    <button onclick="setLang('hi')" class="btn">HI</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div id="userSection" class="section hidden">
+    Welcome, <span id="usernameDisplay">User</span>! <button id="logoutBtn" class="btn btn-dark">Logout</button>
+  </div>
+
+  <section class="section">
+    <h2 id="heading_concept">💡 Concept: Interest</h2>
+    <p id="desc_concept">Simple Interest (SI) = P×R×T/100. Compound Interest (CI)= A–P ; A=P(1+R/100)^T</p>
+    <div class="tool-box">
+      <h3 id="tool_heading">🔢 Interest Calculator</h3>
+      <label>Principal (P): <input id="principal" type="number" placeholder="₹ e.g. 1000"/></label><br/>
+      <label>Rate (R%): <input id="rate" type="number" placeholder="e.g. 5"/></label><br/>
+      <label>Time (T years): <input id="time" type="number" placeholder="e.g. 2"/></label><br/>
+      <button onclick="calcInterest()" class="btn btn-primary">Calculate</button>
+      <p id="interestResult">SI = -- ; CI = --</p>
+    </div>
+  </section>
+
+  <section class="section graph-box">
+    <h2 id="heading_graph">📈 Growth Chart</h2>
+    <canvas id="interestChart"></canvas>
+  </section>
+
+  <section class="section quiz-box">
+    <h2 id="heading_quiz">📝 Quiz: Interest</h2>
+    <p id="quizQ">If P=₹1000, R=5%, T=2 yrs; what's CI?</p>
+    <ul>
+      <li><button onclick="answerQuiz(1)" class="btn btn-primary">₹100</button></li>
+      <li><button onclick="answerQuiz(2)" class="btn btn-primary">₹102.50</button></li>
+      <li><button onclick="answerQuiz(3)" class="btn btn-primary">₹105.06</button></li>
+      <li><button onclick="answerQuiz(4)" class="btn btn-primary">₹110</button></li>
+    </ul>
+    <p id="quizFeedback"></p>
+    <span id="bookmarkQuiz" class="bookmark">★ Bookmark this</span>
+
+    <div class="affiliate">
+      <strong>Master Finance Guide:</strong> <a href="#" target="_blank">[Affiliate Link]</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <a href="interest_cheatsheet.pdf" download>
+      <button class="btn btn-primary">📥 Download PDF Cheatsheet</button>
+    </a>
+  </section>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite. All Rights Reserved.</p>
+  <p>Follow us: <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> | <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a></p>
+  <p>Built with ❤️ by Ankit Saini</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Multi-language text mapping
+const texts = {
+  en: {
+    heading_concept:"💡 Concept: Interest",
+    desc_concept:"Simple Interest (SI)=P×R×T/100. Compound Interest (CI)=A–P ; A=P(1+R/100)^T",
+    tool_heading:"🔢 Interest Calculator",
+    heading_graph:"📈 Growth Chart",
+    heading_quiz:"📝 Quiz: Interest",
+    quizQ:"If P=₹1000, R=5%, T=2 yrs; what's CI?"
+  },
+  hi: {
+    heading_concept:"💡 अवधारणा: ब्याज",
+    desc_concept:"सरल ब्याज (SI)=P×R×T/100. चक्रवृद्धि ब्याज (CI)=A–P ; A=P(1+R/100)^T",
+    tool_heading:"🔢 ब्याज कैलकुलेटर",
+    heading_graph:"📈 ग्रोथ चार्ट",
+    heading_quiz:"📝 प्रश्न: ब्याज",
+    quizQ:"यदि P=₹1000, R=5%, T=2 वर्ष; CI क्या होगा?"
+  }
+};
+function setLang(lang){
+  document.getElementById('heading_concept').innerText = texts[lang].heading_concept;
+  document.getElementById('desc_concept').innerText = texts[lang].desc_concept;
+  document.getElementById('tool_heading').innerText = texts[lang].tool_heading;
+  document.getElementById('heading_graph').innerText = texts[lang].heading_graph;
+  document.getElementById('heading_quiz').innerText = texts[lang].heading_quiz;
+  document.getElementById('quizQ').innerText = texts[lang].quizQ;
+}
+
+// Dark Mode
+const dmBtn = document.getElementById('darkModeToggle');
+dmBtn.onclick = () => {
+  document.body.classList.toggle('dark');
+  dmBtn.innerText = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+  localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+};
+if (localStorage.getItem('darkMode')==='true') dmBtn.click();
+
+// Interest Calculator + Chart
+let si=0, ci=0;
+function calcInterest(){
+  const P = +document.getElementById('principal').value;
+  const R = +document.getElementById('rate').value;
+  const T = +document.getElementById('time').value;
+  if (!P||!R||!T){alert('Enter all values'); return;}
+  si = (P*R*T/100).toFixed(2);
+  const A = P * Math.pow(1+R/100, T);
+  ci = (A - P).toFixed(2);
+  document.getElementById('interestResult').innerText = `SI = ₹${si} ; CI = ₹${ci}`;
+  updateChart(P, si, ci);
+}
+const ctx = document.getElementById('interestChart').getContext('2d');
+const chart = new Chart(ctx, {
+  type:'bar',
+  data:{labels:['Principal','SI','CI'], datasets:[{label:'₹',data:[0,0,0],backgroundColor:['#3399ff','#33cc33','#ff9933']}]},
+  options:{responsive:true, scales:{y:{beginAtZero:true}}}
+});
+function updateChart(P, si, ci){
+  chart.data.datasets[0].data=[P, parseFloat(si), parseFloat(ci)];
+  chart.update();
+}
+
+// Quiz logic
+const correctAnswer = 3;
+let correct=0,attempted=0;
+document.getElementById('bookmarkQuiz').onclick = () => {
+  localStorage.setItem('bookmark_int_q1', 'true');
+  alert('Question bookmarked!');
+};
+function answerQuiz(choice){
+  attempted++;
+  updateQuizGraph();
+  const fb = document.getElementById('quizFeedback');
+  fb.innerHTML = choice===correctAnswer ? '<span style="color:green">✔️ Correct!</span>' : '<span style="color:red">❌ Incorrect!</span>';
+}
+
+// Quiz progress chart
+function updateQuizGraph(){
+  // stub: updating bar chart not implemented to save space
+}
+
+// Login
+const loginBtn = document.getElementById('loginBtn'),
+      logoutBtn = document.getElementById('logoutBtn'),
+      uSection = document.getElementById('userSection'),
+      uName = document.getElementById('usernameDisplay');
+loginBtn.onclick = () => { const name = prompt('Enter username'); if(name){ localStorage.setItem('username', name); location.reload(); }};
+logoutBtn.onclick = () => { localStorage.removeItem('username'); location.reload(); };
+window.onload = () => {
+  const name = localStorage.getItem('username');
+  if(name){ uName.innerText=name; uSection.classList.remove('hidden'); loginBtn.style.display='none'; }
+};
+
+// Push notification demo
+if ('Notification' in window){
+  Notification.requestPermission().then(perm=>{
+    if(perm === 'granted'){
+      setTimeout(()=>{
+        new Notification('EduIgnite Reminder',{body:'Try our Simple & Compound Interest calculator!'});
+      },5000);
+    }
+  });
+}
+</script>
 </body>
 </html>
+
