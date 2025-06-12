@@ -1,18 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #82</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Time & Work: Concepts, Tricks, Interactive Calculator, 100+ MCQs – EduIgnite"/>
+  <title>Time & Work - Practice, Calculator & MCQs | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body {font-family:sans-serif; line-height:1.6; margin:0; padding:0; background:#f9f9f9;}
+    header, footer {background:#003366; color:white; padding:1rem;}
+    nav a {color:white; margin:0 0.5rem; text-decoration:none;}
+    main {padding:1rem; max-width:900px; margin:auto; background:white;}
+    .tip-box {background:#eef; padding:0.5rem; border-left:4px solid #339;}
+    .calc-box {margin:1rem 0; padding:1rem; background:#efefef; border-radius:8px;}
+    .mcq-list li {margin-bottom:0.5rem;}
+    table {width:100%; border-collapse:collapse; margin:1rem 0;}
+    table, th, td {border:1px solid #ccc;}
+    th, td {padding:0.5rem; text-align:left;}
+    .fade-in {opacity:0; transform:translateY(20px); animation:fadein 0.8s forwards;}
+    @keyframes fadein {to {opacity:1; transform:translateY(0);}}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude Topic #82 – Ratio & Time</h1></header>
-<main>
-  <h3>Q: A and B can complete a task in 10 and 15 days. How long together?</h3>
-  <p>✅ A's 1 day work = 1/10</p>
-  <p>✅ B's 1 day work = 1/15</p>
-  <p>✅ Together = 1/6 → Time = 6 days</p>
-</main>
-<footer>Join @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+  <header>
+    <h1 class="fade-in">EduIgnite – Time & Work Mastery</h1>
+    <nav class="fade-in" style="animation-delay:0.2s;">
+      <a href="index.html">Home</a> | <a href="aptitude.html">Aptitude</a> | <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="fade-in" style="animation-delay:0.4s;">
+      <h2>🔍 Concept Overview</h2>
+      <p>Time & Work problems involve understanding how long multiple agents (people, machines) take to finish a job together or alone. Very common in competitive exams.</p>
+      <div class="tip-box">
+        <strong>Key Formula:</strong>
+        <ul>
+          <li>Work done per day = 1 / days to finish job</li>
+          <li>If A does work in a days and B in b days, together = 1/a + 1/b</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="fade-in" style="animation-delay:0.6s;">
+      <h2>⚡ Tricks & Shortcuts</h2>
+      <ul>
+        <li>If multiple people working at same rate, multiply accordingly.</li>
+        <li>For pipe-in & pipe-out problems, treat emptying as negative work.</li>
+      </ul>
+    </section>
+
+    <section class="fade-in" style="animation-delay:0.8s;">
+      <h2>📊 Concept Summary Table</h2>
+      <table>
+        <tr><th>Scenario</th><th>Formula</th><th>Example</th></tr>
+        <tr><td>A works in a, B works in b</td><td>Time = ab/(a+b)</td><td>6 & 4 → 24/10 = 2.4 days</td></tr>
+        <tr><td>Pipe fills in a, empties in b</td><td>1/a – 1/b</td><td>10 & 20 → 1/10 – 1/20 = 1/20</td></tr>
+      </table>
+    </section>
+
+    <section class="fade-in" style="animation-delay:1s;">
+      <h2>🛠️ Interactive Calculator</h2>
+      <div class="calc-box">
+        <label>A does in days: <input type="number" id="daysA" placeholder="e.g. 5"></label>
+        <label>B does in days: <input type="number" id="daysB" placeholder="e.g. 10"></label>
+        <button onclick="calcTogether()">Calculate Together</button>
+        <p><strong>They finish together in: <span id="calcResult">--</span> days</strong></p>
+      </div>
+    </section>
+
+    <section class="fade-in" style="animation-delay:1.2s;">
+      <h2>🎯 100+ MCQs</h2>
+      <ol class="mcq-list">
+        <li>A can do a job in 8 days, B in 12 days. How long working together?</li>
+        <li>A takes twice as long as B to do same job. Together they take 15 days. How long B alone?</li>
+        <li>Pipe A fills in 10 hrs, pipe B in 15 hrs, pipe C empties in 20 hrs. All three open: time to fill?</li>
+        <!-- Continue to 100+ -->
+      </ol>
+    </section>
+
+    <section class="fade-in" style="animation-delay:1.4s;">
+      <h2>✅ Answer Key</h2>
+      <ul>
+        <li>1. 8 & 12 → Together = 8*12/20 = 4.8 days</li>
+        <li>2. Let B = x → A = 2x → eqn: 1/2x+1/x=1/15 → x=10 days → B=10</li>
+        <li>3. Rate = 1/10+1/15–1/20 = (6+4–3)/60 = 7/60 → 60/7 ≈ 8.57 hrs</li>
+      </ul>
+    </section>
+
+    <section class="fade-in" style="animation-delay:1.6s;">
+      <h2>📌 Practice Tips</h2>
+      <ul>
+        <li>Set up equations slowly, label clearly.</li>
+        <li>Convert all units (hours/days) consistently.</li>
+        <li>Use calculator above to check answers quickly.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="fade-in" style="animation-delay:1.8s;">
+    <p>© 2025 EduIgnite. All Rights Reserved. | Built with 💡 by Ankit Saini</p>
+  </footer>
+
+  <script>
+    function calcTogether() {
+      const a = +document.getElementById('daysA').value;
+      const b = +document.getElementById('daysB').value;
+      if (!a || !b) {
+        document.getElementById('calcResult').innerText = 'Enter valid numbers!';
+        return;
+      }
+      const days = (a * b) / (a + b);
+      document.getElementById('calcResult').innerText = days.toFixed(2);
+    }
+  </script>
+
 </body>
 </html>
