@@ -1,22 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #100 – Build a Winner's Mindset</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #100 | Master Data Structures with Interactive Visuals</title>
+  <meta name="description" content="Learn Data Structures in-depth with quizzes, code samples, interactive tools, and tracking."/>
+  <meta name="keywords" content="Data Structures, Interactive, Quiz, EduIgnite"/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Master Data Structures with Interactive Visuals",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite",
+      "logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}
+    },
+    "datePublished":"2025-06-12","image":"https://eduignite.com/images/ds.jpg",
+    "description":"Comprehensive guide on data structures with visual tools & quizzes."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin:0;padding:0;font-family:'Roboto',sans-serif;transition:background .3s,color .3s; }
+    body.dark { background:#202124;color:#ececec; }
+    header, footer { background:#1a237e;color:white;padding:1rem; }
+    nav a{color:white;margin:0 .5rem;text-decoration:none;}
+    .main{max-width:1000px;margin:auto;padding:1.2rem;}
+    .btn{padding:.6rem 1.2rem;border:none;border-radius:4px;margin:.3rem;cursor:pointer;transition:transform .2s}
+    .btn:hover{transform:scale(1.05)}
+    .btn-primary{background:#3949ab;color:white;}
+    .btn-dark{background:#555;color:white;}
+    .section, .post-box, .quiz-box, .tool-box{margin:2rem 0;padding:1.5rem;border-radius:8px;background:#f3f3f3;}
+    .blockquote{margin:1.5rem;padding:1rem;background:#e8eaf6;border-left:4px solid #3949ab;}
+    .bookmark{cursor:pointer;color:#fb8c00;font-size:1.3rem;float:right;}
+    .progress-bar{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:10px 0;}
+    .progress-filled{height:100%;width:0;background:#3949ab;transition:width .3s;}
+    canvas{max-width:100%!important;height:auto!important;}
+    @media(max-width:768px){ nav{display:block;text-align:center;} nav a{display:block;margin:.4rem 0;} }
+  </style>
 </head>
 <body>
-<header><h1>Blog #100: Study Like a Topper</h1></header>
-<main>
-  <h2>🔥 5 Things Toppers Never Skip</h2>
-  <ul>
-    <li>📅 Daily routine with fixed study slots</li>
-    <li>🧠 Active recall + Spaced Repetition</li>
-    <li>🧘‍♂️ Mental fitness with exercise & meditation</li>
-    <li>📚 Concept clarity > Rattafication</li>
-    <li>📈 Weekly goal review</li>
-  </ul>
-</main>
-<footer>Follow @eduignite_official | t.me/eduigniteofficial</footer>
+<header>
+  <h1>EduIgnite Blog #100: Data Structures Deep Dive</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div class="post-box">
+    <h2>Busting Arrays, Linked Lists & Stacks – Visual & Interactive Edition</h2>
+    <span id="bookmarkMain" class="bookmark">☆</span>
+    <img src="images/ds.jpg" alt="Data Structures" style="width:100%;border-radius:6px"/>
+    <p id="introText">Welcome to the ultimate guide on core Data Structures with interactive demos, quizzes and best-practice patterns...</p>
+  </div>
+
+  <div class="tool-box">
+    <h3 id="demoTitle">Interactive Array Visualizer</h3>
+    <p>Enter items separated by commas:</p>
+    <input id="arrayInput" type="text" placeholder="e.g. 5,2,9,3" style="width:80%;"/>
+    <button class="btn btn-primary" onclick="animateArray()">Visualize</button>
+    <div id="arrayViz" style="margin-top:1rem; min-height:100px;"></div>
+  </div>
+
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Choose the Right DS</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQ">Press Start to Begin...</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">Hint</button>
+    <p id="hintText"></p>
+    <p id="feedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br/>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <div class="section">
+    <h3 id="perfTitle">Quiz Performance</h3>
+    <canvas id="perfChart"></canvas>
+    <button id="savePerf" class="btn btn-primary">Save Results</button>
+  </div>
+
+  <div class="affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Data Structures Guide (PDF)</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite | Follow on <a href="https://instagram.com/eduignite_official">Instagram</a> |
+    <a href="https://t.me/eduignite_official">Telegram</a></p>
+  <p>Coded by Ankit Saini</p>
+</footer>
+<script>
+  // ==== Firebase Auth ====
+  const fbConfig = { apiKey:"KEY", authDomain:"eduignite.firebaseapp.com", projectId:"eduignite", appId:"APP_ID" };
+  firebase.initializeApp(fbConfig);
+  const auth = firebase.auth();
+  const userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(user=>{
+    userContainer.innerHTML = user
+      ? `Hi, ${user.email} <button onclick="logout()">Logout</button>`
+      : `<button onclick="login()">Login</button>`;
+  });
+  function login(){ const e=prompt('Email:'), p=prompt('Password:'); auth.signInWithEmailAndPassword(e,p).catch(console.error);}
+  function logout(){ auth.signOut(); }
+
+  // ==== Dark Mode & Language Toggle ====
+  document.getElementById('darkToggle').onclick = ()=>{
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  const content = {
+    en:{demoTitle:"Interactive Array Visualizer", quizTitle:"Quiz: Choose the Right DS", perfTitle:"Quiz Performance", download:"Download PDF"},
+    hi:{demoTitle:"ऐरे विज़ुअलाइज़र", quizTitle:"DS चुनें प्रश्नोत्तरी", perfTitle:"प्रदर्शन", download:"PDF डाउनलोड करें"}
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    document.getElementById('demoTitle').innerText = content[l].demoTitle;
+    document.getElementById('quizTitle').innerText = content[l].quizTitle;
+    document.getElementById('perfTitle').innerText = content[l].perfTitle;
+    document.getElementById('downloadPDF').innerText = content[l].download;
+    document.getElementById('hintText').innerText = '';
+  }
+
+  // ==== Array Visualizer ====
+  function animateArray(){
+    const arr = document.getElementById('arrayInput').value.split(',').map(x=>x.trim());
+    const viz = document.getElementById('arrayViz');
+    viz.innerHTML = '';
+    arr.forEach(x=>{
+      const box = document.createElement('div');
+      box.style = "display:inline-block;margin:4px;padding:10px;background:#fafafa;border:1px solid #333;border-radius:4px;";
+      box.innerText = x;
+      viz.appendChild(box);
+    });
+  }
+
+  // ==== Quiz Engine ====
+  const quiz = [
+    { q:"What's best for LIFO?", choices:["Stack","Queue","Tree","Graph"], c:0, hint:"Last in first out!" },
+    { q:"DS apt for FIFO?", choices:["Array","Queue","HashMap","Heap"], c:1, hint:"First in first out." }
+  ];
+  let qi=0, score=0;
+  const qQ = document.getElementById('quizQ'), qOpt=document.getElementById('quizOptions'),
+        qHint=document.getElementById('hintText'), qFB=document.getElementById('feedback');
+  const bar = document.getElementById('quizBar');
+
+  function loadQ(){
+    const d = quiz[qi];
+    qQ.innerText = d.q;
+    qOpt.innerHTML = ''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((ch,i)=>{
+      let b=document.createElement('button');
+      b.innerText=ch; b.className="btn";
+      b.onclick = ()=>{
+        qFB.innerText = i===d.c ? "✅ Correct!" : "❌ Incorrect.";
+        if(i===d.c) score++;
+        qi++;
+        bar.style.width = ((qi/quiz.length)*100)+"%";
+        if(qi<quiz.length) setTimeout(loadQ, 600);
+        else finishQuiz();
+      };
+      qOpt.appendChild(b);
+    });
+  }
+
+  document.getElementById('startQuiz').onclick = ()=>{
+    qi=0; score=0; bar.style.width="0%"; loadQ();
+  };
+  function showHint(){ qHint.innerText = "Hint: "+ (quiz[qi]?.hint||''); }
+
+  // ==== Performance Chart ====
+  let ctx = document.getElementById('perfChart').getContext('2d');
+  let perfChart = new Chart(ctx, {
+    type:'bar',
+    data:{labels:[], datasets:[{label:'Score', data:[], backgroundColor:'#3949ab'}]},
+    options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}}
+  });
+
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quiz.length)*100));
+    perfChart.update();
+    alert('📊 Performance saved!');
+  };
+
+  // ==== PDF Download Stub ====
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 PDF download starting...");
+
+  // ==== Bookmark Highlight ====
+  document.querySelectorAll('.bookmark').forEach(el => el.onclick = ()=>el.innerText = el.innerText === '☆' ? '★' : '☆');
+
+  // ==== Notifications ====
+  if(Notification.permission!=="denied") {
+    Notification.requestPermission().then(p => {
+      if(p==="granted") new Notification("EduIgnite Blog 100!",{body:"Explore DS with visuals!"});
+    });
+  }
+</script>
 </body>
 </html>
+
