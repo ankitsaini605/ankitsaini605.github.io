@@ -1,17 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #88</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="author" content="EduIgnite"/>
+<meta name="description" content="Speed, Time & Distance: Tools, Quiz, Charts, Dark Mode, Login – EduIgnite"/>
+<title>Speed, Time & Distance – Pro Tools | EduIgnite</title>
+<link rel="stylesheet" href="style.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+ body{font-family:sans-serif;margin:0;padding:0;background:#fff;color:#000;}
+ body.dark{background:#121212;color:#eee;}
+ header,footer{padding:1rem;background:#003366;color:white;}
+ nav a{margin:0 0.5rem;color:white;text-decoration:none;}
+ .main{max-width:900px;margin:auto;padding:1rem;}
+ .btn{padding:0.5rem 1rem;border:none;border-radius:4px;margin:0.5rem;cursor:pointer;}
+ .btn-primary{background:#3399ff;color:white;}
+ .btn-dark{background:#555;color:white;}
+ .section{margin:2rem 0;}
+ .tool-box,.graph-box,.quiz-box{background:#eef;padding:1rem;border-radius:8px;margin-top:1rem;}
+ .bookmark{cursor:pointer;color:#f39c12;}
+ .affiliate{background:#fffae6;border:1px solid #ffd35a;padding:1rem;margin:1rem 0;}
+</style>
 </head>
 <body>
-<header><h1>Aptitude #88 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>EduIgnite – Speed, Time & Distance 🏃</h1>
+  <div style="float:right;">
+    <button onclick="setLang('en')" class="btn">EN</button><button onclick="setLang('hi')" class="btn">HI</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a> | <a href="aptitude.html">Aptitude</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div id="userSection" class="section hidden">
+    Welcome, <span id="usernameDisplay">User</span>! 
+    <button id="logoutBtn" class="btn btn-dark">Logout</button>
+  </div>
+
+  <section class="section">
+    <h2 id="heading_concept">💡 Concept: Speed, Time & Distance</h2>
+    <p id="desc_concept">Formula: Speed = Distance/Time; Time = Distance/Speed; Distance = Speed × Time</p>
+    <div class="tool-box">
+      <h3 id="tool_heading">📏 Calculator</h3>
+      <label>Distance (km): <input id="distance" type="number" placeholder="e.g. 120"/></label><br/>
+      <label>Speed (km/h): <input id="speed" type="number" placeholder="e.g. 60"/></label><br/>
+      <button onclick="calcSTD()" class="btn btn-primary">Calculate Time</button>
+      <p id="stdResult">Time = -- hours</p>
+    </div>
+  </section>
+
+  <section class="section graph-box">
+    <h2 id="heading_graph">📈 Trip Time Chart</h2>
+    <canvas id="stdChart"></canvas>
+  </section>
+
+  <section class="section quiz-box">
+    <h2 id="heading_quiz">📝 Quiz</h2>
+    <p id="quizQ">If a car travels 240 km at 80 km/h, how long will it take?</p>
+    <ul>
+      <li><button onclick="answerQuiz(1)" class="btn btn-primary">2h</button></li>
+      <li><button onclick="answerQuiz(2)" class="btn btn-primary">3h</button></li>
+      <li><button onclick="answerQuiz(3)" class="btn btn-primary">4h</button></li>
+      <li><button onclick="answerQuiz(4)" class="btn btn-primary">5h</button></li>
+    </ul>
+    <p id="quizFeedback"></p>
+    <span id="bookmarkQuiz" class="bookmark">★ Bookmark</span>
+    <div class="affiliate">
+      <strong>Check GPS Speedometer App: </strong><a href="#" target="_blank">[Affiliate Link]</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <a href="std_cheatsheet.pdf" download>
+      <button class="btn btn-primary">📥 Download PDF</button>
+    </a>
+  </section>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite. All Rights Reserved.</p>
+  <p>Follow us: <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> | <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a></p>
+  <p>Built with ❤️ by Ankit Saini</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Language toggle
+const texts = {
+ en:{heading_concept:"💡 Concept: Speed, Time & Distance",desc_concept:"Formula: Speed = Distance/Time; Time = Distance/Speed; Distance = Speed×Time",tool_heading:"📏 Calculator",heading_quiz:"📝 Quiz",quizQ:"If a car travels 240 km at 80 km/h, how long will it take?"},
+ hi:{heading_concept:"💡 अवधारणा: गति, समय & दूरी",desc_concept:"फ़ॉर्मूला: गति = दूरी/समय; समय = दूरी/गति; दूरी = गति×समय",tool_heading:"📏 कैलकुलेटर",heading_quiz:"📝 प्रश्न",quizQ:"यदि कार 80 km/h की गति से 240 km चलती है, तो कितना समय लगेगा?"}
+};
+function setLang(lang){
+  document.getElementById('heading_concept').innerText = texts[lang].heading_concept;
+  document.getElementById('desc_concept').innerText = texts[lang].desc_concept;
+  document.getElementById('tool_heading').innerText = texts[lang].tool_heading;
+  document.getElementById('heading_quiz').innerText = texts[lang].heading_quiz;
+  document.getElementById('quizQ').innerText = texts[lang].quizQ;
+}
+
+// Dark Mode Toggle
+const dmBtn=document.getElementById('darkModeToggle');
+dmBtn.onclick=()=>{document.body.classList.toggle('dark');dmBtn.innerText=document.body.classList.contains('dark')?'Light Mode':'Dark Mode';localStorage.setItem('darkMode',document.body.classList.contains('dark'));};
+if(localStorage.getItem('darkMode')==='true') dmBtn.click();
+
+// Calculator + graph
+const ctx=document.getElementById('stdChart').getContext('2d');
+const stdChart=new Chart(ctx,{type:'bar',data:{labels:['Distance','Time'],datasets:[{label:'Trip (hrs)',data:[0,0],backgroundColor:['#3399ff','#33cc33']}]},options:{responsive:true, scales:{y:{beginAtZero:true}}}});
+
+function calcSTD(){
+  const d=+document.getElementById('distance').value;
+  const s=+document.getElementById('speed').value;
+  if(!d||!s){alert('Enter valid numbers');return;}
+  const t=(d/s).toFixed(2);
+  document.getElementById('stdResult').innerText=`Time = ${t} hours`;
+  stdChart.data.datasets[0].data=[d, parseFloat(t)];
+  stdChart.update();
+}
+
+// Quiz logic
+const correctAnswer=1;
+let correct=0,attempted=0;
+document.getElementById('bookmarkQuiz').onclick=()=>{localStorage.setItem('bookmark_std_q1','true');alert('Bookmarked!');};
+function answerQuiz(choice){
+  attempted++;
+  const fb=document.getElementById('quizFeedback');
+  if(choice===correctAnswer){correct++;fb.innerHTML='<span style="color:green">✔️ Correct!</span>';}
+  else fb.innerHTML='<span style="color:red">❌ Incorrect!</span>';
+}
+
+// Login + logout
+const loginBtn=document.getElementById('loginBtn'),logoutBtn=document.getElementById('logoutBtn'),userSection=document.getElementById('userSection'),usernameDisplay=document.getElementById('usernameDisplay');
+
+loginBtn.onclick=()=>{const name=prompt('Enter username'); if(name){localStorage.setItem('username',name); location.reload();}};
+logoutBtn.onclick=()=>{localStorage.removeItem('username');location.reload();};
+window.onload=()=>{const name=localStorage.getItem('username'); if(name){usernameDisplay.innerText=name;userSection.classList.remove('hidden');loginBtn.style.display='none';}};
+
+// Push Notification stub
+if('Notification' in window){
+  Notification.requestPermission().then(perm=>{if(perm==='granted'){setTimeout(()=>{new Notification('EduIgnite Alert',{body:'New Speed-Time quiz ready!'});},3000);}});
+}
+</script>
 </body>
 </html>
+
