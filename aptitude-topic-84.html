@@ -1,17 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #84</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Ratios & Proportions: Login, Dark Mode, Bookmarks, Quiz, Notifications – EduIgnite"/>
+  <title>Ratios & Proportions – Pro Tools | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body {font-family:sans-serif; margin:0; padding:0; background:#fff; color:#000;}
+    body.dark {background:#121212; color:#eee;}
+    header, footer {padding:1rem; background:#003366; color:white;}
+    nav a {margin:0 0.5rem; color:white; text-decoration:none;}
+    .main {padding:1rem; max-width:900px; margin:auto;}
+    .btn {padding:0.5rem 1rem; margin:0.5rem; border:none; border-radius:4px; cursor:pointer;}
+    .btn-primary {background:#3399ff; color:white;}
+    .btn-dark {background:#555; color:white;}
+    .section {margin:2rem 0;}
+    .bookmark {cursor:pointer; color:#f39c12;}
+    .hidden {display:none;}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude #84 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+  <header>
+    <h1>EduIgnite – Ratios & Proportions Mastery</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="aptitude.html">Aptitude</a> |
+      <a href="#" id="loginBtn">Login</a> |
+      <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+    </nav>
+  </header>
+
+  <div class="main">
+    <!-- Logged-in greeting -->
+    <div id="userSection" class="section hidden">
+      Welcome, <span id="usernameDisplay">User</span>! <button id="logoutBtn" class="btn btn-dark">Logout</button>
+    </div>
+
+    <!-- Concept -->
+    <section class="section">
+      <h2>📘 Concept: Ratios & Proportions</h2>
+      <p>Useful for age, mixture, and work problems. Key formula:</p>
+      <ul>
+        <li>To keep x:y ratio, maintain quantities in same proportion</li>
+        <li>Proportion example: if A:B = 3:2 and sum = 25, solve 3x + 2x = 25</li>
+      </ul>
+    </section>
+
+    <!-- Quiz -->
+    <section class="section">
+      <h2>📝 Quiz (Ratios)</h2>
+      <p id="quizQ">A bag contains apples and oranges in ratio 3:2. If there are 25 fruits total, how many apples?</p>
+      <ul>
+        <li><button onclick="answerQuiz(1)" class="btn btn-primary">10</button></li>
+        <li><button onclick="answerQuiz(2)" class="btn btn-primary">15</button></li>
+        <li><button onclick="answerQuiz(3)" class="btn btn-primary">12</button></li>
+        <li><button onclick="answerQuiz(4)" class="btn btn-primary">13</button></li>
+      </ul>
+      <p id="quizFeedback"></p>
+      <span id="bookmarkQuiz" class="bookmark">★ Bookmark this question</span>
+    </section>
+
+    <!-- Progress -->
+    <section class="section">
+      <h2>📊 Your Progress</h2>
+      <p>Correct Answers: <span id="correctCount">0</span> | Attempted: <span id="attemptCount">0</span></p>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2025 EduIgnite. All Rights Reserved.</p>
+    <p>Follow us: <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> | <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a></p>
+    <p>Built with ❤️ by Ankit Saini</p>
+  </footer>
+
+<script>
+// Dark mode toggle
+const dmBtn = document.getElementById('darkModeToggle');
+dmBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  dmBtn.innerText = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+  localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+});
+if (localStorage.getItem('darkMode') === 'true') dmBtn.click();
+
+// Quiz logic, progress, bookmark
+let correct = 0, attempted = 0;
+const correctAnswer = 2;
+document.getElementById('bookmarkQuiz').addEventListener('click', () => {
+  localStorage.setItem('bookmark_q1', 'true');
+  alert('Question bookmarked!');
+});
+function answerQuiz(choice) {
+  attempted++;
+  document.getElementById('attemptCount').innerText = attempted;
+  const fb = document.getElementById('quizFeedback');
+  if (choice === correctAnswer) {
+    correct++;
+    fb.innerHTML = '<span class="correct">✔️ Correct!</span>';
+    document.getElementById('correctCount').innerText = correct;
+  } else {
+    fb.innerHTML = '<span class="wrong">❌ Incorrect. Try again!</span>';
+  }
+}
+
+// Simulated login/logout
+const loginBtn = document.getElementById('loginBtn'),
+      logoutBtn = document.getElementById('logoutBtn'),
+      userSection = document.getElementById('userSection'),
+      usernameDisplay = document.getElementById('usernameDisplay');
+
+loginBtn.addEventListener('click', () => {
+  const name = prompt('Enter name to login');
+  if (name) {
+    localStorage.setItem('username', name);
+    location.reload();
+  }
+});
+logoutBtn.addEventListener('click', () => {
+  localStorage.removeItem('username');
+  location.reload();
+});
+window.addEventListener('load', () => {
+  const name = localStorage.getItem('username');
+  if (name) {
+    usernameDisplay.innerText = name;
+    userSection.classList.remove('hidden');
+    loginBtn.classList.add('hidden');
+  }
+});
+
+// Push notification stub
+if ('Notification' in window) {
+  Notification.requestPermission().then(perm => {
+    if (perm === 'granted') {
+      setTimeout(() => {
+        new Notification('EduIgnite Quiz Reminder', {
+          body: 'You have 5 new practice questions waiting!',
+        });
+      }, 3000);
+    }
+  });
+}
+</script>
+
 </body>
 </html>
