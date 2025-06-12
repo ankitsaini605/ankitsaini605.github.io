@@ -1,17 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #95</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Time-Speed-Distance: calculators, quiz with hints, deep notes, charts, timer — EduIgnite"/>
+  <title>Time, Speed & Distance – Pro Tools | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body{font-family:Arial, sans-serif;margin:0;color:#222;transition:background .3s,color .3s;}
+    body.dark{background:#121212;color:#ddd;}
+    header,footer{background:#012345;color:#fff;padding:1rem;}
+    nav a{color:#fff;margin:0 0.5rem;text-decoration:none;}
+    .main{max-width:1100px;margin:auto;padding:1rem;}
+    .btn{padding:0.6rem 1.2rem;border:none;border-radius:4px;margin:0.4rem;cursor:pointer;transition:transform .2s;}
+    .btn:hover{transform:scale(1.05);}
+    .btn-primary{background:#007bff;color:#fff;}
+    .btn-dark{background:#555;color:#fff;}
+    .section, .concept-box, .tool-box, .quiz-box{margin:2rem 0;padding:1.2rem;border-radius:8px;background:#f0f4f8;}
+    .bookmark{cursor:pointer;color:#e07a5f;font-size:1.3rem;}
+    .affiliate{background:#ffeedd;border:1px solid #ffcc88;padding:1rem;margin:1rem 0;border-radius:6px;}
+    .progress-bar {height:10px;background:#ddd;margin:10px 0;border-radius:5px;overflow:hidden;}
+    .progress-filled {height:100%;width:0%;background:#007bff;transition:width .3s;}
+    canvas {max-width:100%!important;height:auto!important;}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude #95 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>EduIgnite – Time, Speed & Distance 🚗</h1>
+  <div style="float:right;">
+    <button onclick="setLang('en')" class="btn">EN</button>
+    <button onclick="setLang('hi')" class="btn">HI</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Session -->
+  <div id="userSection" class="section hidden">
+    Welcome, <span id="usernameDisplay">User</span>! <button id="logoutBtn" class="btn btn-dark">Logout</button>
+    <button id="resetProgress" class="btn">Reset Progress</button>
+  </div>
+
+  <!-- Concepts -->
+  <div class="concept-box">
+    <h2 id="concept_heading">📘 Time-Speed-Distance Concepts</h2>
+    <p id="concept_text"></p>
+    <button id="bookmarkConcept" class="bookmark">★ Bookmark Concept</button>
+  </div>
+
+  <!-- Calculator Box -->
+  <div class="tool-box">
+    <h2 id="tool_heading">🛠️ Time/Speed/Distance Calculator</h2>
+    <label>Distance (d): <input id="dist" type="number" placeholder="km"></label><br/>
+    <label>Time (t in hrs): <input id="time" type="number" placeholder="h"></label><br/>
+    <label>Speed (s): <input id="speed" type="number" placeholder="km/h"></label><br/>
+    <button onclick="calcTSD()" class="btn btn-primary">Calculate Missing Value</button>
+    <p id="tsdResult">---</p>
+    <canvas id="tsdChart"></canvas>
+  </div>
+
+  <!-- Quiz Engine -->
+  <div class="quiz-box">
+    <div>
+      <h2 id="quiz_heading">📝 Quiz: Time, Speed & Distance (15 MCQs)</h2>
+      <div class="progress-bar"><div class="progress-filled" id="quizProgress"></div></div>
+      <div id="quizContainer">
+        <p id="quizQ">Loading...</p>
+        <ul id="quizChoices"></ul>
+        <button class="btn" onclick="showHint()">💡 Show Hint</button>
+        <p id="quizHint"></p>
+        <p id="quizFeedback"></p>
+        <button id="bookmarkQuiz" class="bookmark">★ Bookmark Question</button>
+      </div>
+      <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+      <button id="downloadPDF" class="btn btn-primary hidden">📥 Download PDF Solutions</button>
+    </div>
+    <div class="affiliate"><strong>Upgrade to Pro Speed Kit:</strong> <a href="#" target="_blank">[Affiliate Link]</a></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite. All Rights Reserved.</p>
+  <p>Follow us: <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> | 
+     <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a></p>
+  <p>Built with ❤️ by Ankit Saini — <a href="#" target="_blank">Subscribe for Pro Plan</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Concept Texts
+const conceptEN = `
+- Formula: Speed = Distance/Time<br/>
+- Time = Distance/Speed; Distance = Speed × Time.<br/>
+- Average speed (equal distance): <em>2ab/(a+b)</em>.<br/>
+- For round trips: Harmonic mean applies.<br/>
+- Key trick: convert minutes to hours (e.g 30m = 0.5h).
+`;
+const conceptHI = `
+- सूत्र: गति (S) = दूरी (D) ÷ समय (T)<br/>
+- समय = दूरी ÷ गति; दूरी = गति × समय।<br/>
+- साधारण औसत गति: <em>2ab/(a+b)</em> (समान दूरी के लिए)।<br/>
+- वापसी यात्रा में हरमोनिक औसत लागू होती है।<br/>
+- ध्यान दें: मिनट को घंटे में बदलें (30म = 0.5घं).
+`;
+const toolHeading = {en:'🛠️ Calculator', hi:'🛠️ कैलकुलेटर'};
+const quizHeading = {en:'📝 Quiz: Time, Speed & Distance (15 MCQs)', hi:'📝 प्रश्नोत्तरी: समय, गति एवं दूरी (15 प्रश्न)'};
+
+// Quiz Data
+const quizData = [
+  {q_en:"A covers 60km in 1.2h. Speed =?", q_hi:"A 60किमी 1.2घंटे में पार करता है। गति = ?", choices:["50km/h","60km/h","72km/h","45km/h"], answer:0, hint:"Speed = 60/1.2"},
+  // ... add more 14 questions
+];
+let current=0, score=0;
+
+// Initialize
+function setLang(lang){
+  document.getElementById('concept_text').innerHTML = lang==='en' ? conceptEN : conceptHI;
+  document.getElementById('tool_heading').innerText = toolHeading[lang];
+  document.getElementById('quiz_heading').innerText = quizHeading[lang];
+  document.getElementById('startQuiz').innerText = lang==='en'?'Start Quiz':'प्रश्नोत्तरी शुरू करें';
+  loadQuestion(lang);
+}
+
+// Calculator
+const ctx = document.getElementById('tsdChart').getContext('2d');
+const tsdChart = new Chart(ctx, {
+  type:'pie', data:{
+    labels:['Distance','Time','Speed'],
+    datasets:[{data:[0,0,0],backgroundColor:['#007bff','#28a745','#ffc107']}]
+  }
+});
+function calcTSD(){
+  const d=+dist.value, t=+time.value, s=+speed.value;
+  let res="";
+  if(d && t){ res=`Speed = ${(d/t).toFixed(2)} km/h`; tsdChart.data.datasets[0].data=[d,t,(d/t)]; }
+  else if(d && s){ res=`Time = ${(d/s).toFixed(2)} h`; tsdChart.data.datasets[0].data=[d,(d/s),s]; }
+  else if(t && s){ res=`Distance = ${(t*s).toFixed(2)} km`; tsdChart.data.datasets[0].data=[t,s,(t*s)]; }
+  else return alert('Provide 2 values.');
+  tsdChart.update(); document.getElementById('tsdResult').innerText = res;
+}
+
+// Quiz
+function loadQuestion(lang='en'){
+  const data = quizData[current];
+  quizQ.innerText = lang==='en' ? data.q_en : data.q_hi;
+  let ul = quizChoices; ul.innerHTML="";
+  data.choices.forEach((c,i)=>{
+    let btn = document.createElement('button');
+    btn.innerText = c;
+    btn.className='btn btn-primary';
+    btn.onclick = ()=>checkAnswer(i);
+    ul.appendChild(btn);
+  });
+  updateProgress();
+}
+function showHint(){
+  quizHint.innerText = quizData[current].hint;
+}
+function startQuiz(){
+  current=0; score=0;
+  startQuizBtn.classList.add('hidden');
+  downloadPDF.classList.add('hidden');
+  loadQuestion('en');
+}
+function updateProgress(){
+  const pct = Math.round((current/quizData.length)*100);
+  progressFilled.style.width = pct + '%';
+}
+function checkAnswer(ch){
+  quizFeedback.innerHTML = ch===quizData[current].answer ? '<span style="color:green">✔️ Correct!</span>' : '<span style="color:red">❌ Incorrect!</span>';
+  score += (ch===quizData[current].answer);
+  localStorage.setItem(`bookmark_tsd_q${current}`, 'true');
+  current++;
+  setTimeout(()=>{
+    if(current < quizData.length){
+      loadQuestion(document.querySelector('button').innerText==='HI' ? 'hi' : 'en');
+    } else finishQuiz();
+  },800);
+}
+function finishQuiz(){
+  quizQ.innerText = `Quiz Completed! Score: ${score}/${quizData.length}`;
+  quizChoices.innerHTML="";
+  downloadPDF.classList.remove('hidden');
+  progressFilled.style.width = '100%';
+}
+
+// Dark Mode
+darkModeToggle.onclick = ()=>{
+  document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+};
+if(localStorage.getItem('darkMode')==='true') darkModeToggle.click();
+
+// Login
+loginBtn.onclick = ()=>{
+  const name = prompt('Enter username');
+  if(name) localStorage.setItem('username', name), location.reload();
+};
+logoutBtn.onclick = ()=>{
+  localStorage.removeItem('username'); location.reload();
+};
+window.onload = ()=>{
+  const name = localStorage.getItem('username');
+  if(name){
+    usernameDisplay.innerText = name;
+    userSection.classList.remove('hidden');
+  } else startQuizBtn.style.display='';
+  Notification.requestPermission().then(perm=>{
+    if(perm=='granted') setTimeout(()=> new Notification('EduIgnite', { body:'Ready for Quiz?' }), 2000);
+  });
+  setLang('en');
+};
+
+// Reset progress
+resetProgress.onclick = ()=>{
+  localStorage.clear();
+  alert('Bookmarks & progress reset!');
+};
+</script>
 </body>
 </html>
+
