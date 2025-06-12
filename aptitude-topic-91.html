@@ -1,17 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #91</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Percentage Problems: Calc, Quiz, Dark Mode, Login — EduIgnite"/>
+  <title>Percentage Problems – Pro Tools | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body{font-family:sans-serif;margin:0;padding:0;background:#fff;color:#000;}
+    body.dark{background:#121212;color:#eee;}
+    header,footer{background:#003366;color:white;padding:1rem;}
+    nav a{color:white;margin:0 0.5rem;text-decoration:none;}
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .btn{padding:0.5rem 1rem;border:none;border-radius:4px;margin:0.5rem;cursor:pointer;}
+    .btn-primary{background:#3399ff;color:white;}
+    .btn-dark{background:#555;color:white;}
+    .section,.tool-box,.quiz-box{margin:2rem 0;background:#eef;padding:1rem;border-radius:8px;}
+    .bookmark{cursor:pointer;color:#f39c12;}
+    .affiliate{background:#fffae6;border:1px solid #ffd35a;padding:1rem;margin:1rem 0;}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude #91 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>EduIgnite – Percentage Problems 📐</h1>
+  <div style="float:right;">
+    <button onclick="setLang('en')" class="btn">EN</button>
+    <button onclick="setLang('hi')" class="btn">HI</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div id="userSection" class="section hidden">
+    Welcome, <span id="usernameDisplay">User</span>! 
+    <button id="logoutBtn" class="btn btn-dark">Logout</button>
+  </div>
+
+  <div class="tool-box">
+    <h2 id="tool_heading">📊 Percentage Calculator</h2>
+    <label>Base Value (x): <input id="base" type="number" placeholder="e.g. 200"></label><br/>
+    <label>Percentage (%): <input id="percent" type="number" placeholder="e.g. 15"></label><br/>
+    <button onclick="calcPercent()" class="btn btn-primary">Calculate</button>
+    <p id="percentResult">Result = --</p>
+  </div>
+
+  <div class="quiz-box">
+    <h2 id="quiz_heading">📝 Quiz: Percentage</h2>
+    <p id="quizQ">What is 20% of 150?</p>
+    <ul>
+      <li><button onclick="answerQuiz(1)" class="btn btn-primary">30</button></li>
+      <li><button onclick="answerQuiz(2)" class="btn btn-primary">25</button></li>
+      <li><button onclick="answerQuiz(3)" class="btn btn-primary">40</button></li>
+      <li><button onclick="answerQuiz(4)" class="btn btn-primary">35</button></li>
+    </ul>
+    <p id="quizFeedback"></p>
+    <span id="bookmarkQuiz" class="bookmark">★ Bookmark this question</span>
+    <div class="affiliate">
+      <strong>Need Expert Solutions?</strong> 
+      <a href="#" target="_blank">[Affiliate Link]</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <a href="percentage_cheatsheet.pdf" download>
+      <button class="btn btn-primary">📥 Download Percentage Guide</button>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite. All Rights Reserved.</p>
+  <p>Follow us: <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> | 
+  <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a></p>
+  <p>Built with ❤️ by Ankit Saini</p>
+</footer>
+
+<script>
+// Multi-language support
+const texts = {
+  en: {
+    tool_heading: "📊 Percentage Calculator",
+    quiz_heading: "📝 Quiz: Percentage",
+    quizQ: "What is 20% of 150?"
+  },
+  hi: {
+    tool_heading: "📊 प्रतिशत कैलकुलेटर",
+    quiz_heading: "📝 प्रश्न: प्रतिशत",
+    quizQ: "150 का 20% क्या होगा?"
+  }
+};
+function setLang(lang){
+  document.getElementById('tool_heading').innerText = texts[lang].tool_heading;
+  document.getElementById('quiz_heading').innerText = texts[lang].quiz_heading;
+  document.getElementById('quizQ').innerText = texts[lang].quizQ;
+}
+
+// Dark mode
+const dmBtn = document.getElementById('darkModeToggle');
+dmBtn.onclick = () => {
+  document.body.classList.toggle('dark');
+  dmBtn.innerText = document.body.classList.contains('dark')?'Light Mode':'Dark Mode';
+  localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+};
+if(localStorage.getItem('darkMode')==='true') dmBtn.click();
+
+// Percentage calculator
+function calcPercent(){
+  const base = +document.getElementById('base').value;
+  const pct = +document.getElementById('percent').value;
+  if(!base || !pct){alert('Enter valid numbers'); return;}
+  const res = ((base * pct)/100).toFixed(2);
+  document.getElementById('percentResult').innerText = `Result = ${res}`;
+}
+
+// Quiz logic
+const correctAnswer = 1;
+document.getElementById('bookmarkQuiz').onclick = () => {
+  localStorage.setItem('bookmark_pct_q1', 'true');
+  alert('Bookmarked!');
+};
+function answerQuiz(choice){
+  const fb = document.getElementById('quizFeedback');
+  fb.innerHTML = choice === correctAnswer ? 
+    '<span style="color:green">✔️ Correct!</span>' : 
+    '<span style="color:red">❌ Incorrect!</span>';
+}
+
+// Login/logout
+const loginBtn = document.getElementById('loginBtn'),
+      logoutBtn = document.getElementById('logoutBtn'),
+      userSection = document.getElementById('userSection'),
+      usernameDisplay = document.getElementById('usernameDisplay');
+loginBtn.onclick = ()=>{
+  const name = prompt('Enter username');
+  if(name){localStorage.setItem('username', name); location.reload();}
+};
+logoutBtn.onclick = ()=>{
+  localStorage.removeItem('username');
+  location.reload();
+};
+window.onload = ()=>{
+  const name = localStorage.getItem('username');
+  if(name){usernameDisplay.innerText = name; userSection.classList.remove('hidden'); loginBtn.style.display = 'none';}
+};
+
+// Push notification demo
+if ('Notification' in window){
+  Notification.requestPermission().then(perm => {
+    if(perm === 'granted'){
+      setTimeout(() => {
+        new Notification('EduIgnite Tip', {body: 'Try our Percentage calculator!'});
+      }, 3000);
+    }
+  });
+}
+</script>
+
 </body>
 </html>
+
