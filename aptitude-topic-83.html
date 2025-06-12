@@ -1,18 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #83</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Work and Time: Concepts, Graphs, Quiz Engine, PDF download, Multi-language support – EduIgnite"/>
+  <title>Work & Time – Pro Tools & Quiz | EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {font-family:sans-serif; background:#f0f0f5; margin:0; padding:0;}
+    header, footer {background:#003366; color:white; padding:1rem;}
+    nav a {color:white; margin:0 0.5rem; text-decoration:none;}
+    main {padding:1rem; max-width:1000px; margin:auto; background:white;}
+    .section-box {margin:2rem 0; animation:fadeIn 0.8s ease-in;}
+    .lang-switch {float:right;}
+    .quiz-box, .graph-box {background:#eef; padding:1rem; border-radius:8px; margin-top:1rem;}
+    .correct {color:green;} .wrong {color:red;}
+    @keyframes fadeIn {from {opacity:0; transform:translateY(20px);} to {opacity:1;transform:translateY(0);}}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude Topic #83 – Ratio & Time</h1></header>
-<main>
-  <h3>Q: A and B can complete a task in 10 and 15 days. How long together?</h3>
-  <p>✅ A's 1 day work = 1/10</p>
-  <p>✅ B's 1 day work = 1/15</p>
-  <p>✅ Together = 1/6 → Time = 6 days</p>
-</main>
-<footer>Join @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+  <header class="section-box">
+    <h1>EduIgnite – Work & Time 🛠️ Advanced Tools</h1>
+    <div class="lang-switch">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('hi')">HI</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="aptitude.html">Aptitude</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Graph Section -->
+    <section class="section-box">
+      <h2 id="heading_graph">📊 Work Rate Comparison Graph</h2>
+      <p id="desc_graph">Visual comparison of person A vs B work rates.</p>
+      <div class="graph-box">
+        <canvas id="workGraph"></canvas>
+      </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="section-box">
+      <h2 id="heading_quiz">📝 Assessment Quiz</h2>
+      <div class="quiz-box">
+        <p id="quizQ">If A does a job in 8 days and B in 12 days, how long will they take working together?</p>
+        <ul>
+          <li><button onclick="checkAnswer(1)">4 days</button></li>
+          <li><button onclick="checkAnswer(2)">4.8 days</button></li>
+          <li><button onclick="checkAnswer(3)">3 days</button></li>
+          <li><button onclick="checkAnswer(4)">5 days</button></li>
+        </ul>
+        <p id="quizFeedback"></p>
+      </div>
+    </section>
+
+    <!-- PDF Download -->
+    <section class="section-box">
+      <a id="pdfLink" href="work_time_notes.pdf" download>
+        <button>📥 Download Cheatsheet (PDF)</button>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="section-box">
+    <p>© 2025 EduIgnite. All Rights Reserved.</p>
+    <p>Follow us: 
+       <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> |
+       <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a>
+    </p>
+    <p>Built with ❤️ by Ankit Saini</p>
+  </footer>
+
+  <script>
+    // Language support
+    const texts = {
+      en: {
+        heading_graph: "📊 Work Rate Comparison Graph",
+        desc_graph: "Visual comparison of person A vs B work rates.",
+        heading_quiz: "📝 Assessment Quiz",
+        quizQ: "If A does a job in 8 days and B in 12 days, how long will they take working together?",
+      },
+      hi: {
+        heading_graph: "📊 कार्य-दर तुलना ग्राफ़",
+        desc_graph: "व्यक्ति A और B की कार्य-दर की तुलना देखने हेतु।",
+        heading_quiz: "📝 मूल्यांकन प्रश्न",
+        quizQ: "अगर A एक काम 8 दिनों में करता है और B 12 दिनों में, तो साथ मिलकर कितना समय लगेगा?"
+      }
+    };
+    function setLang(lang) {
+      document.getElementById('heading_graph').innerText = texts[lang].heading_graph;
+      document.getElementById('desc_graph').innerText = texts[lang].desc_graph;
+      document.getElementById('heading_quiz').innerText = texts[lang].heading_quiz;
+      document.getElementById('quizQ').innerText = texts[lang].quizQ;
+    }
+
+    // Chart.js graph
+    const ctx = document.getElementById('workGraph').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['A', 'B', 'Together'],
+        datasets: [{
+          label: 'Days to Complete Job',
+          data: [8, 12, Math.round((8*12)/(8+12)*100)/100],
+          backgroundColor: ['#3399ff','#33cc33','#ff9933']
+        }]
+      },
+      options: { scales: { y: { beginAtZero: true }} }
+    });
+
+    // Quiz logic
+    function checkAnswer(choice) {
+      const feedback = document.getElementById('quizFeedback');
+      if (choice === 2) {
+        feedback.innerText = "✔️ Correct! They take 4.8 days.";
+        feedback.className = 'correct';
+      } else {
+        feedback.innerText = "❌ Wrong answer. Try again!";
+        feedback.className = 'wrong';
+      }
+    }
+  </script>
 </body>
 </html>
