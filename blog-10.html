@@ -1,20 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Post #10 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <title>EduIgnite Blog #10 – Advanced Logic & Critical Thinking</title>
+  <meta name="description" content="Boost your logic skills with articles, interactive quizzes, calculators, Firebase auth, multilingual switch, and performance analytics powered by EduIgnite." />
+  <meta name="keywords" content="logic, critical thinking, quiz, interactive, EduIgnite, Firebase, multilingual" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Advanced Logic & Critical Thinking",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-12",
+    "image":"https://eduignite.com/images/logic.jpg",
+    "description":"Master logical reasoning with advanced exercises, interactive tools, quizzes and analytics."
+  }
+  </script>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Blog Post 10 - Useful study tips from EduIgnite.">
-  <meta name="keywords" content="study tips, blog 10, education, ankit saini">
-  <meta name="author" content="Ankit Saini">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body{margin:0;padding:0;font-family:'Segoe UI',sans-serif;transition:background .3s,color .3s;}
+    body.dark{background:#181a1b;color:#e2e2e2;}
+    header, footer{background:#2e3b4e;color:white;padding:1rem;}
+    nav a{color:white;margin:0 .5rem;text-decoration:none;}
+    .main{max-width:1100px;margin:auto;padding:1rem;}
+    .btn{padding:.7rem 1.4rem;border:none;border-radius:4px;margin:.3rem;cursor:pointer;transition:transform .2s;}
+    .btn:hover{transform:scale(1.05);}
+    .btn-primary{background:#4a90e2;color:white;}
+    .btn-dark{background:#555;color:white;}
+    .section, .post-box, .quiz-box, .tool-box{margin:2rem 0;padding:1.5rem;border-radius:8px;background:#f4f7fa;}
+    .bookmark{cursor:pointer;color:#f39c12;font-size:1.3rem;float:right;}
+    .lang-switch{margin:0 .5rem;}
+    .progress-bar{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:10px 0;}
+    .progress-filled{height:100%;width:0;background:#4a90e2;transition:width .3s;}
+    canvas{max-width:100%!important;height:auto!important;}
+    @media(max-width:768px){nav{display:block;text-align:center;}nav a{display:block;margin:.4rem 0;}}
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog Post #10</h2>
-  <p>This blog discusses study strategies, motivation, and smart learning approaches to help you crack your exams with confidence.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+<header>
+  <h1>EduIgnite Blog #10 🔍 Logic & Critical Thinking</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark lang-switch">EN</button>
+    <button id="langHi" class="btn btn-dark lang-switch">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- FEATURED ARTICLE -->
+  <div class="post-box">
+    <h2 id="titleFeature">Master Logical Reasoning: Proven Techniques</h2>
+    <span id="bookmarkFeat" class="bookmark">☆</span>
+    <img src="images/logic.jpg" alt="Logic Puzzle Illustration">
+    <p id="introFeature">
+      Learn how to decode complex puzzles, sharpen your critical thinking – bursting with examples and interactive exercises...
+    </p>
+    <button class="btn btn-primary" onclick="alert('Expand full article!')">Read Full Article</button>
+  </div>
+
+  <!-- INTERACTIVE PUZZLE -->
+  <div class="tool-box">
+    <h3 id="puzzleTitle">Solve Riddle: What Am I?</h3>
+    <p id="puzzleText">I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?</p>
+    <input id="puzzleGuess" type="text" placeholder="Your guess...">
+    <button class="btn btn-primary" onclick="checkPuzzle()">Submit</button>
+    <p id="puzzleResult"></p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">🧠 Quick Quiz: Logic & Reasoning</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQtext">Press Start!</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showQuizHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQ" class="bookmark">☆</button><br/>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- PERFORMANCE CHART -->
+  <div class="section">
+    <h3 id="chartTitle">Your Performance Tracker</h3>
+    <canvas id="perfChart"></canvas>
+    <button id="savePerf" class="btn btn-primary">Save Results</button>
+  </div>
+
+  <!-- PDF DOWNLOAD -->
+  <div class="affiliate">
+    <h4 id="pdfTitle">Download Logic Booster PDF</h4>
+    <button id="downloadPDF" class="btn btn-primary">Download Now</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite | Follow on 
+    <a href="https://instagram.com/eduignite_official" target="_blank">Instagram</a> |
+    <a href="https://t.me/eduignite_official" target="_blank">Telegram</a>
+  </p>
+  <p>Built with ❤️ by Ankit Saini</p>
+</footer>
+
+<script>
+  // --- Firebase Auth Setup ---
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "eduignite.firebaseapp.com",
+    projectId: "eduignite",
+    appId: "APP_ID"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  const userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      userContainer.innerHTML = `Hello, ${user.email} <button onclick="logout()">Logout</button>`;
+    } else {
+      userContainer.innerHTML = `<button onclick="login()">Login</button>`;
+    }
+  });
+  function login(){
+    const email=prompt("Email:"), pass=prompt("Password:");
+    auth.signInWithEmailAndPassword(email, pass).catch(console.error);
+  }
+  function logout(){ auth.signOut(); }
+
+  // --- Dark/Light Toggle ---
+  document.getElementById('darkToggle').onclick = () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // --- Language Switch ---
+  const content = {
+    en: {
+      puzzleTitle: "Solve Riddle: What Am I?",
+      puzzleText: "I speak without a mouth and hear without ears...",
+      quizTitle: "🧠 Quick Quiz: Logic & Reasoning",
+      btnStart: "Start Quiz",
+      hintBtn:"💡 Hint",
+      performance:"Your Performance Tracker",
+      downloadPDF:"Download Now"
+    },
+    hi: {
+      puzzleTitle: "पहेली हल करें: मैं क्या हूँ?",
+      puzzleText: "मैं बिना मुँह के बोलता हूँ और बिना कान के सुनता हूँ...",
+      quizTitle: "🧠 तर्क प्रश्नोत्तरी",
+      btnStart:"प्रश्नोत्तरी शुरू करें",
+      hintBtn:"💡 संकेत",
+      performance:"आपका प्रदर्शन ट्रैकर",
+      downloadPDF:"डाउनलोड करें"
+    }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l){
+    document.getElementById('puzzleTitle').innerText = content[l].puzzleTitle;
+    document.getElementById('puzzleText').innerText = content[l].puzzleText;
+    document.getElementById('quizTitle').innerText = content[l].quizTitle;
+    document.getElementById('startQuiz').innerText = content[l].btnStart;
+    document.getElementById('quizHint').innerText = "";
+    document.getElementById('chartTitle').innerText = content[l].performance;
+    document.getElementById('downloadPDF').innerText = content[l].downloadPDF;
+  }
+
+  // --- Puzzle Logic ---
+  function checkPuzzle(){
+    const ans = document.getElementById('puzzleGuess').value.trim().toLowerCase();
+    document.getElementById('puzzleResult').innerText =
+      (ans === "echo") ? "✅ Correct!" : "❌ Try again.";
+  }
+
+  // --- Quiz Engine ---
+  const quizData = [
+    {q:"If ALL is to DOG, then DOG is to ___?",choices:["ALL","GOD","CAT","PIG"],c:1,h:"Think reverse letters."},
+    {q:"Find the odd: 2,6,12,20,30,42",choices:["30","42","20","12"],c:3,h:"Check n(n+1)."}
+  ];
+  let qi=0;
+  const qQ = document.getElementById('quizQtext'), qOpt=document.getElementById('quizOptions'),
+        qHint=document.getElementById('quizHint'), qFB=document.getElementById('quizFeedback'),
+        qBar=document.getElementById('quizBar');
+
+  function loadQ(){
+    let d=quizData[qi];
+    qQ.innerText = d.q;
+    qOpt.innerHTML = "";
+    qHint.textContent = "";
+    qFB.textContent = "";
+    d.choices.forEach((ch,i)=>{
+      let b=document.createElement('button');
+      b.className="btn";
+      b.innerText=ch;
+      b.onclick=()=>{
+        qFB.innerText = (i===d.c ? "✅ Correct!" : "❌ Wrong.");
+        qi++; qBar.style.width = (qi/quizData.length*100)+"%";
+        if(qi<quizData.length) setTimeout(loadQ, 1000); else qQ.innerText="🎉 Quiz done!";
+      };
+      qOpt.appendChild(b);
+    });
+  }
+
+  document.getElementById('startQuiz').onclick = ()=>{
+    qi=0; qBar.style.width="0%"; loadQ();
+  };
+  document.getElementById('bookmarkQ').onclick = ()=>{
+    alert("Question bookmarked!");
+  };
+  document.getElementById('startQuiz').innerText = content.en.btnStart;
+
+  document.getElementById('downloadPDF').onclick = ()=>alert("Downloading advanced logic PDF...");
+
+  // --- Performance Chart ---
+  let pc = document.getElementById('perfChart').getContext('2d');
+  let perfChart = new Chart(pc, {
+    type:'line', data:{
+      labels:['Attempt 1','Attempt 2'], datasets:[{label:'Score %',data:[80,90],backgroundColor:'#4a90e2'}]
+    }, options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick = ()=>alert("Performance saved!");
+
+  // --- Notifications ---
+  if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(p=>{
+      if(p==="granted") new Notification("EduIgnite Blog Ready!",{body:"Explore Logic & Critical Thinking"});
+    });
+  }
+</script>
 </body>
 </html>
