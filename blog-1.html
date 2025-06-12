@@ -1,28 +1,263 @@
-<!-- Save as blog-1.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="EduIgnite – Learn smart with MCQs, coding tutorials, study blogs, and current affairs. Crack your exams with confidence." />
-<meta name="keywords" content="EduIgnite, study tips, competitive exams, C programming, aptitude quiz, current affairs, coding MCQ, ankit saini website" />
-<meta name="author" content="Ankit Saini" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
-  <title>Study for 6 Hours Without Losing Focus</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>EduIgnite Blog – Deep Dives & Smart Insights</title>
+  <meta name="description" content="EduIgnite Blog: in-depth articles, interactive quizzes, calculators, performance tracking and more."/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* ===== Global ===== */
+    body{margin:0;padding:0;font-family:Arial,sans-serif;transition:background .3s, color .3s;}
+    body.dark{background:#121212;color:#ddd;}
+    header, footer{background:#004d40;color:white;padding:1rem;}
+    nav a{color:white;margin:0 .5rem;text-decoration:none;}
+    .main{max-width:1100px;margin:auto;padding:1rem;}
+    .btn{padding:.6rem 1.2rem;border:none;border-radius:4px;cursor:pointer;margin:.3rem;transition:transform .2s;}
+    .btn:hover{transform:scale(1.04);}
+    .btn-primary{background:#00796b;color:white;}
+    .btn-dark{background:#444;color:white;}
+    .section, .post-box, .quiz-box, .tool-box{margin:2rem 0;padding:1.5rem;border-radius:8px;background:#e0f2f1;}
+    .post-box img{max-width:100%;border-radius:6px;}
+    .bookmark{cursor:pointer;color:#ff5722;font-size:1.2rem;float:right;}
+    .progress-bar{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:10px 0;}
+    .progress-filled{height:100%;width:0;background:#00796b;transition:width .3s;}
+    .affiliate{background:#fff3e0;border:1px solid #ffcc80;padding:1rem;margin:1rem 0;border-radius:6px;}
+    canvas{max-width:100%!important;height:auto!important;}
+    @media(max-width:768px){nav{display:block;text-align:center;}nav a{display:inline-block; margin:.5rem 0;}}
+  </style>
 </head>
 <body>
-  <header><h1>EduIgnite</h1></header>
-  <main>
-    <h2>How to Study for 6 Hours Without Losing Focus</h2>
-    <ol>
-      <li><strong>Pomodoro Technique:</strong> 25 min study + 5 min break</li>
-      <li><strong>Clear Distractions:</strong> Keep phone away, silent mode</li>
-      <li><strong>Use Timetable:</strong> Divide 6 hours into subjects</li>
-      <li><strong>Hydrate & Snack:</strong> Light food keeps brain active</li>
-      <li><strong>Mindset:</strong> Study as a mission, not punishment</li>
-    </ol>
-    <p>Keep your desk clean and your goals clear. Stay consistent!</p>
-  </main>
-  <footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+<header>
+  <h1>EduIgnite Blog 🔥</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- USER BAR -->
+  <div id="userSection" class="section hidden">
+    <strong>Hi, <span id="usernameDisplay">User</span>!</strong>
+    <button id="logoutBtn" class="btn btn-dark">Logout</button>
+    <button id="resetProgress" class="btn btn-primary">Reset Bookmarks & History</button>
+  </div>
+
+  <!-- FEATURED POST -->
+  <div class="post-box">
+    <h2>🔍 How to Master Aptitude Tests in 2025</h2>
+    <span class="bookmark" id="bookmarkPostFeatured">★</span>
+    <img src="images/aptitude-mastery.jpg" alt="Aptitude Mastery">
+    <p>
+      Welcome to an in-depth guide on preparing for aptitude exams in 2025 and beyond. We cover cutting-edge strategies, common pitfalls, smart shortcuts, and mindset tools...
+    </p>
+    <button class="btn btn-primary">Read More</button>
+  </div>
+
+  <!-- RECENT POSTS GRID -->
+  <div class="section">
+    <h2>Latest Insights & Tutorials</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;">
+      <!-- Sample entry -->
+      <div class="post-box" style="flex:1 1 300px;">
+        <h3>🚀 Linked Lists Made Easy</h3>
+        <span class="bookmark">★</span>
+        <img src="images/linked-lists.jpg" alt="Linked Lists">
+        <p>A beginner’s guide + interactive quiz to master linked lists in programming...</p>
+        <button class="btn btn-primary">Read More</button>
+      </div>
+      <!-- More posts later via JS or backend -->
+    </div>
+  </div>
+
+  <!-- TOOL SPOTLIGHT: Quiz -->
+  <div class="quiz-box">
+    <h2>📝 Quiz: Aptitude Vocabulary</h2>
+    <div class="progress-bar"><div id="quizProgressBar" class="progress-filled"></div></div>
+    <p id="quizQ">Press Start to begin!</p>
+    <ul id="quizChoices"></ul>
+    <button class="btn" onclick="showQuizHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">★</button><br/>
+    <button id="startQuizBtn" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- TOOL SPOTLIGHT: Mini Calculator -->
+  <div class="tool-box">
+    <h2>🧮 Mini Tool: Percentage Change</h2>
+    <input id="miniInit" type="number" placeholder="Initial value">
+    <input id="miniPer" type="number" placeholder="Change %">
+    <select id="miniType">
+      <option value="increase">Increase</option>
+      <option value="decrease">Decrease</option>
+    </select>
+    <button onclick="calcMiniPerc()" class="btn btn-primary">Calculate</button>
+    <p id="miniPercResult">--</p>
+  </div>
+
+  <!-- PERFORMANCE & ENGAGEMENT -->
+  <div id="performanceSection" class="section">
+    <h2>📊 Your Performance Overview</h2>
+    <canvas id="performanceChart"></canvas>
+    <button id="savePerfBtn" class="btn btn-primary">Save to Profile</button>
+  </div>
+
+  <!-- AFFILIATE PROMO -->
+  <div class="affiliate">
+    <h3>Upgrade to EduIgnite Pro 💎</h3>
+    <p>Exclusive PDF guides, bonus quizzes, and progress-tracking dashboard.</p>
+    <a href="#" class="btn btn-primary">Unlock Pro</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite | Follow us on 
+    <a href="https://instagram.com/eduignite_official" target="_blank">Instagram</a> |
+    <a href="https://t.me/eduignite_official" target="_blank">Telegram</a>
+  </p>
+  <p>Crafted with ❤️ by Ankit Saini</p>
+</footer>
+<script>
+  // ✅ Dark Mode Toggle
+  const toggleBtn = document.getElementById('darkModeToggle');
+  toggleBtn.onclick = () => document.body.classList.toggle('dark');
+
+  // ✅ Simple Login Simulation
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const userSection = document.getElementById('userSection');
+  const usernameDisplay = document.getElementById('usernameDisplay');
+
+  loginBtn.onclick = () => {
+    const user = prompt("Enter your name:");
+    if (user) {
+      localStorage.setItem('eduUser', user);
+      usernameDisplay.innerText = user;
+      userSection.classList.remove('hidden');
+      loginBtn.style.display = 'none';
+    }
+  };
+
+  logoutBtn.onclick = () => {
+    localStorage.removeItem('eduUser');
+    location.reload();
+  };
+
+  window.onload = () => {
+    const storedUser = localStorage.getItem('eduUser');
+    if (storedUser) {
+      usernameDisplay.innerText = storedUser;
+      userSection.classList.remove('hidden');
+      loginBtn.style.display = 'none';
+    }
+    renderPerformanceChart();
+  };
+
+  // ✅ Bookmark Toggle
+  document.querySelectorAll('.bookmark').forEach(el => {
+    el.onclick = () => {
+      el.innerText = el.innerText === '★' ? '☆' : '★';
+    };
+  });
+
+  // ✅ Mini Calculator Logic
+  function calcMiniPerc() {
+    const init = parseFloat(document.getElementById('miniInit').value);
+    const per = parseFloat(document.getElementById('miniPer').value);
+    const type = document.getElementById('miniType').value;
+    let result = type === "increase" ? init + (init * per / 100) : init - (init * per / 100);
+    document.getElementById('miniPercResult').innerText = `Result: ${result.toFixed(2)}`;
+  }
+
+  // ✅ Quiz Logic
+  const quizQuestions = [
+    { q: "What does 'obstinate' mean?", choices: ["Generous", "Stubborn", "Polite", "Fast"], correct: 1, hint: "Think about someone who won’t change their mind." },
+    { q: "Antonym of 'benevolent'?", choices: ["Cruel", "Kind", "Loyal", "Wise"], correct: 0, hint: "Benevolent means kind-hearted." }
+  ];
+
+  let currentQ = 0;
+  const quizQ = document.getElementById('quizQ');
+  const quizChoices = document.getElementById('quizChoices');
+  const quizHint = document.getElementById('quizHint');
+  const quizFeedback = document.getElementById('quizFeedback');
+  const quizProgressBar = document.getElementById('quizProgressBar');
+
+  function showQuiz() {
+    const q = quizQuestions[currentQ];
+    quizQ.innerText = q.q;
+    quizChoices.innerHTML = "";
+    quizHint.innerText = "";
+    quizFeedback.innerText = "";
+    q.choices.forEach((c, i) => {
+      const btn = document.createElement('button');
+      btn.innerText = c;
+      btn.className = "btn";
+      btn.onclick = () => {
+        if (i === q.correct) {
+          quizFeedback.innerText = "✅ Correct!";
+        } else {
+          quizFeedback.innerText = "❌ Incorrect.";
+        }
+        currentQ++;
+        quizProgressBar.style.width = `${(currentQ / quizQuestions.length) * 100}%`;
+        if (currentQ < quizQuestions.length) setTimeout(showQuiz, 1000);
+        else quizQ.innerText = "🎉 Quiz Complete!";
+      };
+      quizChoices.appendChild(btn);
+    });
+  }
+
+  document.getElementById('startQuizBtn').onclick = () => {
+    currentQ = 0;
+    showQuiz();
+  };
+
+  function showQuizHint() {
+    if (currentQ < quizQuestions.length) {
+      quizHint.innerText = `Hint: ${quizQuestions[currentQ].hint}`;
+    }
+  }
+
+  // ✅ ChartJS Performance Tracker
+  function renderPerformanceChart() {
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Quiz 1', 'Quiz 2', 'Mock Test'],
+        datasets: [{
+          label: 'Score (%)',
+          data: [85, 92, 78],
+          backgroundColor: ['#00796b', '#004d40', '#26a69a']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, max: 100 }
+        }
+      }
+    });
+  }
+
+  // ✅ Save Progress (Dummy)
+  document.getElementById('savePerfBtn').onclick = () => {
+    alert("📊 Performance data saved to your profile!");
+  };
+
+  // ✅ Reset Bookmarks & Progress
+  document.getElementById('resetProgress').onclick = () => {
+    localStorage.clear();
+    alert("🔁 Progress & bookmarks cleared.");
+    location.reload();
+  };
+</script>
+
 </body>
 </html>
