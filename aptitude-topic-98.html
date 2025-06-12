@@ -1,17 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #98</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="author" content="EduIgnite"/>
+  <meta name="description" content="Permutation & Combination – calculators, quizzes, charts, PDF – EduIgnite"/>
+  <title>Permutation & Combination – EduIgnite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;padding:0;transition:background .3s,color .3s;}
+    body.dark{background:#121212;color:#ddd;}
+    header,footer{background:#1a237e;color:white;padding:1rem;}
+    nav a{color:white;margin:0 .5rem;text-decoration:none;}
+    .main{max-width:1100px;margin:auto;padding:1rem;}
+    .btn{padding:.6rem 1.2rem;border:none;border-radius:4px;margin:.4rem;cursor:pointer;transition:transform .2s;}
+    .btn:hover{transform:scale(1.05);}
+    .btn-primary{background:#3949ab;color:white;}
+    .btn-dark{background:#555;color:white;}
+    .section, .concept-box, .tool-box, .quiz-box{margin:2rem 0;padding:1.2rem;border-radius:8px;background:#eef;}
+    .bookmark{cursor:pointer;color:#ff5722;font-size:1.3rem;}
+    .affiliate{background:#fff8e1;border:1px solid #ffecb3;padding:1rem;margin:1rem 0;}
+    .progress-bar{height:10px;background:#ddd;border-radius:5px;overflow:hidden;margin:10px 0;}
+    .progress-filled{height:100%;width:0;background:#3949ab;transition:width .3s;}
+    canvas{max-width:100%!important;height:auto!important;}
+  </style>
 </head>
 <body>
-<header><h1>Aptitude #98 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>EduIgnite – Permutation & Combination 🔢</h1>
+  <div style="float:right;">
+    <button onclick="setLang('en')" class="btn">EN</button>
+    <button onclick="setLang('hi')" class="btn">HI</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div id="userSection" class="section hidden">
+    Welcome, <span id="usernameDisplay">User</span>! <button id="logoutBtn" class="btn btn-dark">Logout</button>
+    <button id="resetProgress" class="btn">Reset Progress</button>
+  </div>
+
+  <div class="concept-box">
+    <h2 id="concept_heading">📘 Permutation & Combination Concepts</h2>
+    <div id="concept_content"></div>
+    <button id="bookmarkConcept" class="bookmark">★ Bookmark Concept</button>
+  </div>
+
+  <div class="tool-box">
+    <h2 id="tool_heading">🧮 Calculators</h2>
+    <label>n (total items): <input id="calcN" type="number" min="0"/></label><br/>
+    <label>r (select items): <input id="calcR" type="number" min="0"/></label><br/>
+    <button onclick="calcPerm()" class="btn btn-primary">Compute nPr</button>
+    <button onclick="calcComb()" class="btn btn-primary">Compute nCr</button>
+    <button onclick="calcFact()" class="btn btn-primary">Compute n!</button>
+    <p id="calcResult">--</p>
+    <canvas id="factChart"></canvas>
+  </div>
+
+  <div class="quiz-box">
+    <h2 id="quiz_heading">📝 Quiz: Permutations & Combinations (20 Qs)</h2>
+    <div class="progress-bar"><div id="quizProgressBar" class="progress-filled"></div></div>
+    <div id="quizContainer">
+      <p id="quizQ">Are you ready?</p>
+      <ul id="quizChoices"></ul>
+      <button class="btn" onclick="showHint()">💡 Hint</button>
+      <p id="quizHint"></p>
+      <p id="quizFeedback"></p>
+      <button id="bookmarkQuiz" class="bookmark">★ Bookmark Question</button>
+    </div>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+    <button id="downloadPDF" class="btn btn-primary hidden">📥 Download PDF</button>
+    <div class="affiliate"><strong>Advanced Perm/Comb Pack:</strong> <a href="#" target="_blank">[Affiliate]</a></div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite. All Rights Reserved.</p>
+  <p>Follow us:
+    <a href="https://instagram.com/eduignite_official" target="_blank">Instagram</a> |
+    <a href="https://t.me/eduignite_official" target="_blank">Telegram</a>
+  </p>
+  <p>Coded with ❤️ by Ankit Saini</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Multi-language concept text
+const conceptEN = `
+<strong>nPr (Permutation):</strong> Order matters → nPr = n! / (n−r)! <br>
+<strong>nCr (Combination):</strong> Order doesn't matter → nCr = n! / (r! (n−r)!) <br>
+<strong>Factorial (n!):</strong> product of all natural numbers up to n.<br>
+<strong>Examples:</strong> 
+- 5P2 = 5×4=20  
+- 5C2 = 10  
+- 6! = 720
+`;
+const conceptHI = `
+<strong>nPr (क्रमचयन):</strong> क्रम महत्व रखता है → nPr = n! / (n−r)! <br>
+<strong>nCr (संयोग):</strong> क्रम महत्व नहीं → nCr = n! / (r! (n−r)!) <br>
+<strong>फलन (n!):</strong> 1 से n तक गुणा।<br>
+<strong>उदाहरण:</strong> 
+- 5P2 = 20  
+- 5C2 = 10  
+- 6! = 720
+`;
+
+function setLang(lang){
+  document.getElementById('concept_content').innerHTML = lang==='en'?conceptEN:conceptHI;
+  document.getElementById('tool_heading').innerText = lang==='en'?'🧮 Calculators':'🧮 कैलकुलेटर';
+  document.getElementById('quiz_heading').innerText = lang==='en'?'📝 Quiz: Perm & Comb (20 Qs)':'📝 प्रश्नोत्तरी: क्रमचयन व संयोजन (20 प्रश्न)';
+  document.getElementById('startQuiz').innerText = lang==='en'?'Start Quiz':'प्रश्नोत्तरी शुरू करें';
+  if(current<quizData.length) loadQuizQuestion(lang);
+}
+
+// Calculators
+function factorial(n){if(n<0)return NaN; let f=1; for(let i=1;i<=n;i++)f*=i; return f;}
+function calcPerm(){
+  const n=+calcN.value, r=+calcR.value;
+  if(isNaN(n)||isNaN(r))return alert('Enter valid values');
+  const res = factorial(n)/factorial(n-r);
+  factChart.data.datasets[0].data=[...Array(n+1).keys()].map(i=>factorial(i));
+  factChart.update();
+  calcResult.innerText = `nPr = ${res}`;
+}
+function calcComb(){
+  const n=+calcN.value, r=+calcR.value;
+  if(isNaN(n)||isNaN(r))return alert('Enter valid values');
+  const res = factorial(n)/(factorial(r)*factorial(n-r));
+  calcResult.innerText = `nCr = ${res}`;
+}
+function calcFact(){
+  const n=+calcN.value;
+  if(isNaN(n))return alert('Enter valid value');
+  calcResult.innerText = `Factorial = ${factorial(n)}`;
+}
+
+// Factorial chart
+const ctx = document.getElementById('factChart').getContext('2d');
+const factChart = new Chart(ctx, {
+  type: 'bar',
+  data:{labels:[],datasets:[{label:'n!',data:[],backgroundColor:'#3949ab'}]},
+  options:{responsive:true}
+});
+
+// Quiz data
+const quizData = Array.from({length:20},(_,i)=>({
+  q_en:`Q${i+1}. Sample perm/comb question?`,
+  q_hi:`Q${i+1}. काल्पनिक permutations प्रश्न?`,
+  choices:['A','B','C','D'],answer:i%4,hint:'Use factorial formula.'
+}));
+
+let current=0,score=0;
+function loadQuizQuestion(lang='en'){
+  const q=quizData[current];
+  quizQ.innerText = lang==='en'?q.q_en:q.q_hi;
+  quizChoices.innerHTML='';
+  q.choices.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.innerText=opt;
+    btn.className='btn btn-primary';
+    btn.onclick=()=>evaluateAnswer(i);
+    quizChoices.appendChild(btn);
+  });
+  updateProgress();
+}
+function showHint(){
+  quizHint.innerText = quizData[current].hint;
+}
+function evaluateAnswer(choice){
+  quizFeedback.innerHTML = choice===quizData[current].answer ?
+    '<span style="color:green">✔️ Correct!</span>' : '<span style="color:red">❌ Incorrect!</span>';
+  if(choice===quizData[current].answer) score++;
+  localStorage.setItem(`bookmark_pc_q${current}`,'true');
+  setTimeout(()=>{
+    current++;
+    if(current<quizData.length) loadQuizQuestion(document.querySelector('button').innerText==='HI'?'hi':'en');
+    else finalizeQuiz();
+  },800);
+}
+function finalizeQuiz(){
+  quizQ.innerText = `Quiz done! Score: ${score}/${quizData.length}`;
+  quizChoices.innerHTML = '';
+  downloadPDF.classList.remove('hidden');
+  updateProgress();
+}
+function updateProgress(){
+  quizProgressBar.style.width = Math.round((current/quizData.length)*100)+'%';
+}
+
+startQuiz.onclick=()=>{
+  current=score=0;
+  downloadPDF.classList.add('hidden');
+  loadQuizQuestion('en');
+};
+downloadPDF.onclick=()=>{alert('Download Perm/Comb PDF Guide');};
+
+// Dark mode & login
+darkModeToggle.onclick=()=>{
+  document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode',document.body.classList.contains('dark'));
+};
+if(localStorage.getItem('darkMode')==='true') darkModeToggle.click();
+
+loginBtn.onclick=()=>{
+  const u=prompt('Enter username');
+  if(u){localStorage.setItem('username',u);location.reload();}
+};
+logoutBtn.onclick=()=>{
+  localStorage.removeItem('username');location.reload();
+};
+resetProgress.onclick=()=>{
+  localStorage.clear();
+  alert('Progress reset!');
+};
+
+window.onload=()=>{
+  const u=localStorage.getItem('username');
+  if(u){
+    usernameDisplay.innerText = u;
+    userSection.classList.remove('hidden');
+    loginBtn.style.display='none';
+  }
+  Notification.requestPermission().then(perm=>{
+    if(perm==='granted') setTimeout(()=> new Notification('EduIgnite Perm/Comb',{body:'Check latest calculators!'}),1500);
+  });
+  setLang('en');
+};
+</script>
+
 </body>
 </html>
+
