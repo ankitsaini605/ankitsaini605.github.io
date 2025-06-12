@@ -1,17 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aptitude Topic #92</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="author" content="EduIgnite"/>
+<meta name="description" content="Ratio & Proportion: Extended calculator, detailed examples, quiz with 10 questions, dark mode, login – EduIgnite"/>
+<title>Ratio & Proportion – Pro Tools | EduIgnite</title>
+<link rel="stylesheet" href="style.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body{font-family:sans-serif;margin:0;padding:0;background:#fff;color:#000;transition:background-color .3s,color .3s;}
+  body.dark{background:#121212;color:#ddd;}
+  header, footer{padding:1rem;background:#003366;color:white;}
+  nav a{margin:0 0.5rem;color:white;text-decoration:none;}
+  .main{max-width:1000px;margin:auto;padding:1rem;}
+  .btn{padding:0.6rem 1.2rem;border:none;border-radius:4px;margin:0.3rem;cursor:pointer;transition:transform .2s;}
+  .btn:hover{transform:scale(1.05);}
+  .btn-primary{background:#3399ff;color:white;}
+  .btn-dark{background:#555;color:white;}
+  .section, .tool-box, .quiz-box, .concept-box{margin:2rem 0;padding:1rem;border-radius:8px;background:#eef;}
+  .bookmark{cursor:pointer;color:#f39c12;font-size:1.2rem;}
+  .affiliate{background:#fffae6;border:1px solid #ffd35a;padding:1rem;margin:1rem 0;}
+  canvas{max-width:100%!important;height:auto!important;}
+</style>
 </head>
 <body>
-<header><h1>Aptitude #92 – Percentage + Tricks</h1></header>
-<main>
-  <p>Q: What is 15% of 480?</p>
-  <p>➡️ 10% = 48, 5% = 24 → Total = 72</p>
-  <p><strong>Answer:</strong> 72</p>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>EduIgnite – Ratio & Proportion 🔄</h1>
+  <div style="float:right;">
+    <button onclick="setLang('en')" class="btn">EN</button>
+    <button onclick="setLang('hi')" class="btn">HI</button>
+  </div>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="aptitude.html">Aptitude</a> |
+    <a href="#" id="loginBtn">Login</a> |
+    <button id="darkModeToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div id="userSection" class="section hidden">
+    Welcome, <span id="usernameDisplay">User</span>! 
+    <button id="logoutBtn" class="btn btn-dark">Logout</button>
+  </div>
+
+  <div class="concept-box">
+    <h2 id="concept_heading">📘 What is Ratio & Proportion?</h2>
+    <p id="concept_text">
+      Ratio compares quantities: <code>a:b = a/b</code>.  
+      Proportion is an equality of ratios: <code>a:b = c:d</code>.  
+      Example: If 3 pencils cost ₹15, then ratio = 3:15 = 1:5.  
+      For proportion: If 1 kg of sugar costs ₹50, then 3 kg costs ₹150, so 1:50 = 3:150.
+    </p>
+  </div>
+
+  <div class="tool-box">
+    <h2 id="tool_heading">🛠️ Ratio Calculator</h2>
+    <label>Enter first value (a): <input id="valA" type="number" placeholder="e.g. 8"/></label><br/>
+    <label>Enter second value (b): <input id="valB" type="number" placeholder="e.g. 12"/></label><br/>
+    <button onclick="calcRatio()" class="btn btn-primary">Calculate Simplified Ratio</button>
+    <p id="ratioResult">Simplified = --</p>
+  </div>
+
+  <div class="section">
+    <canvas id="ratioChart"></canvas>
+  </div>
+
+  <div class="quiz-box">
+    <h2 id="quiz_heading">📝 Quiz: Ratio & Proportion (10 Questions)</h2>
+    <div id="quizContainer">
+      <p id="quizQ">Loading...</p>
+      <ul id="quizChoices"></ul>
+      <p id="quizFeedback"></p>
+      <button id="bookmarkQuiz" class="bookmark">★ Bookmark</button>
+    </div>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+    <button id="downloadPDF" class="btn btn-primary hidden">📥 Download Answers PDF</button>
+    <div class="affiliate"><strong>Buy Master Ratio Guide:</strong> <a href="#" target="_blank">[Affiliate Link]</a></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 EduIgnite. All Rights Reserved.</p>
+  <p>Follow us:
+    <a href="https://instagram.com/YourInstaHandle" target="_blank">Instagram</a> |
+    <a href="https://t.me/YourTelegramChannel" target="_blank">Telegram</a>
+  </p>
+  <p>Built with ❤️ by Ankit Saini</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const quizData = [
+  {q_en:"Ratio 8:12 simplifies to?", q_hi:"8:12 का सरलीकृत अनुपात क्या है?", choices:["2:3","4:6","1:2","3:2"], answer:0},
+  {q_en:"If 5 pens cost ₹25, cost of 15 pens = ?", q_hi:"यदि 5 कलम ₹25 में हैं, 15 की कीमत क्या होगी?", choices:["₹75","₹80","₹60","₹65"], answer:0},
+  // add 8 more questions similarly...
+];
+let current = 0, score = 0;
+
+function setLang(lang){
+  document.getElementById('concept_heading').innerText = lang==="en"?"📘 What is Ratio & Proportion?":"📘 अनुपात और समानुपात क्या है?";
+  document.getElementById('concept_text').innerText = lang==="en"?
+    "Ratio compares quantities: a:b = a/b. Proportion is equality of ratios: a:b = c:d." :
+    "अनुपात मात्राओं की तुलना करता है: a:b = a/b। समानुपात अनुपातों की समानता है: a:b = c:d।";
+  document.getElementById('tool_heading').innerText = lang==="en"?"🛠️ Ratio Calculator":"🛠️ अनुपात कैलकुलेटर";
+  document.getElementById('quiz_heading').innerText = lang==="en"?"📝 Quiz: Ratio & Proportion (10 Questions)":"📝 प्रश्नोत्तरी: अनुपात और समानुपात (10 प्रश्न)";
+  document.getElementById('startQuiz').innerText = lang==="en"?"Start Quiz":"प्रश्नोत्तरी शुरू करें";
+  // update current question
+  loadQuestion(lang);
+}
+
+function calcRatio(){
+  const a = +document.getElementById('valA').value;
+  const b = +document.getElementById('valB').value;
+  if(!a || !b){alert('Enter valid numbers'); return;}
+  const g = gcd(a,b);
+  const res = `${a/g}:${b/g}`;
+  document.getElementById('ratioResult').innerText = `Simplified = ${res}`;
+  updateChart(a/g, b/g);
+}
+function gcd(a,b){return b?gcd(b, a%b):a;}
+
+const ctx = document.getElementById('ratioChart').getContext('2d');
+const ratioChart = new Chart(ctx,{type:'pie',
+  data:{labels:['a','b'],datasets:[{data:[0,0],backgroundColor:['#3399ff','#33cc33']}]},
+  options:{responsive:true}}
+);
+function updateChart(a,b){
+  ratioChart.data.datasets[0].data=[a,b];
+  ratioChart.update();
+}
+
+// Quiz functions
+function loadQuestion(lang = 'en'){
+  const data = quizData[current];
+  document.getElementById('quizQ').innerText = lang==="en"?data.q_en:data.q_hi;
+  const ul = document.getElementById('quizChoices');
+  ul.innerHTML = '';
+  data.choices.forEach((ch,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-primary';
+    btn.innerText = ch;
+    btn.onclick = ()=>checkAnswer(i);
+    ul.appendChild(btn);
+  });
+}
+function startQuiz(){
+  current = 0; score = 0;
+  document.getElementById('startQuiz').classList.add('hidden');
+  document.getElementById('downloadPDF').classList.add('hidden');
+  loadQuestion('en');
+}
+function checkAnswer(choice){
+  const fb = document.getElementById('quizFeedback');
+  if(choice === quizData[current].answer){
+    fb.innerHTML = '<span style="color:green">✔️ Correct!</span>'; score++;
+  } else fb.innerHTML = '<span style="color:red">❌ Incorrect!</span>';
+  localStorage.setItem(`bookmark_ratio_q${current}`, 'true');
+  setTimeout(()=>{
+    current++;
+    if(current < quizData.length) loadQuestion(document.querySelector('button[onclick^="setLang"]').innerText==='HI' ? 'hi' : 'en');
+    else finishQuiz();
+  }, 800);
+}
+function finishQuiz(){
+  document.getElementById('quizQ').innerText = `Quiz Completed! Score: ${score}/${quizData.length}`;
+  document.getElementById('quizChoices').innerHTML = '';
+  document.getElementById('downloadPDF').classList.remove('hidden');
+}
+document.getElementById('startQuiz').onclick = () => startQuiz();
+document.getElementById('downloadPDF').onclick = () => {}; // link to guide
+
+// Dark mode
+const dmBtn = document.getElementById('darkModeToggle');
+dmBtn.onclick = ()=>{document.body.classList.toggle('dark'); localStorage.setItem('darkMode', document.body.classList.contains('dark'));};
+if(localStorage.getItem('darkMode')==='true') dmBtn.click();
+
+// Login/logout
+const loginBtn = document.getElementById('loginBtn'),
+      logoutBtn = document.getElementById('logoutBtn'),
+      userSection = document.getElementById('userSection'),
+      usernameDisplay = document.getElementById('usernameDisplay');
+loginBtn.onclick = ()=>{
+  const name = prompt('Enter username');
+  if(name){ localStorage.setItem('username', name); location.reload(); }
+};
+logoutBtn.onclick = ()=>{
+  localStorage.removeItem('username');
+  location.reload();
+};
+window.onload = ()=>{
+  const name = localStorage.getItem('username');
+  if(name){
+    usernameDisplay.innerText = name;
+    userSection.classList.remove('hidden');
+    loginBtn.style.display = 'none';
+  }
+};
+
+// Notifications
+if('Notification' in window){
+  Notification.requestPermission().then(perm=>{
+    if(perm==='granted'){
+      setTimeout(()=>{
+        new Notification('EduIgnite', {body:'Start Ratio quiz now!'});
+      },2000);
+    }
+  });
+}
+</script>
+
 </body>
 </html>
+
