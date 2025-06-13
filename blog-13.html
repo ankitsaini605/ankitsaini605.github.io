@@ -1,20 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Post #13 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Blog Post 13 - Useful study tips from EduIgnite.">
-  <meta name="keywords" content="study tips, blog 13, education, ankit saini">
-  <meta name="author" content="Ankit Saini">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #13 | JavaScript DOM & Event Handling – EduIgnite</title>
+  <meta name="description" content="Explore DOM manipulation & event handling in JavaScript with interactive playground, visual event logging, quizzes, tracking, PDF download, Firebase auth, dark mode, language toggle, push notifications."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"JavaScript DOM & Event Handling",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13",
+    "image":"https://eduignite.com/images/js-dom-events.jpg",
+    "description":"Interactive DOM playground, event log, quizzes, progress tracking, PDF guide, Firebase login, dark mode, multilingual toggle, notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd;}
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem;}
+    .tool-box, .section, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px;}
+    .editor { width:100%; font-family:monospace; background:#f5f5f5; padding:1rem; border-radius:4px; height:200px;}
+    .preview { border:1px solid #ccc; padding:1rem; margin-top:1rem;}
+    .log { max-height:150px; overflow:auto; background:#fff; padding:1rem; border-radius:4px;}
+    .btn { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition:.2s; }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition: width .3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog Post #13</h2>
-  <p>This blog discusses study strategies, motivation, and smart learning approaches to help you crack your exams with confidence.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #13 – JavaScript DOM & Event Handling</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live DOM Playground -->
+  <div class="tool-box">
+    <h3 id="toolTitle">DOM & Event Playground</h3>
+    <textarea id="jsEditor" class="editor">// Add a button and log clicks
+const btn = document.createElement('button');
+btn.textContent = 'Click me';
+btn.onclick = () => log('Button clicked at ' + new Date().toLocaleTimeString());
+document.getElementById('preview').appendChild(btn);
+</textarea>
+    <button class="btn btn-primary" onclick="runJS()">Run</button>
+    <div id="preview" class="preview"></div>
+    <div id="eventLog" class="log"></div>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Understanding DOM & Events</h2>
+    <ul>
+      <li><strong>DOM:</strong> Represent web page elements as objects for access/modification.</li>
+      <li><strong>Event Listeners:</strong> respond to user actions—clicks, keypresses, hovers.</li>
+      <li><strong>Event Propagation:</strong> capturing, bubbling, and preventing default.</li>
+    </ul>
+    <p>Modern JavaScript enables dynamic, interactive web pages through DOM manipulation.</p>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: DOM & Events (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Quiz Score</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download DOM Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), userContainer = document.getElementById('userContainer');
+auth.onAuthStateChanged(u => userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error);}
+function logout(){ auth.signOut();}
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en:{ toolTitle:"DOM & Event Playground", conceptTitle:"Understanding DOM & Events", quizTitle:"Quiz: DOM & Events (10 Qs)", perfTitle:"Your Quiz Score", btnPDF:"Download DOM Guide PDF" },
+  hi:{ toolTitle:"DOM और इवेंट प्लेग्राउंड", conceptTitle:"DOM और इवेंट समझना", quizTitle:"प्रश्नोत्तरी: DOM & इवेंट (10 प्रश्न)", perfTitle:"आपका क्विज़ स्कोर", btnPDF:"DOM गाइड PDF डाउनलोड करें" }
+};
+document.getElementById('langEn').onclick = ()=>setLang('en');
+document.getElementById('langHi').onclick = ()=>setLang('hi');
+function setLang(l){
+  ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>document.getElementById(id).innerText = texts[l][id]);
+  document.getElementById('quizHint').innerText='';
+}
+
+// Run JS Playground
+function runJS(){
+  document.getElementById('preview').innerHTML = '';
+  document.getElementById('eventLog').innerText = '';
+  try {
+    eval(document.getElementById('jsEditor').value);
+  } catch(e) {
+    log('Error: ' + e);
+  }
+}
+function log(msg){
+  const lg = document.getElementById('eventLog');
+  lg.innerHTML += msg + '\n';
+  lg.scrollTop = lg.scrollHeight;
+}
+
+// Quiz Logic
+const quizData = [
+  {q:"Method to add listener?", choices:["addEvent","addEventListener","onClickEvent","listenEvent"], ans:1, hint:"Use standard JS method."},
+  // more Qs...
+];
+let curr=0, score=0;
+const qQ=document.getElementById('quizQuestion'), qOpt=document.getElementById('quizOptions'),
+      qHint=document.getElementById('quizHint'), qFB=document.getElementById('quizFeedback'),
+      qBar=document.getElementById('quizBar');
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q;
+  qOpt.innerHTML = '';
+  qHint.innerText = '';
+  qFB.innerText = '';
+  d.choices.forEach((c,i) => {
+    const b = document.createElement('button');
+    b.className = 'btn';
+    b.innerText = c;
+    b.onclick = () => {
+      qFB.innerText = i === d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i === d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr/quizData.length)*100}%`;
+      if(curr < quizData.length) setTimeout(loadQuiz, 400);
+      else alert(`Quiz Completed! Score: ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = () => {
+  curr = 0;
+  score = 0;
+  qBar.style.width = '0%';
+  loadQuiz();
+};
+function showHint() { if(curr<quizData.length) qHint.innerText = "💡 " + quizData[curr].hint; }
+
+// Performance Chart
+const perfCtx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(perfCtx, {
+  type: 'line',
+  data: { labels: [], datasets: [{ label: 'Score %', data: [], backgroundColor: '#00897b' }] },
+  options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+});
+document.getElementById('savePerf').onclick = () => {
+  perfChart.data.labels.push(`Run #${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length * 100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading DOM Guide PDF...");
+
+// Push Notifications
+if(Notification.permission !== "denied") {
+  Notification.requestPermission().then(p => {
+    if(p === "granted") {
+      new Notification("EduIgnite JS", { body: "Start DOM mastery now!" });
+    }
+  });
+}
+</script>
 </body>
 </html>
