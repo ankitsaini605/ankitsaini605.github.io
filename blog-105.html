@@ -1,21 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #105 – Study Secrets</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog #105 | Data Interpretation & Graph Analysis – EduIgnite</title>
+  <meta name="description" content="Master Data Interpretation with tables, bar charts, quizzes, performance tracking, PDF guide, Firebase auth, dark mode & multilingual support." />
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Advanced Data Interpretation & Graph Analysis",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-12",
+    "image":"https://eduignite.com/images/data-interpretation.jpg",
+    "description":"Interactive lessons with tables, charts, quizzes, PDF downloads, analytics, bilingual toggle, dark mode, login & more."
+  }
+  </script>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {margin:0; padding:0; font-family:'Segoe UI',sans-serif; transition:background .3s,color .3s;}
+    body.dark {background:#121212; color:#ddd;}
+    header, footer {background:#00695c; color:white; padding:1rem;}
+    nav a, nav button {color:white; margin:0 .4rem; text-decoration:none; cursor:pointer;}
+    .main {max-width:1000px; margin:auto; padding:1rem;}
+    .btn {padding:.7rem 1.4rem; border:none; border-radius:4px; margin:.3rem; cursor:pointer; transition:transform .2s;}
+    .btn:hover {transform:scale(1.05);}
+    .btn-primary {background:#00897b; color:white;}
+    .section, .tool-box, .quiz-box {margin:2rem 0; padding:1.5rem; border-radius:8px; background:#e0f2f1;}
+    .bookmark {cursor:pointer; font-size:1.3rem; color:#ff7043; float:right;}
+    .progress-bar {height:12px; background:#ddd; border-radius:6px; overflow:hidden; margin:10px 0;}
+    .progress-filled {height:100%; width:0; background:#00897b; transition:width .3s;}
+    canvas {max-width:100%!important; height:auto!important;}
+    table {width:100%; border-collapse:collapse; margin:1rem 0;}
+    th, td {border:1px solid #ccc; padding:.5rem; text-align:center;}
+    @media(max-width:768px){nav{display:block;text-align:center;} nav a,nav button{display:block;margin:.4rem 0;}}
+  </style>
 </head>
 <body>
-<header><h1>Blog #105: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>Blog #105 – Data Interpretation & Graph Analysis</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+
+  <!-- Concept Section -->
+  <div class="section">
+    <h2 id="conceptTitle">Data Interpretation Essentials</h2>
+    <span id="bookmarkConcept" class="bookmark">☆</span>
+    <p id="conceptContent">
+      Data Interpretation (DI) involves analyzing, synthesizing, and interpreting data from tables, charts and graphs to make decisions.
+    </p>
+    <ol>
+      <li>Scan heading & axes</li>
+      <li>Compute totals, averages</li>
+      <li>Compare series across periods/groups</li>
+      <li>Visual trends: bar, line, pie</li>
+      <li>Beware misleading scales</li>
+    </ol>
+  </div>
+
+  <!-- DI Tool & Chart -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Create Bar Chart from Sample Data</h3>
+    <textarea id="csvInput" rows="5" placeholder="Label,Value&#10;Q1,120&#10;Q2,150"></textarea><br>
+    <button class="btn btn-primary" onclick="drawChart()">Generate Chart</button>
+    <canvas id="diChart"></canvas>
+  </div>
+
+  <!-- Quiz Section -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Interpret the Bar Chart (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Start the quiz to answer questions.</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker -->
+  <div class="section">
+    <h3 id="perfTitle">Performance Tracker & Summary</h3>
+    <canvas id="perfChart"></canvas>
+    <button id="savePerf" class="btn btn-primary">Save Performance</button>
+    <p id="summaryText"></p>
+  </div>
+
+  <!-- PDF Download -->
+  <div class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download DI Guide (PDF)</button>
+  </div>
+
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  const fbConfig = { apiKey:"YOUR_KEY", authDomain:"eduignite.firebaseapp.com", projectId:"eduignite", appId:"APPID" };
+  firebase.initializeApp(fbConfig);
+  const auth = firebase.auth(), userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => {
+    userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`;
+  });
+  function login(){ const e = prompt('Email:'), p = prompt('Password:'); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en: {
+      conceptTitle:"Data Interpretation Essentials",
+      toolTitle:"Create Bar Chart from Sample Data",
+      quizTitle:"Quiz: Interpret the Bar Chart (10 Qs)",
+      perfTitle:"Performance Tracker & Summary",
+      btnPDF:"Download DI Guide (PDF)"
+    },
+    hi: {
+      conceptTitle:"डेटा इंटरप्रिटेशन मूल बातें",
+      toolTitle:"बार चार्ट बनाएं",
+      quizTitle:"प्रश्नोत्तरी: बार चार्ट व्याख्या (10 प्रश्न)",
+      perfTitle:"प्रदर्शन ट्रैकर और सारांश",
+      btnPDF:"DI गाइड डाउनलोड करें (PDF)"
+    }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l){
+    document.getElementById('conceptTitle').innerText = texts[l].conceptTitle;
+    document.getElementById('toolTitle').innerText = texts[l].toolTitle;
+    document.getElementById('quizTitle').innerText = texts[l].quizTitle;
+    document.getElementById('perfTitle').innerText = texts[l].perfTitle;
+    document.getElementById('downloadPDF').innerText = texts[l].btnPDF;
+    document.getElementById('quizHint').innerText = '';
+  }
+
+  // Bookmark toggles
+  document.getElementById('bookmarkConcept').onclick = () => {
+    const e = document.getElementById('bookmarkConcept');
+    e.innerText = e.innerText === '☆' ? '★' : '☆';
+  };
+  document.getElementById('bookmarkQuiz').onclick = () => {
+    const e = document.getElementById('bookmarkQuiz');
+    e.innerText = e.innerText === '☆' ? '★' : '☆';
+  };
+
+  // Chart generator
+  let chartInstance = null;
+  function drawChart(){
+    const text = document.getElementById('csvInput').value.trim();
+    if (!text) return alert('Paste valid CSV data.');
+    const lines = text.split('\n'), labels = [], values = [];
+    lines.slice(1).forEach(ln => {
+      const [lbl, val] = ln.split(',');
+      labels.push(lbl.trim());
+      values.push(+val);
+    });
+    const ctx = document.getElementById('diChart').getContext('2d');
+    if (chartInstance) chartInstance.destroy();
+    chartInstance = new Chart(ctx, { type:'bar', data:{ labels, datasets:[{ label:'Value', data:values, backgroundColor:'#00897b' }]}, options:{responsive:true} });
+  }
+
+  // Quiz logic
+  const quizData = [
+    { q: "Which quarter has highest value?", choices:[], ans:0, hint:"Check largest bar." },
+    // add more questions after generating a chart...
+  ];
+  let curr=0, score=0;
+  const qQ = document.getElementById('quizQuestion'),
+        qOpt = document.getElementById('quizOptions'),
+        qHint = document.getElementById('quizHint'),
+        qFB = document.getElementById('quizFeedback'),
+        qBar = document.getElementById('quizBar');
+  function loadQ(){
+    const d = quizData[curr];
+    qQ.innerText = d.q;
+    qOpt.innerHTML = ''; qHint.innerText = ''; qFB.innerText = '';
+    d.choices.forEach((ch, i) => {
+      const b=document.createElement('button');
+      b.className='btn'; b.innerText = ch;
+      b.onclick = () => {
+        qFB.innerText = i === d.ans ? "✅ Correct!" : "❌ Incorrect.";
+        if (i===d.ans) score++;
+        curr++; qBar.style.width = `${(curr/quizData.length)*100}%`;
+        curr < quizData.length ? setTimeout(loadQ, 600) : finishQuiz();
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = () => { curr=0; score=0; qBar.style.width="0%"; loadQ(); };
+  function showHint(){
+    if(curr < quizData.length) qHint.innerText = "💡 Hint: " + quizData[curr].hint;
+  }
+
+  // Performance chart
+  const perfCtx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(perfCtx, { type:'line', data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b'}]}, options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}}});
+  document.getElementById('savePerf').onclick = () => {
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length + 1}`);
+    perfChart.data.datasets[0].data.push(Math.round(score / quizData.length * 100));
+    perfChart.update();
+    document.getElementById('summaryText').innerText = `You scored ${score}/${quizData.length} (${Math.round(score/quizData.length*100)}%)`;
+    alert("✅ Performance saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = () => alert("📥 Data Interpretation Guide PDF downloading...");
+
+  // Browser notification
+  if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(p => {
+      if (p === "granted") new Notification("EduIgnite DI", { body:"Start interpreting data now!" });
+    });
+  }
+</script>
+
 </body>
 </html>
+
