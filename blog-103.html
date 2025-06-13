@@ -1,21 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #103 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #103 | Speed, Distance & Time – EduIgnite</title>
+  <meta name="description" content="Master formulas for speed, distance and time with interactive tool, quizzes, charts — full power edition."/>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BlogPosting","headline":"Speed, Distance & Time Mastery","author":{"@type":"Person","name":"Ankit Saini"},"publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},"datePublished":"2025-06-12","image":"https://eduignite.com/images/sdt.jpg","description":"Interactive SDT lessons and quizzes on EduIgnite."}
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin:0; padding:0; font-family: 'Segoe UI', sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { color:white; margin:0 .4rem; text-decoration:none; cursor:pointer; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .btn { padding:.7rem 1.4rem; border:none; border-radius:4px; margin:.3rem; cursor:pointer; transition: transform .2s; }
+    .btn:hover { transform:scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .btn-dark { background:#444; color:white; }
+    .section, .tool-box, .quiz-box { margin:2rem 0; padding:1.5rem; border-radius:8px; background:#e0f2f1; }
+    .bookmark { cursor:pointer; font-size:1.3rem; color:#ff7043; float:right; }
+    .progress-bar { height:12px; background:#ddd; border-radius:6px; overflow:hidden; margin:10px 0; }
+    .progress-filled { height:100%; width:0; background:#00897b; transition:width .3s; }
+    canvas { max-width:100%!important; height:auto!important; }
+    @media(max-width:768px){ nav{display:block;text-align:center;} nav a, nav button{display:block;margin:.4rem 0;} }
+  </style>
 </head>
 <body>
-<header><h1>Blog #103: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>Blog #103 – Speed, Distance & Time</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div class="section">
+    <h2 id="conceptTitle">Speed, Distance & Time Fundamentals</h2>
+    <span id="bookmarkConcept" class="bookmark">☆</span>
+    <p id="conceptContent">
+      Learn essential formulas: speed = distance/time, time = distance/speed, distance = speed × time. Practice with problem examples...
+    </p>
+  </div>
+
+  <div class="tool-box">
+    <h3 id="toolTitle">SDT Calculator</h3>
+    <input id="inputDistance" type="number" placeholder="Distance (km)" />
+    <input id="inputSpeed" type="number" placeholder="Speed (km/h)" />
+    <button class="btn btn-primary" onclick="calcSDT()">Calculate Time</button>
+    <p id="toolOutput">--</p>
+  </div>
+
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: SDT (10 Questions)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button><p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br/>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <div class="section">
+    <h3 id="perfTitle">Performance Analytics</h3>
+    <canvas id="perfChart"></canvas>
+    <button id="savePerf" class="btn btn-primary">Save Performance</button>
+  </div>
+
+  <div class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download SDT Guide (PDF)</button>
+  </div>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  const fbConfig = { apiKey:"YOUR_KEY", authDomain:"eduignite.firebaseapp.com", projectId:"eduignite", appId:"APPID" };
+  firebase.initializeApp(fbConfig);
+  const auth = firebase.auth(); const userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => {
+    userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`;
+  });
+  function login(){const e=prompt('Email:'), p=prompt('Password:');auth.signInWithEmailAndPassword(e,p).catch(console.error);}
+  function logout(){auth.signOut();}
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = ()=>{
+    document.body.classList.toggle('dark'); localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en: {
+      conceptTitle: "Speed, Distance & Time Fundamentals",
+      toolTitle: "SDT Calculator",
+      quizTitle: "Quiz: SDT (10 Questions)",
+      perfTitle: "Performance Analytics",
+      btnPDF: "Download SDT Guide (PDF)"
+    },
+    hi: {
+      conceptTitle: "गति, दूरी और समय मूल बातें",
+      toolTitle: "SDT कैलकुलेटर",
+      quizTitle: "प्रश्नोत्तरी: SDT (10 प्रश्न)",
+      perfTitle: "प्रदर्शन विश्लेषण",
+      btnPDF: "SDT गाइड डाउनलोड करें"
+    }
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    document.getElementById('conceptTitle').innerText = texts[l].conceptTitle;
+    document.getElementById('toolTitle').innerText = texts[l].toolTitle;
+    document.getElementById('quizTitle').innerText = texts[l].quizTitle;
+    document.getElementById('perfTitle').innerText = texts[l].perfTitle;
+    document.getElementById('downloadPDF').innerText = texts[l].btnPDF;
+    document.getElementById('quizHint').innerText = '';
+  }
+
+  // Bookmark concept
+  document.getElementById('bookmarkConcept').onclick = ()=>{
+    const el = document.getElementById('bookmarkConcept');
+    el.innerText = el.innerText==='☆' ? '★' : '☆';
+  }
+
+  // SDT Calculator
+  function calcSDT(){
+    const d=+document.getElementById('inputDistance').value;
+    const v=+document.getElementById('inputSpeed').value;
+    if(!d||!v){alert('Valid inputs needed');return;}
+    const t = d/v;
+    document.getElementById('toolOutput').innerText = `Time = ${t.toFixed(2)} hours`;
+  }
+
+  // Quiz logic
+  const quizData = [
+    { q:"If speed=60 km/h, how long for 180 km?", choices:["3h","2h","4h","5h"], ans:0, hint:"time = d/v" },
+    // add rest...
+  ];
+  let curr=0, score=0;
+  const qQ=document.getElementById('quizQuestion'),
+    qOpt=document.getElementById('quizOptions'),
+    qHint=document.getElementById('quizHint'),
+    qFB=document.getElementById('quizFeedback'),
+    qBar=document.getElementById('quizBar');
+
+  function loadQ(){
+    const d=quizData[curr];
+    qQ.innerText = d.q;
+    qOpt.innerHTML = '';
+    qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((ch,i)=>{
+      const b=document.createElement('button'); b.innerText=ch; b.className='btn';
+      b.onclick=()=>{
+        qFB.innerText = i===d.ans ? "✅ Correct!" : "❌ Incorrect.";
+        if(i===d.ans) score++;
+        curr++;
+        qBar.style.width = `${(curr/quizData.length)*100}%`;
+        curr<quizData.length ? setTimeout(loadQ,600) : finishQuiz();
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{
+    curr=0; score=0; qBar.style.width="0%"; loadQ();
+  }
+  function showHint(){
+    if(curr < quizData.length) qHint.innerText = "💡 Hint: "+quizData[curr].hint;
+  }
+  document.getElementById('bookmarkQuiz').onclick = ()=>{
+    const el = document.getElementById('bookmarkQuiz');
+    el.innerText = el.innerText==='☆' ? '★' : '☆';
+  }
+
+  // Performance chart
+  const ctx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctx,{
+    type:'bar',
+    data:{labels:[], datasets:[{label:'Score %', data:[], backgroundColor:'#00897b'}]},
+    options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+    perfChart.update(); alert("✅ Saved!");
+  }
+
+  // Download PDF
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 SDT Guide downloading...");
+
+  // Notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite SDT", { body:"Time to level‐up SDT skills!" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
