@@ -1,28 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="EduIgnite – Learn smart with MCQs, coding tutorials, study blogs, and current affairs. Crack your exams with confidence." />
-<meta name="keywords" content="EduIgnite, study tips, competitive exams, C programming, aptitude quiz, current affairs, coding MCQ, ankit saini website" />
-<meta name="author" content="Ankit Saini" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8" />
-  <title>Best Morning Routine for Students</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #2 | Introduction to HTML5 & Semantic Elements – EduIgnite</title>
+  <meta name="description" content="Learn about HTML5 & semantic elements: live editor, accessibility tips, quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, and push notifications.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Introduction to HTML5 & Semantic Elements",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13","image":"https://eduignite.com/images/html5-semantic.jpg",
+    "description":"Build better web pages using HTML5 semantic tags with live preview, quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, and notifications."
+  }</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white;padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .editor, .preview { width:100%; font-family:monospace; padding:1rem; border-radius:4px; margin-top:1rem; }
+    .editor { background:#f5f5f5; height:200px; }
+    .preview { background:#fff; border:1px solid #ccc; min-height:150px; }
+    .btn{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+    .btn:hover{transform:scale(1.05);}
+    .btn-primary{background:#00897b;color:white;}
+    .section, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px;}
+    .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+    .progress-filled{background:#00897b;width:0;height:100%;transition:width .3s;}
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
+<header>
+  <h1>Blog #2 – Introduction to HTML5 & Semantic Elements</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div class="section">
+    <h2 id="conceptTitle">Why HTML5 & Semantic Tags Matter</h2>
+    <p>Semantic elements help with accessibility, SEO, and clearer code. Tags like <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code> define the structure and purpose of content.</p>
+    <ul>
+      <li><strong>&lt;nav&gt;:</strong> Navigation links</li>
+      <li><strong>&lt;section&gt;:</strong> Thematic content block</li>
+      <li><strong>&lt;aside&gt;:</strong> Sidebar content</li>
+      <li><strong>&lt;footer&gt;:</strong> Footer information</li>
+    </ul>
+  </div>
+
+  <div class="section tool-box">
+    <h3 id="toolTitle">Live HTML5 Preview</h3>
+    <textarea id="htmlEditor" class="editor">
+<header>
+  <h1>My Page Title</h1>
+  <nav><a href="#">Home</a> | <a href="#">Blog</a></nav>
+</header>
 <main>
-  <h2>Best Morning Routine for Students</h2>
-  <ol>
-    <li><strong>Wake Up Early:</strong> Between 5:30 AM – 6:00 AM</li>
-    <li><strong>Hydrate:</strong> Drink water before phone</li>
-    <li><strong>20 Min Exercise:</strong> Boosts blood flow to brain</li>
-    <li><strong>30 Min Study:</strong> Pick light revision topic</li>
-    <li><strong>Healthy Breakfast:</strong> Banana + Milk + Dry Fruits</li>
-    <li><strong>No Mobile till 8 AM:</strong> Mind stays fresh</li>
-  </ol>
-  <p>Consistency is key — turn this into habit and feel the difference in 7 days!</p>
+  <article>
+    <h2>Article Heading</h2>
+    <p>This is a sample paragraph demonstrating HTML5 semantic markup.</p>
+  </article>
+  <aside><p>Related links and sidebar content here.</p></aside>
 </main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<footer><p>©2025 EduIgnite</p></footer>
+    </textarea>
+    <button class="btn btn-primary" onclick="updatePreview()">Render</button>
+    <div id="htmlPreview" class="preview">Rendered output will appear here</div>
+  </div>
+
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Semantic HTML5 (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p><ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <section class="section">
+    <h3 id="perfTitle">Your Quiz Tracker</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download HTML5 Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), userContainer=document.getElementById('userContainer');
+auth.onAuthStateChanged(u => {
+  userContainer.innerHTML = u
+    ? `Hi, ${u.email} <button onclick="logout()">Logout</button>`
+    : `<button onclick="login()">Login</button>`;
+});
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: { conceptTitle:"Why HTML5 & Semantic Tags Matter", toolTitle:"Live HTML5 Preview", quizTitle:"Quiz: Semantic HTML5 (10 Qs)", perfTitle:"Your Quiz Tracker", btnPDF:"Download HTML5 Guide PDF" },
+  hi: { conceptTitle:"HTML5 और सेमांटिक टैग क्यों जरूरी हैं", toolTitle:"लाइव HTML5 प्रिव्यू", quizTitle:"प्रश्नोत्तरी: सेमांटिक HTML5 (10 प्रश्न)", perfTitle:"आपका स्कोर", btnPDF:"HTML5 गाइड PDF डाउनलोड करें" }
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l) {
+  ["conceptTitle", "toolTitle", "quizTitle", "perfTitle", "downloadPDF"].forEach(id =>
+    document.getElementById(id).innerText = texts[l][id]
+  );
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Live preview
+function updatePreview() {
+  document.getElementById('htmlPreview').innerHTML = document.getElementById('htmlEditor').value;
+}
+
+// Quiz logic
+const quizData = [
+  { q:"Which tag defines page header?", choices:["<main>","<header>","<article>","<footer>"], ans:1, hint:"Top section of page" },
+  // ...more questions
+];
+let curr = 0, score = 0;
+const qQ=document.getElementById('quizQuestion'),qOpt=document.getElementById('quizOptions'),
+      qHint=document.getElementById('quizHint'),qFB=document.getElementById('quizFeedback'),
+      qBar=document.getElementById('quizBar');
+function loadQuiz() {
+  const d = quizData[curr];
+  qQ.innerText = d.q;
+  qOpt.innerHTML = '';
+  qHint.innerText = '';
+  qFB.innerText = '';
+  d.choices.forEach((c,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.innerText = c;
+    btn.onclick = () => {
+      qFB.innerText = i === d.ans ? "✅ Correct" : "❌ Wrong";
+      if (i === d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr / quizData.length) * 100}%`;
+      if (curr < quizData.length) setTimeout(loadQuiz, 400);
+      else alert(`Quiz over: ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick = () => {
+  curr = 0; score = 0; qBar.style.width = '0%'; loadQuiz();
+};
+function showHint() {
+  if (curr < quizData.length) qHint.innerText = "💡 " + quizData[curr].hint;
+}
+
+// Tracker
+const perfCtx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(perfCtx, {
+  type: 'line',
+  data: { labels: [], datasets: [{ label: 'Score %', data: [], backgroundColor: '#00897b' }] },
+  options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+});
+document.getElementById('savePerf').onclick = () => {
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score / quizData.length * 100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF
+document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading HTML5 Guide PDF...");
+
+// Push Notifications
+if (Notification.permission !== "denied") {
+  Notification.requestPermission().then(p => {
+    if (p === "granted") {
+      new Notification("EduIgnite HTML5", {
+        body: "Explore HTML5 semantic elements now!"
+      });
+    }
+  });
+}
+</script>
 </body>
 </html>
+
