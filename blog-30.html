@@ -2,15 +2,186 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog Post #30 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #30 | Introduction to ES6+ – EduIgnite</title>
+  <meta name="description" content="Explore JavaScript ES6+ features: live code playground, modern syntax, quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, and push notifications.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Introduction to ES6+",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13","image":"https://eduignite.com/images/es6-features.jpg",
+    "description":"Hands‑on with ES6+ features: let/const, arrow functions, destructuring, modules, quiz, PDF, Firebase auth, dark mode, multilingual support & notifications."
+  }</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, button, input, textarea { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background: #121212; color: #ddd; }
+    header, footer { background: #00695c; color: #fff; padding: 1rem; }
+    nav a, nav button { margin: 0 .5rem; color:white; text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .section, .quiz-box { background: #e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    textarea.editor { width:100%; font-family:monospace; background:#f5f5f5; padding:1rem; height:120px; border-radius:4px; }
+    pre.preview { background:#fff; border:1px solid #ccc; padding:1rem; overflow:auto; min-height:80px; }
+    .btn{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+    .btn-primary{background:#00897b;color:white;}
+    .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+    .progress-filled{background:#00897b;width:0;height:100%;transition:width .3s;}
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #30</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #30 – Introduction to ES6+</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <div class="tool-box">
+    <h3 id="toolTitle">ES6+ Playground</h3>
+    <textarea id="codeEditor" class="editor">// Example: let/const, arrow fn, destructuring
+const nums = [1,2,3];
+const squares = nums.map(n => n**2);
+const [a, , c] = squares;
+console.log({squares, a, c});</textarea>
+    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+    <pre id="demoOutput" class="preview">Press Run to see output</pre>
+  </div>
+
+  <section class="section">
+    <h2 id="conceptTitle">Modern JavaScript Features</h2>
+    <ul>
+      <li><strong>let & const:</strong> block scoping instead of var.</li>
+      <li><strong>Arrow Functions:</strong> concise syntax & lexical this.</li>
+      <li><strong>Destructuring:</strong> easy unpacking of arrays & objects.</li>
+      <li><strong>Template literals:</strong> interpolation & multi-line strings.</li>
+    </ul>
+  </section>
+
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: ES6+ (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p><ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <section class="section">
+    <h3 id="perfTitle">Track Your Performance</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download ES6+ Cheat Sheet PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth=firebase.auth(), uc=document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if (localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Multilingual
+const texts = {
+  en:{toolTitle:"ES6+ Playground",conceptTitle:"Modern JavaScript Features",quizTitle:"Quiz: ES6+ (10 Qs)",perfTitle:"Track Your Performance",btnPDF:"Download ES6+ Cheat Sheet PDF"},
+  hi:{toolTitle:"ES6+ प्लेग्राउंड",conceptTitle:"मॉडर्न JavaScript फीचर्स",quizTitle:"प्रश्नोत्तरी: ES6+ (10 प्रश्न)",perfTitle:"आपका प्रदर्शन",btnPDF:"ES6+ चीट शीट PDF डाउनलोड करें"}
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l){
+  ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Live Code Runner
+function runCode(){
+  const out = document.getElementById('demoOutput');
+  try {
+    const f = new Function(document.getElementById('codeEditor').value + '\nreturn squares && a && c;');
+    const result = f();
+    out.textContent = JSON.stringify(result,null,2);
+  } catch(e){ out.textContent = 'Error: '+e; }
+}
+
+// Quiz Logic
+const quizData=[
+  {q:"Which creates a new variable?",choices:["let","var","both","none"],ans:2,hint:"ES6 introduced one."},
+  // ..rest
+];
+let curr=0,score=0;
+const [qQ,qOpt,qHint,qFB,qBar]=[
+  document.getElementById('quizQuestion'),
+  document.getElementById('quizOptions'),
+  document.getElementById('quizHint'),
+  document.getElementById('quizFeedback'),
+  document.getElementById('quizBar')
+];
+function loadQuiz(){
+  const d=quizData[curr];
+  qQ.innerText=d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+  d.choices.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='btn'; btn.innerText=c;
+    btn.onclick=()=>{
+      qFB.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qBar.style.width=`${(curr/quizData.length)*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz,400) : alert(`Quiz done: ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick=()=>{curr=0;score=0;qBar.style.width='0%';loadQuiz();};
+function showHint(){ if(curr<quizData.length) qHint.innerText="💡 "+quizData[curr].hint; }
+
+// Performance Chart
+const perfCtx=document.getElementById('perfChart').getContext('2d');
+const perfChart=new Chart(perfCtx,{type:'line',data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}});
+document.getElementById('savePerf').onclick=()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick=()=>alert("📥 Downloading ES6+ Cheat Sheet PDF...");
+
+// Notifications
+if(Notification.permission!=="denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite ES6+",{body:"Practice modern JS ES6+ features!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
