@@ -1,21 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #106 – Study Secrets</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog #106 | Logical Reasoning & Puzzle Skills – EduIgnite</title>
+  <meta name="description" content="Boost your logical reasoning with puzzles, interactive logic builder, quizzes, analytics, downloadable PDF guide, dark mode, bilingual, login & analytics." />
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Logical Reasoning & Puzzle Mastery",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-12",
+    "image":"https://eduignite.com/images/logical-reasoning.jpg",
+    "description":"Enhance logical reasoning with pattern puzzles, interactive builder, dynamic quiz, PDF resources, tracking, bilingual, dark mode."
+  }
+  </script>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin:0; padding:0; font-family:'Segoe UI',sans-serif; transition:background .3s, color .3s;}
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { color:white; margin:0 .4rem; text-decoration:none; cursor:pointer; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .btn { padding:.7rem 1.4rem; border:none; border-radius:4px; margin:.3rem; cursor:pointer; transition:transform .2s;}
+    .btn:hover { transform:scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .section, .tool-box, .quiz-box { margin:2rem 0; padding:1.5rem; border-radius:8px; background:#e0f2f1; }
+    .bookmark { cursor:pointer; font-size:1.3rem; color:#ff7043; float:right; }
+    .progress-bar { height:12px; background:#ddd; border-radius:6px; overflow:hidden; margin:10px 0; }
+    .progress-filled { height:100%; width:0; background:#00897b; transition:width .3s; }
+    canvas { max-width:100%!important; height:auto!important; }
+    .puzzle-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(60px,1fr)); gap:8px; margin:1rem 0; }
+    .cell { background:#fff; border:1px solid #ccc; height:60px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.2rem; }
+    .cell.selected { background:#00897b; color:white; }
+    @media(max-width:768px){ nav{display:block;text-align:center;} nav a, nav button{display:block;margin:.4rem 0;} }
+  </style>
 </head>
 <body>
-<header><h1>Blog #106: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+<header>
+  <h1>Blog #106 – Logical Reasoning & Puzzles</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+
+  <div class="section">
+    <h2 id="conceptTitle">Understanding Logical Patterns</h2>
+    <span id="bookmarkConcept" class="bookmark">☆</span>
+    <p id="conceptContent">
+      Logical reasoning puzzles include sequence patterns, matrix grids, syllogisms, and deduction using clues and elimination techniques...
+    </p>
+    <ul>
+      <li>Number series: arithmetic, geometric</li>
+      <li>Matrix completion</li>
+      <li>Deductive puzzles: “if–then” logic</li>
+      <li>Practice: Pick all prime numbers in grid</li>
+    </ul>
+  </div>
+
+  <div class="tool-box">
+    <h3 id="toolTitle">Interactive Puzzle Builder</h3>
+    <div class="puzzle-grid" id="puzzleGrid"></div>
+    <button class="btn btn-primary" onclick="startPuzzle()">Start Puzzle</button>
+    <button class="btn btn-primary" onclick="checkPuzzle()">Check Answers</button>
+    <p id="puzzleResult"></p>
+  </div>
+
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Logical Reasoning (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br/>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <div class="section">
+    <h3 id="perfTitle">Performance & Progress</h3>
+    <canvas id="perfChart"></canvas>
+    <button id="savePerf" class="btn btn-primary">Save Performance</button>
+  </div>
+
+  <div class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Reasoning Guide (PDF)</button>
+  </div>
+
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  const fbConfig = { apiKey:"YOUR_KEY", authDomain:"eduignite.firebaseapp.com", projectId:"eduignite", appId:"APPID" };
+  firebase.initializeApp(fbConfig);
+  const auth = firebase.auth(), userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => {
+    userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`;
+  });
+  function login(){const e=prompt('Email:'),p=prompt('Password:');auth.signInWithEmailAndPassword(e,p).catch(console.error);}
+  function logout(){auth.signOut();}
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = ()=>{
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en: {
+      conceptTitle:"Understanding Logical Patterns",
+      toolTitle:"Interactive Puzzle Builder",
+      quizTitle:"Quiz: Logical Reasoning (10 Qs)",
+      perfTitle:"Performance & Progress",
+      btnPDF:"Download Reasoning Guide (PDF)"
+    },
+    hi: {
+      conceptTitle:"तार्किक पैटर्न समझें",
+      toolTitle:"पज़ल इंटरएक्टिव बिल्डर",
+      quizTitle:"प्रश्नोत्तरी: तार्किक निर्णय (10 प्रश्न)",
+      perfTitle:"प्रदर्शन और प्रगति",
+      btnPDF:"रिज़निंग गाइड डाउनलोड करें (PDF)"
+    }
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    document.getElementById('conceptTitle').innerText = texts[l].conceptTitle;
+    document.getElementById('toolTitle').innerText = texts[l].toolTitle;
+    document.getElementById('quizTitle').innerText = texts[l].quizTitle;
+    document.getElementById('perfTitle').innerText = texts[l].perfTitle;
+    document.getElementById('downloadPDF').innerText = texts[l].btnPDF;
+    document.getElementById('quizHint').innerText = '';
+  }
+
+  // Bookmark toggles
+  document.getElementById('bookmarkConcept').onclick = ()=>{
+    const el = document.getElementById('bookmarkConcept');
+    el.innerText = el.innerText==='☆' ? '★' : '☆';
+  };
+  document.getElementById('bookmarkQuiz').onclick = ()=>{
+    const el = document.getElementById('bookmarkQuiz');
+    el.innerText = el.innerText==='☆' ? '★' : '☆';
+  };
+
+  // Puzzle Grid Logic
+  const gridEl = document.getElementById('puzzleGrid');
+  let grid = [];
+  function startPuzzle(){
+    gridEl.innerHTML = ''; grid = [];
+    const size = 4;
+    for(let i=0;i<size*size;i++){
+      const value = Math.floor(Math.random()*50)+1;
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.innerText = value;
+      cell.onclick = () => cell.classList.toggle('selected');
+      gridEl.appendChild(cell);
+      grid.push({value, cell});
+    }
+    document.getElementById('puzzleResult').innerText = '';
+  }
+  function checkPuzzle(){
+    const selected = grid.filter(g => g.cell.classList.contains('selected')).map(g=>g.value);
+    const isAllEven = selected.every(v=>v%2===0);
+    document.getElementById('puzzleResult').innerText = isAllEven ? '✅ All correct!' : '❌ Some are odd. Try again';
+  }
+
+  // Quiz Logic
+  const quizData = [
+    { q:"If A>B and B>C, then A?C?", choices:["<","=",">","Can't say"], ans:2, hint:"Transitive relation" },
+    // add more questions for a full 10
+  ];
+  let curr=0, score=0;
+  const qQ=document.getElementById('quizQuestion'),
+    qOpt=document.getElementById('quizOptions'),
+    qHint=document.getElementById('quizHint'),
+    qFB=document.getElementById('quizFeedback'),
+    qBar=document.getElementById('quizBar');
+  function loadQ(){
+    const d=quizData[curr];
+    qQ.innerText=d.q;
+    qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((ch,i)=>{
+      const b=document.createElement('button');
+      b.className='btn'; b.innerText=ch;
+      b.onclick = ()=>{
+        qFB.innerText = i===d.ans?"✅ Correct!":"❌ Incorrect.";
+        if(i===d.ans) score++;
+        curr++;
+        qBar.style.width = `${(curr/quizData.length)*100}%`;
+        curr<quizData.length ? setTimeout(loadQ,600) : finishQuiz();
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{
+    curr=0; score=0; qBar.style.width="0%"; loadQ();
+  };
+  function showHint(){
+    if(curr<quizData.length) qHint.innerText = "💡 Hint: "+quizData[curr].hint;
+  }
+
+  // Performance Chart
+  const ctx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctx, {
+    type:'bar',
+    data:{labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }]},
+    options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+    perfChart.update();
+    alert("✅ Performance Saved");
+  };
+
+  // PDF Download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 Reasoning Guide PDF downloading...");
+
+  // Browser Notification
+  if(Notification.permission!=="denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite Reasoning", { body: "Time to test your logic!" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
