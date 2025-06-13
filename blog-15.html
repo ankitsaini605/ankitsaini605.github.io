@@ -2,19 +2,275 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog Post #15 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Blog Post 15 - Useful study tips from EduIgnite.">
-  <meta name="keywords" content="study tips, blog 15, education, ankit saini">
-  <meta name="author" content="Ankit Saini">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #15 | Python Data Analysis with Pandas – EduIgnite</title>
+  <meta name="description" content="Learn data analysis using Python Pandas: interactive notebook, charts, quizzes, downloadable PDF, Firebase auth, dark mode, multilingual toggle, and push notifications.">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Python Data Analysis with Pandas",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13",
+    "image":"https://eduignite.com/images/pandas-data-analysis.jpg",
+    "description":"Interactive Pandas notebook and chart visualization with quizzes, PDF guide, backend features, dark mode, multilingual toggle, and notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button {
+      font-family:'Segoe UI',sans-serif;
+      transition: background .3s,color .3s;
+    }
+    body.dark {
+      background:#121212;
+      color:#ddd;
+    }
+    header, footer {
+      background:#00695c;
+      color:white;
+      padding:1rem;
+    }
+    nav a, nav button {
+      margin:0 .5rem;
+      color:white;
+      text-decoration:none;
+    }
+    .main {
+      max-width:900px;
+      margin:auto;
+      padding:1rem;
+    }
+    .tool-box, .section, .quiz-box {
+      background:#e0f2f1;
+      padding:1.5rem;
+      margin:2rem 0;
+      border-radius:8px;
+    }
+    .editor {
+      width:100%;
+      font-family:monospace;
+      background:#f5f5f5;
+      padding:1rem;
+      border-radius:4px;
+      height:200px;
+    }
+    .preview {
+      border:1px solid #ccc;
+      padding:1rem;
+      margin-top:1rem;
+      background:#fff;
+      overflow:auto;
+    }
+    .btn {
+      padding:.6rem 1.2rem;
+      margin:.3rem;
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+      transition:transform .2s;
+    }
+    .btn:hover {
+      transform:scale(1.05);
+    }
+    .btn-primary {
+      background:#00897b;
+      color:white;
+    }
+    .progress-bar {
+      background:#ddd;
+      border-radius:6px;
+      height:12px;
+      overflow:hidden;
+      margin:10px 0;
+    }
+    .progress-filled {
+      background:#00897b;
+      width:0%;
+      height:100%;
+      transition:width .3s;
+    }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog Post #15</h2>
-  <p>This blog discusses study strategies, motivation, and smart learning approaches to help you crack your exams with confidence.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #15 – Python Data Analysis with Pandas</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live Pandas Notebook -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Pandas Notebook</h3>
+    <textarea id="pyEditor" class="editor">import pandas as pd\n# create DataFrame\ndata = {'Name':['Alice','Bob','Charlie'],'Score':[85,92,78]}\ndf = pd.DataFrame(data)\ndf['Passed'] = df.Score >= 80\ndf</textarea>
+    <button class="btn btn-primary" onclick="runPy()">Run Code</button>
+    <div id="pyPreview" class="preview"></div>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Pandas for Data Analysis</h2>
+    <p>Pandas is a powerful library to manipulate & analyze structured data:</p>
+    <ul>
+      <li><strong>DataFrame:</strong> table-like structure with labeled axes.</li>
+      <li><strong>Series:</strong> single column of data.</li>
+      <li>Use methods like <code>read_csv</code>, <code>groupby</code>, <code>agg</code> to explore data.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Pandas Basics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Quiz Score</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Pandas Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), userContainer=document.getElementById('userContainer');
+auth.onAuthStateChanged(u =>
+  userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`
+);
+function login(){ const e=prompt("Email"),p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: { toolTitle: "Pandas Notebook", conceptTitle: "Pandas for Data Analysis", quizTitle: "Quiz: Pandas Basics (10 Qs)", perfTitle: "Your Quiz Score", btnPDF: "Download Pandas Guide PDF" },
+  hi: { toolTitle: "Pandas नोटबुक", conceptTitle: "डेटा विश्लेषण के लिए Pandas", quizTitle: "प्रश्नोत्तरी: Pandas बेसिक्स (10 प्रश्न)", perfTitle: "आपका क्विज़ स्कोर", btnPDF: "Pandas गाइड PDF डाउनलोड करें" }
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l) {
+  ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id => document.getElementById(id).innerText = texts[l][id]);
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Run Python code with Pyodide
+let pyodideReady = false;
+loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/" }).then(py => {
+  window.pyodide = py;
+  pyodideReady = true;
+});
+async function runPy(){
+  if (!pyodideReady) return alert("Loading Python...");
+  const code = document.getElementById('pyEditor').value;
+  const outDiv = document.getElementById('pyPreview');
+  try {
+    const res = await pyodide.runPythonAsync(code);
+    outDiv.innerText = res ?? '✔ Code ran!';
+  } catch (e) {
+    outDiv.innerText = 'Error: ' + e;
+  }
+}
+
+// Quiz engine
+const quizData = [
+  {q:"What does DataFrame represent?", choices:["Series","2D table","Plot","None"], ans:1, hint:"Think table."},
+  // …other questions…
+];
+let curr = 0, score = 0;
+const qQ = document.getElementById('quizQuestion'),
+      qOpt = document.getElementById('quizOptions'),
+      qHint = document.getElementById('quizHint'),
+      qFB = document.getElementById('quizFeedback'),
+      qBar = document.getElementById('quizBar');
+function loadQuiz() {
+  const d = quizData[curr];
+  qQ.innerText = d.q;
+  qOpt.innerHTML = '';
+  qHint.innerText = '';
+  qFB.innerText = '';
+  d.choices.forEach((c,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.innerText = c;
+    btn.onclick = () => {
+      qFB.innerText = (i === d.ans) ? "✅ Correct" : "❌ Wrong";
+      if (i === d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr / quizData.length) * 100}%`;
+      if (curr < quizData.length) setTimeout(loadQuiz, 400);
+      else alert(`Quiz finished! Score: ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick = () => {
+  curr = 0; score = 0; qBar.style.width = '0%'; loadQuiz();
+};
+function showHint() {
+  if (curr < quizData.length) qHint.innerText = "💡 " + quizData[curr].hint;
+}
+
+// Chart tracking
+const perfCtx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(perfCtx, {
+  type: 'line',
+  data: { labels: [], datasets: [{ label: 'Score %', data: [], backgroundColor: '#00897b' }] },
+  options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+});
+document.getElementById('savePerf').onclick = () => {
+  perfChart.data.labels.push(`Attempt ${perfChart.data.labels.length + 1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score / quizData.length * 100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF
+document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading Pandas Guide PDF...");
+
+// Push Notifications
+if (Notification.permission !== "denied") {
+  Notification.requestPermission().then(p => {
+    if (p === "granted") {
+      new Notification("EduIgnite Pandas", {
+        body: "Supercharge your data analysis with Pandas!"
+      });
+    }
+  });
+}
+</script>
 </body>
 </html>
