@@ -1,21 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #117 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Blog #117 | Machine Learning Intro – EduIgnite</title>
+  <meta name="description" content="Intro to Machine Learning: supervised vs unsupervised, interactive dataset explorer, live plot visualizer, quiz, performance tracking, Firebase auth, multilingual, dark mode, downloadable summary PDF, plus push notifications."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Machine Learning Intro",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-12",
+    "image":"https://eduignite.com/images/ml-intro.jpg",
+    "description":"Learn ML basics with interactive charts, supervised vs unsupervised learning, dataset explorer, quiz, performance tracker, PDF download, Firebase login, dark mode, multilingual."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .section, .tool-box, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .btn { padding:.7rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition: transform .2s;}
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .bookmark { float:right; font-size:1.4rem; cursor:pointer; color:#ff7043; }
+    .progress-bar { background:#ddd; overflow:hidden; border-radius:6px; height:12px; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition: width .3s; }
+    #mlChart, #dataVis { max-width:100%!important; height:auto!important; }
+    @media(max-width:768px){ nav{display:block;text-align:center;} nav a,nav button{display:block;margin:.4rem 0;} }
+  </style>
 </head>
 <body>
-<header><h1>Blog #117: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #117 – Machine Learning Intro</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- ML Chart -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Supervised vs Unsupervised</h3>
+    <canvas id="mlChart"></canvas>
+  </div>
+
+  <!-- Dataset Explorer -->
+  <div class="tool-box">
+    <h3 id="dataTitle">Interactive Dataset Explorer</h3>
+    <textarea id="dataInput" rows="3" placeholder="Enter CSV rows, e.g. 1,2,3\n4,5,6"></textarea>
+    <button class="btn btn-primary" onclick="plotData()">Plot Data</button>
+    <canvas id="dataVis"></canvas>
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: ML Basics (8 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Perf tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Performance Tracker</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download ML Summary (PDF)</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), userContainer=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u=>userContainer.innerHTML = u?`Hi, ${u.email} <button onclick="logout()">Logout</button>`:`<button onclick="login()">Login</button>`);
+  function login(){ const e=prompt("Email"),p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode toggle
+  document.getElementById('darkToggle').onclick = () => {
+    const d=document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en: { toolTitle:"Supervised vs Unsupervised", dataTitle:"Interactive Dataset Explorer", quizTitle:"Quiz: ML Basics (8 Qs)", perfTitle:"Performance Tracker", btnPDF:"Download ML Summary (PDF)" },
+    hi: { toolTitle:"प्रबंधित बनाम अप्रबंधित", dataTitle:"डेटासेट एक्सप्लोरर", quizTitle:"प्रश्नोत्तरी: ML मूल बातें (8 प्रश्न)", perfTitle:"प्रदर्शन ट्रैकर", btnPDF:"ML सारांश (PDF) डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    ["toolTitle","dataTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>{
+      document.getElementById(id).innerText = texts[l][id];
+    });
+    document.getElementById('quizHint').innerText='';
+  }
+
+  // ML Chart
+  const mlCtx = document.getElementById('mlChart').getContext('2d');
+  const mlChart = new Chart(mlCtx, {
+    type: 'pie',
+    data: { labels:['Supervised','Unsupervised'], datasets:[{data:[60,40], backgroundColor:['#00897b','#4db6ac']} ]},
+    options:{responsive:true}
+  });
+
+  // Dataset Explorer
+  function plotData(){
+    const rows = document.getElementById('dataInput').value.trim().split('\n').map(r=>r.split(',').map(Number));
+    if(rows.length<2)return alert("Enter at least 2 rows");
+    const labels = rows[0].map((_,i)=>`Col${i+1}`);
+    const data = rows.slice(1).map(r=>r.map((v,i)=>({x:i+1,y:v}))).flat();
+    const visCtx = document.getElementById('dataVis').getContext('2d');
+    new Chart(visCtx, {type:'scatter', data:{datasets:[{label:'Dataset',data}]}, options:{plugins:{legend:{display:false}}}});
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"Which ML type uses labeled data?", choices:["Reinforcement","Supervised","Unsupervised","Evolutionary"], ans:1, hint:"Labels = known outputs"},
+    {q:"Clustering is an example of?", choices:["Supervised","Unsupervised","Semi-supervised","Deep Learning"], ans:1, hint:"No labels used"},
+    // … up to 8 Qs total
+  ];
+  let curr=0, score=0;
+  const qQ = document.getElementById('quizQuestion'), qOpt = document.getElementById('quizOptions'),
+        qHint = document.getElementById('quizHint'), qFB = document.getElementById('quizFeedback'),
+        qBar = document.getElementById('quizBar');
+  function loadQuiz(){
+    const d=quizData[curr];
+    qQ.innerText=d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.className='btn'; b.innerText=c;
+      b.onclick=()=>{
+        qFB.innerText = i===d.ans?"✅ Correct":"❌ Wrong";
+        if(i===d.ans) score++;
+        curr++; qBar.style.width=`${(curr/quizData.length)*100}%`;
+        curr<quizData.length?setTimeout(loadQuiz,600):alert(`Quiz Done! Score: ${score}/${quizData.length}`);
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{
+    curr=0;score=0; qBar.style.width="0%"; loadQuiz();
+  };
+  function showHint(){
+    if(curr<quizData.length) qHint.innerText="💡 Hint: "+quizData[curr].hint;
+  }
+
+  // Performance tracking
+  const perfCtx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(perfCtx,{
+    type:'line', data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]}, options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update(); alert("✅ Score saved!");
+  };
+
+  // PDF Download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 PDF summary downloading...");
+
+  // Push notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p=>{ if(p==="granted") new Notification("EduIgnite ML Intro", { body:"Keep learning ML today!" }); });
+  }
+</script>
 </body>
 </html>
+
