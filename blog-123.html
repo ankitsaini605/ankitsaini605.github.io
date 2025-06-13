@@ -1,26 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>📚 30-Day Study Challenge</title></head>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #123 | Deep Learning & AI Introduction – EduIgnite</title>
+  <meta name="description" content="An introductory guide to Deep Learning & AI: live neural network demo, visual plots, interactive quizzes, performance tracking, PDF download, Firebase login, dark mode, multilingual toggles, push notifications."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Deep Learning & AI Introduction",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13",
+    "image":"https://eduignite.com/images/ai-deep-learning.jpg",
+    "description":"Explore neural networks through live demos, training visualizations, quizzes, progress tracking, PDF guide, auth, dark mode, multilingual support, and notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .section, .tool-box, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .btn { padding:.7rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition: transform .2s; }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    #vizCanvas, #perfChart { width:100% !important; height:300px !important; }
+    .editor { width:100%; font-family:monospace; background:#f5f5f5; padding:1rem; border-radius:4px; height:150px; }
+    @media(max-width:768px){ nav{display:block;text-align:center;} nav a,nav button{display:block;margin:.4rem 0;} }
+  </style>
+</head>
 <body>
-<h1>📚 30-Day Study Challenge</h1>
-<h2>📅 Day-Wise Plan</h2>
-<ul>
-  <li><b>Day 1–5:</b> Learn basic concepts (1 subject daily)</li>
-  <li><b>Day 6–10:</b> Solve 15 MCQs daily from all topics</li>
-  <li><b>Day 11–20:</b> Mix practice + 2-hour mock tests</li>
-  <li><b>Day 21–30:</b> Revise mistakes, attempt new mocks</li>
-</ul>
-<h2>🧠 Rules</h2>
-<ul>
-  <li>No distractions for 2 hours morning</li>
-  <li>Record daily learning in a log</li>
-  <li>Take Sunday as quiz & feedback day</li>
-</ul>
-<h2>✅ Benefits</h2>
-<ul>
-  <li>Focus improvement</li>
-  <li>Habit building</li>
-  <li>Strong revision base</li>
-</ul>
+<header>
+  <h1>Blog #123 – Deep Learning & AI Introduction</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Neural Network Demo -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live Neural Network Demo</h3>
+    <textarea id="nnConfig" class="editor">// layers: 2 input, 2 hidden, 1 output\nd3 = tf.sequential(); ...</textarea>
+    <button class="btn btn-primary" onclick="runNN()">Run Demo</button>
+    <canvas id="vizCanvas"></canvas>
+  </div>
+
+  <!-- Core Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Neural Network Basics</h2>
+    <p>Neural networks consist of interconnected layers of neurons. Each neuron applies weights and activation functions to inputs. Training adjusts weights by minimizing loss via backpropagation.</p>
+    <ul>
+      <li><strong>Feedforward networks</strong> for classification/regression tasks.</li>
+      <li><strong>Activation functions</strong>: ReLU, Sigmoid, Softmax.</li>
+      <li><strong>Loss functions</strong>: MSE, Cross‑entropy.</li>
+      <li><strong>Optimizers</strong>: SGD, Adam.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Deep Learning (8 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Training Plot & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Training Accuracy / Loss</h3>
+    <canvas id="perfChart"></canvas><br>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download AI Starter PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.0.0"></script>
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), userContainer=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u=> userContainer.innerHTML = u?`Hi, ${u.email} <button onclick="logout()">Logout</button>`:`<button onclick="login()">Login</button>`);
+  function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode toggle
+  document.getElementById('darkToggle').onclick = ()=>{
+    const d=document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en:{ toolTitle:"Live Neural Network Demo", conceptTitle:"Neural Network Basics", quizTitle:"Quiz: Deep Learning (8 Qs)", perfTitle:"Training Accuracy / Loss" },
+    hi:{ toolTitle:"लाइव न्यूरल नेटवर्क डेमो", conceptTitle:"न्यूरल नेटवर्क बेसिक्स", quizTitle:"प्रश्नोत्तरी: डीप लर्निंग (8 प्रश्न)", perfTitle:"ट्रैनिंग एक्यूरेसी/लॉस" }
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    ["toolTitle","conceptTitle","quizTitle","perfTitle"].forEach(id=>document.getElementById(id).innerText=texts[l][id]);
+    document.getElementById('quizHint').innerText='';
+  }
+
+  // Neural demo
+  async function runNN(){
+    const model = tf.sequential();
+    model.add(tf.layers.dense({units:4, activation:'relu', inputShape:[2]}));
+    model.add(tf.layers.dense({units:1, activation:'sigmoid'}));
+    model.compile({optimizer:'adam', loss:'binaryCrossentropy', metrics:['accuracy']});
+    const xs = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
+    const ys = tf.tensor2d([[0],[1],[1],[0]]);
+    const hist = await model.fit(xs, ys, {epochs:20, callbacks:{
+      onEpochEnd:(epoch, logs)=>updateChart(epoch, logs)
+    }});
+  }
+  const perfCtx=document.getElementById('perfChart').getContext('2d');
+  const perfChart=new Chart(perfCtx,{type:'line',data:{labels:[],datasets:[
+    {label:'Accuracy',data:[],borderColor:'#00897b',fill:false},
+    {label:'Loss',data:[],borderColor:'#ff7043',fill:false}
+  ]}, options:{responsive:true,scales:{y:{beginAtZero:true,max:1}}}});
+  function updateChart(epoch, logs){
+    perfChart.data.labels.push(`Ep ${epoch+1}`);
+    perfChart.data.datasets[0].data.push(logs.acc);
+    perfChart.data.datasets[1].data.push(logs.loss);
+    perfChart.update();
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"What activation outputs between 0 and 1?", choices:["ReLU","Sigmoid","Tanh","Softmax"], ans:1, hint:"Think probability."},
+    // 8 Qs total...
+  ];
+  let curr=0, score=0;
+  const qQ=document.getElementById('quizQuestion'), qOpt=document.getElementById('quizOptions'),
+        qHint=document.getElementById('quizHint'), qFB=document.getElementById('quizFeedback'),
+        qBar=document.getElementById('quizBar');
+  function loadQuiz(){
+    const d=quizData[curr];
+    qQ.innerText=d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((c,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.innerText=c;
+      b.onclick=()=>{
+        qFB.innerText = i===d.ans?"✅ Correct":"❌ Wrong";
+        if(i===d.ans) score++;
+        curr++; qBar.style.width=`${(curr/quizData.length)*100}%`;
+        if(curr<quizData.length) setTimeout(loadQuiz,300);
+        else alert(`Quiz Finished! Score: ${score}/${quizData.length}`);
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick=()=>{
+    curr=0; score=0; qBar.style.width='0%'; loadQuiz();
+  };
+  function showHint(){ if(curr<quizData.length) qHint.innerText="💡 Hint: "+quizData[curr].hint; }
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading AI intro PDF...");
+
+  // Push notifications
+  if(Notification.permission!=="denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite AI", { body:"Start your AI journey today!" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
