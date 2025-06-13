@@ -1,21 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #111 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Blog #111 | Dynamic Programming Demystified – EduIgnite</title>
+  <meta name="description" content="Master dynamic programming with detailed examples (Knapsack, LCS), interactive solver, quiz engine, performance charts, multilingual support, Firebase login, dark mode & more."/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Dynamic Programming Demystified",
+    "author": {"@type":"Person","name":"Ankit Saini"},
+    "publisher": {"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished": "2025-06-12",
+    "image": "https://eduignite.com/images/dp-guide.jpg",
+    "description": "Interactive guide to dynamic programming concepts like knapsack and LCS, with step-by-step solver, quiz, tracker, bilingual toggle, dark mode & more."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { margin:0;padding:0;font-family:'Segoe UI',sans-serif;transition:background .3s,color .3s;}
+    body.dark { background:#121212;color:#ddd;}
+    header, footer { background:#00695c;color:white;padding:1rem;}
+    nav a,nav button { color:white;margin:0 .4rem;text-decoration:none; }
+    .main { max-width:1000px;margin:auto;padding:1rem;}
+    .section, .tool-box, .quiz-box { margin:2rem 0;padding:1.5rem;border-radius:8px;background:#e0f2f1;}
+    .btn { padding:.7rem 1.4rem;border:none;border-radius:4px;margin:.3rem;cursor:pointer;transition:transform .2s;}
+    .btn:hover { transform:scale(1.05); }
+    .btn-primary { background:#00897b;color:white; }
+    .bookmark { cursor:pointer;font-size:1.3rem;color:#ff7043;float:right; }
+    .progress-bar { height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:10px 0;}
+    .progress-filled { height:100%;width:0;background:#00897b;transition:width .3s;}
+    canvas { max-width:100%!important;height:auto!important; }
+    input, textarea, select { width:100%;padding:.6rem;margin:.5rem 0;border:1px solid #ccc;border-radius:4px;}
+    pre, code { background:#f5f5f5;padding:.5rem;display:block;border-radius:4px; white-space:pre-wrap;}
+    table { width:100%; border-collapse:collapse;margin:1rem 0;}
+    th,td { border:1px solid #ccc; padding:.5rem; text-align:center;}
+    @media(max-width:768px){nav{display:block;text-align:center;}nav a,nav button{display:block;margin:.4rem 0;}}
+  </style>
 </head>
 <body>
-<header><h1>Blog #111: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #111 – Dynamic Programming Demystified</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Concept Explanation -->
+  <section class="section">
+    <h2 id="conceptTitle">What is Dynamic Programming?</h2>
+    <span id="bookmarkConcept" class="bookmark">☆</span>
+    <p id="conceptContent">
+      Dynamic Programming (DP) helps solve problems by breaking them into overlapping subproblems and storing results to avoid repetition.
+    </p>
+    <ul>
+      <li>Use **memoization** (top-down) or **tabulation** (bottom-up)</li>
+      <li>Examples: Knapsack, Longest Common Subsequence (LCS), Fibonacci optimization</li>
+    </ul>
+    <h3>DP Patterns</h3>
+    <table>
+      <tr><th>Problem</th><th>Type</th><th>Dimensions</th><th>Complexity</th></tr>
+      <tr><td>0/1 Knapsack</td><td>Tabulation</td><td>n×W</td><td>O(n × W)</td></tr>
+      <tr><td>Longest Common Subsequence</td><td>2D DP</td><td>len₁×len₂</td><td>O(n × m)</td></tr>
+      <tr><td>Coin Change</td><td>1D/2D</td><td>n×amount</td><td>O(n × amount)</td></tr>
+    </table>
+  </section>
+
+  <!-- Interactive DP Solver -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Knapsack Solver</h3>
+    <textarea id="weights" rows="2" placeholder="Enter weights, e.g. 2,3,4"></textarea>
+    <textarea id="values" rows="2" placeholder="Enter values, e.g. 4,5,6"></textarea>
+    <input id="capacity" type="number" placeholder="Capacity, e.g. 7" />
+    <button class="btn btn-primary" onclick="solveKnapsack()">Solve Knapsack</button>
+    <p id="knapsackResult">--</p>
+  </div>
+
+  <!-- Quiz Section -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: DP Concepts (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start to begin quiz</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br/>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Performance Tracker</h3>
+    <canvas id="perfChart"></canvas><br/>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download DP Guide (PDF)</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  const fbConfig={apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"};
+  firebase.initializeApp(fbConfig);
+  const auth=firebase.auth(), userContainer=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u=> userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ const e=prompt('Email:'),p=prompt('Password:'); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick=()=>{
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts={en:{
+    conceptTitle:"What is Dynamic Programming?",
+    toolTitle:"Knapsack Solver",
+    quizTitle:"Quiz: DP Concepts (10 Qs)",
+    perfTitle:"Performance Tracker",
+    btnPDF:"Download DP Guide (PDF)"
+  },hi:{
+    conceptTitle:"डायनामिक प्रोग्रामिंग क्या है?",
+    toolTitle:"नैपसैक सॉल्वर",
+    quizTitle:"प्रश्नोत्तरी: DP अवधारणाएँ (10 प्रश्न)",
+    perfTitle:"प्रदर्शन ट्रैकर",
+    btnPDF:"DP गाइड डाउनलोड करें (PDF)"
+  }};
+  document.getElementById('langEn').onclick=()=> setLang('en');
+  document.getElementById('langHi').onclick=()=> setLang('hi');
+  function setLang(l){
+    Object.keys(texts[l]).forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.innerText=texts[l][id];
+    });
+    document.getElementById('quizHint').innerText='';
+  }
+
+  // Bookmark toggles
+  document.getElementById('bookmarkConcept').onclick=function(){
+    this.innerText = this.innerText==='☆'?'★':'☆';
+  };
+  document.getElementById('bookmarkQuiz').onclick=function(){
+    this.innerText = this.innerText==='☆'?'★':'☆';
+  };
+
+  // Knapsack solver logic
+  function solveKnapsack(){
+    const w = document.getElementById('weights').value.split(',').map(Number);
+    const v = document.getElementById('values').value.split(',').map(Number);
+    const W = parseInt(document.getElementById('capacity').value, 10);
+    const n = w.length;
+    if (!n || w.length!==v.length || !W){ return alert('Provide valid inputs'); }
+    const dp = Array.from({length: n+1}, ()=> Array(W+1).fill(0));
+    for(let i=1;i<=n;i++){
+      for(let wt=0;wt<=W;wt++){
+        dp[i][wt] = wt<w[i-1] ? dp[i-1][wt] : Math.max(dp[i-1][wt], v[i-1] + dp[i-1][wt-w[i-1]]);
+      }
+    }
+    document.getElementById('knapsackResult').innerHTML = `
+      <strong>Max Value:</strong> ${dp[n][W]} <br/>
+      <strong>Table:</strong><br><pre>${dp.map(row=>row.join(' ')).join('\n')}</pre>`;
+  }
+
+  // Quiz logic
+  const quizData=[
+    {q:"DP reduces time via storing subproblem results",choices:["True","False"],ans:0,hint:"Memoization concept"},
+    // Add 9 more questions...
+  ];
+  let curr=0,score=0;
+  const qQ=document.getElementById('quizQuestion'),qOpt=document.getElementById('quizOptions'),
+        qHint=document.getElementById('quizHint'),qFB=document.getElementById('quizFeedback'),
+        qBar=document.getElementById('quizBar');
+  function loadQ(){
+    const d=quizData[curr];
+    qQ.innerText=d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((ch,i)=>{
+      const b=document.createElement('button');
+      b.className='btn'; b.innerText=ch;
+      b.onclick=()=>{
+        qFB.innerText = i===d.ans ? "✅ Correct!" : "❌ Incorrect.";
+        if(i===d.ans) score++;
+        curr++; qBar.style.width=`${(curr/quizData.length)*100}%`;
+        curr<quizData.length? setTimeout(loadQ,600): finishQuiz();
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick=()=>{
+    curr=0;score=0;qBar.style.width="0%"; loadQ();
+  };
+  function showHint(){ if(curr<quizData.length) qHint.innerText="💡 Hint: " + quizData[curr].hint; }
+  function finishQuiz(){ alert(`Quiz complete! Score: ${score}/${quizData.length}`); }
+
+  // Performance Tracker
+  const perfCtx=document.getElementById('perfChart').getContext('2d');
+  const perfChart=new Chart(perfCtx,{
+    type:'line',
+    data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},
+    options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick=()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+    perfChart.update(); alert("✅ Performance saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick=()=> alert("📥 DP Guide PDF downloading...");
+
+  // Push notifications
+  if(Notification.permission!=="denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite DP", { body: "Let's optimize with Dynamic Programming!" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
