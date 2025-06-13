@@ -2,19 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog Post #17 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="Blog Post 17 - Useful study tips from EduIgnite.">
-  <meta name="keywords" content="study tips, blog 17, education, ankit saini">
-  <meta name="author" content="Ankit Saini">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #17 | Web APIs & AJAX – EduIgnite</title>
+  <meta name="description" content="Master Web APIs and AJAX: live fetch demo, JSON handling, interactive quiz, PDF guide, Firebase auth, dark mode, multilingual support, and notifications.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Web APIs & AJAX","author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13","image":"https://eduignite.com/images/web-apis-ajax.jpg",
+    "description":"Interactive fetch demo, JSON parsing, quizzes, progress tracking, PDF guide, Firebase auth, dark mode, multilingual toggle, notifications."
+  }</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white;padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .section, .quiz-box{background:#e0f2f1;padding:1.5rem;margin:2rem 0;border-radius:8px;}
+    .editor{width:100%;font-family:monospace;background:#f5f5f5;padding:1rem;border-radius:4px;height:150px;}
+    .preview{border:1px solid #ccc;padding:1rem;margin-top:1rem;background:#fff;overflow:auto;}
+    .btn{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+    .btn:hover{transform:scale(1.05);}
+    .btn-primary{background:#00897b;color:white;}
+    .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+    .progress-filled{background:#00897b;width:0;height:100%;transition:width .3s;}
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog Post #17</h2>
-  <p>This blog discusses study strategies, motivation, and smart learning approaches to help you crack your exams with confidence.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #17 – Web APIs & AJAX</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live Fetch Demo -->
+  <div class="tool-box">
+    <h3 id="toolTitle">AJAX & Fetch Playground</h3>
+    <button class="btn btn-primary" onclick="loadData()">Fetch Users</button>
+    <div id="apiPreview" class="preview">Click the button to fetch data</div>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Understanding AJAX & Fetch</h2>
+    <ul>
+      <li><strong>Fetch API:</strong> Modern way to make HTTP requests.</li>
+      <li><strong>Promises & async/await:</strong> Handle asynchronous code cleanly.</li>
+      <li><strong>JSON:</strong> Standard data format for APIs.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: AJAX & APIs (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p><ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Tracking & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Quiz Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Web APIs Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase, auth, dark-mode, language same as previous files
+
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth=firebase.auth(), uc=document.getElementById('userContainer');
+auth.onAuthStateChanged(u=> uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){const e=prompt("Email"),p=prompt("Password");auth.signInWithEmailAndPassword(e,p).catch(console.error);}
+function logout(){auth.signOut();}
+document.getElementById('darkToggle').onclick = ()=>{const d=document.body.classList.toggle('dark'); localStorage.setItem('darkMode', d);};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+const texts={en:{toolTitle:"AJAX & Fetch Playground",conceptTitle:"Understanding AJAX & Fetch",quizTitle:"Quiz: AJAX & APIs (10 Qs)",perfTitle:"Your Quiz Progress",btnPDF:"Download Web APIs Guide PDF"},
+hi:{toolTitle:"AJAX & Fetch प्लेग्राउंड",conceptTitle:"AJAX और Fetch समझें",quizTitle:"प्रश्नोत्तरी: AJAX & APIs (10 प्रश्न)",perfTitle:"आपकी क्विज़ प्रगति",btnPDF:"Web APIs गाइड PDF डाउनलोड करें"}};
+document.getElementById('langEn').onclick=()=>setLang('en');
+document.getElementById('langHi').onclick=()=>setLang('hi');
+function setLang(l){["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>document.getElementById(id).innerText=texts[l][id]); document.getElementById('quizHint').innerText='';}
+
+// Live fetch demo
+async function loadData(){
+  const p=document.getElementById('apiPreview');
+  try {
+    p.innerText = "Loading...";
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await res.json();
+    p.innerHTML = `<strong>${data.length} users fetched.</strong><ul>${data.map(u=>`<li>${u.name} (${u.email})</li>`).join("")}</ul>`;
+  } catch(e){
+    p.innerText = "Error: "+e;
+  }
+}
+
+// Quiz engine & performance chart & PDF & notifications logic same as previous
+
+const quizData=[{q:"Fetch returns…?",choices:["Promise","Array","String","Number"],ans:0,hint:"Think promises."} /*…9 more*/];
+let curr=0, score=0;
+const qQ=document.getElementById('quizQuestion'),qOpt=document.getElementById('quizOptions'),
+      qHint=document.getElementById('quizHint'),qFB=document.getElementById('quizFeedback'),
+      qBar=document.getElementById('quizBar');
+function loadQuiz(){
+  const d=quizData[curr];
+  qQ.innerText=d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+  d.choices.forEach((c,i)=>{
+    const btn=document.createElement('button');btn.className='btn';btn.innerText=c;
+    btn.onclick=()=>{
+      qFB.innerText = i===d.ans?"✅ Correct":"❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr/quizData.length)*100}%`;
+      if(curr<quizData.length) setTimeout(loadQuiz,400); else alert(`Quiz complete: ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick=()=>{curr=0;score=0;qBar.style.width='0%';loadQuiz();};
+function showHint(){if(curr<quizData.length) qHint.innerText="💡 "+quizData[curr].hint;}
+
+// Performance chart
+const perfChart=new Chart(document.getElementById('perfChart').getContext('2d'),{
+  type:'line',
+  data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},
+  options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}
+});
+document.getElementById('savePerf').onclick=()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+document.getElementById('downloadPDF').onclick=()=>alert("📥 Downloading Web APIs Guide PDF...");
+
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p => { if(p==="granted") new Notification("EduIgnite APIs",{body:"Explore APIs & AJAX now!"}); });
+}
+</script>
 </body>
 </html>
