@@ -2,962 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5 Powerful Exam Hacks Top-Scoring Students Use Daily | EduIgnite</title>
-  <meta name="description" content="Discover the 5 proven daily habits and strategies that top-scoring students use to excel in competitive exams. Learn how to implement smart revision, the 90/10 rule, timer-based study, daily question practice, and digital detox to boost your exam performance.">
-  <meta name="keywords" content="exam hacks, topper tips, daily routine, study habits, exam preparation, study techniques, competitive exams, smart revision, 90/10 rule, timer-based study, digital detox">
-  <meta name="author" content="Ankit Saini">
-  <link rel="stylesheet" href="../EduIgnite/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #3 | JavaScript DOM & Event Handling – EduIgnite</title>
+  <meta name="description" content="Master JavaScript DOM manipulation & event handling: interactive DOM playground, quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, and notifications.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"JavaScript DOM & Event Handling",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13","image":"https://eduignite.com/images/js-dom-events.jpg",
+    "description":"Hands‑on JavaScript DOM manipulation & event handling: interactive UI demo, quiz, tracking, PDF, Firebase auth, dark mode, multilanguage & notifications."
+  }</script>
+  <link rel="stylesheet" href="style.css">
   <style>
-    /* Page-specific styles */
-    .blog-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .blog-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    .blog-meta {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px 0;
-      color: #666;
-      font-size: 0.9rem;
-    }
-    
-    .blog-meta > div {
-      margin: 0 15px;
-      display: flex;
-      align-items: center;
-    }
-    
-    .blog-meta i {
-      margin-right: 5px;
-      color: var(--primary-color);
-    }
-    
-    .blog-image {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .blog-intro {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #444;
-      margin-bottom: 30px;
-      padding-left: 20px;
-      border-left: 4px solid var(--primary-color);
-    }
-    
-    .hack-card {
-      background-color: white;
-      border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 30px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .hack-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    
-    .hack-number {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background-color: var(--primary-color);
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 40px;
-      font-weight: bold;
-      margin-right: 15px;
-      font-size: 1.2rem;
-    }
-    
-    .hack-title {
-      display: inline-block;
-      font-size: 1.4rem;
-      color: var(--secondary-color);
-      margin-bottom: 20px;
-    }
-    
-    .hack-description {
-      margin-left: 55px;
-      line-height: 1.7;
-      color: #555;
-    }
-    
-    .hack-benefits {
-      margin-top: 20px;
-      margin-left: 55px;
-      background-color: #f8f9fa;
-      padding: 15px;
-      border-radius: 5px;
-    }
-    
-    .hack-benefits h4 {
-      color: var(--secondary-color);
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
-    
-    .hack-benefits ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-    
-    .hack-benefits li {
-      margin-bottom: 8px;
-    }
-    
-    .implementation-steps {
-      margin-top: 20px;
-      margin-left: 55px;
-    }
-    
-    .implementation-steps h4 {
-      color: var(--secondary-color);
-      margin-bottom: 15px;
-    }
-    
-    .step {
-      display: flex;
-      margin-bottom: 15px;
-    }
-    
-    .step-number {
-      background-color: var(--secondary-color);
-      color: white;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 25px;
-      font-size: 0.9rem;
-      margin-right: 15px;
-      flex-shrink: 0;
-    }
-    
-    .step-content {
-      flex-grow: 1;
-    }
-    
-    .expert-quote {
-      background-color: #f5f9ff;
-      border-left: 4px solid var(--accent-color);
-      padding: 20px;
-      margin: 30px 0;
-      border-radius: 5px;
-      font-style: italic;
-      color: #444;
-    }
-    
-    .expert-quote cite {
-      display: block;
-      text-align: right;
-      margin-top: 10px;
-      font-style: normal;
-      font-weight: bold;
-      color: var(--secondary-color);
-    }
-    
-    .conclusion {
-      background-color: #f8f9fa;
-      padding: 25px;
-      border-radius: 8px;
-      margin: 40px 0;
-    }
-    
-    .conclusion h3 {
-      color: var(--secondary-color);
-      margin-top: 0;
-    }
-    
-    .author-section {
-      display: flex;
-      align-items: center;
-      margin: 40px 0;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    .author-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-right: 20px;
-      object-fit: cover;
-    }
-    
-    .author-bio h3 {
-      margin-top: 0;
-      color: var(--secondary-color);
-    }
-    
-    .author-bio p {
-      margin-bottom: 10px;
-      color: #555;
-    }
-    
-    .social-links a {
-      color: var(--primary-color);
-      margin-right: 15px;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-    }
-    
-    .social-links a:hover {
-      color: var(--secondary-color);
-    }
-    
-    .related-posts {
-      margin: 40px 0;
-    }
-    
-    .related-posts h3 {
-      color: var(--secondary-color);
-      margin-bottom: 20px;
-    }
-    
-    .related-posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    
-    .related-post {
-      background-color: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
-    
-    .related-post:hover {
-      transform: translateY(-5px);
-    }
-    
-    .related-post-image {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-    }
-    
-    .related-post-content {
-      padding: 15px;
-    }
-    
-    .related-post-title {
-      font-size: 1.1rem;
-      margin: 0 0 10px 0;
-      color: var(--secondary-color);
-    }
-    
-    .related-post-excerpt {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 10px;
-    }
-    
-    .read-more {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    .read-more i {
-      margin-left: 5px;
-      transition: transform 0.3s ease;
-    }
-    
-    .read-more:hover i {
-      transform: translateX(5px);
-    }
-    
-    .share-section {
-      margin: 30px 0;
-      text-align: center;
-    }
-    
-    .share-section h3 {
-      color: var(--secondary-color);
-      margin-bottom: 15px;
-    }
-    
-    .share-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-    
-    .share-button {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 15px;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: opacity 0.3s ease;
-    }
-    
-    .share-button:hover {
-      opacity: 0.9;
-    }
-    
-    .share-button i {
-      margin-right: 8px;
-    }
-    
-    .facebook {
-      background-color: #3b5998;
-    }
-    
-    .twitter {
-      background-color: #1da1f2;
-    }
-    
-    .linkedin {
-      background-color: #0077b5;
-    }
-    
-    .whatsapp {
-      background-color: #25d366;
-    }
-    
-    .comments-section {
-      margin: 40px 0;
-    }
-    
-    .comments-section h3 {
-      color: var(--secondary-color);
-      margin-bottom: 20px;
-    }
-    
-    .comment {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    
-    .comment-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .comment-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 15px;
-      object-fit: cover;
-    }
-    
-    .comment-info h4 {
-      margin: 0 0 5px 0;
-      color: var(--secondary-color);
-    }
-    
-    .comment-date {
-      font-size: 0.8rem;
-      color: #666;
-    }
-    
-    .comment-content {
-      line-height: 1.6;
-      color: #444;
-    }
-    
-    .comment-actions {
-      margin-top: 10px;
-      display: flex;
-      gap: 15px;
-    }
-    
-    .comment-action {
-      font-size: 0.9rem;
-      color: #666;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      transition: color 0.3s ease;
-    }
-    
-    .comment-action:hover {
-      color: var(--primary-color);
-    }
-    
-    .comment-action i {
-      margin-right: 5px;
-    }
-    
-    .comment-form {
-      background-color: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    .comment-form h4 {
-      color: var(--secondary-color);
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #444;
-      font-weight: bold;
-    }
-    
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 10px 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary-color);
-    }
-    
-    .form-group textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-    
-    .submit-button {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .submit-button:hover {
-      background-color: var(--secondary-color);
-    }
-    
-    @media (max-width: 768px) {
-      .blog-meta {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .blog-meta > div {
-        margin: 5px 0;
-      }
-      
-      .hack-title {
-        display: block;
-        margin-top: 10px;
-      }
-      
-      .hack-description, .hack-benefits, .implementation-steps {
-        margin-left: 0;
-      }
-      
-      .author-section {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .author-image {
-        margin-right: 0;
-        margin-bottom: 15px;
-      }
-      
-      .related-posts-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .share-buttons {
-        flex-wrap: wrap;
-      }
-    }
+    body,button,input,textarea { font-family:'Segoe UI', sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white;padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .section, .quiz-box { background:#e0f2f1;padding:1.5rem;margin:2rem 0;border-radius:8px; }
+    .editor { width:100%;font-family:monospace;background:#f5f5f5;padding:1rem;border-radius:4px;height:140px; }
+    .preview { background:#fff;border:1px solid #ccc;padding:1rem;min-height:80px;overflow:auto; }
+    .btn{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+    .btn-primary{background:#00897b;color:white;}
+    .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+    .progress-filled{background:#00897b;width:0;height:100%;transition:width .3s;}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo-container">
-      <h1>EduIgnite</h1>
-      <p class="tagline">Learn Smart. Rise Faster.</p>
-    </div>
-    <div class="search-container">
-      <form action="#" method="get" id="search-form">
-        <input type="text" placeholder="Search topics..." name="search" id="search-input">
-        <button type="submit"><i class="fas fa-search"></i></button>
-      </form>
-    </div>
-  </header>
-  
+<header>
+  <h1>Blog #3 – JavaScript DOM & Events</h1>
   <nav>
-    <div class="menu-toggle">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-      <li><a href="../EduIgnite/index.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="../EduIgnite/programming.html"><i class="fas fa-code"></i> Programming</a></li>
-      <li><a href="../EduIgnite/aptitude.html"><i class="fas fa-brain"></i> Aptitude</a></li>
-      <li><a href="../EduIgnite/current-affairs.html"><i class="fas fa-newspaper"></i> Current Affairs</a></li>
-      <li><a href="../EduIgnite/blog.html" class="active"><i class="fas fa-book-reader"></i> Study Blog</a></li>
-      <li><a href="../EduIgnite/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-    </ul>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
   </nav>
-  
-  <main>
-    <div class="blog-content">
-      <div class="blog-header">
-        <h1>5 Powerful Exam Hacks Top-Scoring Students Use Daily</h1>
-        <div class="blog-meta">
-          <div><i class="far fa-calendar"></i> June 15, 2025</div>
-          <div><i class="far fa-user"></i> Ankit Saini</div>
-          <div><i class="far fa-clock"></i> 8 min read</div>
-          <div><i class="far fa-comment"></i> 42 Comments</div>
-        </div>
-      </div>
-      
-      <img src="https://source.unsplash.com/random/1200x600/?study" alt="Student studying effectively" class="blog-image">
-      
-      <p class="blog-intro">
-        Have you ever wondered what sets top-scoring students apart from the rest? It's not just intelligence or luck – it's their consistent daily habits and strategic approach to studying. After interviewing hundreds of toppers from various competitive exams, we've identified five powerful exam hacks that consistently appear in their daily routines. Implementing these strategies can transform your study effectiveness and exam performance.
-      </p>
-      
-      <div class="hack-card">
-        <span class="hack-number">1</span>
-        <h3 class="hack-title">Smart Revision Strategy</h3>
-        <p class="hack-description">
-          Top performers don't revise randomly. They strategically focus on their weakest topics during the morning hours when their brain is fresh and cognitive abilities are at their peak. This approach ensures that the most challenging material receives attention when you're most capable of processing and retaining it.
-        </p>
-        <div class="hack-benefits">
-          <h4>Benefits:</h4>
-          <ul>
-            <li>Maximizes retention of difficult concepts</li>
-            <li>Builds confidence by tackling weaknesses head-on</li>
-            <li>Creates a balanced knowledge base across all subjects</li>
-            <li>Reduces exam anxiety related to weak areas</li>
-          </ul>
-        </div>
-        <div class="implementation-steps">
-          <h4>How to Implement:</h4>
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">Identify your 3-5 weakest topics or concepts through practice tests or self-assessment.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">Schedule a dedicated 60-90 minute morning session (ideally between 6-10 AM) specifically for these topics.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">Use active recall techniques rather than passive reading – solve problems, create mind maps, or teach the concept to yourself.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">Track your progress weekly and adjust your weak topics list as you improve.</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="hack-card">
-        <span class="hack-number">2</span>
-        <h3 class="hack-title">The 90/10 Rule</h3>
-        <p class="hack-description">
-          This powerful principle involves dedicating 90% of your study effort to the 10% most important or high-yield chapters. Top students understand that not all content is equally important for exams. By analyzing previous year papers and exam patterns, they identify the most frequently tested topics and concentrate their energy there.
-        </p>
-        <div class="hack-benefits">
-          <h4>Benefits:</h4>
-          <ul>
-            <li>Maximizes return on time invested</li>
-            <li>Ensures mastery of high-probability exam content</li>
-            <li>Reduces overwhelm from trying to cover everything equally</li>
-            <li>Creates a strategic advantage in time-limited exams</li>
-          </ul>
-        </div>
-        <div class="implementation-steps">
-          <h4>How to Implement:</h4>
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">Analyze at least 5 years of previous exam papers to identify recurring topics and question patterns.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">Create a priority list ranking chapters/topics by their frequency in exams and mark allocation.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">Allocate 90% of your study time to the top 10% of topics on your priority list.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">For the remaining topics, create concise summary notes for quick revision rather than deep study.</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="expert-quote">
-        "The difference between average students and toppers isn't how many hours they study, but how strategically they allocate those hours. The 90/10 rule is perhaps the most powerful study principle I've observed across thousands of successful students."
-        <cite>— Dr. Rajesh Kumar, Educational Psychologist</cite>
-      </div>
-      
-      <div class="hack-card">
-        <span class="hack-number">3</span>
-        <h3 class="hack-title">Timer-Based Study Sessions</h3>
-        <p class="hack-description">
-          Top performers rarely study in unstructured, marathon sessions. Instead, they use timed intervals – typically 25-minute focused study blocks followed by 5-minute breaks (similar to the Pomodoro Technique). This approach maintains peak concentration and prevents the diminishing returns that come with extended study periods.
-        </p>
-        <div class="hack-benefits">
-          <h4>Benefits:</h4>
-          <ul>
-            <li>Maintains high focus and prevents mental fatigue</li>
-            <li>Creates a sense of urgency that improves concentration</li>
-            <li>Makes large study tasks feel more manageable</li>
-            <li>Trains your brain for the time-pressure of actual exams</li>
-            <li>Reduces procrastination by committing to short, defined periods</li>
-          </ul>
-        </div>
-        <div class="implementation-steps">
-          <h4>How to Implement:</h4>
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">Set a timer for 25 minutes and commit to studying with complete focus during this period.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">Remove all distractions – put your phone in another room, close unnecessary browser tabs, and inform others not to disturb you.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">When the timer rings, take a 5-minute break – stand up, stretch, or get some water, but avoid digital distractions.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">After completing four 25-minute sessions, take a longer 15-30 minute break.</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="hack-card">
-        <span class="hack-number">4</span>
-        <h3 class="hack-title">Daily Question Practice</h3>
-        <p class="hack-description">
-          Consistent daily practice of 10-20 questions per subject is a non-negotiable habit for top students. They understand that passive reading creates an illusion of knowledge, while active problem-solving reveals true understanding and reinforces learning pathways in the brain.
-        </p>
-        <div class="hack-benefits">
-          <h4>Benefits:</h4>
-          <ul>
-            <li>Builds practical application skills rather than theoretical knowledge alone</li>
-            <li>Identifies knowledge gaps that wouldn't be apparent through reading</li>
-            <li>Improves speed and accuracy under exam conditions</li>
-            <li>Reduces exam anxiety through familiarity with question formats</li>
-            <li>Reinforces concepts through active recall</li>
-          </ul>
-        </div>
-        <div class="implementation-steps">
-          <h4>How to Implement:</h4>
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">Create a question bank from previous papers, textbooks, and online resources for each subject.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">Set aside a specific time each day dedicated solely to solving problems (not reading or revising).</div>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">Time yourself to simulate exam conditions – aim to solve questions within the time you'd have in the actual exam.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">Review incorrect answers thoroughly and maintain an "error log" to track and revisit your mistakes.</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="hack-card">
-        <span class="hack-number">5</span>
-        <h3 class="hack-title">Digital Detox During Study Hours</h3>
-        <p class="hack-description">
-          Perhaps the most challenging yet transformative habit of top students is their strict digital discipline. They maintain zero phone contact during their primary study hours, recognizing that even brief digital interruptions can derail deep focus and significantly reduce learning efficiency.
-        </p>
-        <div class="hack-benefits">
-          <h4>Benefits:</h4>
-          <ul>
-            <li>Eliminates the most common source of distraction and procrastination</li>
-            <li>Enables deep focus and flow state that enhances learning</li>
-            <li>Prevents the cognitive switching penalty that occurs with multitasking</li>
-            <li>Reduces stress by limiting information overload and social media comparison</li>
-            <li>Improves overall study quality rather than just quantity</li>
-          </ul>
-        </div>
-        <div class="implementation-steps">
-          <h4>How to Implement:</h4>
-          <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">Identify your 3-4 hour "peak productivity window" when you'll implement a complete digital detox.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">Place your phone in another room or use apps that block distracting applications for set periods.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">Inform friends and family about your unavailability during these hours to manage expectations.</div>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">Schedule specific times to check messages and social media outside your study blocks to reduce FOMO (fear of missing out).</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="conclusion">
-        <h3>Putting It All Together</h3>
-        <p>The power of these five exam hacks lies not just in implementing them individually, but in combining them into a cohesive daily routine. Start by incorporating one hack at a time until it becomes habitual, then add another. Within 30 days of consistent practice, you'll likely notice significant improvements in your focus, retention, and overall exam readiness.</p>
-        <p>Remember that top students aren't born – they're made through consistent, strategic habits. The difference between average results and exceptional performance often comes down to these seemingly small daily practices that compound over time.</p>
-        <p>Which of these five hacks will you implement first? The sooner you start, the sooner you'll see results.</p>
-      </div>
-      
-      <div class="author-section">
-        <img src="https://source.unsplash.com/random/200x200/?portrait" alt="Ankit Saini" class="author-image">
-        <div class="author-bio">
-          <h3>About the Author</h3>
-          <p>Ankit Saini is an educational consultant and former topper of multiple competitive exams. He has spent the last decade studying the habits and strategies of high-performing students and helping thousands of students improve their academic performance.</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fas fa-globe"></i></a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="share-section">
-        <h3>Share this Article</h3>
-        <div class="share-buttons">
-          <a href="#" class="share-button facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-          <a href="#" class="share-button twitter"><i class="fab fa-twitter"></i> Twitter</a>
-          <a href="#" class="share-button linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-          <a href="#" class="share-button whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        </div>
-      </div>
-      
-      <div class="related-posts">
-        <h3>Related Articles You Might Enjoy</h3>
-        <div class="related-posts-grid">
-          <div class="related-post">
-            <img src="https://source.unsplash.com/random/400x200/?memory" alt="Memory Techniques" class="related-post-image">
-            <div class="related-post-content">
-              <h4 class="related-post-title">7 Memory Techniques That Actually Work for Students</h4>
-              <p class="related-post-excerpt">Discover scientifically-proven methods to enhance your memory and retention for exams.</p>
-              <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-          
-          <div class="related-post">
-            <img src="https://source.unsplash.com/random/400x200/?notes" alt="Note Taking" class="related-post-image">
-            <div class="related-post-content">
-              <h4 class="related-post-title">The Art of Effective Note-Taking</h4>
-              <p class="related-post-excerpt">Learn how to take notes that actually help you learn, not just document information.</p>
-              <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-          
-          <div class="related-post">
-            <img src="https://source.unsplash.com/random/400x200/?stress" alt="Exam Stress" class="related-post-image">
-            <div class="related-post-content">
-              <h4 class="related-post-title">Managing Exam Stress: A Comprehensive Guide</h4>
-              <p class="related-post-excerpt">Practical strategies to stay calm and focused during high-pressure exam situations.</p>
-              <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="comments-section">
-        <h3>Comments (42)</h3>
-        
-        <div class="comment">
-          <div class="comment-header">
-            <img src="https://source.unsplash.com/random/100x100/?person" alt="Priya Sharma" class="comment-avatar">
-            <div class="comment-info">
-              <h4>Priya Sharma</h4>
-              <span class="comment-date">June 16, 2025 at 10:23 AM</span>
-            </div>
-          </div>
-          <div class="comment-content">
-            <p>The 90/10 rule completely changed my approach to studying for my engineering entrance exams. I was trying to cover everything equally and getting nowhere. Once I focused on the high-yield topics, my mock test scores improved dramatically. Thanks for sharing these insights!</p>
-          </div>
-          <div class="comment-actions">
-            <a href="#" class="comment-action"><i class="far fa-thumbs-up"></i> Like (15)</a>
-            <a href="#" class="comment-action"><i class="far fa-comment"></i> Reply</a>
-          </div>
-        </div>
-        
-        <div class="comment">
-          <div class="comment-header">
-            <img src="https://source.unsplash.com/random/100x100/?man" alt="Rahul Verma" class="comment-avatar">
-            <div class="comment-info">
-              <h4>Rahul Verma</h4>
-              <span class="comment-date">June 15, 2025 at 8:45 PM</span>
-            </div>
-          </div>
-          <div class="comment-content">
-            <p>I've been implementing the timer-based study technique for the past month, and it's been a game-changer. I used to study for hours but realized I wasn't really focused most of the time. Breaking it down into 25-minute sessions has helped me maintain concentration and actually get more done in less time.</p>
-          </div>
-          <div class="comment-actions">
-            <a href="#" class="comment-action"><i class="far fa-thumbs-up"></i> Like (8)</a>
-            <a href="#" class="comment-action"><i class="far fa-comment"></i> Reply</a>
-          </div>
-        </div>
-        
-        <div class="comment-form">
-          <h4>Leave a Comment</h4>
-          <form>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-              <label for="comment">Comment</label>
-              <textarea id="comment" required></textarea>
-            </div>
-            <button type="submit" class="submit-button">Post Comment</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    
-    <section class="newsletter">
-      <h2>Get More Study Tips</h2>
-      <p>Subscribe to our newsletter for weekly exam hacks, study techniques, and motivation delivered straight to your inbox.</p>
-      <form id="newsletter-form" class="newsletter-form">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
-      </form>
-      <p class="form-message"></p>
-    </section>
-  </main>
-  
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section about">
-        <h3>About EduIgnite</h3>
-        <p>EduIgnite is your comprehensive learning platform designed to help students excel in programming, aptitude, and competitive exams.</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-      </div>
-      
-      <div class="footer-section links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="../EduIgnite/index.html">Home</a></li>
-          <li><a href="../EduIgnite/programming.html">Programming</a></li>
-          <li><a href="../EduIgnite/aptitude.html">Aptitude</a></li>
-          <li><a href="../EduIgnite/current-affairs.html">Current Affairs</a></li>
-          <li><a href="../EduIgnite/blog.html">Study Blog</a></li>
-          <li><a href="../EduIgnite/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section contact">
-        <h3>Contact Us</h3>
-        <p><i class="fas fa-envelope"></i> contact@eduignite.com</p>
-        <p><i class="fas fa-phone"></i> +91 9876543210</p>
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      &copy; 2025 EduIgnite | Designed with <i class="fas fa-heart"></i> by Ankit Saini | All Rights Reserved
-    </div>
-  </footer>
-  
-  <script>
-    // Toggle mobile menu
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-      document.querySelector('.nav-links').classList.toggle('active');
-    });
-    
-    // Newsletter form submission
-    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('input[type="email"]').value;
-      const messageElement = document.querySelector('.form-message');
-      
-      // Simple validation
-      if (email) {
-        // In a real application, you would send this to your server
-        messageElement.textContent = 'Thank you for subscribing!';
-        messageElement.style.color = 'green';
-        this.reset();
-        
-        // Hide the message after 3 seconds
-        setTimeout(() => {
-          messageElement.textContent = '';
-        }, 3000);
-      }
-    });
-    
-    // Comment form submission
-    document.querySelector('.comment-form form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for your comment! It will appear after moderation.');
-      this.reset();
-    });
-    
-    // Search functionality
-    document.getElementById('search-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const searchTerm = document.getElementById('search-input').value.toLowerCase();
-      
-      if (searchTerm) {
-        // In a real application, you would implement proper search functionality
-        alert('Searching for: ' + searchTerm);
-        // You could redirect to a search results page
-        // window.location.href = 'search-results.html?q=' + encodeURIComponent(searchTerm);
-      }
-    });
-  </script>
+</header>
+
+<div class="main">
+  <!-- Live DOM Playground -->
+  <div class="tool-box">
+    <h3 id="toolTitle">DOM Playground</h3>
+    <button id="addBtn" class="btn btn-primary">Add Item</button>
+    <ul id="list" class="preview"></ul>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">DOM Manipulation & Event Handling</h2>
+    <ul>
+      <li><strong>Document Object Model (DOM):</strong> HTML represented as a tree of JS objects.</li>
+      <li><strong>addEventListener:</strong> Attach events like click, input, keydown, etc.</li>
+      <li><strong>createElement & appendChild:</strong> Dynamic content creation and insertion.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: DOM & Events (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p><ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Track Your Performance</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download DOM & Events PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u => {
+  uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`;
+});
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const dark = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', dark);
+};
+if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: {toolTitle:"DOM Playground",conceptTitle:"DOM Manipulation & Event Handling",quizTitle:"Quiz: DOM & Events (10 Qs)",perfTitle:"Track Your Performance",btnPDF:"Download DOM & Events PDF"},
+  hi: {toolTitle:"DOM प्लेग्राउंड",conceptTitle:"DOM मैनिपुलेशन & इवेंट हैंडलिंग",quizTitle:"प्रश्नोत्तरी: DOM & इवेंट (10 प्रश्न)",perfTitle:"आपका प्रदर्शन",btnPDF:"DOM & इवेंट PDF डाउनलोड करें"}
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l) {
+  ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Live DOM Demo
+let counter=0;
+document.getElementById('addBtn').addEventListener('click', () => {
+  const li = document.createElement('li');
+  li.textContent = `List Item ${++counter}`;
+  li.addEventListener('click', () => alert(li.textContent));
+  document.getElementById('list').appendChild(li);
+});
+
+// Quiz Logic
+const quizData = [
+  {q:"Which method adds an event listener?",choices:["addEventListener()","onClick()","listenEvent()","addListener()"],ans:0,hint:"Starts with 'add'."},
+  // ...add 9 more questions
+];
+let curr=0, score=0;
+// Quiz refs
+const qQ = document.getElementById('quizQuestion'),
+      qOpt = document.getElementById('quizOptions'),
+      qHint = document.getElementById('quizHint'),
+      qFB = document.getElementById('quizFeedback'),
+      qBar = document.getElementById('quizBar');
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+  d.choices.forEach((c,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.innerText = c;
+    btn.onclick = () => {
+      qFB.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr/quizData.length)*100}%`;
+      if(curr<quizData.length) setTimeout(loadQuiz,400);
+      else alert(`Well done! You scored ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick = () => {curr=0;score=0;qBar.style.width='0%';loadQuiz();};
+function showHint(){ if(curr<quizData.length) qHint.innerText = "💡 " + quizData[curr].hint; }
+
+// Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx, { type:'line', data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]}, options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}} });
+document.getElementById('savePerf').onclick = ()=> {
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF download
+document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading DOM & Events Guide PDF...");
+
+// Notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p => {
+    if(p === "granted"){
+      new Notification("EduIgnite DOM", { body:"Practice DOM & Events now!" });
+    }
+  });
+}
+</script>
 </body>
 </html>
