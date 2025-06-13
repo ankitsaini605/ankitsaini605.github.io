@@ -1,21 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #121 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #121 | Responsive CSS Mastery – EduIgnite</title>
+  <meta name="description" content="Learn modern responsive CSS: Flexbox, Grid, CSS Variables, dark/light themes, interactive demos, live editor, quizzes, performance tracker, PDF download, Firebase auth, multilingual toggle, push notifications."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Responsive CSS Mastery",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13",
+    "image":"https://eduignite.com/images/css-mastery.jpg",
+    "description":"Hands-on responsive CSS with Flexbox, Grid, CSS Variables, live demos, interactive quizzes, PDF guide, dark mode, multilingual, Firebase login, notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .section, .tool-box, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .btn { padding:.7rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition: transform .2s; }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .bookmark { float:right; font-size:1.4rem; cursor:pointer; color:#ff7043; }
+    .editor, #perfChart { width:100%; }
+    .editor { font-family:monospace; background:#f5f5f5; padding:1rem; border-radius:4px; height:200px; }
+    @media(max-width:768px){ nav{display:block;text-align:center;} nav a,nav button{display:block;margin:.4rem 0;} }
+  </style>
 </head>
 <body>
-<header><h1>Blog #121: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #121 – Responsive CSS Mastery</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live CSS Editor -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live CSS Playground</h3>
+    <textarea id="cssEditor" class="editor">
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+.box { background:#00897b; padding:1rem; color:white; text-align:center; border-radius:4px; }
+    </textarea>
+    <button class="btn btn-primary" onclick="runCSS()">Render</button>
+    <iframe id="cssPreview" style="width:100%;height:200px;border:1px solid #ccc;margin-top:1rem;"></iframe>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Flexbox & Grid Rules</h2>
+    <ul>
+      <li><strong>Flexbox:</strong> great for 1D layouts (nav bars, menus).</li>
+      <li><strong>Grid:</strong> ideal for 2D grid systems (dashboards, galleries).</li>
+      <li><strong>Variables:</strong> <code>--main-color</code> for theme management.</li>
+      <li>Combine them for responsive UIs that adapt across devices.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: CSS Concepts (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your CSS Scores</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download CSS Mastery PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), userContainer=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u=> userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ const e=prompt("Email"),p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode toggle
+  document.getElementById('darkToggle').onclick=()=>{
+    const d=document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode',d);
+  };
+  if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en: { toolTitle:"Live CSS Playground", conceptTitle:"Flexbox & Grid Rules", quizTitle:"Quiz: CSS Concepts (10 Qs)", perfTitle:"Your CSS Scores", btnPDF:"Download CSS Mastery PDF" },
+    hi: { toolTitle:"लाइव CSS प्लेग्राउंड", conceptTitle:"फ्लेक्सबॉक्स और ग्रिड नियम", quizTitle:"प्रश्नोत्तरी: CSS अवधारणाएँ (10 प्रश्न)", perfTitle:"आपके CSS स्कोर", btnPDF:"CSS मास्टरी PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick=()=>setLang('en');
+  document.getElementById('langHi').onclick=()=>setLang('hi');
+  function setLang(l){
+    ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>document.getElementById(id).innerText=texts[l][id]);
+    document.getElementById('quizHint').innerText='';
+  }
+
+  // Live CSS runner
+  function runCSS(){
+    const css = document.getElementById('cssEditor').value;
+    const iframe = document.getElementById('cssPreview');
+    iframe.contentDocument.body.innerHTML = '<div class="container"><div class="box">A</div><div class="box">B</div><div class="box">C</div></div>';
+    const style = iframe.contentDocument.createElement('style');
+    style.innerText = css;
+    iframe.contentDocument.head.appendChild(style);
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"Which property defines grid columns?", choices:["grid-cols","grid-template-columns","columns","col-width"], ans:1, hint:"Use template pattern."},
+    // ... add 10 total
+  ];
+  let curr=0,score=0;
+  const qQ=document.getElementById('quizQuestion'),
+        qOpt=document.getElementById('quizOptions'),
+        qHint=document.getElementById('quizHint'),
+        qFB=document.getElementById('quizFeedback'),
+        qBar=document.getElementById('quizBar');
+  function loadQuiz(){
+    const d=quizData[curr];
+    qQ.innerText=d.q;
+    qOpt.innerHTML='';
+    d.choices.forEach((c,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.innerText=c;
+      b.onclick=()=>{
+        qFB.innerText = i===d.ans?"✅ Correct":"❌ Wrong";
+        if(i===d.ans) score++;
+        curr++;
+        qBar.style.width=`${(curr/quizData.length)*100}%`;
+        curr<quizData.length?setTimeout(loadQuiz,400):alert(`Finished! Score: ${score}/${quizData.length}`);
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick=()=>{
+    curr=0;score=0;qBar.style.width='0%';loadQuiz();
+  };
+  function showHint(){ if(curr<quizData.length)qHint.innerText="💡 Hint: "+quizData[curr].hint; }
+
+  // Performance Tracker
+  const perfCtx=document.getElementById('perfChart').getContext('2d');
+  const perfChart=new Chart(perfCtx,{
+    type:'line',
+    data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},
+    options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick=()=>{
+    perfChart.data.labels.push(`Run #${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF guide
+  document.getElementById('downloadPDF').onclick=()=>alert("📥 Downloading CSS Mastery PDF...");
+
+  // Push notifications
+  if(Notification.permission!=="denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite CSS", {body:"Master responsive layouts today!"});
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
