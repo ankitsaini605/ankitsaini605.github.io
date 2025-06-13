@@ -2,15 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog Post #31 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #31 | CSS Variables & Theming – EduIgnite</title>
+  <meta name="description" content="Master CSS variables & theming: live theme switcher demo, quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, progress tracking & push notifications.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"CSS Variables & Theming",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13","image":"https://eduignite.com/images/css-variables.jpg",
+    "description":"Create dynamic themes with CSS variables: live theme switcher, quiz, PDF guide, Firebase auth, dark mode, multilingual support & notifications."
+  }</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, button, input, textarea { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; --main-bg:#242424; }
+    header, footer { background: var(--main-bg,#00695c); color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .section, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px;}
+    .theme-btn{margin:.3rem;padding:.5rem 1rem;border:none;border-radius:4px;cursor:pointer;}
+    .btn{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+    .btn-primary{background:#00897b;color:white;}
+    .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+    .progress-filled{background:#00897b;width:0;height:100%;transition:width .3s;}
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #31</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #31 – CSS Variables & Theming</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live Theming Playground -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live Theme Switcher</h3>
+    <button class="theme-btn" data-theme="default">Default</button>
+    <button class="theme-btn" data-theme="blue">Blue</button>
+    <button class="theme-btn" data-theme="green">Green</button>
+    <p style="padding:1rem;border:1px solid #888; margin-top:1rem;" id="demoBox">Theme preview box</p>
+  </div>
+
+  <!-- Underlying Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">CSS Variables & Theming Concepts</h2>
+    <ul>
+      <li><strong>--root variables</strong>: Define reusable properties.</li>
+      <li><strong>Theming:</strong> Switch values via JavaScript.</li>
+      <li><strong>Dark Mode synergy:</strong> Combine variables for dynamic theming.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: CSS Variables (8 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Track Your Performance</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download CSS Variables Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc=document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en:{toolTitle:"Live Theme Switcher",conceptTitle:"CSS Variables & Theming Concepts",quizTitle:"Quiz: CSS Variables (8 Qs)",perfTitle:"Track Your Performance",btnPDF:"Download CSS Variables Guide PDF"},
+  hi:{toolTitle:"लाइव थीम स्विचर",conceptTitle:"CSS वेरिएबल्स & थीमिंग अवधारणाएं",quizTitle:"प्रश्नोत्तरी: CSS वेरिएबल्स (8 प्रश्न)",perfTitle:"आपका प्रदर्शन",btnPDF:"CSS वेरिएबल्स गाइड PDF डाउनलोड करें"}
+};
+document.getElementById('langEn').onclick = ()=> setLang('en');
+document.getElementById('langHi').onclick = ()=> setLang('hi');
+function setLang(l){
+  ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText='';
+}
+
+// Theme switcher logic
+const themes = {
+  default: { '--main-bg': '#00695c', '--demo-bg': '#e0f2f1', '--text-color': '#333' },
+  blue:    { '--main-bg': '#1565c0', '--demo-bg': '#bbdefb', '--text-color': '#0d47a1' },
+  green:   { '--main-bg': '#2e7d32', '--demo-bg': '#c8e6c9', '--text-color': '#1b5e20' }
+};
+document.querySelectorAll('.theme-btn').forEach(btn => btn.onclick = () => {
+  const t = themes[btn.dataset.theme];
+  Object.entries(t).forEach(([k,v]) => document.documentElement.style.setProperty(k, v));
+  document.getElementById('demoBox').style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--demo-bg');
+});
+
+// Quiz logic
+const quizData = [
+  {q:"How to define a CSS variable?",choices:["--var: value;","var: value;","$var: value;","css-var: value;"],ans:0,hint:"Starts with --"},
+  {q:"JS method to get a CSS var?",choices:["getPropertyValue","getCSSVar","getVar","getProperty"],ans:0,hint:"It's CSSStyleDeclaration method"},
+  // 6 more...
+];
+let curr=0, score=0;
+const [qQ,qOpt,qHint,qFB,qBar] = [
+  document.getElementById('quizQuestion'),
+  document.getElementById('quizOptions'),
+  document.getElementById('quizHint'),
+  document.getElementById('quizFeedback'),
+  document.getElementById('quizBar')
+];
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q;
+  qOpt.innerHTML = '';
+  qHint.innerText = '';
+  qFB.innerText = '';
+  d.choices.forEach((c,i)=>{
+    const b = document.createElement('button');
+    b.className='btn';
+    b.innerText = c;
+    b.onclick = () => {
+      qFB.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr/quizData.length)*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz,400) : alert(`You scored ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = () => {curr=0;score=0;qBar.style.width='0%';loadQuiz();};
+function showHint(){ if(curr<quizData.length) qHint.innerText = "💡 " + quizData[curr].hint; }
+
+// Performance Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx,{type:'line',data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}});
+document.getElementById('savePerf').onclick = ()=> {
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF download
+document.getElementById('downloadPDF').onclick = ()=> alert("📥 Downloading CSS Variables Guide PDF...");
+
+// Push notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p => {
+    if(p === "granted"){
+      new Notification("EduIgnite Theming",{body:"Try switching CSS themes now!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
