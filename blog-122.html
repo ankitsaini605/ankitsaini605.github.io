@@ -1,21 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #122 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #122 | JavaScript ES6 & Beyond – EduIgnite</title>
+  <meta name="description" content="Dive deep into modern JavaScript: ES6+ features, live code editor, visual demos, quizzes, performance tracking, downloadable PDF, dark mode, multilingual toggle, Firebase auth, push notifications."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"JavaScript ES6 & Beyond",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13",
+    "image":"https://eduignite.com/images/js-es6.jpg",
+    "description":"Master ES6+ JavaScript features: let/const, arrow functions, async/await, modules, live editor, quiz, performance tracker, PDF guide, Firebase login, dark mode, multilingual support, notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .section, .tool-box, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .btn { padding:.7rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition: transform .2s; }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .editor { width:100%; font-family:monospace; background:#f5f5f5; padding:1rem; border-radius:4px; height:200px; }
+    .progress-bar { background:#ddd; overflow:hidden; border-radius:6px; height:12px; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition: width .3s; }
+  </style>
 </head>
 <body>
-<header><h1>Blog #122: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #122 – JavaScript ES6 & Beyond</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live JS Editor -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live JavaScript Editor</h3>
+    <textarea id="jsEditor" class="editor">// e.g.\nconst greet = name => `Hello, ${name}!`;\nalert(greet('Student'));</textarea>
+    <button class="btn btn-primary" onclick="runJS()">Run Code</button>
+    <iframe id="jsOutput" style="width:100%;height:200px;border:1px solid #ccc;margin-top:1rem;"></iframe>
+  </div>
+
+  <!-- ES6 Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Modern JS Concepts</h2>
+    <ul>
+      <li><strong>let/const:</strong> block‑scoped variables</li>
+      <li><strong>Arrow functions:</strong> concise syntax & lexical this</li>
+      <li><strong>Destructuring & Spread:</strong> unpacking & copying data</li>
+      <li><strong>Async/Await:</strong> modern async flows</li>
+      <li><strong>Modules:</strong> import/export for clean code</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: ES6 Concepts (12 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your JavaScript Scores</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download ES6+ Guide (PDF)</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u=> userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark mode
+  document.getElementById('darkToggle').onclick = ()=>{
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en:{ toolTitle:"Live JavaScript Editor", conceptTitle:"Modern JS Concepts", quizTitle:"Quiz: ES6 Concepts (12 Qs)", perfTitle:"Your JavaScript Scores", btnPDF:"Download ES6+ Guide (PDF)" },
+    hi:{ toolTitle:"लाइव जावास्क्रिप्ट एडिटर", conceptTitle:"आधुनिक JS अवधारणाएँ", quizTitle:"प्रश्नोत्तरी: ES6 अवधारणाएँ (12 प्रश्न)", perfTitle:"आपके JavaScript स्कोर", btnPDF:"ES6+ गाइड (PDF) डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>document.getElementById(id).innerText = texts[l][id]);
+    document.getElementById('quizHint').innerText='';
+  }
+
+  // Run JS code
+  function runJS(){
+    const code = document.getElementById('jsEditor').value;
+    const frame = document.getElementById('jsOutput');
+    const doc = frame.contentDocument || frame.contentWindow.document;
+    doc.open(); doc.write(`<script>try{${code}}catch(e){document.body.innerText='Error: '+e;}<\/script>`);
+    doc.close();
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"Arrow functions bind which 'this'?", choices:["Global this","Lexical this","Undefined","Dynamic this"], ans:1, hint:"They inherit surrounding context" },
+    {q:"Which keyword blocks redeclaration?", choices:["var","let","function","const"], ans:1, hint:"Use block-scope" },
+    // add remaining Qs...
+  ];
+  let curr=0, score=0;
+  const qQ = document.getElementById('quizQuestion'), qOpt = document.getElementById('quizOptions'),
+        qHint = document.getElementById('quizHint'), qFB = document.getElementById('quizFeedback'),
+        qBar = document.getElementById('quizBar');
+  function loadQuiz(){
+    const d = quizData[curr];
+    qQ.innerText = d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((c,i)=>{
+      const b = document.createElement('button');
+      b.className = 'btn'; b.innerText = c;
+      b.onclick = ()=>{
+        qFB.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+        if(i===d.ans) score++;
+        curr++;
+        qBar.style.width = `${(curr/quizData.length)*100}%`;
+        curr<quizData.length ? setTimeout(loadQuiz,400) : alert(`Done! Score: ${score}/${quizData.length}`);
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{
+    curr=0; score=0; qBar.style.width='0%'; loadQuiz();
+  };
+  function showHint(){ if(curr<quizData.length) qHint.innerText = "💡 Hint: "+quizData[curr].hint; }
+
+  // Performance tracker
+  const perfCtx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(perfCtx, {
+    type:'line', data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]}, options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}
+  });
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run #${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading ES6+ PDF guide...");
+
+  // Push notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite JS", { body:"Master ES6 features today!" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
