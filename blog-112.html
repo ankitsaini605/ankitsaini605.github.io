@@ -1,21 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #112 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Blog #112 | System Design Essentials – EduIgnite</title>
+  <meta name="description" content="Learn system design fundamentals — scalability, API design, real-time messaging, interactive diagram builder, quizzes, performance tracker, Firebase auth, dark mode, multilingual toggle & more."/>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"System Design Essentials",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-12",
+    "image":"https://eduignite.com/images/system-design.jpg",
+    "description":"Interactive guide to system design — learn scalability, API design, real-time messaging; build diagrams, quizzes, track progress, PDF download, dark mode, Firebase auth, multilingual."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {margin:0;padding:0;font-family:'Segoe UI',sans-serif;transition:background .3s,color .3s;}
+    body.dark {background:#121212;color:#ddd;}
+    header,footer{background:#00695c;color:white;padding:1rem;}
+    nav a,nav button{color:white;margin:0 .4rem;text-decoration:none;cursor:pointer;}
+    .main{max-width:1000px;margin:auto;padding:1rem;}
+    .section,.tool-box,.quiz-box{margin:2rem 0;padding:1.5rem;border-radius:8px;background:#e0f2f1;}
+    .btn{padding:.7rem 1.4rem;border:none;border-radius:4px;margin:.3rem;cursor:pointer;transition:transform .2s;}
+    .btn:hover{transform:scale(1.05);}
+    .btn-primary{background:#00897b;color:white;}
+    .bookmark{cursor:pointer;font-size:1.3rem;color:#ff7043;float:right;}
+    .progress-bar{height:12px;background:#ddd;border-radius:6px;overflow:hidden;margin:10px 0;}
+    .progress-filled{height:100%;width:0;background:#00897b;transition:width .3s;}
+    textarea, input{width:100%;padding:.6rem;margin:.5rem 0;border:1px solid #ccc;border-radius:4px;}
+    canvas{max-width:100%!important;height:auto!important;}
+    pre, code{background:#f5f5f5;padding:.5rem;display:block;border-radius:4px;white-space:pre-wrap;}
+    @media(max-width:768px){nav{display:block;text-align:center;}nav a,nav button{display:block;margin:.4rem 0;}}
+  </style>
 </head>
 <body>
-<header><h1>Blog #112: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #112 – System Design Essentials</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Key Principles of System Design</h2>
+    <span id="bookmarkConcept" class="bookmark">☆</span>
+    <p id="conceptContent">
+      Design scalable systems with proper API, database, caching, and message queue patterns.
+    </p>
+    <ul>
+      <li><strong>Scalability:</strong> horizontal vs vertical scaling</li>
+      <li><strong>API Design:</strong> RESTful routes, status codes, idempotency</li>
+      <li><strong>Data Stores:</strong> SQL vs NoSQL, sharding, partitioning, indexing</li>
+      <li><strong>Caching:</strong> CDN, Redis—cache-aside and TTL strategies</li>
+      <li><strong>Asynchronous:</strong> Kafka/RabbitMQ, work queues</li>
+      <li><strong>Real-time:</strong> WebSocket vs long polling</li>
+    </ul>
+  </section>
+
+  <!-- Diagram Builder -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Interactive Diagram Builder (Mock-up)</h3>
+    <textarea id="diagramInput" rows="4" placeholder="e.g. CLIENT -> API -> DB"></textarea>
+    <button class="btn btn-primary" onclick="renderDiagram()">Build Diagram</button>
+    <pre id="diagramCanvas">[Diagram preview will appear here]</pre>
+  </div>
+
+  <!-- Quiz Section -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: System Design Fundamentals (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start to begin.</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br/>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Performance Tracker</h3>
+    <canvas id="perfChart"></canvas><br/>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download System Design PDF Guide</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  const fbConfig = {apiKey:"KEY", authDomain:"eduignite.firebaseapp.com", projectId:"eduignite", appId:"APPID"};
+  firebase.initializeApp(fbConfig);
+  const auth = firebase.auth(), userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => {
+    userContainer.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`;
+  });
+  function login() { const e = prompt("Email"), p = prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+  function logout() { auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+  };
+  if (localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en: {
+      conceptTitle:"Key Principles of System Design",
+      toolTitle:"Interactive Diagram Builder (Mock-up)",
+      quizTitle:"Quiz: System Design Fundamentals (10 Qs)",
+      perfTitle:"Performance Tracker",
+      btnPDF:"Download System Design PDF Guide"
+    },
+    hi: {
+      conceptTitle:"सिस्टम डिजाइन के मुख्य सिद्धांत",
+      toolTitle:"इंटरएक्टिव आरेख बिल्डर (मॉक-अप)",
+      quizTitle:"प्रश्नोत्तरी: सिस्टम डिजाइन मूल बातें (10 प्रश्न)",
+      perfTitle:"प्रदर्शन ट्रैकर",
+      btnPDF:"सिस्टम डिजाइन PDF गाइड डाउनलोड करें"
+    }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l) {
+    ["conceptTitle","toolTitle","quizTitle","perfTitle","downloadPDF"].forEach(id => {
+      document.getElementById(id).innerText = texts[l][id];
+    });
+    document.getElementById('quizHint').innerText = '';
+  }
+
+  // Bookmark toggles
+  document.getElementById('bookmarkConcept').onclick = function() {
+    this.innerText = this.innerText==='☆'?'★':'☆';
+  };
+  document.getElementById('bookmarkQuiz').onclick = function() {
+    this.innerText = this.innerText==='☆'?'★':'☆';
+  };
+
+  // Diagram builder (simple text placeholder)
+  function renderDiagram() {
+    const txt = document.getElementById('diagramInput').value;
+    document.getElementById('diagramCanvas').innerText = `Diagram: ${txt}`;
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"Which storage is best for relational data?",choices:["Redis","MongoDB","PostgreSQL","Elasticsearch"],ans:2,hint:"Structured tables"},
+    // Add 9 more...
+  ];
+  let curr=0,score=0;
+  const qQ = document.getElementById('quizQuestion'),
+        qOpt = document.getElementById('quizOptions'),
+        qHint = document.getElementById('quizHint'),
+        qFB = document.getElementById('quizFeedback'),
+        qBar = document.getElementById('quizBar');
+  function loadQ() {
+    const d = quizData[curr];
+    qQ.innerText = d.q; qOpt.innerHTML=''; qHint.innerText=''; qFB.innerText='';
+    d.choices.forEach((ch,i) => {
+      const b = document.createElement('button');
+      b.className = 'btn'; b.innerText = ch;
+      b.onclick = () => {
+        qFB.innerText = i===d.ans ? "✅ Correct!" : "❌ Incorrect.";
+        if(i===d.ans) score++;
+        curr++; qBar.style.width = `${(curr/quizData.length)*100}%`;
+        curr < quizData.length ? setTimeout(loadQ,600) : finishQuiz();
+      };
+      qOpt.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = () => {
+    curr=0; score=0; qBar.style.width='0%'; loadQ();
+  };
+  function showHint() {
+    if(curr < quizData.length) qHint.innerText = "💡 Hint: " + quizData[curr].hint;
+  }
+  function finishQuiz() {
+    alert(`Quiz done! Score: ${score}/${quizData.length}`);
+  }
+
+  // Performance Tracker
+  const perfCtx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(perfCtx, {
+    type: 'line',
+    data: { labels: [], datasets: [{ label:'Score %', data:[], backgroundColor:'#00897b' }] },
+    options:{responsive:true, scales:{y:{beginAtZero:true, max:100}}}
+  });
+  document.getElementById('savePerf').onclick = () => {
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Performance saved!");
+  };
+
+  // PDF Download
+  document.getElementById('downloadPDF').onclick = () => alert("📥 System Design Guide PDF downloading...");
+
+  // Push Notifications
+  if(Notification.permission !== "denied") {
+    Notification.requestPermission().then(p => {
+      if(p === "granted") {
+        new Notification("EduIgnite System Design", { body: "Design smarter systems today!" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
