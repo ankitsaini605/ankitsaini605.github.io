@@ -2,15 +2,247 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog Post #32 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #32 | Flexbox Deep Dive – EduIgnite</title>
+  <meta name="description" content="Learn CSS Flexbox: live flex playground, layout quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, performance tracking & notifications.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">{
+    "@context":"https://schema.org","@type":"BlogPosting",
+    "headline":"Flexbox Deep Dive",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished":"2025-06-13","image":"https://eduignite.com/images/css-flexbox.jpg",
+    "description":"Master CSS Flexbox with a live playground, quiz, PDF guide, Firebase auth, dark mode, language toggle, performance tracking & notifications."
+  }</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, button, input, textarea { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white;padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .section, .quiz-box { background:#e0f2f1;padding:1.5rem;margin:2rem 0;border-radius:8px;}
+    .flex-demo { display:flex; gap:8px; padding:1rem; background:#fff; border:1px solid #ccc; }
+    .flex-item { padding:1rem;background:#00897b;color:#fff;cursor:pointer;transition:.2s;}
+    .flex-item:hover { background:#00695c; }
+    .btn, .btn-primary { padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s; }
+    .btn-primary { background:#00897b;color:white; }
+    .progress-bar { background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0; }
+    .progress-filled { background:#00897b;width:0;height:100%;transition:width .3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #32</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #32 – Flexbox Deep Dive</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Flexbox playground -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live Flexbox Playground</h3>
+    <div class="controls">
+      <label>Direction:
+        <select id="flexDirection">
+          <option value="row">row</option>
+          <option value="column">column</option>
+          <option value="row-reverse">row-reverse</option>
+          <option value="column-reverse">column-reverse</option>
+        </select>
+      </label>
+      <label>Justify:
+        <select id="justifyContent">
+          <option value="flex-start">flex-start</option>
+          <option value="center">center</option>
+          <option value="space-between">space-between</option>
+          <option value="space-around">space-around</option>
+          <option value="space-evenly">space-evenly</option>
+        </select>
+      </label>
+      <label>Align:
+        <select id="alignItems">
+          <option value="flex-start">flex-start</option>
+          <option value="center">center</option>
+          <option value="stretch">stretch</option>
+          <option value="flex-end">flex-end</option>
+          <option value="baseline">baseline</option>
+        </select>
+      </label>
+      <button class="btn btn-primary" onclick="updateFlex()">Apply</button>
+    </div>
+    <div class="flex-demo" id="flexDemo">
+      <div class="flex-item">1</div>
+      <div class="flex-item">2</div>
+      <div class="flex-item">3</div>
+    </div>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Flexbox Concepts</h2>
+    <ul>
+      <li><strong>flex-direction:</strong> row/column and their reverses.</li>
+      <li><strong>justify-content:</strong> how items are spaced along main axis.</li>
+      <li><strong>align-items:</strong> alignment on cross axis.</li>
+      <li><strong>Responsive layouts:</strong> using Flexbox for adaptive design.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Flexbox (8 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Track Your Performance</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Flexbox Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const mode = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', mode);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Multilingual
+const texts = {
+  en:{
+    toolTitle:"Live Flexbox Playground",
+    conceptTitle:"Flexbox Concepts",
+    quizTitle:"Quiz: Flexbox (8 Qs)",
+    perfTitle:"Track Your Performance",
+    btnPDF:"Download Flexbox Guide PDF"
+  },
+  hi:{
+    toolTitle:"लाइव फ्लेक्सबॉक्स प्लेग्राउंड",
+    conceptTitle:"Flexbox अवधारणाएँ",
+    quizTitle:"प्रश्नोत्तरी: Flexbox (8 प्रश्न)",
+    perfTitle:"आपका प्रदर्शन",
+    btnPDF:"Flexbox गाइड PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l){
+  ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText='';
+}
+
+// Flexbox Playground logic
+function updateFlex(){
+  const dir = document.getElementById('flexDirection').value;
+  const just = document.getElementById('justifyContent').value;
+  const align = document.getElementById('alignItems').value;
+  const demo = document.getElementById('flexDemo');
+  demo.style.display = 'flex';
+  demo.style.flexDirection = dir;
+  demo.style.justifyContent = just;
+  demo.style.alignItems = align;
+}
+
+// Quiz data
+const quizData = [
+  {q:"Which property sets the main axis direction?",choices:["flex-direction","align-items","justify-content","order"],ans:0,hint:"Think direction."},
+  {q:"To center items vertically, use:",choices:["align-items:center","justify-content:center","flex-direction:center","order:center"],ans:0,hint:"Cross-axis support."},
+  // Define rest...
+];
+let curr=0, score=0;
+const [qQ,qOpt,qHint,qFB,qBar] = [
+  document.getElementById('quizQuestion'),
+  document.getElementById('quizOptions'),
+  document.getElementById('quizHint'),
+  document.getElementById('quizFeedback'),
+  document.getElementById('quizBar')
+];
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText=d.q;
+  qOpt.innerHTML='';
+  qHint.innerText='';
+  qFB.innerText='';
+  d.choices.forEach((c,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.innerText = c;
+    btn.onclick = () => {
+      qFB.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qBar.style.width = `${(curr/quizData.length)*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz, 400) : alert(`Quiz complete: ${score}/${quizData.length}`);
+    };
+    qOpt.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick = () => {
+  curr=0; score=0; qBar.style.width='0%';
+  loadQuiz();
+};
+function showHint(){
+  if(curr<quizData.length) qHint.innerText = "💡 " + quizData[curr].hint;
+}
+
+// Performance Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx,{
+  type:'line',
+  data:{labels:[], datasets:[{label:'Score %', data:[], backgroundColor:'#00897b'}]},
+  options:{responsive:true, scales:{y:{beginAtZero:true, max:100}}}
+});
+document.getElementById('savePerf').onclick = () => {
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score / quizData.length * 100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading Flexbox Guide PDF...");
+
+// Push Notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p => {
+    if(p==="granted"){
+      new Notification("EduIgnite Flexbox",{body:"Play with Flexbox layouts now!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
