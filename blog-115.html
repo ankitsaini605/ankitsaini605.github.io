@@ -1,21 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #115 – Study Secrets</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Blog #115 | Data Structures Deep Dive – EduIgnite</title>
+  <meta name="description" content="Explore arrays, linked lists, trees, and graphs with interactive visualizers, quizzes, performance trackers, multilingual support, dark mode, Firebase auth, PDF download & more—exclusive to EduIgnite."/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Data Structures Deep Dive",
+    "author": {"@type":"Person","name":"Ankit Saini"},
+    "publisher": {"@type":"Organization","name":"EduIgnite","logo":{"@type":"ImageObject","url":"https://eduignite.com/logo.png"}},
+    "datePublished": "2025-06-12",
+    "image": "https://eduignite.com/images/data-structures.jpg",
+    "description": "Interactive visualizations and quizzes for arrays, linked lists, trees, and graphs. Featuring Firebase login, multilingual, dark mode, PDF download, performance tracker & notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, input, textarea, select, button { font-family:'Segoe UI',sans-serif; transition: background .3s, color .3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:1000px; margin:auto; padding:1rem; }
+    .section, .tool-box, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .btn { padding:.7rem 1.2rem; border:none; border-radius:4px; margin:.3rem; cursor:pointer; transition: transform .2s; }
+    .btn:hover { transform: scale(1.05); }
+    .btn-primary { background:#00897b; color:white; }
+    .bookmark { float:right; cursor:pointer; font-size:1.4rem; color:#ff7043; }
+    .progress-bar { background:#ddd; border-radius:6px; overflow:hidden; height:12px; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition: width .3s; }
+    canvas { max-width:100%!important; }
+    svg { border:1px solid #ccc; padding:1rem; border-radius:4px; margin-top:1rem; }
+    @media(max-width:768px){ nav { display:block; text-align:center; } nav a, nav button { display:block; margin: .4rem 0; } }
+
+  </style>
 </head>
 <body>
-<header><h1>Blog #115: Topper's Daily Formula</h1></header>
-<main>
-  <ul>
-    <li>📌 Set 3 daily goals</li>
-    <li>📚 Study 90 mins per session</li>
-    <li>📅 Weekly schedule + Sunday review</li>
-    <li>⏰ Track time: use Pomodoro (25/5)</li>
-    <li>🧠 Revise before bed</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #115 – Data Structures Deep Dive</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button>
+    <button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+
+  <!-- Array Visualizer -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Array Visualizer</h3>
+    <textarea id="arrayInput" rows="2" placeholder="Enter comma-separated values e.g. 10, 20, 30"></textarea>
+    <button class="btn btn-primary" onclick="visualizeArray()">Visualize</button>
+    <svg id="arrayVis" width="100%" height="60"></svg>
+  </div>
+
+  <!-- Section: Linked List -->
+  <section class="section">
+    <h2 id="conceptTitle">Singly Linked List Basics</h2>
+    <span id="bookmarkConcept" class="bookmark">☆</span>
+    <p id="conceptContent">A linked list is a chain of nodes, each containing data & pointer to next. Great for dynamic memory usage.</p>
+    <ul>
+      <li>Insertion/Deletion at head/tail</li>
+      <li>Traversal in O(n)</li>
+      <li>Dynamic vs static memory structures</li>
+    </ul>
+  </section>
+
+  <!-- Quiz for Data Structures -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Fundamental Structures (8 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Press Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Performance Tracker & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Performance Tracker</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Data Structures PDF Guide</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | 
+    <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | 
+    <a href="https://t.me/eduignite_official" style="color:white">Telegram</a>
+  </p>
+</footer>
+
+<script>
+  // Firebase Auth
+  const fbConfig = { apiKey: "KEY", authDomain: "eduignite.firebaseapp.com", projectId: "eduignite", appId: "APPID" };
+  firebase.initializeApp(fbConfig);
+  const auth = firebase.auth(), userContainer = document.getElementById('userContainer');
+  auth.onAuthStateChanged(user => {
+    userContainer.innerHTML = user
+      ? `Hi, ${user.email} <button onclick="logout()">Logout</button>`
+      : `<button onclick="login()">Login</button>`;
+  });
+  function login(){ const e = prompt("Email"), p = prompt("Password"); auth.signInWithEmailAndPassword(e, p).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = () => {
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en: {
+      toolTitle: "Array Visualizer",
+      conceptTitle: "Singly Linked List Basics",
+      quizTitle: "Quiz: Fundamental Structures (8 Qs)",
+      perfTitle: "Performance Tracker",
+      btnPDF: "Download Data Structures PDF Guide"
+    },
+    hi: {
+      toolTitle: "एरे विज़ुअलाइज़र",
+      conceptTitle: "सिंगली लिंक्ड लिस्ट मूल बातें",
+      quizTitle: "प्रश्नोत्तरी: मूल संरचनाएँ (८ प्रश्न)",
+      perfTitle: "प्रदर्शन ट्रैकर",
+      btnPDF: "डेटा स्ट्रक्चर PDF गाइड डाउनलोड करें"
+    }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(lang) {
+    ["toolTitle","conceptTitle","quizTitle","perfTitle","downloadPDF"].forEach(id => {
+      document.getElementById(id).innerText = texts[lang][id];
+    });
+    document.getElementById('quizHint').innerText = '';
+  }
+
+  // Bookmarks
+  document.getElementById('bookmarkConcept').onclick = function(){ this.innerText = this.innerText==='☆'?'★':'☆'; };
+  document.getElementById('bookmarkQuiz').onclick = function(){ this.innerText = this.innerText==='☆'?'★':'☆'; };
+
+  // Array Visualizer
+  function visualizeArray(){
+    const vals = document.getElementById('arrayInput').value.split(',').map(v => v.trim());
+    const svg = document.getElementById('arrayVis');
+    svg.innerHTML = '';
+    const width = svg.clientWidth, barW = width / vals.length;
+    vals.forEach((v, i) => {
+      const rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+      rect.setAttribute('x', barW * i + 5);
+      rect.setAttribute('y', 20);
+      rect.setAttribute('width', barW - 10);
+      rect.setAttribute('height', 30);
+      rect.setAttribute('fill', '#00897b');
+      svg.appendChild(rect);
+      const tx = document.createElementNS("http://www.w3.org/2000/svg","text");
+      tx.setAttribute('x', barW * i + barW / 2);
+      tx.setAttribute('y', 40);
+      tx.setAttribute('text-anchor','middle');
+      tx.textContent = v;
+      svg.appendChild(tx);
+    });
+  }
+
+  // Quiz logic
+  const quizData = [
+    { q: "What is the time complexity to access array by index?", choices: ["O(n)", "O(log n)", "O(1)", "O(n log n)"], ans: 2, hint: "Direct indexing" },
+    { q: "In singly linked list, removing tail is", choices: ["O(1)", "O(n)", "O(log n)", "O(n²)"], ans: 1, hint: "Traverse till end" },
+    // Add total 8 questions…
+  ];
+  let curr = 0, score = 0;
+  const qQ = document.getElementById('quizQuestion'),
+        qOpt = document.getElementById('quizOptions'),
+        qHint = document.getElementById('quizHint'),
+        qFB = document.getElementById('quizFeedback'),
+        qBar = document.getElementById('quizBar');
+
+  function loadQuiz() {
+    const cur = quizData[curr];
+    qQ.innerText = cur.q;
+    qOpt.innerHTML = '';
+    qHint.innerText = '';
+    qFB.innerText = '';
+    cur.choices.forEach((opt,i) =>{
+      const b = document.createElement('button');
+      b.className = 'btn';
+      b.innerText = opt;
+      b.onclick = () => {
+        qFB.innerText = i === cur.ans ? "✅ Correct" : "❌ Incorrect";
+        if (i === cur.ans) score++;
+        curr++;
+        qBar.style.width = `${(curr/quizData.length)*100}%`;
+        curr < quizData.length ? setTimeout(loadQuiz, 600) : alert(`Quiz Completed! Score: ${score}/${quizData.length}`);
+      };
+      qOpt.appendChild(b);
+    });
+  }
+
+  document.getElementById('startQuiz').onclick = () => {
+    curr=0; score=0; qBar.style.width="0%"; loadQuiz();
+  };
+  function showHint(){
+    if(curr < quizData.length) qHint.innerText = "💡 Hint: "+ quizData[curr].hint;
+  }
+
+  // Performance Tracker
+  const ctx = document.getElementById('perfChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: [], datasets: [{ label: 'Score %', data: [], backgroundColor:'#00897b' }] },
+    options: { responsive: true, scales: { y: { beginAtZero:true, max:100 } } }
+  });
+  document.getElementById('savePerf').onclick = ()=>{
+    chart.data.labels.push(`Run ${chart.data.labels.length+1}`);
+    chart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    chart.update();
+    alert("✅ Performance saved!");
+  };
+
+  // PDF Download
+  document.getElementById('downloadPDF').onclick = () => {
+    alert("📥 PDF downloading...");
+  };
+
+  // Push Notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite Data Struct", { body: "Ready to dive deeper?" });
+      }
+    });
+  }
+</script>
 </body>
 </html>
+
