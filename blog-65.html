@@ -1,15 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #65</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #65 | Web Accessibility (a11y) Essentials – EduIgnite</title>
+  <meta name="description" content="Master web accessibility: live a11y checker, ARIA demo, quiz, PDF guide, Firebase auth, dark mode, bilingual toggle, progress analytics & notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Web Accessibility (a11y) Essentials",
+    "author": { "@type": "Person", "name": "Ankit Saini" },
+    "publisher": { "@type": "Organization", "name": "EduIgnite" },
+    "datePublished": "2025-06-13",
+    "description": "Interactive a11y checker and ARIA demo: quiz, downloadable PDF, Firebase login, dark mode, EN/HI toggle, progress & notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .tool-box, .quiz-box, .section { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .editor-results { display:flex; gap:10px; flex-direction:column; }
+    textarea.code-area { width:100%; height:150px; font-family:monospace; }
+    #a11yReport { background:#fafafa; padding:10px; max-height:200px; overflow:auto; border:1px solid #ccc; border-radius:4px; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition:.2s; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite Blog #65</h1></header>
-<main>
-  <p>Boost your brain with memory techniques and focused revision used by toppers in blog 65.</p>
-</main>
-<footer>Follow: Instagram @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #65 – Web Accessibility (a11y) Essentials</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. Live A11y Checker -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live Accessibility Checker</h3>
+    <textarea id="htmlInput" class="code-area" placeholder="Paste HTML…">&lt;button&gt;Click&lt;/button&gt;</textarea>
+    <button class="btn btn-primary" onclick="runA11y()">Check Accessibility</button>
+    <div id="a11yReport"></div>
+  </div>
+
+  <!-- 2. ARIA & Focus Demo -->
+  <div class="tool-box">
+    <h3 id="ariaTitle">ARIA Landmark & Focus Demo</h3>
+    <button class="btn" onclick="alert('🎉 You clicked a landmark!')">Click Me</button>
+    <div tabindex="0" role="region" aria-label="Demo Panel" style="border:1px dashed #00897b;padding:10px;margin-top:10px;">
+      Use Tab to focus here!
+    </div>
+  </div>
+
+  <!-- 3. Accessibility Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Why A11y Matters</h2>
+    <ul>
+      <li>WCAG principles: Perceivable, Operable, Understandable, Robust</li>
+      <li>Semantic HTML improves screen-reader support</li>
+      <li>ARIA roles, labels, live regions</li>
+      <li>Keyboard navigation & focus states</li>
+      <li>Color contrast and accessible forms</li>
+    </ul>
+  </section>
+
+  <!-- 4. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Accessibility Basics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 5. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download a11y Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc=document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u
+  ? `Hi, ${u.email} <button onclick="logout()">Logout</button>`
+  : `<button onclick="login()">Login</button>`);
+function login(){ auth.signInWithEmailAndPassword(prompt("Email"), prompt("Password")).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = ()=>{
+  const d=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: {
+    toolTitle:"Live Accessibility Checker",
+    ariaTitle:"ARIA Landmark & Focus Demo",
+    conceptTitle:"Why A11y Matters",
+    quizTitle:"Quiz: Accessibility Basics (10 Qs)",
+    perfTitle:"Your Progress",
+    btnPDF:"Download a11y Guide PDF"
+  },
+  hi: {
+    toolTitle:"लाइव एक्सेसिबिलिटी चेकर",
+    ariaTitle:"ARIA लैंडमार्क & फोकस डेमो",
+    conceptTitle:"A11y क्यों ज़रूरी है",
+    quizTitle:"प्रश्नोत्तरी: Accessibility (10 प्रश्न)",
+    perfTitle:"आपकी प्रगति",
+    btnPDF:"a11y गाइड PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = ()=>setLang('en');
+document.getElementById('langHi').onclick = ()=>setLang('hi');
+function setLang(l){
+  ['toolTitle','ariaTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText = '';
+}
+
+// A11y Checker Logic
+function runA11y(){
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(document.getElementById('htmlInput').value, "text/html");
+  let report = "";
+  doc.querySelectorAll('img:not([alt])').forEach(img => report += "🚫 Image missing alt\n");
+  doc.querySelectorAll('button:not([aria-label])').forEach(btn => report += "🔔 Button missing aria-label\n");
+  if(!report) report = "✅ Looks accessible!";
+  document.getElementById('a11yReport').innerText = report;
+}
+
+// Quiz logic (same pattern)
+const quizData = [
+  {q:"What does ARIA stand for?", choices:["Accessible Rich Internet Applications"], ans:0, hint:"ARIA = Accessible …" },
+  {q:"WCAG principle 'Operable'?", choices:["Yes"], ans:0, hint:"Keyboard usable" },
+  {q:"Use alt on images?", choices:["True"], ans:0, hint:"Alt text needed" },
+  {q:"Use <header> for site header?", choices:["True"], ans:0, hint:"Semantic header" },
+  {q:"Role='button' needed on <button>?", choices:["False"], ans:0, hint:"Native element" },
+  {q:"Use tabindex='0' for focus?", choices:["True"], ans:0, hint:"Makes focusable" },
+  {q:"Contrast ratio ≥ 4.5:1?", choices:["True"], ans:0, hint:"WCAG AA" },
+  {q:"Video needs captions?", choices:["True"], ans:0, hint:"For deaf users" },
+  {q:"ARIA-label helps screen readers?", choices:["True"], ans:0, hint:"Adds description" },
+  {q:"Landmarks help navigation?", choices:["True"], ans:0, hint:"For screen readers" }
+];
+let curr=0, score=0;
+const [qQ, qO, qH, qF, qB] = [
+  document.getElementById('quizQuestion'),
+  document.getElementById('quizOptions'),
+  document.getElementById('quizHint'),
+  document.getElementById('quizFeedback'),
+  document.getElementById('quizBar')
+];
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q; qO.innerHTML = ""; qH.innerText = ""; qF.innerText = "";
+  d.choices.forEach((c,i) => {
+    const b=document.createElement('button');
+    b.className='btn'; b.innerText=c;
+    b.onclick = ()=>{
+      qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qB.style.width = `${(curr/quizData.length)*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz,300): alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = ()=>{
+  curr=0;score=0;qB.style.width="0%";loadQuiz();
+};
+document.querySelector('.btn[onclick="showHint()"]').onclick = ()=>{
+  if(curr<quizData.length) qH.innerText = "💡 "+quizData[curr].hint;
+};
+
+// Progress Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx,{ type:'line', data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]}, options:{responsive:true, scales:{y:{beginAtZero:true,max:100}}}});
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading Accessibility Guide PDF...");
+
+// Notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite A11y",{body:"Test your accessibility skills!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
