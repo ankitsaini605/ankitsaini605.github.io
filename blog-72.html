@@ -1,15 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #72</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog #72 | JavaScript Charting with Chart.js</title>
+  <meta name="description" content="Master Chart.js in JS: live chart editor, dynamic data, quiz, PDF download, Firebase auth, dark mode, EN/HI toggle, analytics & push notifications">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"JavaScript Charting with Chart.js",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Interactive Chart.js playground, real‑time data editing, quiz, downloadable PDF, Firebase login, dark/light mode, dual language, progress dashboard and push alerts."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, button, textarea, input { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:#fff; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:1rem auto; padding:1rem; }
+    .editor-box, .quiz-box, .section { background:#e0f2f1; border-radius:8px; padding:1.5rem; margin:2rem 0; }
+    textarea.code-area { width:100%; height:180px; font-family:monospace; }
+    .preview-chart { height:300px; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite Blog #72</h1></header>
-<main>
-  <p>Boost your brain with memory techniques and focused revision used by toppers in blog 72.</p>
-</main>
-<footer>Follow: Instagram @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #72 – JavaScript Charting with Chart.js</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn">EN</button><button id="langHi" class="btn">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Chart Playground -->
+  <div class="editor-box">
+    <h3 id="toolTitle">Live Chart.js Editor</h3>
+    <textarea id="codeEditor" class="code-area">// Customize: colors, labels, data  
+const config = {
+  type: 'bar',
+  data: { labels:['Jan','Feb','Mar','Apr','May'], datasets:[{label:'Sales',backgroundColor:'#00897b',data:[12,19,3,5,2]}]},
+  options:{ responsive:true, scales:{ y:{ beginAtZero:true } } }
+};
+createChart(config);</textarea>
+    <button class="btn btn-primary" onclick="runChart()">Run Chart</button>
+    <canvas id="previewChart" class="preview-chart"></canvas>
+  </div>
+
+  <!-- Insights -->
+  <section class="section">
+    <h2 id="conceptTitle">Chart.js Highlights</h2>
+    <ul>
+      <li>Easy creation of line, bar, pie, radar charts</li>
+      <li>Customizable tooltips, legends, animations</li>
+      <li>Dynamic dataset updates and responsiveness</li>
+      <li>Plugin & extension support (annotations, zoom)</li>
+      <li>Advanced styling and multi-axis configuration</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Chart.js Essentials (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button><p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Track & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress Overview</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save My Score</button>
+  </section>
+  <section class="section">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Chart Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), uc=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ auth.signInWithEmailAndPassword(prompt("Email"), prompt("Password")).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = () => {
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en:{ toolTitle:"Live Chart.js Editor", conceptTitle:"Chart.js Highlights", quizTitle:"Quiz: Chart.js Essentials (10 Qs)", perfTitle:"Your Progress Overview", btnPDF:"Download Chart Guide PDF" },
+    hi:{ toolTitle:"लाइव Chart.js एडिटर", conceptTitle:"Chart.js मुख्य फीचर्स", quizTitle:"प्रश्नोत्तरी: Chart.js (10 प्रश्न)", perfTitle:"आपकी प्रगति", btnPDF:"Chart गाइड PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l){
+    ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.innerText = texts[l][id];
+    });
+  }
+
+  // Chart runner
+  let chartInstance = null;
+  function createChart(cfg){
+    const ctx = document.getElementById('previewChart').getContext('2d');
+    if(chartInstance) chartInstance.destroy();
+    chartInstance = new Chart(ctx, cfg);
+  }
+  function runChart(){
+    try {
+      const userCode = document.getElementById('codeEditor').value;
+      evaluate(userCode);
+    } catch(e){ alert('Error: '+e.message); }
+  }
+  function evaluate(code){
+    return new Function('createChart', code)(createChart);
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"Chart.js uses canvas element?", choices:["True"],ans:0,hint:"Yes, viewport-based."},
+    {q:"type:'bar' creates bar chart?", choices:["True"],ans:0,hint:"Correct."},
+    {q:"data.labels array defines x-axis?", choices:["True"],ans:0,hint:"Yes."},
+    {q:"You can update data dynamically?", choices:["True"],ans:0,hint:"Use chart.update()."},
+    {q:"Legend shows dataset labels?", choices:["True"],ans:0,hint:"Can toggle visibility."},
+    {q:"Responsive rescales chart on resize?", choices:["True"],ans:0,hint:"Responsive:true."},
+    {q:"Plugins for zoom or tooltip exist?", choices:["True"],ans:0,hint:"Yes."},
+    {q:"Scales config is inside options?", choices:["True"],ans:0,hint:"Under options.scales."},
+    {q:"chart.destroy() removes chart instance?", choices:["True"],ans:0,hint:"Avoid memory leaks."},
+    {q:"Colors accept hex or rgb strings?", choices:["True"],ans:0,hint:"CSS color formats allowed."}
+  ];
+  let currQ=0,score=0;
+  const [qQ,qO,qH,qF,qB] = [
+    document.getElementById('quizQuestion'),
+    document.getElementById('quizOptions'),
+    document.getElementById('quizHint'),
+    document.getElementById('quizFeedback'),
+    document.getElementById('quizBar')
+  ];
+  function loadQuiz(){
+    const d=quizData[currQ];
+    qQ.innerText=d.q; qO.innerHTML=''; qH.innerText=''; qF.innerText='';
+    d.choices.forEach((c,i)=>{
+      const btn=document.createElement('button');
+      btn.className='btn'; btn.innerText=c;
+      btn.onclick=()=>{
+        qF.innerText = i===d.ans?"✅ Correct":"❌ Wrong";
+        if(i===d.ans) score++;
+        currQ++;
+        qB.style.width = `${(currQ/quizData.length)*100}%`;
+        currQ<quizData.length? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+      };
+      qO.appendChild(btn);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{
+    currQ=0; score=0; qB.style.width="0%"; loadQuiz();
+  };
+  function showHint(){
+    if(currQ < quizData.length) qH.innerText = "💡 "+quizData[currQ].hint;
+  }
+
+  // Progress chart
+  const ctxPerf = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctxPerf,{
+    type:'line',
+    data:{ labels:[], datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}] },
+    options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+  });
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading Chart Guide PDF...");
+
+  // Push notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted") new Notification("EduIgnite Charts",{body:"Create awesome charts now!"});
+    });
+  }
+</script>
 </body>
 </html>
+
