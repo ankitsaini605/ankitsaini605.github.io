@@ -1,16 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Post #39 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Blog #39 | JavaScript ES6+ Patterns – EduIgnite</title>
+<meta name="description" content="Understand modern JavaScript (ES6+) patterns: live code editor, results, quiz, PDF tutorial, Firebase auth, dark mode, EN/HI toggle, progress tracking & notifications"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"JavaScript ES6+ Patterns","author":{"@type":"Person","name":"Ankit Saini"},"publisher":{"@type":"Organization","name":"EduIgnite"},"datePublished":"2025-06-13","description":"Interactive ES6+ code editor (let/const, arrow funcs, destructuring), quiz, PDF download, Firebase login, dark mode, bilingual toggle, and analytics."}
+</script>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+  body.dark { background:#121212;color:#ddd; }
+  header, footer { background:#00695c;color:white;padding:1rem; }
+  nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+  .main{max-width:900px;margin:auto;padding:1rem;}
+  .tool-box, .quiz-box, .section{background:#e0f2f1;padding:1.5rem;margin:2rem 0;border-radius:8px;}
+  .editor-results{display:flex; gap:10px;}
+  textarea.code-area{flex:1;height:200px;}
+  iframe#resultFrame{flex:1;border:1px solid #ccc;}
+  .btn, .btn-primary{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+  .btn-primary{background:#00897b;color:white;}
+  .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+  .progress-filled{background:#00897b;width:0;height:100%;transition:.3s;}
+</style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #39</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #39 – JavaScript ES6+ Patterns</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. Live JS Editor -->
+  <div class="tool-box">
+    <h3 id="toolTitle">ES6+ Live Editor</h3>
+    <div class="editor-results">
+      <textarea id="codeEditor" class="code-area">
+// Try: let x = [1,2]; const y = {...x}; arrow function, destructuring...
+const arr = [1,2,3];
+const doubled = arr.map(n => n * 2);
+console.log(doubled);
+      </textarea>
+      <iframe id="resultFrame"></iframe>
+    </div>
+    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+  </div>
+
+  <!-- 2. Key Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Modern JS Essentials</h2>
+    <ul>
+      <li><strong>let</strong> and <strong>const</strong> for safe variable declarations.</li>
+      <li>Arrow functions, template literals, and default/rest/spread operators.</li>
+      <li>Destructuring arrays and objects for cleaner code.</li>
+      <li>Promises, async/await, and modules.</li>
+      <li>Array utilities: map/filter/reduce and modern performance patterns.</li>
+    </ul>
+  </section>
+
+  <!-- 3. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: ES6+ Patterns (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress Chart & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download ES6+ Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase + Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u=> uc.innerHTML = u? `Hi, ${u.email} <button onclick="logout()">Logout</button>`: `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Language toggle
+const texts = {
+  en:{
+    toolTitle:"ES6+ Live Editor",
+    conceptTitle:"Modern JS Essentials",
+    quizTitle:"Quiz: ES6+ Patterns (10 Qs)",
+    perfTitle:"Your Progress",
+    btnPDF:"Download ES6+ Guide PDF"
+  },
+  hi:{
+    toolTitle:"ES6+ लाइव एडिटर",
+    conceptTitle:"मॉर्डन JS मूल बातें",
+    quizTitle:"प्रश्नोत्तरी: ES6+ Patterns (10 प्रश्न)",
+    perfTitle:"आपकी प्रगति",
+    btnPDF:"ES6+ गाइड PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = ()=> setLang('en');
+document.getElementById('langHi').onclick = ()=> setLang('hi');
+function setLang(l){
+  ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText='';
+}
+
+// Run user JS
+function runCode(){
+  const code = document.getElementById('codeEditor').value;
+  const iframe = document.getElementById('resultFrame');
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open();
+  doc.write('<script>console.clear();</script><script>'+code+'</script>');
+  doc.close();
+}
+
+// Quiz Logic
+const quizData = [
+  {q:"Which is immutable declaration?",choices:["let","var","const","function"],ans:2,hint:"'c' stands for constant."},
+  {q:"Arrow functions don't bind what?",choices:["this","arguments","super","all"],ans:1,hint:"'arguments' object missing."},
+  {q:"Destructuring array syntax?",choices:["[a,b]=arr","{a,b}=arr","(a,b)=arr","arr={a,b}"],ans:0,hint:"Square brackets."},
+  {q:"Spread operator is ...?",choices:["*","...","--","++"],ans:1,hint:"Three dots."},
+  {q:"Promise resolution method?",choices:["then","catch","finally","all"],ans:0,hint:"The first handler."},
+  {q:"Async/await works on?",choices:["Promises","Callbacks","Intervals","Events"],ans:0,hint:"Modern async syntax."},
+  {q:"Template literal uses?",choices:["' '","` `","\" \"","< >"],ans:1,hint:"Backticks."},
+  {q:"Default params like?",choices:["f(a=5)","f(a?5)","f(a<-5)","f(a*=5)"],ans:0,hint:"Direct assignment."},
+  {q:"Rest parameter is indicated by?",choices:["...args","arg...","*args","^args"],ans:0,hint:"Matching spread."},
+  {q:"Map/Filter/Reduce is on?",choices:["Arrays","Objects","Strings","Numbers"],ans:0,hint:"Built into Array.prototype."},
+];
+let curr=0, score=0;
+const qQ=document.getElementById('quizQuestion'), qO=document.getElementById('quizOptions'),
+      qH=document.getElementById('quizHint'), qF=document.getElementById('quizFeedback'), qB=document.getElementById('quizBar');
+function loadQuiz(){
+  const d=quizData[curr];
+  qQ.innerText=d.q; qO.innerHTML=''; qH.innerText=''; qF.innerText='';
+  d.choices.forEach((c,i)=>{
+    const b=document.createElement('button'); b.className='btn'; b.innerText=c;
+    b.onclick=()=>{
+      qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qB.style.width=`${curr/quizData.length*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz,400):alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = ()=>{ curr=0; score=0; qB.style.width="0%"; loadQuiz(); };
+function showHint(){ if(curr<quizData.length) qH.innerText="💡 "+quizData[curr].hint; }
+
+// Progress Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx, {type:'line', data:{labels:[], datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}});
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = ()=> alert("📥 Downloading ES6+ Patterns PDF...");
+
+// Push Notifications
+if(Notification.permission!=="denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite JS Patterns",{body:"Level up with ES6+ today!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
