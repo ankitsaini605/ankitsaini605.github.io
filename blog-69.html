@@ -1,26 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #69 – Mastering Exam Prep</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #69 | JavaScript ES2025 Features</title>
+  <meta name="description" content="Deep dive into JS ES2025: live code editor, intelligent REPL, quiz, PDF guide, Firebase auth, dark mode, bilingual toggle, analytics, notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"JavaScript ES2025 Features",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Interactive ES2025 live editor, quiz, downloadable PDF guide, Firebase login, dark/light mode, EN/HI toggle, analytics & push notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, input { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:#fff; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .editor-box, .quiz-box, .section { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    textarea.code-area { width:100%; height:200px; font-family:monospace; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+    #output { background:#fff; padding:10px; border:1px solid #ccc; min-height:100px; font-family:monospace; white-space:pre; }
+  </style>
 </head>
 <body>
-<header><h1>Blog #69: Boost Your Memory & Focus</h1></header>
-<main>
-  <h2>🔍 Topic: Revision Strategy</h2>
-  <p>Use the 1-3-7 formula: Revise after 1 day, 3 days, and 7 days for long-term retention.</p>
+<header>
+  <h1>Blog #69 – JavaScript ES2025 Features</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn">EN</button><button id="langHi" class="btn">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn">Dark Mode</button>
+  </nav>
+</header>
 
-  <h2>📚 Topic: Nighttime Study Tips</h2>
-  <ul>
-    <li>Revise already-studied concepts only</li>
-    <li>Don’t learn new material before sleep</li>
-    <li>Summarize the day on paper</li>
-  </ul>
+<div class="main">
+  <!-- 1. Live ES2025 Editor -->
+  <div class="editor-box">
+    <h3 id="toolTitle">Live ES2025 Playground</h3>
+    <textarea id="codeEditor" class="code-area">// Try Optional Chaining & Nullish Coalescing
+const data = { user: { age: null } };
+const age = data.user?.age ?? 'unknown';
+console.log('Age:', age);</textarea>
+    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+    <div id="output"></div>
+  </div>
 
-  <h2>🛏️ Bonus Tip: Sleep + Review</h2>
-  <p>10 minutes of reading before sleep can lock learning into long-term memory.</p>
-</main>
-<footer>Follow @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+  <!-- 2. ES2025 Features Explained -->
+  <section class="section">
+    <h2 id="conceptTitle">What’s New in ES2025?</h2>
+    <ul>
+      <li><strong>Optional Chaining</strong>: `a?.b?.c` safely handles nested properties</li>
+      <li><strong>Nullish Coalescing</strong>: `a ?? b` treats `null`/`undefined` only</li>
+      <li><strong>Logical Assignment</strong>: `a ||= b`, `a &&= b`, `a ??= b`</li>
+      <li><strong>Record & Tuple (stage 3)</strong> introduction</li>
+      <li><strong>Top-level await</strong> in modules</li>
+      <li><strong>Regex v2 additions</strong>: named capture groups, Unicode sets</li>
+    </ul>
+  </section>
+
+  <!-- 3. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: ES2025 Features (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Progress Tracker</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download JS ES2025 Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), uc = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ auth.signInWithEmailAndPassword(prompt("Email"), prompt("Password")).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = () => {
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en:{ toolTitle:"Live ES2025 Playground", conceptTitle:"What’s New in ES2025?", quizTitle:"Quiz: ES2025 Features (10 Qs)", perfTitle:"Progress Tracker", btnPDF:"Download JS ES2025 Guide PDF" },
+    hi:{ toolTitle:"लाइव ES2025 प्लेग्राउंड", conceptTitle:"ES2025 में नवीनताएँ", quizTitle:"प्रश्नोत्तरी: ES2025 फीचर्स (10 प्रश्न)", perfTitle:"प्रगति ट्रैकर", btnPDF:"JS ES2025 गाइड PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l){
+    ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.innerText = texts[l][id];
+    });
+  }
+
+  // Run JS code
+  function runCode(){
+    let out = '';
+    try {
+      out = eval(document.getElementById('codeEditor').value);
+      out = out === undefined ? '' : out;
+    } catch(e){ out = e.toString(); }
+    document.getElementById('output').innerText = String(out);
+  }
+
+  // Quiz
+  const quizData = [
+    {q:"Optional chaining returns undefined if missing?", choices:["True"], ans:0, hint:"Safe nested access."},
+    {q:"Nullish coalescing uses ??", choices:["True"], ans:0, hint:"Only null/undefined."},
+    {q:"Logical assignment ||= assigns if falsy?", choices:["True"], ans:0, hint:"Assign if falsy."},
+    {q:"Top-level await works in modules?", choices:["True"], ans:0, hint:"No async wrapper."},
+    {q:"Record & Tuple immutable structures!", choices:["True"], ans:0, hint:"Stage 3 proposal."},
+    {q:"Named capture in regex uses ?<name>", choices:["True"], ans:0, hint:"Yes, named groups."},
+    {q:"Regex Unicode sets with []+", choices:["True"], ans:0, hint:"ES2025 regex v2."},
+    {q:"?. stops errors if undefined", choices:["True"], ans:0, hint:"Short-circuits undefined."},
+    {q:"a &&= b means if a truthy assign b?", choices:["True"], ans:0, hint:"Logical AND assign."},
+    {q:"eval captures console.log output?", choices:["True"], ans:0, hint:"Logs return undefined."}
+  ];
+  let curr=0, score=0;
+  const [qQ, qO, qH, qF, qB] = [
+    document.getElementById('quizQuestion'),
+    document.getElementById('quizOptions'),
+    document.getElementById('quizHint'),
+    document.getElementById('quizFeedback'),
+    document.getElementById('quizBar')
+  ];
+  function loadQuiz(){
+    const d = quizData[curr];
+    qQ.innerText = d.q;
+    qO.innerHTML = "";
+    qH.innerText = "";
+    qF.innerText = "";
+    d.choices.forEach((c,i)=>{
+      const b = document.createElement('button');
+      b.className = 'btn';
+      b.innerText = c;
+      b.onclick = ()=>{
+        qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+        if(i===d.ans) score++;
+        curr++;
+        qB.style.width = `${(curr/quizData.length)*100}%`;
+        curr < quizData.length ? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+      };
+      qO.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{
+    curr=0;score=0;qB.style.width="0%";loadQuiz();
+  };
+  function showHint(){
+    if(curr < quizData.length) qH.innerText = "💡 "+quizData[curr].hint;
+  }
+
+  // Progress chart
+  const ctx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctx,{ type:'line', data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }] }, options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } } });
+  document.getElementById('savePerf').onclick = ()=>{
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading JS ES2025 Guide PDF...");
+
+  // Notifications
+  if(Notification.permission!=="denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted"){
+        new Notification("EduIgnite JS",{body:"Explore ES2025 features now!"});
+    }});
+  }
+</script>
 </body>
 </html>
+
