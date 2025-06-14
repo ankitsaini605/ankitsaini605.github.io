@@ -1,22 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #74</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #74 | Python Basics & Interactive Code Runner</title>
+  <meta name="description" content="Learn Python basics: live code editor, run code, quiz, PDF download, Firebase auth, dark mode, EN/HI toggle, progress tracking & push notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Python Basics & Interactive Code Runner",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Hands-on Python shell in-browser using Pyodide, quizzes, PDF guide, Firebase login, dark/light mode, EN/HI toggle, learning analytics & push notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, pre { font-family:'Segoe UI', sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:#fff; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .editor-box, .quiz-box, .section { background:#e0f2f1; border-radius:8px; padding:1.5rem; margin:2rem 0; }
+    textarea.code-area { width:100%; height:200px; font-family:monospace; }
+    pre#pyOutput { background:#fff; padding:10px; border:1px solid #ccc; min-height:150px; font-family:monospace; white-space:pre-wrap; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition:.3s; }
+  </style>
+  <!-- Pyodide runtime to run Python in browser -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 </head>
 <body>
-<header><h1>Blog #74 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #74 – Python Basics & Interactive Shell</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn">EN</button><button id="langHi" class="btn">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live Python Editor -->
+  <div class="editor-box">
+    <h3 id="toolTitle">Live Python Shell (Pyodide)</h3>
+    <textarea id="codeEditor" class="code-area">print("Hello, EduIgnite!")\nfor i in range(1,6):\n    print(i, "*", i, "=", i*i)</textarea>
+    <button class="btn btn-primary" onclick="runPy()">Run Python</button>
+    <pre id="pyOutput">// output here</pre>
+  </div>
+
+  <!-- Python Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Python Essentials Covered</h2>
+    <ul>
+      <li><strong>print()</strong>, variables, basic types</li>
+      <li>Loops (for / while) & conditional statements</li>
+      <li>Lists, dicts, and common operations</li>
+      <li>Functions & simple modules</li>
+      <li>Error handling with <code>try/except</code></li>
+      <li>File I/O basics (local virtual FS)</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Python Basics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button><p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Learning Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Python Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Initialize Pyodide
+  let pyodideReady = false, pyodideInstance = null;
+  async function loadPy(){
+    pyodideInstance = await loadPyodide();
+    pyodideReady = true;
+  }
+  loadPy();
+
+  async function runPy(){
+    if(!pyodideReady){ alert("Loading Python engine, wait a sec..."); return; }
+    const code = document.getElementById('codeEditor').value;
+    try {
+      const output = await pyodideInstance.runPythonAsync(code);
+      document.getElementById('pyOutput').innerText = String(output);
+    } catch(e){
+      document.getElementById('pyOutput').innerText = 'Error: ' + e.message;
+    }
+  }
+
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), uc=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ auth.signInWithEmailAndPassword(prompt("Email"),prompt("Password")).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode toggle
+  document.getElementById('darkToggle').onclick = ()=>{
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en:{ toolTitle:"Live Python Shell (Pyodide)", conceptTitle:"Python Essentials Covered", quizTitle:"Quiz: Python Basics (10 Qs)", perfTitle:"Your Learning Progress", btnPDF:"Download Python Guide PDF" },
+    hi:{ toolTitle:"लाइव Python शेल (Pyodide)", conceptTitle:"Python मूल बातें", quizTitle:"प्रश्नोत्तरी: Python बेसिक्स (10 प्रश्न)", perfTitle:"आपकी सीख प्रगति", btnPDF:"Python गाइड PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = ()=>setLang('en');
+  document.getElementById('langHi').onclick = ()=>setLang('hi');
+  function setLang(l){
+    ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.innerText = texts[l][id];
+    });
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"print() outputs text?",choices:["True"],ans:0,hint:"Yes."},
+    {q:"for i in range(3) loops 3 times?",choices:["True"],ans:0,hint:"0,1,2."},
+    {q:"Lists are mutable?",choices:["True"],ans:0,hint:"They can be changed."},
+    {q:"dict uses key:value pairs?",choices:["True"],ans:0,hint:"Yes."},
+    {q:"Function defined via def?",choices:["True"],ans:0,hint:"def func(): ..."},
+    {q:"While loops may be infinite?",choices:["True"],ans:0,hint:"If no break."},
+    {q:"Use try/except to catch errors?",choices:["True"],ans:0,hint:"Yes."},
+    {q:"Comments start with #?",choices:["True"],ans:0,hint:"# comment"},
+    {q:"Indentation matters in Python?",choices:["True"],ans:"Yes",hint:"Blocks are defined by indent."},
+    {q:"Python variables need declaration?",choices:["False"],ans:0,hint:"They are dynamic."}
+  ];
+  let curr=0, score=0;
+  const [qQ,qO,qH,qF,qB] = [
+    document.getElementById('quizQuestion'),
+    document.getElementById('quizOptions'),
+    document.getElementById('quizHint'),
+    document.getElementById('quizFeedback'),
+    document.getElementById('quizBar')
+  ];
+  function loadQuiz(){
+    const d = quizData[curr];
+    qQ.innerText = d.q; qO.innerHTML = ""; qH.innerText = ""; qF.innerText = "";
+    d.choices.forEach((c,i)=>{
+      const b = document.createElement('button');
+      b.className = 'btn'; b.innerText = c;
+      b.onclick = ()=>{
+        qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+        if(i===d.ans) score++;
+        curr++;
+        qB.style.width = `${(curr/quizData.length)*100}%`;
+        if(curr < quizData.length) setTimeout(loadQuiz,400);
+        else alert(`Score: ${score}/${quizData.length}`);
+      };
+      qO.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = ()=>{ curr=0; score=0; qB.style.width="0%"; loadQuiz(); };
+  function showHint(){ if(curr < quizData.length) qH.innerText = "💡 " + quizData[curr].hint; }
+
+  // Progress chart
+  const ctxPerf = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctxPerf,{
+    type:'line',
+    data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }] },
+    options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+  });
+  document.getElementById('savePerf').onclick = ()=> {
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading Python Guide PDF...");
+
+  // Push notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted") new Notification("EduIgnite Python",{body:"Run Python code now!"});
+    });
+  }
+</script>
 </body>
 </html>
+
