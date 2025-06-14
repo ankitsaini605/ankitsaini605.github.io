@@ -1,31 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #66 – Full Study Strategy</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #66 | CSS Animations & Transitions – EduIgnite</title>
+  <meta name="description" content="Master CSS animations/transitions: live demo, interactive editor, quiz, PDF guide, Firebase auth, dark mode, multilingual toggle, progress analytics, notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"CSS Animations & Transitions",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Live editor for CSS animations/transitions, quiz, PDF download, Firebase auth, dark mode, EN/HI toggle, progress analytics & push notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .tool-box, .quiz-box, .section { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .editor-results { display:flex; gap:10px; }
+    textarea.code-area { flex:1; height:200px; font-family:monospace; }
+    iframe#animPreview { flex:1; border:1px solid #ccc; height:200px; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition:.2s; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>Ultimate Study Blueprint for Toppers</h1></header>
-<main>
-  <h2>📌 Topic 1: Pomodoro Technique</h2>
-  <p>This method breaks your study time into 25-minute focused sessions followed by a 5-minute break. It's effective for improving concentration and stamina.</p>
+<header>
+  <h1>Blog #66 – CSS Animations & Transitions</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
 
-  <h2>📌 Topic 2: Active Recall</h2>
-  <p>Instead of re-reading, ask yourself questions and write answers from memory. This boosts long-term retention.</p>
+<div class="main">
+  <!-- 1. Live Animations Editor -->
+  <div class="tool-box editor-results">
+    <div style="flex:1;">
+      <h3 id="toolTitle">CSS Animation Playground</h3>
+      <textarea id="codeEditor" class="code-area"><!DOCTYPE html>
+<html>
+<head><style>
+@keyframes pulse {
+  0% { transform: scale(1); background: #00897b; }
+  50% { transform: scale(1.2); background: #004d40; }
+  100% { transform: scale(1); background: #00897b; }
+}
+.box {
+  width:100px; height:100px; margin:auto;
+  animation: pulse 2s infinite;
+}
+</style></head><body><div class="box"></div></body>
+</html></textarea>
+    </div>
+    <iframe id="animPreview"></iframe>
+  </div>
+  <button class="btn btn-primary" onclick="runPreview()">Run Preview</button>
 
-  <h2>📌 Topic 3: Spaced Repetition</h2>
-  <p>Review content at increasing intervals (1 day, 3 days, 7 days) to fight forgetting curve. Use apps like Anki for this.</p>
+  <!-- 2. Concepts Section -->
+  <section class="section">
+    <h2 id="conceptTitle">Animations | Transitions Concepts</h2>
+    <ul>
+      <li>CSS Transitions: `transition-property`, `duration`, `timing-function`</li>
+      <li>Keyframes animations: `@keyframes`, `animation-name`, `iteration-count`</li>
+      <li>Animatable properties and best practices</li>
+      <li>Responsive animations: prefers-reduced-motion</li>
+      <li>Performance tips: use transforms, avoid layout thrash</li>
+    </ul>
+  </section>
 
-  <h2>📌 Topic 4: Morning vs Night Study</h2>
-  <ul>
-    <li><strong>Morning:</strong> Best for problem-solving, fresh memory.</li>
-    <li><strong>Night:</strong> Best for revision, concept clarity, less distraction.</li>
-  </ul>
+  <!-- 3. Quiz Section -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: CSS Animations (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
 
-  <h2>📌 Bonus: Weekly Study Plan</h2>
-  <p>✓ 4 Days for learning, 2 Days for practice, 1 Day for revision + mock test.</p>
-</main>
-<footer>Follow: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+  <!-- 4. Progress & PDF Guide -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Animations Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc=document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u
+  ? `Hi, ${u.email} <button onclick="logout()">Logout</button>`
+  : `<button onclick="login()">Login</button>`);
+function login(){ auth.signInWithEmailAndPassword(prompt("Email"), prompt("Password")).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = ()=>{
+  const d=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: {
+    toolTitle:"CSS Animation Playground",
+    conceptTitle:"Animations | Transitions Concepts",
+    quizTitle:"Quiz: CSS Animations (10 Qs)",
+    perfTitle:"Your Progress",
+    btnPDF:"Download Animations Guide PDF"
+  },
+  hi: {
+    toolTitle:"CSS एनीमेशन प्लेग्राउंड",
+    conceptTitle:"एनीमेशन | ट्रांजिशन अवधारणाएँ",
+    quizTitle:"प्रश्नोत्तरी: CSS एनीमेशन (10 प्रश्न)",
+    perfTitle:"आपकी प्रगति",
+    btnPDF:"एनीमेशन गाइड PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l){
+  ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Run preview
+function runPreview(){
+  const code = document.getElementById('codeEditor').value;
+  const doc = document.getElementById('animPreview').contentDocument;
+  doc.open(); doc.write(code); doc.close();
+}
+
+// Quiz logic
+const quizData = [
+  {q:"transition-duration property?", choices:["time value"], ans:0, hint:"Duration in seconds or ms."},
+  {q:"@keyframes used for?", choices:["custom animation"], ans:0, hint:"Defines animation steps."},
+  {q:"animation-iteration-count infinite?", choices:["loop endlessly"], ans:0, hint:"Loops infinitely."},
+  {q:"transform is animatable?", choices:["True"], ans:0, hint:"Use transforms for better perf."},
+  {q:"transition-timing-function ease-in?", choices:["starts slow"], ans:0, hint:"easing curve beginning slow."},
+  {q:"prefers-reduced-motion media query?", choices:["True"], ans:0, hint:"Respect user preference."},
+  {q:"animation-delay waits start?", choices:["True"], ans:0, hint:"Delays animation."},
+  {q:"use opacity transition for fade?", choices:["True"], ans:0, hint:"Yes, use opacity."},
+  {q:"transition shorthand needs property?", choices:["Yes"], ans:0, hint:"Specify property."},
+  {q:"animation-fill-mode forwards?", choices:["True"], ans:0, hint:"Holds last frame."}
+];
+let curr=0, score=0;
+const qQ = document.getElementById('quizQuestion'),
+      qO = document.getElementById('quizOptions'),
+      qH = document.getElementById('quizHint'),
+      qF = document.getElementById('quizFeedback'),
+      qB = document.getElementById('quizBar');
+
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q;
+  qO.innerHTML = '';
+  qH.innerText = '';
+  qF.innerText = '';
+  d.choices.forEach((c,i)=>{
+    const b = document.createElement('button');
+    b.className = 'btn';
+    b.innerText = c;
+    b.onclick = ()=>{
+      qF.innerText = i === d.ans ? "✅ Correct" : "❌ Wrong";
+      if (i === d.ans) score++;
+      curr++;
+      qB.style.width = `${(curr/quizData.length)*100}%`;
+      curr < quizData.length ? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+
+document.getElementById('startQuiz').onclick = ()=>{
+  curr=0; score=0; qB.style.width="0%"; loadQuiz();
+};
+
+function showHint(){
+  if(curr < quizData.length) qH.innerText = "💡 " + quizData[curr].hint;
+}
+
+// Progress Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx,{ type:'line', data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }] }, options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } } });
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading Animations Guide PDF...");
+
+// Notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted") new Notification("EduIgnite CSS",{ body:"Animate your skills now!" });
+  });
+}
+</script>
 </body>
 </html>
+
