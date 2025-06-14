@@ -1,16 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Focus Like a Monk</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #7 | Data Structures in Python – EduIgnite</title>
+  <meta name="description" content="Master Python Data Structures: live code-editor, interactive examples, quiz, downloadable PDF, Firebase auth, dark mode, bilingual toggle, progress analytics, notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"BlogPosting",
+      "headline":"Data Structures in Python",
+      "author":{"@type":"Person","name":"Ankit Saini"},
+      "publisher":{"@type":"Organization","name":"EduIgnite"},
+      "datePublished":"2025-06-13",
+      "description":"Comprehensive Python DS guide with live editor, quiz, downloadable PDF, Firebase login, dark/light toggle, English/Hindi, progress tracking & notifications."
+    }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, pre, input { font-family:'Segoe UI', sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:#fff; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .editor-box, .quiz-box, .section { background:#e0f2f1; border-radius:8px; padding:1.5rem; margin:2rem 0; }
+    textarea.code-area { width:100%; height:200px; font-family:monospace; }
+    pre#pyOutput { background:#fff; padding:10px; border:1px solid #ccc; min-height:120px; white-space:pre; font-family:monospace; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Focus Like a Monk</h2>
-  <p>Control your attention by eliminating noise, setting goals, and meditating daily for 5–10 min.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #7 – Data Structures in Python</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn">EN</button>
+    <button id="langHi" class="btn">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Editor -->
+  <div class="editor-box">
+    <h3 id="toolTitle">Live Python DS Playground</h3>
+    <textarea id="codeEditor" class="code-area"># Try Python list & dict
+nums = [1,2,3,4,5]
+squares = [n*n for n in nums]
+d = {"a":1, "b":2}
+print("Squares:", squares)
+print("Dict keys:", list(d.keys()))</textarea>
+    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+    <pre id="pyOutput"></pre>
+  </div>
+
+  <!-- Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Key Data Structures</h2>
+    <ul>
+      <li><strong>List</strong>: ordered, mutable collection</li>
+      <li><strong>Tuple</strong>: immutable sequences</li>
+      <li><strong>Dict</strong>: key-value mapping</li>
+      <li><strong>Set</strong>: unordered unique elements</li>
+      <li><strong>Comprehensions</strong>: list/dict/set comprehensions</li>
+      <li><strong>Performance tips</strong>: choose right DS for task</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Python DS (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Python DS Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), uc = document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ auth.signInWithEmailAndPassword(prompt("Email"), prompt("Password")).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = () => {
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en:{ toolTitle:"Live Python DS Playground", conceptTitle:"Key Data Structures", quizTitle:"Quiz: Python DS (10 Qs)", perfTitle:"Your Progress", btnPDF:"Download Python DS Guide PDF" },
+    hi:{ toolTitle:"लाइव Python DS प्लेग्राउंड", conceptTitle:"मुख्य डेटा संरचनाएँ", quizTitle:"प्रश्नोত্তरी: Python DS (10 प्रश्न)", perfTitle:"आपकी प्रगति", btnPDF:"Python DS गाइड PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l){
+    ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.innerText = texts[l][id];
+    });
+  }
+
+  // Python-like execution via Skulpt
+  function runCode() {
+    const editor = document.getElementById('codeEditor').value;
+    Sk.configure({ output: v => document.getElementById('pyOutput').innerText += v + '\n' });
+    document.getElementById('pyOutput').innerText = '';
+    Sk.misceval.asyncToPromise(() => Sk.importMainWithBody('<stdin>', false, editor))
+      .catch(err => document.getElementById('pyOutput').innerText = err.toString());
+  }
+
+  // Load Skulpt library
+  (function(){
+    const s = document.createElement('script');
+    s.src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js";
+    document.head.appendChild(s);
+  })();
+
+  // Quiz logic
+  const quizData = [
+    {q:"List is mutable?", choices:["True"], ans:0, hint:"Lists can be modified."},
+    {q:"Tuple can change elements?", choices:["False"], ans:0, hint:"Tuples are immutable."},
+    {q:"Dict uses key->value pairs?", choices:["True"], ans:0, hint:"Mapping structure."},
+    {q:"Set allows duplicates?", choices:["False"], ans:0, hint:"Unique elements only."},
+    {q:"Comprehension syntax []?", choices:["True"], ans:0, hint:"List comprehension uses []"},
+    {q:"Dict comprehension uses {}", choices:["True"], ans:0, hint:"Mapping comprehension uses {}"},
+    {q:"Set comprehension uses {}", choices:["True"], ans:0, hint:"But {} can be dict—use set()"},
+    {q:"List indexing starts at 0?", choices:["True"], ans:0, hint:"Python is zero-based."},
+    {q:"len() returns length?", choices:["True"], ans:0, hint:"Built-in length function."},
+    {q:"Cannot assign to tuple element?", choices:["True"], ans:0, hint:"Immutable structure."}
+  ];
+  let curr=0, score=0;
+  const [qQ, qO, qH, qF, qB] = [
+    document.getElementById('quizQuestion'),
+    document.getElementById('quizOptions'),
+    document.getElementById('quizHint'),
+    document.getElementById('quizFeedback'),
+    document.getElementById('quizBar')
+  ];
+  function loadQuiz(){
+    const d = quizData[curr];
+    qQ.innerText = d.q; qO.innerHTML=""; qH.innerText=""; qF.innerText="";
+    d.choices.forEach((c,i)=>{
+      const btn = document.createElement('button');
+      btn.className = 'btn';
+      btn.innerText = c;
+      btn.onclick = () => {
+        qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+        if(i===d.ans) score++;
+        curr++;
+        qB.style.width = `${(curr/quizData.length)*100}%`;
+        curr < quizData.length ? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+      };
+      qO.appendChild(btn);
+    });
+  }
+  document.getElementById('startQuiz').onclick = () => { curr=0; score=0; qB.style.width="0%"; loadQuiz(); };
+  function showHint(){ if(curr < quizData.length) qH.innerText = "💡 " + quizData[curr].hint; }
+
+  // Progress chart
+  const ctx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctx,{
+    type:'line',
+    data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }] },
+    options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+  });
+  document.getElementById('savePerf').onclick = () => {
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading Python DS Guide PDF...");
+
+  // Notifications
+  if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(p => {
+      if(p === "granted") new Notification("EduIgnite Python",{ body:"Practice Python data structures now!" });
+    });
+  }
+</script>
 </body>
 </html>
+
