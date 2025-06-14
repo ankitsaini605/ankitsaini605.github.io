@@ -1,16 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Post #41 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #41 | Data Structures in Java – EduIgnite</title>
+  <meta name="description" content="Learn Java data structures: live code compiler, visualizations, quiz, PDF guide, Firebase auth, dark mode, EN/HI toggle, progress tracking & notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Java Data Structures",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Interactive Java code editor for arrays, lists, stacks; visualizers, quiz, Firebase auth, dark mode, bilingual toggle, PDF download, analytics & notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white;padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main{max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .quiz-box, .section{background:#e0f2f1;padding:1.5rem;margin:2rem 0;border-radius:8px;}
+    .editor-results{display:flex;gap:10px;}
+    textarea.code-area{flex:1;height:200px;}
+    iframe#javaFrame{flex:1;border:1px solid #ccc;height:200px;}
+    .btn, .btn-primary{padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s;}
+    .btn-primary{background:#00897b;color:white;}
+    .progress-bar{background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0;}
+    .progress-filled{background:#00897b;width:0;height:100%;transition:.3s;}
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #41</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #41 – Java Data Structures</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. Live Java Editor via REPL.it -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Java Live Editor</h3>
+    <div class="editor-results">
+      <textarea id="codeEditor" class="code-area">
+// Use main() to test:
+public class Main {
+  public static void main(String[] args) {
+    int[] arr = {1,2,3};
+    System.out.println("Sum: " + java.util.Arrays.stream(arr).sum());
+  }
+}
+      </textarea>
+      <iframe id="javaFrame"></iframe>
+    </div>
+    <button class="btn btn-primary" onclick="runJava()">Run Java</button>
+  </div>
+
+  <!-- 2. Data Structure Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Key DS Concepts</h2>
+    <ul>
+      <li>Arrays & dynamic behavior using `ArrayList`</li>
+      <li>Stacks, Queues, LinkedLists</li>
+      <li>HashMap and Set interfaces</li>
+      <li>Tree basics using `TreeSet` and `TreeMap`</li>
+      <li>Best-use scenarios & performance trade-offs</li>
+    </ul>
+  </section>
+
+  <!-- 3. Visualizer -->
+  <div class="tool-box">
+    <h3>ArrayList Visualizer</h3>
+    <button class="btn btn-primary" onclick="visualizeList()">Visualize Sample ArrayList</button>
+    <div id="visContainer" class="section"></div>
+  </div>
+
+  <!-- 4. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Java DS (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 5. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Java DS Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth=firebase.auth(), uc=document.getElementById('userContainer');
+auth.onAuthStateChanged(u=> uc.innerHTML = u? `Hi, ${u.email} <button onclick="logout()">Logout</button>`:`<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"),p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick=()=>{
+  const d=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode',d);};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts={en:{toolTitle:"Java Live Editor",conceptTitle:"Key DS Concepts",quizTitle:"Quiz: Java DS (10 Qs)",perfTitle:"Your Progress",btnPDF:"Download Java DS Guide PDF"},hi:{toolTitle:"Java लाइव एडिटर",conceptTitle:"मुख्य DS सिद्धांत",quizTitle:"प्रश्नोत्तरी: Java DS (10 प्रश्न)",perfTitle:"आपकी प्रगति",btnPDF:"Java DS गाइड PDF डाउनलोड करें"}};
+document.getElementById('langEn').onclick=()=>setLang('en');
+document.getElementById('langHi').onclick=()=>setLang('hi');
+function setLang(l){ ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerText=texts[l][id];}); document.getElementById('quizHint').innerText=''; }
+
+// Run Java (via REPL.it embed)
+function runJava(){
+  const code = document.getElementById('codeEditor').value;
+  const iframe = document.getElementById('javaFrame');
+  const src = `https://replit.com/@embed/?language=java&code=${encodeURIComponent(code)}&output=true`;
+  iframe.src = src;
+}
+
+// Visualize ArrayList
+function visualizeList(){
+  const arr = ["A","B","C","D"];
+  let html = '<div style="display:flex;">';
+  arr.forEach(v=>{
+    html += `<div style="padding:10px;border:1px solid #00897b;margin:3px;border-radius:4px;">${v}</div>`;
+  });
+  html += '</div>';
+  document.getElementById('visContainer').innerHTML = html;
+}
+
+// Quiz Logic
+const quizData=[
+  {q:"ArrayList default size?",choices:["10","5","0","100"],ans:0,hint:"Default is ten."},
+  {q:"Stack extends?",choices:["Vector","List","Array","Map"],ans:0,hint:"Legacy from Vector."},
+  {q:"Queue interface method?",choices:["add()","get()","pop()","find()"],ans:0,hint:"Queue add."},
+  {q:"HashMap allows null?",choices:["keys & values","values only","keys only","none"],ans:0,hint:"Both allowed."},
+  {q:"TreeSet is sorted?",choices:["Yes","No"],ans:0,hint:"Auto-sorted."},
+  {q:"LinkedList implements?",choices:["Deque","List","Queue","All"],ans:3,hint:"It’s double-ended."},
+  {q:"removeFirst() returns?",choices:["element","index","void","boolean"],ans:0,hint:"Returns element."},
+  {q:"peek() retrieves or removes?",choices:["retrieves","removes","both","neither"],ans:0,hint:"Just peeks."},
+  {q:"HashMap not synchronized?",choices:["True","False"],ans:0,hint:"Unsynchronized."},
+  {q:"Vector synchronized?",choices:["True","False"],ans:0,hint:"Legacy sync."},
+];
+let curr=0, score=0;
+const qQ=document.getElementById('quizQuestion'),qO=document.getElementById('quizOptions'),qH=document.getElementById('quizHint'),qF=document.getElementById('quizFeedback'),qB=document.getElementById('quizBar');
+function loadQuiz(){
+  const d=quizData[curr];
+  qQ.innerText=d.q; qO.innerHTML=''; qH.innerText=''; qF.innerText='';
+  d.choices.forEach((c,i)=>{
+    const b=document.createElement('button');
+    b.className='btn'; b.innerText=c;
+    b.onclick=()=>{
+      qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qB.style.width = `${curr/quizData.length*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz,400):alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick=()=>{curr=0;score=0;qB.style.width="0%";loadQuiz();};
+function showHint(){if(curr<quizData.length) qH.innerText="💡 "+quizData[curr].hint;}
+
+// Progress Chart
+const ctx=document.getElementById('perfChart').getContext('2d');
+const perfChart=new Chart(ctx,{type:'line',data:{labels:[],datasets:[{label:'Score %',data:[],backgroundColor:'#00897b'}]},options:{responsive:true,scales:{y:{beginAtZero:true,max:100}}}});
+document.getElementById('savePerf').onclick=()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick=()=>alert("📥 Downloading Java DS PDF...");
+
+// Notifications
+if(Notification.permission!=="denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite Java DS",{body:"Enhance your Java skills now!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
