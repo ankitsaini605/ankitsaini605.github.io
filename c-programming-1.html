@@ -1,26 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="EduIgnite – Learn smart with MCQs, coding tutorials, study blogs, and current affairs. Crack your exams with confidence." />
-<meta name="keywords" content="EduIgnite, study tips, competitive exams, C programming, aptitude quiz, current affairs, coding MCQ, ankit saini website" />
-<meta name="author" content="Ankit Saini" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8" />
-  <title>C Programming - Basic Concepts</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn C Programming fundamentals with Eduignite. Easy-to-understand tutorials with examples for beginners.">
+  <meta name="keywords" content="C Programming, Eduignite, C Basics, Learn C, Programming Tutorials, C Syntax">
+  <meta name="author" content="Eduignite Team">
+  <title>C Programming Basics - Eduignite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 </head>
+
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>C Programming Basics</h2>
-  <ul>
-    <li><strong>Header Files:</strong> #include &lt;stdio.h&gt;, &lt;conio.h&gt;</li>
-    <li><strong>main() Function:</strong> Entry point of C program</li>
-    <li><strong>Variables:</strong> int, float, char</li>
-    <li><strong>Output:</strong> printf("Hello World");</li>
-    <li><strong>Input:</strong> scanf("%d", &x);</li>
-  </ul>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <!-- Header -->
+  <header>
+    <h1>🔥 C Programming - Level 1</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="programming.html" class="active">C Programming</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Table of Contents -->
+  <aside class="toc">
+    <h3>📘 Topics Covered</h3>
+    <ul>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#syntax">Basic Syntax</a></li>
+      <li><a href="#variables">Variables & Data Types</a></li>
+      <li><a href="#inputoutput">Input/Output</a></li>
+      <li><a href="#example">Simple Example</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <section id="intro">
+      <h2>📌 What is C Programming?</h2>
+      <p>C is a general-purpose, procedural programming language developed by Dennis Ritchie. It’s known for its speed and close-to-hardware performance, often used in systems and embedded programming.</p>
+    </section>
+
+    <section id="syntax">
+      <h2>📐 Basic Syntax</h2>
+      <p>A basic C program has the following structure:</p>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Hello, World!");
+    return 0;
+}
+      </code></pre>
+    </section>
+
+    <section id="variables">
+      <h2>🔢 Variables & Data Types</h2>
+      <p>Common data types:</p>
+      <ul>
+        <li><strong>int</strong> – Integer</li>
+        <li><strong>float</strong> – Decimal</li>
+        <li><strong>char</strong> – Character</li>
+      </ul>
+    </section>
+
+    <section id="inputoutput">
+      <h2>💬 Input and Output</h2>
+      <p>Use <code>scanf</code> for input and <code>printf</code> for output.</p>
+      <pre><code>
+int age;
+printf("Enter your age: ");
+scanf("%d", &age);
+printf("You are %d years old", age);
+      </code></pre>
+    </section>
+
+    <section id="example">
+      <h2>✅ Simple Program Example</h2>
+      <pre><code>
+#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 10, b = 20;
+    int sum = a + b;
+    printf("Sum = %d", sum);
+    return 0;
+}
+      </code></pre>
+    </section>
+  </main>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>🚀 Want to test your C skills?</h2>
+    <p>Try our <a href="c-quiz-1.html">C Quiz</a> to check your understanding!</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Eduignite | Made for passionate learners worldwide.</p>
+    <p><a href="sitemap.xml">Sitemap</a> | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <!-- Search Function -->
+  <script>
+    const tocLinks = document.querySelectorAll('.toc a');
+    tocLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        window.scrollTo({
+          top: target.offsetTop - 50,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
