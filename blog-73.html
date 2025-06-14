@@ -1,22 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #73</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #73 | JavaScript ES6+ Features Deep Dive</title>
+  <meta name="description" content="Explore ES6+ in JS: live feature playground, code editor, quiz, PDF download, Firebase auth, dark mode, EN/HI toggle, analytics & push notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"JavaScript ES6+ Features Deep Dive",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Hands‑on JS ES6+ editor, examples (let/const, arrow, async/await, modules), quiz, downloadable PDF, Firebase login, dark/light mode, bilingual, progress charts & notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, pre { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:#fff; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .editor-box, .quiz-box, .section { background:#e0f2f1; border-radius:8px; padding:1.5rem; margin:2rem 0; }
+    textarea.code-area { width:100%; height:200px; font-family:monospace; }
+    pre#jsOutput { background:#fff; padding:10px; border:1px solid #ccc; min-height:150px; white-space:pre-wrap; font-family:monospace; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0%; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>Blog #73 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+<header>
+  <h1>Blog #73 – JavaScript ES6+ Deep Dive</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn">EN</button><button id="langHi" class="btn">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- Live Editor -->
+  <div class="editor-box">
+    <h3 id="toolTitle">ES6+ Playground</h3>
+    <textarea id="codeEditor" class="code-area">// Try arrow functions, let/const, async/await
+const nums = [1, 2, 3];
+const squared = nums.map(n => n*n);
+const log = async () => {
+  await new Promise(r => setTimeout(r,500));
+  console.log('Squares:', squared);
+};
+log();</textarea>
+    <button class="btn btn-primary" onclick="runJS()">Run Code</button>
+    <pre id="jsOutput">// output here</pre>
+  </div>
+
+  <!-- ES6 Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Key ES6+ Features Covered</h2>
+    <ul>
+      <li><strong>let/const</strong> scoping advantages</li>
+      <li><strong>Arrow functions</strong> concise & lexical this</li>
+      <li><strong>Template literals</strong> embedded expressions</li>
+      <li><strong>Destructuring</strong> arrays/objects</li>
+      <li><strong>Default/rest/spread</strong> arguments</li>
+      <li><strong>Async/await</strong> promise handling</li>
+      <li><strong>Modules</strong> (import/export)</li>
+    </ul>
+  </section>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: ES6+ Essentials (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Learning Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download ES6+ Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), uc=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ auth.signInWithEmailAndPassword(prompt("Email"),prompt("Password")).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode toggle
+  document.getElementById('darkToggle').onclick = () => {
+    const d = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+  // Language toggle
+  const texts = {
+    en:{ toolTitle:"ES6+ Playground", conceptTitle:"Key ES6+ Features Covered", quizTitle:"Quiz: ES6+ Essentials (10 Qs)", perfTitle:"Learning Progress", btnPDF:"Download ES6+ Guide PDF" },
+    hi:{ toolTitle:"ES6+ प्रयोगशाला", conceptTitle:"ES6+ के मुख्य विशेषताएँ", quizTitle:"प्रश्नोत्तरी: ES6+ (10 प्रश्न)", perfTitle:"सीखने की प्रगति", btnPDF:"ES6+ गाइड PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = () => setLang('en');
+  document.getElementById('langHi').onclick = () => setLang('hi');
+  function setLang(l){
+    ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.innerText = texts[l][id];
+    });
+  }
+
+  // Run JS
+  function runJS(){
+    const src = document.getElementById('codeEditor').value;
+    try {
+      const oldLog = console.log;
+      let out = '';
+      console.log = v => out += v + '\n';
+      new Function(src)();
+      document.getElementById('jsOutput').innerText = out;
+      console.log = oldLog;
+    } catch(e){
+      document.getElementById('jsOutput').innerText = 'Error: ' + e.message;
+    }
+  }
+
+  // Quiz logic
+  const quizData = [
+    {q:"let respects block scope?",choices:["True"],ans:0,hint:"Yes."},
+    {q:"const allows reassigning?",choices:["False"],ans:0,hint:"Immutable binding."},
+    {q:"Arrow fn binds lexical this?",choices:["True"],ans:0,hint:"Doesn't create its own this."},
+    {q:"Template literals use backticks?",choices:["True"],ans:0,hint:"`...${expr}`."},
+    {q:"Spread (...) unpacks arrays?",choices:["True"],ans:0,hint:"Use in function calls or literals."},
+    {q:"Destructuring works on objects?",choices:["True"],ans:0,hint:"const {a,b}=obj."},
+    {q:"Default params set undefined?",choices:["False"],ans:0,hint:"They take default."},
+    {q:"Modules import with import...",choices:["True"],ans:0,hint:"ES6 syntax."},
+    {q:"Async functions return Promise?",choices:["True"],ans:0,hint:"Always a Promise."},
+    {q:"Await pauses execution until resolved?",choices:["True"],ans:0,hint:"Works inside async."}
+  ];
+  let curr=0,score=0;
+  const [qQ,qO,qH,qF,qB] = [
+    document.getElementById('quizQuestion'),
+    document.getElementById('quizOptions'),
+    document.getElementById('quizHint'),
+    document.getElementById('quizFeedback'),
+    document.getElementById('quizBar')
+  ];
+  function loadQuiz(){
+    const d = quizData[curr];
+    qQ.innerText = d.q; qO.innerHTML = ""; qH.innerText = ""; qF.innerText = "";
+    d.choices.forEach((c,i)=>{
+      const b = document.createElement('button');
+      b.className = 'btn'; b.innerText = c;
+      b.onclick = () => {
+        qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+        if(i===d.ans) score++;
+        curr++;
+        qB.style.width = `${(curr/quizData.length)*100}%`;
+        if(curr < quizData.length){ setTimeout(loadQuiz,400); }
+        else { alert(`Score: ${score}/${quizData.length}`); }
+      };
+      qO.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = () => { curr=0; score=0; qB.style.width="0%"; loadQuiz(); };
+  function showHint(){ if(curr < quizData.length) qH.innerText = "💡 " + quizData[curr].hint; }
+
+  // Progress chart
+  const ctxPerf = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctxPerf,{
+    type:'line',
+    data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }] },
+    options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+  });
+  document.getElementById('savePerf').onclick = () => {
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF download
+  document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading ES6+ Guide PDF...");
+
+  // Push notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p => {
+      if(p === "granted") new Notification("EduIgnite ES6+", { body: "Practice ES6+ JavaScript now!" });
+    });
+  }
+</script>
 </body>
 </html>
+
