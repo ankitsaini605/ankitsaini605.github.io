@@ -1,26 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>C Programming Quiz - Set 1</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Test your C programming knowledge with this interactive quiz on Eduignite.">
+  <meta name="keywords" content="C quiz, C programming MCQ, Eduignite C test, C programming questions">
+  <meta name="author" content="Eduignite Team">
+  <title>C Programming Quiz - Eduignite</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="C programming multiple choice questions to test your knowledge. Created by EduIgnite." />
-  <meta name="keywords" content="c programming mcq, c quiz, c test, EduIgnite, coding practice" />
-  <meta name="author" content="Ankit Saini" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f7f9fc;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #003366;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .btn {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .result {
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      color: green;
+    }
+    .explanation {
+      font-size: 14px;
+      color: #444;
+      background: #eef;
+      padding: 10px;
+      border-left: 4px solid #003366;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>C Programming – MCQ Quiz Set 1</h2>
-  <ol>
-    <li>Q: What is the output of: <code>printf("%d", 5 + 3);</code>? <br><strong>Ans:</strong> 8</li>
-    <li>Q: Which header file is required for <code>printf()</code>? <br><strong>Ans:</strong> stdio.h</li>
-    <li>Q: Which of these is a valid variable name? <br><strong>Ans:</strong> total_marks</li>
-    <li>Q: What is the correct format specifier for float? <br><strong>Ans:</strong> %f</li>
-    <li>Q: What is the size of <code>int</code> in C (typical)? <br><strong>Ans:</strong> 4 bytes</li>
-  </ol>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+  <h1>🧠 C Programming Quiz</h1>
+  <p style="text-align:center;">Test your skills and learn with instant feedback!</p>
+
+  <div class="quiz-container">
+    <form id="quizForm">
+
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. Which of the following is the correct syntax of main function in C?</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a"> void main()</label>
+          <label><input type="radio" name="q1" value="b"> int main()</label>
+          <label><input type="radio" name="q1" value="c"> main()</label>
+          <label><input type="radio" name="q1" value="d"> None of the above</label>
+        </div>
+        <div class="explanation" id="exp1" style="display:none;">
+          ✅ Correct: <b>int main()</b><br>
+          <i>Explanation:</i> 'int main()' is the standard syntax as it returns an integer to the operating system.
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. What is the output of: printf("%d", (5 + 2) * 3);</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a"> 21</label>
+          <label><input type="radio" name="q2" value="b"> 17</label>
+          <label><input type="radio" name="q2" value="c"> 15</label>
+          <label><input type="radio" name="q2" value="d"> 23</label>
+        </div>
+        <div class="explanation" id="exp2" style="display:none;">
+          ✅ Correct: <b>21</b><br>
+          <i>Explanation:</i> (5 + 2) = 7, then 7 * 3 = 21
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">
+        <h3>3. Which symbol is used to denote a pointer?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="a"> @</label>
+          <label><input type="radio" name="q3" value="b"> *</label>
+          <label><input type="radio" name="q3" value="c"> #</label>
+          <label><input type="radio" name="q3" value="d"> &</label>
+        </div>
+        <div class="explanation" id="exp3" style="display:none;">
+          ✅ Correct: <b>*</b><br>
+          <i>Explanation:</i> Asterisk (*) is used to declare and dereference pointers in C.
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" class="btn" onclick="submitQuiz()">Submit Quiz</button>
+    </form>
+
+    <div class="result" id="score"></div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function submitQuiz() {
+      let score = 0;
+      const answers = { q1: 'b', q2: 'a', q3: 'b' };
+
+      Object.keys(answers).forEach((key, i) => {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+          score++;
+        }
+        document.getElementById('exp' + (i + 1)).style.display = 'block';
+      });
+
+      document.getElementById('score').innerText = `🎯 Your Score: ${score}/3`;
+    }
+  </script>
+
 </body>
 </html>
+
