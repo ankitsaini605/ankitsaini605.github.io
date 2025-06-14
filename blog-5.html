@@ -1,1 +1,205 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Why Most Students Fail in Competitive Exams</title><link rel='stylesheet' href='style.css' /><meta name='description' content='Understand the top reasons behind failure in competitive exams and how to avoid them.'><meta name='keywords' content='exam failure reasons, competitive exams, success tips'><meta name='author' content='Ankit Saini'><meta name='viewport' content='width=device-width, initial-scale=1.0'></head><body><header><h1>EduIgnite</h1></header><main><h2>Why Most Students Fail in Competitive Exams</h2><ol><li>Lack of consistency</li><li>Wrong study strategy</li><li>No mock test practice</li><li>Overuse of social media</li><li>Poor time management</li></ol></main><footer>&copy; 2025 EduIgnite | Ankit Saini</footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #5 | HTML5 Semantic Layout – EduIgnite</title>
+  <meta name="description" content="Understand semantic HTML5 elements: interactive markup editor, live preview, quiz, downloadable guide, Firebase auth, dark mode, bilingual toggle, progress analytics & notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"HTML5 Semantic Layout",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Learn HTML5 semantic tags (header, nav, section, article, aside, footer) with live preview, quiz, PDF download, Firebase login, dark mode, EN/HI toggle, progress chart & notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white;padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main { max-width:900px;margin:auto;padding:1rem;}
+    .tool-box, .quiz-box, .section { background:#e0f2f1;padding:1.5rem;margin:2rem 0;border-radius:8px; }
+    .editor { display:flex; gap:10px; }
+    textarea.code-area { flex:1;height:200px;font-family:monospace; }
+    iframe#htmlPreview { flex:1;border:1px solid #ccc;height:200px; }
+    .btn, .btn-primary { padding:.6rem 1.2rem;margin:.3rem;border:none;border-radius:4px;cursor:pointer;transition:.2s; }
+    .btn-primary { background:#00897b;color:white; }
+    .progress-bar { background:#ddd;border-radius:6px;height:12px;overflow:hidden;margin:10px 0; }
+    .progress-filled { background:#00897b;width:0;height:100%;transition:.3s; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Blog #5 – HTML5 Semantic Layout</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. Live Markup Editor -->
+  <div class="tool-box editor">
+    <div style="flex:1;">
+      <h3 id="toolTitle">HTML5 Live Editor</h3>
+      <textarea id="codeEditor" class="code-area"><!DOCTYPE html>
+<html>
+  <body>
+    <header><h2>My Site Header</h2></header>
+    <nav><a href="#">Home</a> | <a href="#">About</a></nav>
+    <main>
+      <section><article><h3>Article Title</h3><p>Content here...</p></article></section>
+      <aside><p>Sidebar info</p></aside>
+    </main>
+    <footer><p>© EduIgnite 2025</p></footer>
+  </body>
+</html></textarea>
+    </div>
+    <iframe id="htmlPreview"></iframe>
+  </div>
+  <button class="btn btn-primary" onclick="runMarkup()">Run Preview</button>
+
+  <!-- 2. Semantic Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Semantic Elements Explained</h2>
+    <ul>
+      <li><strong>&lt;header&gt;</strong>: Intro branding/navigation.</li>
+      <li><strong>&lt;nav&gt;</strong>: Navigation menus.</li>
+      <li><strong>&lt;main&gt;</strong>: Primary page content.</li>
+      <li><strong>&lt;section&gt;</strong>: Thematic grouping.</li>
+      <li><strong>&lt;article&gt;</strong>: Independent content piece.</li>
+      <li><strong>&lt;aside&gt;</strong>: Related secondary info.</li>
+      <li><strong>&lt;footer&gt;</strong>: Copyright, links at bottom.</li>
+    </ul>
+  </section>
+
+  <!-- 3. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: HTML Semantics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download HTML5 Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: { toolTitle: "HTML5 Live Editor", conceptTitle: "Semantic Elements Explained", quizTitle: "Quiz: HTML Semantics (10 Qs)", perfTitle: "Your Progress", btnPDF: "Download HTML5 Guide PDF" },
+  hi: { toolTitle: "HTML5 लाइव एडिटर", conceptTitle: "सेमांटिक एलिमेंट्स समझें", quizTitle: "प्रश्नोत्तरी: HTML Semantics (10 प्रश्न)", perfTitle: "आपकी प्रगति", btnPDF: "HTML5 गाइड PDF डाउनलोड करें" }
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l){
+  ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Markup Preview
+function runMarkup(){
+  const code = document.getElementById('codeEditor').value;
+  const iframe = document.getElementById('htmlPreview');
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  doc.open(); doc.write(code); doc.close();
+}
+
+// Quiz logic
+const quizData = [
+  {q:"Which tag for navigation?", choices:["<nav>","<menu>","<navlink>","<sidebar>"], ans:0, hint:"'nav' sounds like navigation."},
+  {q:"Main content goes in?", choices:["<main>","<div>","<body>","<section>"], ans:0, hint:"Semantic main area."},
+  {q:"Independent post tag?", choices:["<article>","<section>","<div>","<aside>"], ans:0, hint:"Think standalone."},
+  {q:"Sidebar/related uses <aside>?", choices:["True","False"], ans:0, hint:"Yes, use aside."},
+  {q:"Footer includes copyright?", choices:["True","False"], ans:0, hint:"Footer is bottom info."},
+  {q:"Header contains logo?", choices:["True","False"], ans:0, hint:"Header is top branding."},
+  {q:"Section groups content?", choices:["True","False"], ans:0, hint:"Yes, that's its purpose."},
+  {q:"Use <div> always?", choices:["No","Yes"], ans:0, hint:"Use semantic tags instead."},
+  {q:"HTML5 semantic improves SEO?", choices:["True","False"], ans:0, hint:"Yes, it helps search."},
+  {q:"Semantic tags improve accessibility?", choices:["True","False"], ans:0, hint:"Yes, for screen readers."},
+];
+let curr=0, score=0;
+const qQ = document.getElementById('quizQuestion'), qO = document.getElementById('quizOptions'), qH = document.getElementById('quizHint'), qF = document.getElementById('quizFeedback'), qB = document.getElementById('quizBar');
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q; qO.innerHTML=''; qH.innerText=''; qF.innerText='';
+  d.choices.forEach((c,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn'; btn.innerText = c;
+    btn.onclick = () => {
+      qF.innerText = i === d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i === d.ans) score++;
+      curr++;
+      qB.style.width = `${(curr/quizData.length)*100}%`;
+      curr < quizData.length ? setTimeout(loadQuiz,300) : alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(btn);
+  });
+}
+document.getElementById('startQuiz').onclick = () => { curr=0; score=0; qB.style.width="0%"; loadQuiz(); };
+function showHint(){ if(curr < quizData.length) qH.innerText = "💡 "+quizData[curr].hint; }
+
+// Progress Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx, { type:'line', data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }]}, options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 }}}});
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF download
+document.getElementById('downloadPDF').onclick = ()=> alert("📥 Downloading HTML5 Guide PDF...");
+
+// Notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite HTML5",{body:"Learn semantic layout interactively!"});
+    }
+  });
+}
+</script>
+</body>
+</html>
