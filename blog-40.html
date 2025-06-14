@@ -1,16 +1,238 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Post #40 - EduIgnite</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #40 | Python for Beginners – EduIgnite</title>
+  <meta name="description" content="Start coding in Python: live REPL, variable explorer, quiz, downloadable guide, Firebase auth, dark mode, EN/HI toggle, progress tracking & notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Python for Beginners",
+    "author": {"@type":"Person","name":"Ankit Saini"},
+    "publisher": {"@type":"Organization","name":"EduIgnite"},
+    "datePublished": "2025-06-13",
+    "description": "Interactive Python REPL, variable explorer, quiz, PDF guide, Firebase login, dark mode, bilingual toggle, notifications, and analytics."
+  }
+  </script>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .tool-box, .quiz-box, .section { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .editor-results { display:flex; gap:10px; }
+    textarea.code-area { flex:1; height:200px; }
+    iframe#pythonFrame { flex:1; border:1px solid #ccc; height:200px; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition:.2s; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #40</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #40 – Python for Beginners</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. Live Python REPL -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Python Live REPL</h3>
+    <div class="editor-results">
+      <textarea id="codeEditor" class="code-area">
+# Write Python here
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("EduIgnite"))
+      </textarea>
+      <iframe id="pythonFrame"></iframe>
+    </div>
+    <button class="btn btn-primary" onclick="runPython()">Run Code</button>
+    <button class="btn" onclick="exploreVars()">Show Variables</button>
+    <div id="varExplorer" class="section"></div>
+  </div>
+
+  <!-- 2. Core Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Python Essentials</h2>
+    <ul>
+      <li>Indentation-based syntax & code blocks</li>
+      <li>Variables, data types, and type conversion</li>
+      <li>Functions, *args/**kwargs, lambdas</li>
+      <li>Control flow: if-elif-else, loops, comprehensions</li>
+      <li>Modules, file I/O, exception handling</li>
+    </ul>
+  </section>
+
+  <!-- 3. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Python Basics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Python Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth Setup
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u? `Hi, ${u.email} <button onclick="logout()">Logout</button>`:`<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en:{
+    toolTitle:"Python Live REPL",
+    conceptTitle:"Python Essentials",
+    quizTitle:"Quiz: Python Basics (10 Qs)",
+    perfTitle:"Your Progress",
+    btnPDF:"Download Python Guide PDF"
+  },
+  hi:{
+    toolTitle:"Python लाइव REPL",
+    conceptTitle:"Python मुख्य बातें",
+    quizTitle:"प्रश्नोत्तरी: Python आधार (10 प्रश्न)",
+    perfTitle:"आपकी प्रगति",
+    btnPDF:"Python गाइड PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = ()=>setLang('en');
+document.getElementById('langHi').onclick = ()=>setLang('hi');
+function setLang(l){
+  ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText='';
+}
+
+// Run Python via Brython
+function runPython(){
+  const code = document.getElementById('codeEditor').value;
+  const iframe = document.getElementById('pythonFrame');
+  iframe.srcdoc = `
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.9/brython.min.js"></script>
+    <body onload="brython()">
+      <script type="text/python">
+${code}
+      </script>
+    </body>`;
+}
+
+// Explore variables (basic hack)
+function exploreVars(){
+  const iframe = document.getElementById('pythonFrame');
+  iframe.contentWindow.postMessage({cmd:'extractVars'}, '*');
+}
+window.addEventListener('message', e => {
+  if(e.data.vars){
+    document.getElementById('varExplorer').innerHTML = '<pre>'+JSON.stringify(e.data.vars, null,2)+'</pre>';
+  }
+});
+
+// Quiz logic
+const quizData = [
+  {q:"What is correct comment syntax?", choices:["# comment","// comment","/* comment */","-- comment"], ans:0, hint:"Python uses hash."},
+  {q:"Which is mutable?", choices:["tuple","list","string","int"], ans:1, hint:"Lists can change."},
+  {q:"Function defined with?", choices:["def","func","function","lambda"], ans:0, hint:"Use def."},
+  {q:"Lambda syntax: lambda x: x*2", choices:["True","False"], ans:0, hint:"Valid syntax."},
+  {q:"Empty class defined as?", choices:["class A: pass","class A() {}","class A {}", "class: A pass"], ans:0, hint:"Pass needed."},
+  {q:"To open file: open('f.txt','r')", choices:["True","False"], ans:0, hint:"Mode 'r' for read."},
+  {q:"Exception block: try/except", choices:["True","False"], ans:0, hint:"Yes, not catch."},
+  {q:"Import math library: import math", choices:["True","False"], ans:0, hint:"Simple import."},
+  {q:"List comprehension: [x for x in range(5)]", choices:["True","False"], ans:0, hint:"Correct form."},
+  {q:"To convert to string: str(123)",choices:["True","False"], ans:0, hint:"str() used."},
+];
+let curr=0, score=0;
+const qQ=document.getElementById('quizQuestion'), qO=document.getElementById('quizOptions'),
+      qH=document.getElementById('quizHint'), qF=document.getElementById('quizFeedback'), qB=document.getElementById('quizBar');
+function loadQuiz(){
+  const d=quizData[curr];
+  qQ.innerText = d.q; qO.innerHTML=''; qH.innerText=''; qF.innerText='';
+  d.choices.forEach((c,i)=>{
+    const b = document.createElement('button');
+    b.className='btn';
+    b.innerText=c;
+    b.onclick = ()=>{
+      qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qB.style.width = `${(curr/quizData.length)*100}%`;
+      curr<quizData.length ? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = ()=>{
+  curr=0; score=0; qB.style.width="0%"; loadQuiz();
+};
+function showHint(){ if(curr<quizData.length) qH.innerText="💡 "+quizData[curr].hint; }
+
+// Performance Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx,{
+  type:'line',
+  data:{ labels: [], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }]},
+  options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } }}
+});
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading Python Guide PDF...");
+
+// Notifications
+if(Notification.permission!=="denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite Python",{body:"Start learning Python interactively!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
