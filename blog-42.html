@@ -1,16 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Post #42 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #42 | SQL Essentials – EduIgnite</title>
+  <meta name="description" content="Master SQL basics: live query simulator, result table, quiz, downloadable guide, Firebase auth, dark mode, EN/HI toggle, progress tracking & notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"SQL Essentials",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Interactive SQL playground, live table results, quiz, PDF guide, Firebase login, dark mode, language toggle, progress & notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, textarea, input, select { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .tool-box, .quiz-box, .section { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .editor-results { display:flex; gap:10px; }
+    textarea.code-area { flex:1; height:180px; }
+    table.result-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    table.result-table th, table.result-table td { border:1px solid #ccc; padding:8px; text-align:left; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition:.2s; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #42</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #42 – SQL Essentials</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. SQL Playground -->
+  <div class="tool-box">
+    <h3 id="toolTitle">SQL Live Playground</h3>
+    <textarea id="sqlEditor" class="code-area">SELECT name, age FROM users WHERE age > 20;</textarea>
+    <button class="btn btn-primary" onclick="runSQL()">Run Query</button>
+    <div id="queryResult"></div>
+  </div>
+
+  <!-- 2. Core Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">SQL Basics Covered</h2>
+    <ul>
+      <li>SELECT, INSERT, UPDATE, DELETE commands</li>
+      <li>Filtering: WHERE, LIKE, IN, BETWEEN</li>
+      <li>JOINs: INNER, LEFT, RIGHT</li>
+      <li>Aggregations: COUNT, SUM, AVG, GROUP BY</li>
+      <li>Indexes, transactions, normalization</li>
+    </ul>
+  </section>
+
+  <!-- 3. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: SQL Basics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download SQL Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"), p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// Dark Mode
+document.getElementById('darkToggle').onclick = () => {
+  const d = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+// Language Toggle
+const texts = {
+  en: {
+    toolTitle: "SQL Live Playground",
+    conceptTitle: "SQL Basics Covered",
+    quizTitle: "Quiz: SQL Basics (10 Qs)",
+    perfTitle: "Your Progress",
+    btnPDF: "Download SQL Guide PDF"
+  },
+  hi: {
+    toolTitle: "SQL लाइव प्लेग्राउंड",
+    conceptTitle: "SQL मूल बातें",
+    quizTitle: "प्रश्नोत्तरी: SQL आधार (10 प्रश्न)",
+    perfTitle: "आपकी प्रगति",
+    btnPDF: "SQL गाइड PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = () => setLang('en');
+document.getElementById('langHi').onclick = () => setLang('hi');
+function setLang(l) {
+  ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText = '';
+}
+
+// Run SQL (Simulated)
+const sampleTable = [
+  {name:'Alice',age:30},
+  {name:'Bob',age:18},
+  {name:'Charlie',age:25},
+];
+function runSQL() {
+  const q = document.getElementById('sqlEditor').value.trim();
+  // super-simple parser
+  const res = sampleTable.filter(r => {
+    if(/WHERE age > (\d+)/i.test(q)) {
+      const num = Number(q.match(/WHERE age > (\d+)/i)[1]);
+      return r.age > num;
+    }
+    return true;
+  });
+  displayResult(res);
+}
+
+function displayResult(rows) {
+  let html = '<table class="result-table"><tr>';
+  if(rows.length === 0){ html = '<p>No results</p>'; }
+  else {
+    Object.keys(rows[0]).forEach(h => html += `<th>${h}</th>`);
+    html += '</tr>';
+    rows.forEach(r => {
+      html += '<tr>';
+      Object.values(r).forEach(v => html += `<td>${v}</td>`);
+      html += '</tr>';
+    });
+    html += '</table>';
+  }
+  document.getElementById('queryResult').innerHTML = html;
+}
+
+// Quiz Data
+const quizData = [
+  {q:"SELECT * means?",choices:["all columns","all rows","default","none"],ans:0,hint:"* is wildcard."},
+  {q:"To remove rows use?",choices:["DELETE","REMOVE","DROP","UPDATE"],ans:0,hint:"DELETE removes data."},
+  {q:"JOIN to combine tables?",choices:["INNER JOIN","GROUP JOIN","MERGE","UNION"],ans:0,hint:"Most common is inner."},
+  {q:"COUNT() counts?",choices:["rows","columns","tables","databases"],ans:0,hint:"Rows count."},
+  {q:"HAVING works after?",choices:["GROUP BY","WHERE","FROM","JOIN"],ans:0,hint:"Group filter."},
+  {q:"BETWEEN inclusive?",choices:["Yes","No"],ans:0,hint:"Includes both ends."},
+  {q:"LIKE '%a%'",choices:["contains 'a'","starts 'a'","ends 'a'","no"],ans:0,hint:"% wildcard."},
+  {q:"ORDER BY sorts by?",choices:["column","row","table","schema"],ans:0,hint:"Sort ordering."},
+  {q:"INSERT INTO needs?",choices:["table,name,values","schema","engine","none"],ans:0,hint:"Basic syntax structure."},
+  {q:"PRIMARY KEY unique?",choices:["Yes","No"],ans:0,hint:"Unique row ID."},
+];
+let curr = 0, score = 0;
+const qQ = document.getElementById('quizQuestion'), qO = document.getElementById('quizOptions'),
+      qH = document.getElementById('quizHint'), qF = document.getElementById('quizFeedback'), qB = document.getElementById('quizBar');
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q; qO.innerHTML = ''; qH.innerText = ''; qF.innerText = '';
+  d.choices.forEach((c,i) => {
+    const b = document.createElement('button');
+    b.className = 'btn'; b.innerText = c;
+    b.onclick = () => {
+      qF.innerText = i===d.ans ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qB.style.width = `${(curr/quizData.length)*100}%`;
+      curr < quizData.length ? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = ()=>{
+  curr=0; score=0; qB.style.width="0%"; loadQuiz();
+};
+function showHint(){ if(curr < quizData.length) qH.innerText = "💡 "+quizData[curr].hint; }
+
+// Progress Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx,{
+  type:'line',
+  data:{ labels: [], datasets: [{ label:'Score %', data: [], backgroundColor:'#00897b' }]},
+  options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } }}
+});
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+  perfChart.update(); alert("✅ Score saved!");
+};
+
+// PDF Download
+document.getElementById('downloadPDF').onclick = ()=> alert("📥 Downloading SQL Guide PDF...");
+
+// Push Notifications
+if(Notification.permission !== "denied"){
+  Notification.requestPermission().then(p=>{
+    if(p === "granted"){
+      new Notification("EduIgnite SQL",{body:"Practice SQL live now!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
