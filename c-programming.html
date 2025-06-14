@@ -1,12 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>C Programming</title><link rel="stylesheet" href="style.css"></head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Master the complete C programming language with Eduignite - Basics, Syntax, Loops, Arrays, Pointers, and more.">
+  <meta name="keywords" content="C programming, learn C, C tutorials, Eduignite, C examples, programming logic">
+  <meta name="author" content="Eduignite Team">
+  <title>Complete C Programming Course - Eduignite</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.ico" />
+</head>
+
 <body>
-<header><h1>StudyWithSaini</h1></header>
-<nav><ul><li><a href="index.html">Home</a></li></ul></nav>
-<main><h2>Basics of C Programming</h2>
-<p>C is a powerful procedural language. Learn its syntax, control structures, and functions.</p>
-<ul><li>#include &lt;stdio.h&gt;</li><li>int main() { return 0; }</li></ul>
-</main>
-<footer>&copy; 2025 Ankit Saini</footer>
-</body></html>
+  <!-- Header -->
+  <header>
+    <h1>🖥️ C Programming Mastery</h1>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="programming.html" class="active">💻 Programming</a>
+      <a href="c-quiz-1.html">🧠 C Quiz</a>
+      <a href="contact.html">📞 Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>🚀 Start Your Journey in C Programming</h2>
+    <p>From Hello World to Advanced Pointers — Everything you need to become a C programming ninja!</p>
+    <a href="c-quiz-1.html" class="btn">Take a Quick Quiz →</a>
+  </section>
+
+  <!-- Modules -->
+  <main class="content">
+    <section>
+      <h2>📘 C Programming Modules</h2>
+      <ul class="module-list">
+        <li><a href="c-programming-1.html">✅ C Basics</a></li>
+        <li><a href="programming-topic-11.html">📐 Variables & Data Types</a></li>
+        <li><a href="programming-topic-12.html">🔁 Loops & Control Structures</a></li>
+        <li><a href="programming-topic-13.html">📦 Arrays</a></li>
+        <li><a href="programming-topic-14.html">📍 Pointers</a></li>
+        <li><a href="programming-topic-15.html">📂 Functions & Recursion</a></li>
+        <li><a href="programming-topic-16.html">📊 Structures & Unions</a></li>
+        <li><a href="programming-topic-17.html">📎 File Handling</a></li>
+        <li><a href="programming-topic-18.html">💡 C Interview Q&A</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>💎 Why Learn C Programming?</h2>
+      <ul>
+        <li>⚙️ C is the foundation of many modern languages like C++, Java, Python.</li>
+        <li>🎯 Excellent for understanding memory management and logic building.</li>
+        <li>💼 Highly preferred in system programming, OS, embedded systems, and IoT.</li>
+      </ul>
+    </section>
+
+    <section class="video-tut">
+      <h2>📺 Watch: C in 100 Seconds</h2>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/KJgsSFOSQv0" title="C Programming Crash Course" frameborder="0" allowfullscreen></iframe>
+    </section>
+  </main>
+
+  <!-- Feedback Form -->
+  <section class="feedback">
+    <h2>✍️ Got Questions or Feedback?</h2>
+    <form action="https://formspree.io/f/yourformid" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="4" placeholder="Your message..."></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Eduignite | C Programming by Passionate Developers for Passionate Learners</p>
+    <p><a href="sitemap.xml">Sitemap</a> | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <!-- JS: Smooth Scroll -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.onclick = function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: "smooth"
+        });
+      };
+    });
+  </script>
+</body>
+</html>
