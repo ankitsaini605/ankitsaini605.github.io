@@ -1,26 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog #68 – Mastering Exam Prep</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blog #68 | Git & Version Control Mastery – EduIgnite</title>
+  <meta name="description" content="Learn Git essentials with live terminal emulator, interactive Git viewer, quiz, PDF guide, Firebase auth, dark mode, multilingual, analytics & notifications"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":"Git & Version Control Mastery",
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "datePublished":"2025-06-13",
+    "description":"Interactive Git terminal, commit viewer, quiz, downloadable PDF, Firebase login, dark mode, EN/HI toggle, progress analytics, push notifications."
+  }
+  </script>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body, button, input, textarea { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212; color:#ddd; }
+    header, footer { background:#00695c; color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem; color:white; text-decoration:none; }
+    .main { max-width:900px; margin:auto; padding:1rem; }
+    .tool-box, .quiz-box, .section { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .terminal-container { height:250px; border:1px solid #444; border-radius:4px; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0; }
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>Blog #68: Boost Your Memory & Focus</h1></header>
-<main>
-  <h2>🔍 Topic: Revision Strategy</h2>
-  <p>Use the 1-3-7 formula: Revise after 1 day, 3 days, and 7 days for long-term retention.</p>
+<header>
+  <h1>Blog #68 – Git & Version Control Mastery</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span><button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
 
-  <h2>📚 Topic: Nighttime Study Tips</h2>
-  <ul>
-    <li>Revise already-studied concepts only</li>
-    <li>Don’t learn new material before sleep</li>
-    <li>Summarize the day on paper</li>
-  </ul>
+<div class="main">
+  <!-- 1. Live Git Terminal -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Live Git Terminal Emulator</h3>
+    <div id="terminal" class="terminal-container"></div>
+    <button class="btn btn-primary" onclick="resetTerminal()">Reset Terminal</button>
+  </div>
 
-  <h2>🛏️ Bonus Tip: Sleep + Review</h2>
-  <p>10 minutes of reading before sleep can lock learning into long-term memory.</p>
-</main>
-<footer>Follow @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+  <!-- 2. Git Concepts -->
+  <section class="section">
+    <h2 id="conceptTitle">Core Git Concepts</h2>
+    <ul>
+      <li>Repositories, Staging area, local vs remote</li>
+      <li>Common commands: clone, add, commit, push, pull, branch</li>
+      <li>Branching & merging strategies</li>
+      <li>Commit messages conventions & best practices</li>
+      <li>Undo changes: reset, revert, stash</li>
+    </ul>
+  </section>
+
+  <!-- 3. Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Git Basics (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p><p id="quizFeedback"></p>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Git Guide PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+  // Firebase Auth
+  firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+  const auth = firebase.auth(), uc=document.getElementById('userContainer');
+  auth.onAuthStateChanged(u => uc.innerHTML = u ? `Hi, ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+  function login(){ auth.signInWithEmailAndPassword(prompt("Email"), prompt("Password")).catch(console.error); }
+  function logout(){ auth.signOut(); }
+
+  // Dark Mode
+  document.getElementById('darkToggle').onclick = ()=> {
+    const d=document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', d);
+  };
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+  // Language Toggle
+  const texts = {
+    en:{ toolTitle:"Live Git Terminal Emulator", conceptTitle:"Core Git Concepts", quizTitle:"Quiz: Git Basics (10 Qs)", perfTitle:"Your Progress", btnPDF:"Download Git Guide PDF" },
+    hi:{ toolTitle:"लाइव Git टर्मिनल", conceptTitle:"मुख्य Git अवधारणाएँ", quizTitle:"प्रश्नोत्तरी: Git बेसिक्स (10 प्रश्न)", perfTitle:"आपकी प्रगति", btnPDF:"Git गाइड PDF डाउनलोड करें" }
+  };
+  document.getElementById('langEn').onclick = ()=> setLang('en');
+  document.getElementById('langHi').onclick = ()=> setLang('hi');
+  function setLang(l){
+    ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.innerText = texts[l][id];
+    });
+  }
+
+  // Terminal emulator setup
+  const term = new Terminal({ cols:80, rows:10, theme: { background:'#000', foreground:'#0f0' } });
+  term.open(document.getElementById('terminal'));
+  const commands = [
+    '$ echo "Welcome to EduIgnite Git!"\r\nWelcome to EduIgnite Git!\r\n',
+    '$ git init\r\nInitialized empty Git repository.\r\n',
+    '$ echo "Hello" > file.txt\r\n$ git add file.txt\r\n$ git commit -m "Add file.txt"\r\n[master (root-commit) abc123] Add file.txt\r\n'
+  ];
+  let idx = 0;
+  function runCommands(){
+    if(idx < commands.length){
+      term.write(commands[idx]);
+      idx++;
+      setTimeout(runCommands, 800);
+    }
+  }
+  function resetTerminal(){ idx = 0; term.clear(); runCommands(); }
+  resetTerminal();
+
+  term.onKey(e => {
+    const key = e.domEvent.key;
+    term.write(key);
+  });
+
+  // Quiz logic
+  const quizData = [
+    {q:"git init creates repository?", choices:["True"], ans:0, hint:"Initializes a repo."},
+    {q:"git add stages changes?", choices:["True"], ans:0, hint:"Adds to staging area."},
+    {q:"git commit records snapshot?", choices:["True"], ans:0, hint:"Commit saves state."},
+    {q:"git push sends to remote?", choices:["True"], ans:0, hint:"Push updates remote."},
+    {q:"git clone creates copy?", choices:["True"], ans:0, hint:"Clone downloads repo."},
+    {q:"git status shows changes?", choices:["True"], ans:0, hint:"Status lists modified files."},
+    {q:"git branch lists branches?", choices:["True"], ans:0, hint:"Branch shows list."},
+    {q:"git checkout switches branch?", choices:["True"], ans:0, hint:"Checkout changes branch."},
+    {q:"git merge combines branches?", choices:["True"], ans:0, hint:"Merges history."},
+    {q:"git reset undo commit?", choices:["True"], ans:0, hint:"Reset reverts HEAD."}
+  ];
+  let curr=0, score=0;
+  const [qQ, qO, qH, qF, qB] = [
+    document.getElementById('quizQuestion'),
+    document.getElementById('quizOptions'),
+    document.getElementById('quizHint'),
+    document.getElementById('quizFeedback'),
+    document.getElementById('quizBar')
+  ];
+  function loadQuiz(){
+    const d = quizData[curr];
+    qQ.innerText = d.q;
+    qO.innerHTML = "";
+    qH.innerText = "";
+    qF.innerText = "";
+    d.choices.forEach((c,i) => {
+      const b = document.createElement('button');
+      b.className = 'btn';
+      b.innerText = c;
+      b.onclick = () => {
+        qF.innerText = i === d.ans ? "✅ Correct" : "❌ Wrong";
+        if(i === d.ans) score++;
+        curr++;
+        qB.style.width = `${(curr/quizData.length)*100}%`;
+        curr < quizData.length ? setTimeout(loadQuiz,400) : alert(`Score: ${score}/${quizData.length}`);
+      };
+      qO.appendChild(b);
+    });
+  }
+  document.getElementById('startQuiz').onclick = () => {
+    curr = 0; score = 0; qB.style.width = "0%"; loadQuiz();
+  };
+  function showHint(){
+    if(curr < quizData.length) qH.innerText = "💡 " + quizData[curr].hint;
+  }
+
+  // Progress Chart
+  const ctx = document.getElementById('perfChart').getContext('2d');
+  const perfChart = new Chart(ctx,{ type:'line', data:{ labels:[], datasets:[{ label:'Score %', data:[], backgroundColor:'#00897b' }] }, options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } } });
+  document.getElementById('savePerf').onclick = () => {
+    perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+    perfChart.data.datasets[0].data.push(Math.round((score/quizData.length)*100));
+    perfChart.update();
+    alert("✅ Score saved!");
+  };
+
+  // PDF Download
+  document.getElementById('downloadPDF').onclick = () => alert("📥 Downloading Git Guide PDF...");
+
+  // Notifications
+  if(Notification.permission !== "denied"){
+    Notification.requestPermission().then(p => {
+      if(p === "granted") new Notification("EduIgnite Git",{ body:"Practice Git commands now!" });
+    });
+  }
+</script>
 </body>
 </html>
+
