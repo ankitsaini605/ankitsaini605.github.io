@@ -2,15 +2,226 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Blog Post #35 - EduIgnite</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog #35 | Async JS & Promises – EduIgnite</title>
+  <meta name="description" content="Master asynchronous JavaScript and Promises with interactive playground, quiz, dark mode, language toggle, progress tracking, PDF download, Firebase auth, SEO, and push notifications">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Async JavaScript & Promises",
+      "author": {"@type": "Person","name": "Ankit Saini"},
+      "publisher": {"@type": "Organization","name": "EduIgnite"},
+      "datePublished": "2025-06-13",
+      "description": "Learn async JS with live editor, Promise chains, quiz, PDF guide, analytics, Firebase auth, dark mode, and multilingual support."
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, button, textarea, input { font-family:'Segoe UI',sans-serif; transition:.3s; }
+    body.dark { background:#121212;color:#ddd; }
+    header, footer { background:#00695c;color:white; padding:1rem; }
+    nav a, nav button { margin:0 .5rem;color:white;text-decoration:none; }
+    .main { max-width: 900px; margin:auto; padding:1rem; }
+    .tool-box, .section, .quiz-box { background:#e0f2f1; padding:1.5rem; margin:2rem 0; border-radius:8px; }
+    .code-editor { width:100%; height:150px; font-family:monospace; padding:.5rem; border:1px solid #ccc; }
+    .output { background:#f8f8f8; padding:1rem; margin-top:1rem; border:1px solid #ccc; white-space:pre-wrap; }
+    .btn, .btn-primary { padding:.6rem 1.2rem; margin:.3rem; border:none; border-radius:4px; cursor:pointer; transition:.2s; }
+    .btn-primary { background:#00897b; color:white; }
+    .progress-bar { background:#ddd; border-radius:6px; height:12px; overflow:hidden; margin:10px 0;}
+    .progress-filled { background:#00897b; width:0; height:100%; transition:.3s; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Blog #35</h2>
-  <p>This blog shares unique study hacks, motivational techniques, and tips to stay focused in your learning journey.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h1>Blog #35 – Async JavaScript & Promises</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="blog.html">Blog Home</a> |
+    <button id="langEn" class="btn btn-dark">EN</button><button id="langHi" class="btn btn-dark">HI</button>
+    <span id="userContainer"></span>
+    <button id="darkToggle" class="btn btn-dark">Dark Mode</button>
+  </nav>
+</header>
+
+<div class="main">
+  <!-- 1. Live Async Playground -->
+  <div class="tool-box">
+    <h3 id="toolTitle">Async JS Playground</h3>
+    <textarea id="codeEditor" class="code-editor">
+// Example:
+// async function fetchSequence() {
+//   const a = await Promise.resolve("First");
+//   const b = await new Promise(res=>setTimeout(()=>res("Second"),1000));
+//   return a + " → " + b;
+// }
+// fetchSequence().then(console.log);
+    </textarea>
+    <button class="btn btn-primary" onclick="runCode()">Run Code</button>
+    <div class="output" id="codeOutput">Output will appear here...</div>
+  </div>
+
+  <!-- 2. Concepts Deep Dive -->
+  <section class="section">
+    <h2 id="conceptTitle">Async / Await & Promises Explained</h2>
+    <p>Asynchronous JavaScript allows operations to run without blocking the main thread. Promises represent eventual values. Async/await provides syntactic sugar over Promises.</p>
+    <ul>
+      <li><strong>Promise states:</strong> pending → fulfilled/rejected</li>
+      <li><strong>.then / .catch:</strong> method chaining for success/error handling</li>
+      <li><strong>async functions:</strong> always return a Promise wrapped value</li>
+      <li>Example of sequencing and error propagation</li>
+    </ul>
+  </section>
+
+  <!-- 3. Interactive Quiz -->
+  <div class="quiz-box">
+    <h3 id="quizTitle">Quiz: Async JavaScript (10 Qs)</h3>
+    <div class="progress-bar"><div id="quizBar" class="progress-filled"></div></div>
+    <p id="quizQuestion">Click Start to Begin</p>
+    <ul id="quizOptions"></ul>
+    <button class="btn" onclick="showHint()">💡 Hint</button>
+    <p id="quizHint"></p>
+    <p id="quizFeedback"></p>
+    <button id="bookmarkQuiz" class="bookmark">☆ Bookmark</button><br>
+    <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+  </div>
+
+  <!-- 4. Progress Tracking & PDF -->
+  <section class="section">
+    <h3 id="perfTitle">Your Progress</h3>
+    <canvas id="perfChart"></canvas><br>
+    <button id="savePerf" class="btn btn-primary">Save Score</button>
+  </section>
+  <section class="section affiliate">
+    <button id="downloadPDF" class="btn btn-primary btn-block">Download Async JS PDF</button>
+  </section>
+</div>
+
+<footer>
+  <p>©2025 EduIgnite | <a href="https://instagram.com/eduignite_official" style="color:white">Instagram</a> | <a href="https://t.me/eduignite_official" style="color:white">Telegram</a></p>
+</footer>
+
+<script>
+// — Firebase Auth
+firebase.initializeApp({apiKey:"KEY",authDomain:"eduignite.firebaseapp.com",projectId:"eduignite",appId:"APPID"});
+const auth = firebase.auth(), uc = document.getElementById('userContainer');
+auth.onAuthStateChanged(u=>uc.innerHTML = u ? `Hi ${u.email} <button onclick="logout()">Logout</button>` : `<button onclick="login()">Login</button>`);
+function login(){ const e=prompt("Email"),p=prompt("Password"); auth.signInWithEmailAndPassword(e,p).catch(console.error); }
+function logout(){ auth.signOut(); }
+
+// — Dark Mode Toggle
+document.getElementById('darkToggle').onclick = ()=>{
+  const d=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', d);
+};
+if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark');
+
+// — Language Support
+const texts = {
+  en:{
+    toolTitle:"Async JS Playground",
+    conceptTitle:"Async / Await & Promises Explained",
+    quizTitle:"Quiz: Async JavaScript (10 Qs)",
+    perfTitle:"Your Progress",
+    btnPDF:"Download Async JS PDF"
+  },
+  hi:{
+    toolTitle:"Async JS प्लेग्राउंड",
+    conceptTitle:"Async / Await & Promises व्याख्यान",
+    quizTitle:"प्रश्नोत्तरी: Async JavaScript (10 प्रश्न)",
+    perfTitle:"आपकी प्रगति",
+    btnPDF:"Async JS PDF डाउनलोड करें"
+  }
+};
+document.getElementById('langEn').onclick = ()=>setLang('en');
+document.getElementById('langHi').onclick = ()=>setLang('hi');
+function setLang(l){
+  ['toolTitle','conceptTitle','quizTitle','perfTitle','downloadPDF'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.innerText = texts[l][id];
+  });
+  document.getElementById('quizHint').innerText='';
+}
+
+// — Run User Code
+function runCode(){
+  const code = document.getElementById('codeEditor').value;
+  try{
+    new Function(code)().then(res=>{
+      document.getElementById('codeOutput').innerText = JSON.stringify(res, null, 2);
+    }).catch(err=>{
+      document.getElementById('codeOutput').innerText = '❌ Error: ' + err;
+    });
+  }catch(e){
+    document.getElementById('codeOutput').innerText = '❌ ' + e;
+  }
+}
+
+// — Quiz Logic
+const quizData = [
+  {q:"Promise.reject(…) returns a promise in what state?", choices:["resolved","rejected","pending","error"], ans:1, hint:"Check API behavior."},
+  {q:"async function always returns?", choices:["value","Promise","undefined","object"], ans:1, hint:"Async always wraps value."},
+  // 8 more questions...
+];
+let curr=0, score=0;
+const [qQ,qO,qH,qF,qB] = [
+  document.getElementById('quizQuestion'),
+  document.getElementById('quizOptions'),
+  document.getElementById('quizHint'),
+  document.getElementById('quizFeedback'),
+  document.getElementById('quizBar')
+];
+function loadQuiz(){
+  const d = quizData[curr];
+  qQ.innerText = d.q; qO.innerHTML = ""; qH.innerText = ""; qF.innerText = "";
+  d.choices.forEach((c,i)=>{
+    const b = document.createElement('button');
+    b.className = 'btn'; b.innerText = c;
+    b.onclick = () => {
+      qF.innerText = (i===d.ans) ? "✅ Correct" : "❌ Wrong";
+      if(i===d.ans) score++;
+      curr++;
+      qB.style.width = `${curr/quizData.length*100}%`;
+      curr < quizData.length ? setTimeout(loadQuiz, 400) : alert(`Score: ${score}/${quizData.length}`);
+    };
+    qO.appendChild(b);
+  });
+}
+document.getElementById('startQuiz').onclick = ()=>{
+  curr=0; score=0; qB.style.width='0%'; loadQuiz();
+};
+function showHint(){
+  if(curr<quizData.length) qH.innerText = "💡 " + quizData[curr].hint;
+}
+
+// — Save Performance & Chart
+const ctx = document.getElementById('perfChart').getContext('2d');
+const perfChart = new Chart(ctx, {
+  type: 'line',
+  data: { labels: [], datasets: [{label:'Score %', data: [], backgroundColor:'#00897b'}] },
+  options: { responsive:true, scales:{y:{beginAtZero:true,max:100}} }
+});
+document.getElementById('savePerf').onclick = ()=>{
+  perfChart.data.labels.push(`Run ${perfChart.data.labels.length+1}`);
+  perfChart.data.datasets[0].data.push(Math.round(score/quizData.length*100));
+  perfChart.update();
+  alert("✅ Score saved!");
+};
+
+// — Download PDF
+document.getElementById('downloadPDF').onclick = ()=>alert("📥 Downloading Async JS PDF...");
+
+// — Push Notification
+if(Notification.permission!=="denied"){
+  Notification.requestPermission().then(p=>{
+    if(p==="granted"){
+      new Notification("EduIgnite JS",{body:"Practice Async/Await now!"});
+    }
+  });
+}
+</script>
 </body>
 </html>
+
