@@ -1,29 +1,144 @@
 <!DOCTYPE html>
-<html>
-<head><title>C++ STL: Vector, Set, Map</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn 0/1 Knapsack Problem using Dynamic Programming with Python and C++ examples. Ideal for coding interviews, GATE, and competitive programming.">
+  <meta name="keywords" content="Knapsack Problem, 0/1 Knapsack, Dynamic Programming, DP, C++, Python, Competitive Coding, EduIgnite">
+  <meta name="author" content="EduIgnite" />
+  <title>0/1 Knapsack Problem | EduIgnite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+</head>
 <body>
-<h1>💻 STL in C++</h1>
 
-<h2>📦 Vector</h2>
-<pre>
-vector<int> v = {{1, 2, 3}};
-v.push_back(4);
-for(int x : v) cout << x << " ";
-</pre>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<h2>📁 Map</h2>
-<pre>
-map<string, int> mp;
-mp["ankit"] = 22;
-cout << mp["ankit"];  // 22
-</pre>
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>🎒 0/1 Knapsack Problem</h1>
+    <p>Understand and solve one of the most popular dynamic programming problems with optimized techniques.</p>
+    <a href="#content" class="btn-primary">Start Solving</a>
+  </section>
 
-<h2>🧺 Set</h2>
-<pre>
-set<int> s;
-s.insert(5);
-s.insert(5); // duplicate ignored
-</pre>
+  <!-- Main Content -->
+  <main class="container" id="content">
+    <article>
+      <h2>📘 Problem Statement</h2>
+      <p>You are given <strong>weights</strong> and <strong>values</strong> of N items, put these items in a knapsack of capacity W to get the maximum total value in the knapsack. You cannot break an item, either pick it or don’t (0/1 property).</p>
 
-<p>STL makes coding efficient for competitive & interviews</p>
-</body></html>
+      <h3>🧠 Dynamic Programming Approach</h3>
+      <p>We use a 2D array <code>dp[n+1][W+1]</code> where each <code>dp[i][w]</code> represents the maximum value for first <code>i</code> items with weight limit <code>w</code>.</p>
+
+      <h3>🧪 Python Code</h3>
+      <pre><code class="language-python">
+def knapsack(weights, values, W):
+    n = len(weights)
+    dp = [[0]*(W+1) for _ in range(n+1)]
+
+    for i in range(1, n+1):
+        for w in range(W+1):
+            if weights[i-1] <= w:
+                dp[i][w] = max(values[i-1] + dp[i-1][w - weights[i-1]], dp[i-1][w])
+            else:
+                dp[i][w] = dp[i-1][w]
+    return dp[n][W]
+
+# Example usage:
+weights = [2, 3, 4, 5]
+values = [3, 4, 5, 6]
+capacity = 5
+print(knapsack(weights, values, capacity))  # Output: 7
+      </code></pre>
+
+      <h3>⚙️ C++ Code</h3>
+      <pre><code class="language-cpp">
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int knapsack(int W, vector<int> wt, vector<int> val, int n) {
+    vector<vector<int>> dp(n+1, vector<int>(W+1, 0));
+    
+    for (int i = 1; i <= n; ++i) {
+        for (int w = 0; w <= W; ++w) {
+            if (wt[i-1] <= w)
+                dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w]);
+            else
+                dp[i][w] = dp[i-1][w];
+        }
+    }
+    return dp[n][W];
+}
+
+int main() {
+    vector<int> val = {3, 4, 5, 6};
+    vector<int> wt = {2, 3, 4, 5};
+    int W = 5;
+    cout << knapsack(W, wt, val, val.size()) << endl;  // Output: 7
+    return 0;
+}
+      </code></pre>
+
+      <h3>🔍 Optimization Tips</h3>
+      <ul>
+        <li>Space optimization: use 1D array instead of 2D.</li>
+        <li>Greedy doesn’t work — must use DP for 0/1 knapsack.</li>
+      </ul>
+
+      <h3>📌 Applications</h3>
+      <ul>
+        <li>Resource Allocation</li>
+        <li>Project Selection</li>
+        <li>Budgeting Problems</li>
+      </ul>
+    </article>
+
+    <!-- Practice CTA -->
+    <section class="quiz-cta">
+      <h3>📝 Practice Now!</h3>
+      <p>Solve more variations of the knapsack and DP challenges.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Go to Quizzes</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>📚 Related Topics</h3>
+      <ul>
+        <li><a href="programming-topic-124.html">Dynamic Programming Basics</a></li>
+        <li><a href="programming-topic-103.html">Greedy vs DP</a></li>
+        <li><a href="programming-topic-12.html">Recursion Fundamentals</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Syntax Highlighting -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
+
