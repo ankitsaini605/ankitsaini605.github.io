@@ -1,235 +1,105 @@
-<script type="application/ld+json">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON-LD: A Complete Beginner Guide | EduIgnite</title>
+  <meta name="description" content="Learn JSON-LD with EduIgnite! Understand structured data, SEO benefits, implementation with examples, and how to boost your website visibility.">
+  <meta name="keywords" content="JSON-LD, Structured Data, SEO, Schema.org, Google Rich Results, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; color: #333; }
+    header, footer { background-color: #111; color: #fff; padding: 20px 30px; }
+    nav a { color: #00eaff; text-decoration: none; margin-right: 20px; font-weight: bold; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+    h1, h2 { color: #007acc; }
+    .section { margin-bottom: 40px; }
+    .code-box { background: #2d2d2d; color: #eee; padding: 20px; border-radius: 6px; overflow-x: auto; font-family: monospace; }
+    .tip { background: #e0f7fa; border-left: 5px solid #00796b; padding: 10px; margin-top: 15px; }
+    ul li { line-height: 1.8em; }
+    .btn { background: #0072ff; color: white; padding: 10px 20px; display: inline-block; border-radius: 4px; text-decoration: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>EduIgnite - JSON-LD Explained</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="programming.html">All Topics</a>
+    <a href="seo-meta.html">SEO Tips</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>🔍 JSON-LD (JavaScript Object Notation for Linked Data)</h1>
+
+  <div class="section">
+    <h2>📘 What is JSON-LD?</h2>
+    <p><strong>JSON-LD</strong> is a lightweight Linked Data format used to structure data on the web. It helps search engines better understand your content. JSON-LD is mostly used for adding schema markup to HTML for SEO purposes.</p>
+  </div>
+
+  <div class="section">
+    <h2>💡 Why Use JSON-LD?</h2>
+    <ul>
+      <li>Boosts your visibility in Google Search</li>
+      <li>Helps enable rich results (stars, prices, FAQs, etc.)</li>
+      <li>Easy to implement with copy-paste script</li>
+      <li>Recommended by Google for structured data</li>
+      <li>Does not interfere with page design or layout</li>
+    </ul>
+    <div class="tip">✅ Pro Tip: Always validate your JSON-LD with Google’s Rich Results Test.</div>
+  </div>
+
+  <div class="section">
+    <h2>📦 Basic JSON-LD Example</h2>
+    <div class="code-box">
+<pre>
+&lt;script type="application/ld+json"&gt;
 {
   "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
+  "@type": "Organization",
   "name": "EduIgnite",
-  "url": "https://ankitsaini605.github.io",
-  "logo": "https://ankitsaini605.github.io/logo.png",
-  "description": "EduIgnite is a comprehensive educational platform offering high-quality learning resources for programming, aptitude, and competitive exam preparation.",
-  "slogan": "Learn Smart. Rise Faster.",
-  "founder": {
-    "@type": "Person",
-    "name": "Ankit Saini",
-    "jobTitle": "Educational Consultant",
-    "sameAs": [
-      "https://www.linkedin.com/in/ankitsaini605/",
-      "https://twitter.com/ankitsaini605",
-      "https://github.com/ankitsaini605"
-    ]
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "New Delhi",
-    "addressRegion": "Delhi",
-    "addressCountry": "IN",
-    "postalCode": "110001"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+91-9876543210",
-    "contactType": "customer service",
-    "email": "contact@eduignite.com",
-    "availableLanguage": ["English", "Hindi"]
-  },
+  "url": "https://www.eduignite.com",
+  "logo": "https://www.eduignite.com/logo.png",
   "sameAs": [
-    "https://www.facebook.com/eduignite",
-    "https://twitter.com/eduignite",
-    "https://www.instagram.com/eduignite",
-    "https://www.youtube.com/c/eduignite"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "category": "Educational Resources",
-    "availability": "https://schema.org/InStock",
-    "price": "0",
-    "priceCurrency": "INR"
-  },
-  "knowsAbout": [
-    "Programming",
-    "Aptitude Training",
-    "Competitive Exam Preparation",
-    "Computer Science",
-    "Mathematics",
-    "Current Affairs",
-    "Study Techniques"
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "EduIgnite Learning Resources",
-    "itemListElement": [
-      {
-        "@type": "Course",
-        "name": "Programming Fundamentals",
-        "description": "Learn the basics of programming with Java, Python, and C++",
-        "provider": {
-          "@type": "Organization",
-          "name": "EduIgnite"
-        }
-      },
-      {
-        "@type": "Course",
-        "name": "Quantitative Aptitude",
-        "description": "Master mathematical concepts and problem-solving techniques for competitive exams",
-        "provider": {
-          "@type": "Organization",
-          "name": "EduIgnite"
-        }
-      },
-      {
-        "@type": "Course",
-        "name": "Current Affairs",
-        "description": "Stay updated with the latest events and developments relevant for competitive exams",
-        "provider": {
-          "@type": "Organization",
-          "name": "EduIgnite"
-        }
-      }
-    ]
-  },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://ankitsaini605.github.io/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-
-<!-- Course Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Course",
-  "name": "Complete Programming Course",
-  "description": "Master programming fundamentals and advanced concepts with hands-on projects and interactive exercises.",
-  "provider": {
-    "@type": "Organization",
-    "name": "EduIgnite",
-    "sameAs": "https://ankitsaini605.github.io"
-  },
-  "hasCourseInstance": {
-    "@type": "CourseInstance",
-    "courseMode": "online",
-    "courseWorkload": "10 hours per week",
-    "educationalLevel": "Beginner to Advanced",
-    "inLanguage": "en"
-  },
-  "teaches": [
-    "Java Programming",
-    "Python Programming",
-    "C++ Programming",
-    "Data Structures",
-    "Algorithms",
-    "Object-Oriented Programming"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "category": "Educational Resources",
-    "availability": "https://schema.org/InStock",
-    "price": "0",
-    "priceCurrency": "INR"
-  }
-}
-</script>
-
-<!-- FAQ Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is EduIgnite content free to access?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, all educational content on EduIgnite is completely free to access. We believe in making quality education accessible to everyone."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What topics does EduIgnite cover?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "EduIgnite covers a wide range of topics including programming languages (Java, Python, C++), quantitative aptitude, logical reasoning, current affairs, and study techniques for competitive exams."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I track my progress on EduIgnite?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "EduIgnite offers progress tracking features for registered users. You can monitor your quiz scores, completed lessons, and performance analytics to identify areas for improvement."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does EduIgnite provide practice questions?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, EduIgnite provides thousands of practice questions with detailed solutions across all topics. Our interactive quizzes help you test your knowledge and prepare for competitive exams."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I download study materials from EduIgnite?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, EduIgnite offers downloadable resources including PDF notes, formula sheets, cheat sheets, and practice question banks that you can use for offline study."
-      }
-    }
+    "https://www.instagram.com/eduignite_official",
+    "https://www.linkedin.com/company/eduignite"
   ]
 }
-</script>
+&lt;/script&gt;
+</pre>
+    </div>
+  </div>
 
-<!-- Article Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "5 Powerful Exam Hacks Top-Scoring Students Use Daily",
-  "description": "Discover the proven daily habits and strategies that top-scoring students use to excel in competitive exams.",
-  "image": "https://ankitsaini605.github.io/images/exam-hacks.jpg",
-  "author": {
-    "@type": "Person",
-    "name": "Ankit Saini"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "EduIgnite",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://ankitsaini605.github.io/logo.png"
-    }
-  },
-  "datePublished": "2025-06-15",
-  "dateModified": "2025-06-15"
-}
-</script>
+  <div class="section">
+    <h2>🎯 Common Schema Types</h2>
+    <ul>
+      <li><strong>Article</strong> - Blog posts or news</li>
+      <li><strong>FAQPage</strong> - Frequently asked questions</li>
+      <li><strong>Product</strong> - E-commerce product pages</li>
+      <li><strong>Person</strong> - Author or profile information</li>
+      <li><strong>Organization</strong> - Company or website data</li>
+      <li><strong>LocalBusiness</strong> - For local SEO</li>
+    </ul>
+  </div>
 
-<!-- BreadcrumbList Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://ankitsaini605.github.io"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Programming",
-      "item": "https://ankitsaini605.github.io/programming.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Java Introduction",
-      "item": "https://ankitsaini605.github.io/java-intro.html"
-    }
-  ]
-}
-</script>
+  <div class="section">
+    <h2>🚀 How to Add JSON-LD to Your Website?</h2>
+    <p>Place the JSON-LD script inside the <code>&lt;head&gt;</code> tag of your HTML. You can generate structured data for your site using tools like:</p>
+    <ul>
+      <li><a href="https://technicalseo.com/tools/schema-markup-generator/" target="_blank">Schema Markup Generator</a></li>
+      <li><a href="https://search.google.com/test/rich-results" target="_blank">Google Rich Results Test</a></li>
+    </ul>
+    <a href="seo-meta.html" class="btn">Explore More SEO Tools →</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 EduIgnite. Structured for success. SEO powered with JSON-LD.</p>
+</footer>
+
+</body>
+</html>
