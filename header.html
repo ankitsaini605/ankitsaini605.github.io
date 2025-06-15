@@ -1,10 +1,52 @@
-<header style="background:#003366; color:white; padding:20px;">
-  <h1>📚 EduIgnite – Learn Better, Faster</h1>
-  <nav>
-    <a href="index.html">Home</a> |
-    <a href="blogs.html">Blogs</a> |
-    <a href="aptitude.html">Aptitude</a> |
-    <a href="programming.html">Programming</a> |
-    <a href="contact.html">Contact</a>
+<!-- Header Component for EduIgnite -->
+<header style="background-color: #0a0a0a; color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-family: 'Segoe UI', sans-serif;">
+
+  <!-- Logo -->
+  <div style="font-size: 24px; font-weight: bold;">
+    <a href="index.html" style="color: #00bfff; text-decoration: none;">EduIgnite 🔥</a>
+  </div>
+
+  <!-- Navigation Links -->
+  <nav style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+    <a href="index.html" style="color: white; text-decoration: none;">Home</a>
+    <a href="programming.html" style="color: white; text-decoration: none;">Programming</a>
+    <a href="current-affairs.html" style="color: white; text-decoration: none;">Current Affairs</a>
+    <a href="exam-tips.html" style="color: white; text-decoration: none;">Exam Tips</a>
+    <a href="contact.html" style="color: white; text-decoration: none;">Contact</a>
   </nav>
+
+  <!-- Search and Theme Toggle -->
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <!-- Search Box -->
+    <form action="search.html" method="GET" style="display: flex;">
+      <input type="text" name="q" placeholder="Search..." style="padding: 6px; border-radius: 4px 0 0 4px; border: none; outline: none;">
+      <button type="submit" style="background-color: #00bfff; border: none; color: white; padding: 6px 10px; border-radius: 0 4px 4px 0;">🔍</button>
+    </form>
+
+    <!-- Theme Toggle -->
+    <button onclick="toggleTheme()" title="Toggle Theme" style="background: none; border: none; color: #00bfff; font-size: 18px; cursor: pointer;">🌓</button>
+  </div>
+
 </header>
+
+<!-- JavaScript for Theme Toggle -->
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const current = body.getAttribute('data-theme');
+    if (current === 'dark') {
+      body.setAttribute('data-theme', 'light');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0a0a0a');
+    }
+  }
+
+  // Set initial theme based on system preference
+  window.onload = () => {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  };
+</script>
+
