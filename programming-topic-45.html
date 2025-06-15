@@ -1,19 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #45 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Merge Sort algorithm with examples in Python and C++. Includes time complexity, advantages, and real-world applications.">
+  <meta name="keywords" content="Merge Sort, Sorting Algorithm, Python, C++, EduIgnite, Data Structures">
+  <meta name="author" content="EduIgnite Team">
+  <title>Merge Sort in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #45</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>🔀 Merge Sort Algorithm</h1>
+  <p>Master one of the most efficient comparison-based sorting techniques used in large-scale systems.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 Introduction to Merge Sort</h2>
+    <p>
+      Merge Sort is a <strong>Divide and Conquer</strong> algorithm that splits the input array into halves, recursively sorts them, and then merges the sorted halves to produce the final sorted array.
+    </p>
+
+    <h3>🌍 Real-World Use Cases:</h3>
+    <ul>
+      <li>Large databases where stable sorting is required</li>
+      <li>External sorting with huge files (disk-based sorting)</li>
+      <li>Multithreaded systems — due to natural divide-and-conquer nature</li>
+    </ul>
+
+    <h3>🐍 Python Implementation</h3>
+    <pre><code class="language-python">
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        L = arr[:mid]
+        R = arr[mid:]
+
+        merge_sort(L)
+        merge_sort(R)
+
+        i = j = k = 0
+
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+
+arr = [12, 11, 13, 5, 6, 7]
+merge_sort(arr)
+print("Sorted array is:", arr)
+    </code></pre>
+
+    <h3>💻 C++ Implementation</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+void merge(int arr[], int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    int L[n1], R[n2];
+    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+
+    int i = 0, j = 0, k = l;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+
+void mergeSort(int arr[], int l, int r) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    mergeSort(arr, 0, n - 1);
+    cout << "Sorted array is:\n";
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📈 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(n log n)</li>
+      <li><strong>Average Case:</strong> O(n log n)</li>
+      <li><strong>Worst Case:</strong> O(n log n)</li>
+      <li><strong>Space Complexity:</strong> O(n) auxiliary</li>
+    </ul>
+
+    <h3>✅ Advantages</h3>
+    <ul>
+      <li>Stable sort (preserves original order)</li>
+      <li>Good for sorting linked lists and large datasets</li>
+    </ul>
+
+    <h3>⚠️ Disadvantages</h3>
+    <ul>
+      <li>Uses extra space</li>
+      <li>Slower for small datasets compared to quicksort or insertion sort</li>
+    </ul>
+  </article>
+
+  <!-- CTA Section -->
+  <section class="quiz-cta">
+    <h3>🧠 Ready to Practice?</h3>
+    <p>Reinforce your learning with real programming quizzes.</p>
+    <a href="c-quiz-1.html" class="btn-secondary">Try a Quiz Now</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>📚 Related Learning</h3>
+    <ul>
+      <li><a href="programming-topic-44.html">Quick Sort</a></li>
+      <li><a href="programming-topic-46.html">Insertion Sort</a></li>
+      <li><a href="programming-topic-47.html">Heap Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+    <ul>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
