@@ -1,16 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #53 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Stack data structure with examples in C++ and Python. Understand LIFO, push, pop, top operations and applications.">
+  <meta name="keywords" content="Stack, Data Structure, C++, Python, Push, Pop, EduIgnite, LIFO">
+  <meta name="author" content="EduIgnite Team" />
+  <title>Stack Data Structure | C++ & Python Examples | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #53</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>📚 Stack - Data Structure</h1>
+  <p>Last-In, First-Out (LIFO) structure to manage elements effectively</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 What is a Stack?</h2>
+    <p>
+      A <strong>Stack</strong> is a linear data structure that follows the <strong>LIFO (Last In First Out)</strong> principle.
+      The last element added to the stack is the first one to be removed.
+    </p>
+
+    <h3>🔧 Basic Operations:</h3>
+    <ul>
+      <li><strong>push()</strong> – Add an item to the stack</li>
+      <li><strong>pop()</strong> – Remove the top item</li>
+      <li><strong>peek() / top()</strong> – View the top item</li>
+      <li><strong>isEmpty()</strong> – Check if the stack is empty</li>
+    </ul>
+
+    <h3>💻 Python Example:</h3>
+    <pre><code class="language-python">
+stack = []
+
+# Push
+stack.append(10)
+stack.append(20)
+stack.append(30)
+
+# Pop
+print("Popped:", stack.pop())
+
+# Top Element
+print("Top:", stack[-1])
+
+# Check if Empty
+print("Is Empty:", len(stack) == 0)
+    </code></pre>
+
+    <h3>💻 C++ Example:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+    stack&lt;int&gt; s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+
+    cout &lt;&lt; "Top: " &lt;&lt; s.top() &lt;&lt; endl;
+    s.pop();
+    cout &lt;&lt; "After pop, Top: " &lt;&lt; s.top() &lt;&lt; endl;
+
+    cout &lt;&lt; "Is Empty: " &lt;&lt; s.empty() &lt;&lt; endl;
+    return 0;
+}
+    </code></pre>
+
+    <h3>📦 Stack Applications:</h3>
+    <ul>
+      <li>Function call management (call stack)</li>
+      <li>Undo features in editors</li>
+      <li>Syntax parsing</li>
+      <li>Expression evaluation (Postfix, Prefix)</li>
+    </ul>
+
+    <h3>🧮 Time Complexity:</h3>
+    <ul>
+      <li><strong>Push:</strong> O(1)</li>
+      <li><strong>Pop:</strong> O(1)</li>
+      <li><strong>Peek/Top:</strong> O(1)</li>
+    </ul>
+
+    <h3>📌 Stack VS Queue:</h3>
+    <ul>
+      <li>Stack: LIFO (Last-In-First-Out)</li>
+      <li>Queue: FIFO (First-In-First-Out)</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🎯 Check Your Understanding</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take Stack Quiz</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>📚 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-52.html">Linked List</a></li>
+      <li><a href="programming-topic-54.html">Queue</a></li>
+      <li><a href="programming-topic-45.html">Arrays</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
