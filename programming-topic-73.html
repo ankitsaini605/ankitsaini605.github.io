@@ -1,24 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #73</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Master Backtracking Algorithms with EduIgnite. Learn key concepts, implementation techniques, real-world use cases, and interview-level problems." />
+  <meta name="keywords" content="Backtracking, Algorithms, Programming, Recursion, EduIgnite, Competitive Coding" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Backtracking Algorithm - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Programming Topic #73 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🧩 Backtracking Algorithm – Powerful Problem Solving</h1>
+
+    <p>
+      Backtracking is a problem-solving algorithm that uses recursion and tries to build a solution incrementally. If a solution fails, it backtracks and tries a different path. It's often used in scenarios where all permutations, combinations, or constraints need to be explored.
+    </p>
+
+    <h2>🔍 Characteristics of Backtracking</h2>
+    <ul>
+      <li>Recursive in nature</li>
+      <li>Follows Depth First Search (DFS)</li>
+      <li>Tries all possibilities and abandons those that fail</li>
+      <li>Used where decision trees can be applied</li>
+    </ul>
+
+    <h2>🎯 Common Backtracking Problems</h2>
+    <ol>
+      <li>N-Queens Problem</li>
+      <li>Sudoku Solver</li>
+      <li>Rat in a Maze</li>
+      <li>Word Search in Matrix</li>
+      <li>Subset Generation</li>
+      <li>Palindrome Partitioning</li>
+    </ol>
+
+    <h2>🧠 C++ Example: Solving N-Queens</h2>
+    <pre><code>
+// isSafe() function to check safety
+bool isSafe(vector<string>& board, int row, int col, int n) {
+    // Check column and diagonals
+    for (int i = 0; i < row; i++) {
+        if (board[i][col] == 'Q') return false;
+        if (col - (row - i) >= 0 && board[i][col - (row - i)] == 'Q') return false;
+        if (col + (row - i) < n && board[i][col + (row - i)] == 'Q') return false;
+    }
+    return true;
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
-</main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+
+// solve() function to recursively place queens
+void solve(vector<string>& board, int row, int n) {
+    if (row == n) {
+        // Print solution or store it
+        return;
+    }
+    for (int col = 0; col < n; col++) {
+        if (isSafe(board, row, col, n)) {
+            board[row][col] = 'Q';
+            solve(board, row + 1, n);
+            board[row][col] = '.'; // backtrack
+        }
+    }
+}
+    </code></pre>
+
+    <h2>📌 Why Use Backtracking?</h2>
+    <ul>
+      <li>Explores all possibilities intelligently</li>
+      <li>Efficient for constraint satisfaction problems</li>
+      <li>Used in puzzle and game-solving algorithms</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip 🎓:</strong> Backtracking works best when you can prune paths early with smart conditions to reduce the time complexity.
+    </div>
+
+    <h2>🌍 Real-Life Applications</h2>
+    <ul>
+      <li>AI Game Playing (e.g., chess moves)</li>
+      <li>Word puzzles and board games (e.g., crossword, Sudoku)</li>
+      <li>Compiler optimization (register allocation)</li>
+      <li>Combinatorial problem solving in Data Science</li>
+    </ul>
+
+    <h2>🔗 Suggested Practice</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/backtracking/" target="_blank">LeetCode Backtracking Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/backtracking-algorithms/" target="_blank">GFG Backtracking Articles</a></li>
+    </ul>
+
+    <a href="programming-topic-74.html" class="btn">Next Topic: Dynamic Programming ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Empowering Minds Through Code</p>
+  </footer>
+
 </body>
 </html>
+
