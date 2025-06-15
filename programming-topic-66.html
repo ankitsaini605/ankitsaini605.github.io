@@ -1,24 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #66</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Understand Dijkstra's Algorithm for finding the shortest path in weighted graphs. Includes code examples in Python and C++, and real-world applications." />
+  <meta name="keywords" content="Dijkstra's Algorithm, Shortest Path, Graph, DSA, Python, C++, Weighted Graph, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Dijkstra's Algorithm | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #66 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🧭 Dijkstra's Algorithm</h1>
+  <p>Find the shortest path from a single source to all other nodes in a weighted graph.</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 Introduction</h2>
+    <p><strong>Dijkstra's Algorithm</strong> is a Greedy algorithm used to find the shortest paths from a starting node to all other nodes in a graph with non-negative edge weights.</p>
+
+    <h3>🔎 Key Features:</h3>
+    <ul>
+      <li>Works for both directed and undirected graphs</li>
+      <li>Does NOT work with negative weights</li>
+      <li>Time Complexity: O((V + E) log V) using Min Heap</li>
+    </ul>
+
+    <h3>⚙️ Python Implementation:</h3>
+    <pre><code class="language-python">
+import heapq
+
+def dijkstra(graph, start):
+    distances = {node: float('inf') for node in graph}
+    distances[start] = 0
+    queue = [(0, start)]
+
+    while queue:
+        current_distance, current_node = heapq.heappop(queue)
+
+        if current_distance > distances[current_node]:
+            continue
+
+        for neighbor, weight in graph[current_node]:
+            distance = current_distance + weight
+
+            if distance &lt; distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(queue, (distance, neighbor))
+
+    return distances
+
+graph = {
+    'A': [('B', 1), ('C', 4)],
+    'B': [('C', 2), ('D', 5)],
+    'C': [('D', 1)],
+    'D': []
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
+
+print(dijkstra(graph, 'A'))
+    </code></pre>
+
+    <h3>🔧 C++ Implementation:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#define INF 1e9
+
+using namespace std;
+
+typedef pair&lt;int, int&gt; pii;
+
+void dijkstra(int src, vector&lt;pii&gt; adj[], int V) {
+    vector&lt;int&gt; dist(V, INF);
+    dist[src] = 0;
+
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+    pq.push({0, src});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+
+        for (auto edge : adj[u]) {
+            int v = edge.first;
+            int w = edge.second;
+
+            if (dist[v] &gt; d + w) {
+                dist[v] = d + w;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    for (int i = 0; i &lt; V; i++)
+        cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; endl;
+}
+
+int main() {
+    int V = 4;
+    vector&lt;pii&gt; adj[V];
+
+    adj[0].push_back({1, 1});
+    adj[0].push_back({2, 4});
+    adj[1].push_back({2, 2});
+    adj[1].push_back({3, 5});
+    adj[2].push_back({3, 1});
+
+    dijkstra(0, adj, V);
+    return 0;
+}
+    </code></pre>
+
+    <h3>🧠 Real-Life Applications:</h3>
+    <ul>
+      <li>Google Maps and GPS routing</li>
+      <li>Network packet routing</li>
+      <li>Game development (AI pathfinding)</li>
+    </ul>
+
+    <h3>🧪 Try It Yourself:</h3>
+    <p>Practice implementing this algorithm on sites like LeetCode, HackerRank, and Codeforces.</p>
+
+    <div class="quiz-cta">
+      <a href="c-quiz-1.html" class="btn-secondary">🚀 Try Graph Quiz</a>
+    </div>
+  </article>
 </main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite | Designed by Ankit Saini | All Rights Reserved</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
