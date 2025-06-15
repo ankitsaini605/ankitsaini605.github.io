@@ -1,19 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #43 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Bubble Sort algorithm with C++ and Python code examples, complexity analysis, and real-world insights.">
+  <meta name="keywords" content="Bubble Sort, Sorting Algorithm, Python, C++, EduIgnite Programming">
+  <meta name="author" content="EduIgnite">
+  <title>Bubble Sort in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #43</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>🔁 Bubble Sort Algorithm</h1>
+  <p>A classic sorting technique explained with Python and C++ code examples and real-time analysis.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container" id="code-section">
+  <article>
+    <h2>📘 What is Bubble Sort?</h2>
+    <p>Bubble Sort is a simple comparison-based sorting algorithm. It repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.</p>
+
+    <h3>🧠 Working Principle:</h3>
+    <p>Each pass "bubbles" the largest element to the end. This process continues until the array is sorted.</p>
+
+    <h3>🐍 Python Code Example</h3>
+    <pre><code class="language-python">
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+data = [64, 34, 25, 12, 22, 11, 90]
+bubble_sort(data)
+print("Sorted array is:", data)
+    </code></pre>
+
+    <h3>💻 C++ Code Example</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i &lt; n-1; i++)
+        for (int j = 0; j &lt; n-i-1; j++)
+            if (arr[j] > arr[j+1])
+                swap(arr[j], arr[j+1]);
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    bubbleSort(arr, n);
+    cout << "Sorted array: ";
+    for (int i = 0; i &lt; n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📊 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(n) — already sorted with optimization</li>
+      <li><strong>Average Case:</strong> O(n²)</li>
+      <li><strong>Worst Case:</strong> O(n²)</li>
+      <li><strong>Space Complexity:</strong> O(1) — in-place algorithm</li>
+    </ul>
+
+    <h3>💡 Optimization Tip:</h3>
+    <p>Add a <code>swapped</code> flag to break early if the array is already sorted.</p>
+
+    <h3>⚠️ When NOT to Use:</h3>
+    <ul>
+      <li>For large datasets — it's too slow.</li>
+      <li>Better alternatives: Quick Sort, Merge Sort.</li>
+    </ul>
+  </article>
+
+  <!-- CTA Section -->
+  <section class="quiz-cta">
+    <h3>🧪 Practice Makes Perfect!</h3>
+    <p>Take a quiz to reinforce your understanding of sorting algorithms.</p>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>🔗 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-44.html">Quick Sort</a></li>
+      <li><a href="programming-topic-45.html">Merge Sort</a></li>
+      <li><a href="programming-topic-41.html">Linear Search</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+    <ul>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms of Use</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
