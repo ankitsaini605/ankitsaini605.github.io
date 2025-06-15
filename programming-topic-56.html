@@ -1,16 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #56 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Priority Queue in Data Structures with Python and C++ examples, use cases, and operations.">
+  <meta name="keywords" content="Priority Queue, Heap, Data Structure, Python, C++, EduIgnite">
+  <meta name="author" content="EduIgnite Team" />
+  <title>Priority Queue in DSA | Python & C++ Examples | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #56</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <h1>📊 Priority Queue in DSA</h1>
+  <p>Master the concept of Priority Queues using heaps with real examples in Python and C++.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📌 What is a Priority Queue?</h2>
+    <p>
+      A <strong>Priority Queue</strong> is an abstract data type where each element has a priority. The element with the highest priority is served before others.
+      Unlike regular queues, elements are ordered by priority, not insertion order.
+    </p>
+
+    <h3>🔧 Operations:</h3>
+    <ul>
+      <li><code>insert()</code> — Add element with a given priority</li>
+      <li><code>extract_max()</code> or <code>extract_min()</code> — Remove highest/lowest priority element</li>
+      <li><code>peek()</code> — View element with highest priority</li>
+    </ul>
+
+    <h3>💡 Real-World Applications:</h3>
+    <ul>
+      <li>Job scheduling in OS</li>
+      <li>Graph algorithms (Dijkstra, A*)</li>
+      <li>Bandwidth management</li>
+      <li>Task prioritization in project management tools</li>
+    </ul>
+
+    <h3>💻 Python Code using <code>heapq</code>:</h3>
+    <pre><code class="language-python">
+import heapq
+
+pq = []
+heapq.heappush(pq, (2, "Task A"))
+heapq.heappush(pq, (1, "Task B"))
+heapq.heappush(pq, (3, "Task C"))
+
+while pq:
+    priority, task = heapq.heappop(pq)
+    print(f"Processing {task} with priority {priority}")
+    </code></pre>
+
+    <h3>💻 C++ Code using <code>priority_queue</code>:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    priority_queue&lt;int&gt; pq;
+
+    pq.push(30);
+    pq.push(10);
+    pq.push(50);
+
+    while (!pq.empty()) {
+        cout &lt;&lt; pq.top() &lt;&lt; " ";
+        pq.pop();
+    }
+    return 0;
+}
+    </code></pre>
+
+    <h3>⚙️ Types of Priority Queue:</h3>
+    <ul>
+      <li><strong>Min Priority Queue:</strong> Smallest element served first</li>
+      <li><strong>Max Priority Queue:</strong> Largest element served first</li>
+    </ul>
+
+    <h3>⏱️ Time Complexities:</h3>
+    <ul>
+      <li><strong>Insert:</strong> O(log n)</li>
+      <li><strong>Delete/Extract:</strong> O(log n)</li>
+      <li><strong>Peek:</strong> O(1)</li>
+    </ul>
+  </article>
+
+  <!-- Quiz Call-to-Action -->
+  <section class="quiz-cta">
+    <h3>🧠 Test Your Knowledge on Heaps & Queues!</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take Quiz</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>📚 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-55.html">Deque</a></li>
+      <li><a href="programming-topic-54.html">Queue</a></li>
+      <li><a href="programming-topic-57.html">Binary Heap</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
