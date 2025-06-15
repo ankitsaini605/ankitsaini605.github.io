@@ -1,24 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #67</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Topological Sorting using DFS and BFS (Kahn’s Algorithm) in Directed Acyclic Graphs (DAGs) with real-world use cases and code examples in C++ and Python." />
+  <meta name="keywords" content="Topological Sort, DAG, Kahn's Algorithm, DFS, Graph Algorithms, C++, Python, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Topological Sorting in DAG | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #67 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>📊 Topological Sorting in DAGs</h1>
+  <p>Find the linear ordering of vertices in Directed Acyclic Graphs using DFS or BFS (Kahn's Algorithm).</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 What is Topological Sorting?</h2>
+    <p>Topological Sorting of a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge <code>u → v</code>, vertex <code>u</code> comes before <code>v</code>.</p>
+
+    <h3>📌 Conditions:</h3>
+    <ul>
+      <li>Only valid for Directed Acyclic Graphs (DAGs)</li>
+      <li>Used in scheduling tasks, build systems, dependency resolution, etc.</li>
+    </ul>
+
+    <h3>🔧 Python (Kahn’s Algorithm – BFS Based):</h3>
+    <pre><code class="language-python">
+from collections import defaultdict, deque
+
+def topological_sort(V, adj):
+    in_degree = [0] * V
+    for u in range(V):
+        for v in adj[u]:
+            in_degree[v] += 1
+
+    queue = deque([u for u in range(V) if in_degree[u] == 0])
+    topo_order = []
+
+    while queue:
+        u = queue.popleft()
+        topo_order.append(u)
+
+        for v in adj[u]:
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.append(v)
+
+    if len(topo_order) == V:
+        return topo_order
+    else:
+        return "Cycle Detected"
+
+# Example usage
+V = 6
+adj = [[2, 3], [3, 4], [], [4], [5], []]
+print(topological_sort(V, adj))
+    </code></pre>
+
+    <h3>⚙️ C++ (DFS-Based Approach):</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;stack&gt;
+
+using namespace std;
+
+void dfs(int u, vector&lt;bool&gt;& visited, stack&lt;int&gt;& st, vector&lt;int&gt; adj[]) {
+    visited[u] = true;
+    for (int v : adj[u])
+        if (!visited[v])
+            dfs(v, visited, st, adj);
+    st.push(u);
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
+
+void topologicalSort(int V, vector&lt;int&gt; adj[]) {
+    vector&lt;bool&gt; visited(V, false);
+    stack&lt;int&gt; st;
+
+    for (int i = 0; i &lt; V; i++)
+        if (!visited[i])
+            dfs(i, visited, st, adj);
+
+    while (!st.empty()) {
+        cout &lt;&lt; st.top() &lt;&lt; " ";
+        st.pop();
+    }
+}
+
+int main() {
+    int V = 6;
+    vector&lt;int&gt; adj[V];
+
+    adj[5].push_back(2);
+    adj[5].push_back(0);
+    adj[4].push_back(0);
+    adj[4].push_back(1);
+    adj[2].push_back(3);
+    adj[3].push_back(1);
+
+    topologicalSort(V, adj);
+    return 0;
+}
+    </code></pre>
+
+    <h3>🚀 Applications:</h3>
+    <ul>
+      <li>Task Scheduling</li>
+      <li>Dependency Resolution in Software Build Systems (like Makefiles)</li>
+      <li>Semantic Analysis in Compilers</li>
+    </ul>
+
+    <h3>✅ Note:</h3>
+    <p>If the graph contains a cycle, topological sorting is not possible.</p>
+
+    <div class="quiz-cta">
+      <a href="c-quiz-1.html" class="btn-secondary">🎯 Practice Topo Sort Quiz</a>
+    </div>
+  </article>
 </main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite | Designed by Ankit Saini | All Rights Reserved</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
