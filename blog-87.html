@@ -1,22 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #87</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Backtracking Algorithm with classic examples like N-Queens, Sudoku Solver, Rat in a Maze, and Subset Generation. Understand how recursive exploration and pruning work." />
+  <meta name="keywords" content="Backtracking, N-Queens, Sudoku, Maze, Subsets, EduIgnite, Algorithms, Programming, Recursion" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Backtracking Algorithm - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #87 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🔁 Backtracking Algorithm</h1>
+
+    <p>
+      <strong>Backtracking</strong> is a technique for solving problems incrementally, one step at a time, removing solutions that fail to satisfy the constraints. It’s based on **recursion + trial and error**.
+    </p>
+
+    <h2>💡 When to Use Backtracking</h2>
+    <ul>
+      <li>To explore all possibilities (combinatorics).</li>
+      <li>To solve constraint satisfaction problems.</li>
+      <li>When brute force is too inefficient and pruning is possible.</li>
+    </ul>
+
+    <h2>📘 Famous Problems</h2>
+    <ol>
+      <li><strong>N-Queens Problem</strong></li>
+      <li><strong>Sudoku Solver</strong></li>
+      <li><strong>Rat in a Maze</strong></li>
+      <li><strong>Subset/Permutation Generation</strong></li>
+      <li><strong>Word Search in Matrix</strong></li>
+    </ol>
+
+    <h2>🧪 Example: N-Queens Problem</h2>
+    <pre><code>
+bool isSafe(int board[][N], int row, int col) {
+  // Check for queen in this row on the left side
+  ...
+}
+
+bool solveNQUtil(int board[][N], int col) {
+  if (col >= N)
+    return true;
+
+  for (int i = 0; i < N; i++) {
+    if (isSafe(board, i, col)) {
+      board[i][col] = 1;
+      if (solveNQUtil(board, col + 1))
+        return true;
+      board[i][col] = 0; // BACKTRACK
+    }
+  }
+
+  return false;
+}
+    </code></pre>
+
+    <h2>📊 Backtracking vs Brute Force</h2>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Aspect</th>
+        <th>Backtracking</th>
+        <th>Brute Force</th>
+      </tr>
+      <tr>
+        <td>Search Strategy</td>
+        <td>Recursive pruning of invalid paths</td>
+        <td>Check all possibilities blindly</td>
+      </tr>
+      <tr>
+        <td>Efficiency</td>
+        <td>Much better when pruning works</td>
+        <td>Usually exponential and slow</td>
+      </tr>
+      <tr>
+        <td>Use Case</td>
+        <td>Combinatorial + constraint problems</td>
+        <td>Small inputs or exhaustive testing</td>
+      </tr>
+    </table>
+
+    <h2>🧠 Backtracking Template (Pseudocode)</h2>
+    <pre><code>
+function backtrack(path, options):
+  if path is a complete solution:
+    output(path)
+    return
+  for option in options:
+    if isValid(option):
+      path.add(option)
+      backtrack(path, options)
+      path.remove(option)  // undo
+    </code></pre>
+
+    <h2>📚 Related Topics</h2>
+    <ul>
+      <li>Constraint Satisfaction Problems (CSPs)</li>
+      <li>Recursion and DFS</li>
+      <li>Memoization (to combine with pruning)</li>
+    </ul>
+
+    <h2>🧪 Try Yourself!</h2>
+    <p>
+      Implement a Sudoku solver using backtracking and recursion. Start by identifying constraints (row, col, grid) and prune as early as possible.
+    </p>
+
+    <a href="programming-topic-88.html" class="btn">Next Topic: Dynamic Programming 📐</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Smart Algorithms for Smart Learners</p>
+  </footer>
+
 </body>
 </html>
+
