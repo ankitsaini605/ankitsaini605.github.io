@@ -1,38 +1,139 @@
 <!DOCTYPE html>
-<html>
-<head><title>C++ Inheritance + Encapsulation</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn the basics of Dynamic Programming (DP) with easy examples in Python and C++. Understand memoization, tabulation, and real-world applications.">
+  <meta name="keywords" content="Dynamic Programming, Memoization, Tabulation, DP Problems, Python, C++, EduIgnite">
+  <meta name="author" content="EduIgnite" />
+  <title>Dynamic Programming Basics | EduIgnite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+</head>
 <body>
-<h1>🔐 OOP Concepts: Inheritance & Encapsulation</h1>
 
-<h2>🧬 Inheritance</h2>
-<pre>
-class Animal {
-public:
-  void speak() { cout << "Sound"; }
-};
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="c-programming.html">C</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-class Dog : public Animal {
-public:
-  void bark() { cout << "Bark"; }
-};
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <h1>📊 Dynamic Programming (DP) Basics</h1>
+    <p>Master one of the most powerful programming techniques used in real-world software and competitive coding.</p>
+    <a href="#content" class="btn-primary">Start Learning</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="content">
+    <article>
+      <h2>📌 What is Dynamic Programming?</h2>
+      <p>Dynamic Programming (DP) is a technique to solve complex problems by breaking them down into simpler subproblems and solving each subproblem only once, storing the results for future use (memoization or tabulation).</p>
+
+      <h3>💡 When to Use DP?</h3>
+      <ul>
+        <li>Overlapping Subproblems</li>
+        <li>Optimal Substructure</li>
+      </ul>
+
+      <h3>🔁 Top-Down Approach (Memoization) - Python</h3>
+      <pre><code class="language-python">
+def fib(n, memo={}):
+    if n in memo: return memo[n]
+    if n <= 1: return n
+    memo[n] = fib(n-1, memo) + fib(n-2, memo)
+    return memo[n]
+
+print(fib(10))  # Output: 55
+      </code></pre>
+
+      <h3>⬇️ Bottom-Up Approach (Tabulation) - Python</h3>
+      <pre><code class="language-python">
+def fib_tab(n):
+    dp = [0, 1]
+    for i in range(2, n+1):
+        dp.append(dp[i-1] + dp[i-2])
+    return dp[n]
+
+print(fib_tab(10))  # Output: 55
+      </code></pre>
+
+      <h3>⚙️ C++ Example - Fibonacci with Memoization</h3>
+      <pre><code class="language-cpp">
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int fib(int n, unordered_map<int, int>& memo) {
+    if (memo.count(n)) return memo[n];
+    if (n <= 1) return n;
+    memo[n] = fib(n-1, memo) + fib(n-2, memo);
+    return memo[n];
+}
 
 int main() {
-  Dog d;
-  d.speak();  // Output: Sound
-  d.bark();   // Output: Bark
+    unordered_map<int, int> memo;
+    cout << fib(10, memo);  // Output: 55
 }
-</pre>
+      </code></pre>
 
-<h2>🛡️ Encapsulation</h2>
-<pre>
-class Student {
-private:
-  int age;
-public:
-  void setAge(int a) { age = a; }
-  int getAge() { return age; }
-};
-</pre>
+      <h3>🧠 Real-World Applications</h3>
+      <ul>
+        <li>Minimum Cost Path Problems</li>
+        <li>Longest Common Subsequence (LCS)</li>
+        <li>Knapsack Problem</li>
+        <li>Stock Buy & Sell</li>
+        <li>Matrix Chain Multiplication</li>
+      </ul>
 
-<p>Encapsulation = Wrapping data using private members</p>
-</body></html>
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> Use space optimization when you only need the last few computed values instead of storing the full array.
+      </div>
+    </article>
+
+    <!-- Quiz CTA -->
+    <section class="quiz-cta">
+      <h3>🎯 Test Your Knowledge!</h3>
+      <p>Attempt dynamic programming quizzes & problems to sharpen your skills.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Go to Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>📂 Related Concepts</h3>
+      <ul>
+        <li><a href="programming-topic-123.html">Fibonacci Series - Recursion & Iteration</a></li>
+        <li><a href="programming-topic-125.html">0/1 Knapsack Problem</a></li>
+        <li><a href="programming-topic-11.html">Understanding Recursion</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Syntax Highlighting -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
+
