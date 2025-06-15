@@ -1,22 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #82</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Master Greedy Algorithms: Activity selection, Fractional Knapsack, Huffman Coding and more. Learn strategy-based programming with EduIgnite." />
+  <meta name="keywords" content="Greedy Algorithm, Activity Selection, Huffman Coding, Fractional Knapsack, Programming Tutorials, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Greedy Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #82 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>⚡ Greedy Algorithms</h1>
+
+    <p>
+      A **Greedy Algorithm** makes the locally optimal choice at each step with the hope of finding the global optimum. These algorithms work in problems where choosing local optimums leads to the final solution.
+    </p>
+
+    <h2>📌 Characteristics of Greedy Algorithms</h2>
+    <ul>
+      <li>Greedy Choice Property</li>
+      <li>Optimal Substructure</li>
+      <li>No Backtracking Required</li>
+    </ul>
+
+    <h2>🎯 Famous Greedy Problems</h2>
+    <ul>
+      <li>Activity Selection</li>
+      <li>Fractional Knapsack</li>
+      <li>Job Scheduling</li>
+      <li>Huffman Coding</li>
+      <li>Minimum Number of Coins</li>
+      <li>Gas Station Problem</li>
+    </ul>
+
+    <h2>✅ Example: Activity Selection</h2>
+    <pre><code>
+bool activitySelection(vector&lt;pair&lt;int, int&gt;&gt; activities) {
+  sort(activities.begin(), activities.end(), [](auto &a, auto &b) {
+    return a.second &lt; b.second;
+  });
+
+  int count = 1;
+  int end = activities[0].second;
+
+  for (int i = 1; i &lt; activities.size(); i++) {
+    if (activities[i].first &gt;= end) {
+      count++;
+      end = activities[i].second;
+    }
+  }
+
+  return count;
+}
+    </code></pre>
+
+    <h2>💰 Fractional Knapsack (Greedy)</h2>
+    <p>
+      Unlike 0/1 knapsack, we can take fractions of items.
+    </p>
+    <pre><code>
+bool compare(Item a, Item b) {
+  double r1 = (double)a.value / a.weight;
+  double r2 = (double)b.value / b.weight;
+  return r1 &gt; r2;
+}
+
+double fractionalKnapsack(int W, Item arr[], int n) {
+  sort(arr, arr + n, compare);
+
+  double finalValue = 0.0;
+
+  for (int i = 0; i &lt; n; i++) {
+    if (arr[i].weight &lt;= W) {
+      W -= arr[i].weight;
+      finalValue += arr[i].value;
+    } else {
+      finalValue += arr[i].value * ((double)W / arr[i].weight);
+      break;
+    }
+  }
+
+  return finalValue;
+}
+    </code></pre>
+
+    <h2>🔠 Huffman Coding (Greedy + Trees)</h2>
+    <p>
+      Builds the most efficient encoding tree based on character frequency using a min-heap. Used in data compression.
+    </p>
+
+    <div class="tip-box">
+      <strong>Pro Tip:</strong> Always verify if greedy choice guarantees global optimality. Else, use Dynamic Programming.
+    </div>
+
+    <h2>⏱️ Time Complexities</h2>
+    <ul>
+      <li>Activity Selection: O(n log n)</li>
+      <li>Fractional Knapsack: O(n log n)</li>
+      <li>Huffman Coding: O(n log n)</li>
+    </ul>
+
+    <h2>🔗 Practice Sites</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/greedy/" target="_blank">LeetCode Greedy Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/fundamentals-of-algorithms/#Greedy" target="_blank">GFG Greedy Section</a></li>
+    </ul>
+
+    <a href="programming-topic-83.html" class="btn">Next Topic: Backtracking 🔁</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Greedy Algorithms Explained Clearly</p>
+  </footer>
+
 </body>
 </html>
+
