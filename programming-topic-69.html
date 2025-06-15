@@ -1,24 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #69</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to find strongly connected components (SCCs) in a directed graph using Kosaraju’s algorithm. Includes C++ implementation and real-world use cases." />
+  <meta name="keywords" content="Strongly Connected Components, Kosaraju's Algorithm, Graph Algorithms, DFS, C++, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>SCC in Graph using Kosaraju’s Algorithm | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #69 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🔗 Strongly Connected Components (SCC)</h1>
+  <p>Find all SCCs in a directed graph using Kosaraju’s Algorithm — efficient and powerful!</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>🔄 What is a Strongly Connected Component?</h2>
+    <p>A Strongly Connected Component (SCC) in a directed graph is a maximal set of vertices such that there is a path from any node to every other node in the set.</p>
+
+    <h2>⚙️ Kosaraju's Algorithm — Steps</h2>
+    <ol>
+      <li>Do a DFS and store vertices in a stack according to their finishing times.</li>
+      <li>Transpose the graph (reverse all edges).</li>
+      <li>Do DFS again in the order of the stack to find SCCs.</li>
+    </ol>
+
+    <h2>🧑‍💻 C++ Code Implementation</h2>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void dfs(int v, vector&lt;vector&lt;int&gt;&gt;& graph, vector&lt;bool&gt;& visited, stack&lt;int&gt;& Stack) {
+    visited[v] = true;
+    for (int u : graph[v])
+        if (!visited[u])
+            dfs(u, graph, visited, Stack);
+    Stack.push(v);
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
+
+void reverseDFS(int v, vector&lt;vector&lt;int&gt;&gt;& transpose, vector&lt;bool&gt;& visited) {
+    visited[v] = true;
+    cout &lt;&lt; v &lt;&lt; " ";
+    for (int u : transpose[v])
+        if (!visited[u])
+            reverseDFS(u, transpose, visited);
+}
+
+void kosarajuSCC(int V, vector&lt;vector&lt;int&gt;&gt; graph) {
+    stack&lt;int&gt; Stack;
+    vector&lt;bool&gt; visited(V, false);
+
+    for (int i = 0; i &lt; V; i++)
+        if (!visited[i])
+            dfs(i, graph, visited, Stack);
+
+    vector&lt;vector&lt;int&gt;&gt; transpose(V);
+    for (int v = 0; v &lt; V; v++)
+        for (int u : graph[v])
+            transpose[u].push_back(v);
+
+    fill(visited.begin(), visited.end(), false);
+    cout &lt;&lt; "Strongly Connected Components:\n";
+    while (!Stack.empty()) {
+        int v = Stack.top();
+        Stack.pop();
+        if (!visited[v]) {
+            reverseDFS(v, transpose, visited);
+            cout &lt;&lt; endl;
+        }
+    }
+}
+
+int main() {
+    int V = 5;
+    vector&lt;vector&lt;int&gt;&gt; graph = {
+        {2, 3}, {0}, {1}, {4}, {}
+    };
+    kosarajuSCC(V, graph);
+}
+    </code></pre>
+
+    <h3>🔍 Output:</h3>
+    <pre><code>
+Strongly Connected Components:
+4 
+3 
+0 1 2 
+    </code></pre>
+
+    <h3>📌 Use Cases:</h3>
+    <ul>
+      <li>Social networks – Detecting user clusters</li>
+      <li>Web crawling – Grouping similar domains</li>
+      <li>Compilers – Identifying mutually dependent modules</li>
+    </ul>
+
+    <div class="quiz-cta">
+      <a href="c-quiz-1.html" class="btn-secondary">🧠 Practice Graph Quizzes</a>
+    </div>
+  </article>
 </main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite | Designed by Ankit Saini | All Rights Reserved</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
