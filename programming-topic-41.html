@@ -1,19 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #41 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Linear Search algorithm in C++ and Python with code examples, time complexity analysis, and interview insights.">
+  <meta name="keywords" content="Linear Search, C++ Search Algorithm, Python Linear Search, EduIgnite, Programming Tutorials">
+  <meta name="author" content="EduIgnite">
+  <title>Linear Search in C++ and Python | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>Programming Concept #41</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero-banner">
+  <h1>🔍 Linear Search Algorithm</h1>
+  <p>Understand Linear Search with real code examples in Python and C++. Learn how it works, when to use it, and how to analyze its performance.</p>
+  <a href="#code-section" class="btn-primary">View Examples</a>
+</section>
+
+<!-- Main Content -->
+<main class="container" id="code-section">
+  <article>
+    <h2>📘 What is Linear Search?</h2>
+    <p>Linear Search is the simplest searching algorithm. It checks each element one by one until it finds the target or reaches the end of the array.</p>
+    <p>Used when:</p>
+    <ul>
+      <li>The array is small or unsorted</li>
+      <li>Fast coding is more important than performance</li>
+    </ul>
+
+    <h3>✅ Python Code Example</h3>
+    <pre><code class="language-python">
+def linear_search(arr, key):
+    for i in range(len(arr)):
+        if arr[i] == key:
+            return i
+    return -1
+
+data = [10, 25, 30, 45, 50]
+key = int(input("Enter number to search: "))
+result = linear_search(data, key)
+
+if result != -1:
+    print(f"Element found at index {result}")
+else:
+    print("Element not found")
+    </code></pre>
+
+    <h3>⚙️ C++ Code Example</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int linearSearch(int arr[], int size, int key) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == key) return i;
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {10, 25, 30, 45, 50};
+    int key;
+    cout << "Enter number to search: ";
+    cin >> key;
+    int index = linearSearch(arr, 5, key);
+
+    if (index != -1)
+        cout << "Element found at index " << index << endl;
+    else
+        cout << "Element not found" << endl;
+
+    return 0;
+}
+    </code></pre>
+
+    <h3>📊 Time Complexity</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(1) — element found at first index</li>
+      <li><strong>Average Case:</strong> O(n)</li>
+      <li><strong>Worst Case:</strong> O(n) — element not present</li>
+    </ul>
+
+    <h3>💡 Tips for Interviews:</h3>
+    <ul>
+      <li>Don't forget to mention edge cases like empty arrays.</li>
+      <li>Know when to use Binary Search instead (sorted array only).</li>
+      <li>Be ready to explain time complexity clearly.</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🧠 Test Your Knowledge</h3>
+    <p>Try our Linear Search quiz and crack your next coding interview!</p>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>🔗 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-42.html">Binary Search</a></li>
+      <li><a href="programming-topic-43.html">Bubble Sort</a></li>
+      <li><a href="programming-topic-11.html">Reverse an Array</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>© 2025 EduIgnite. All rights reserved.</p>
+    <ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
