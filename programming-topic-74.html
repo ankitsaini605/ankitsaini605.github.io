@@ -1,24 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #74</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Master Dynamic Programming (DP) with detailed explanation, real-life examples, and problem-solving tips. Ideal for coding interviews and competitive programming." />
+  <meta name="keywords" content="Dynamic Programming, DP, Programming, Coding Interview, Memoization, Tabulation, Competitive Programming" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Dynamic Programming - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Programming Topic #74 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>📈 Dynamic Programming (DP)</h1>
+
+    <p>
+      Dynamic Programming is a powerful technique used to solve complex problems by breaking them down into simpler subproblems. It stores the results of subproblems to avoid redundant computations, making algorithms significantly faster.
+    </p>
+
+    <h2>📚 Types of Dynamic Programming</h2>
+    <ul>
+      <li><strong>Memoization (Top-Down)</strong>: Recursively solve subproblems and store results.</li>
+      <li><strong>Tabulation (Bottom-Up)</strong>: Iteratively fill a table based on previous results.</li>
+    </ul>
+
+    <h2>🧠 Key Properties</h2>
+    <ul>
+      <li><strong>Optimal Substructure:</strong> Problem can be broken into optimal subproblems.</li>
+      <li><strong>Overlapping Subproblems:</strong> Same subproblems are solved multiple times.</li>
+    </ul>
+
+    <h2>💡 Common Dynamic Programming Problems</h2>
+    <ol>
+      <li>Fibonacci Numbers</li>
+      <li>Longest Common Subsequence (LCS)</li>
+      <li>0/1 Knapsack Problem</li>
+      <li>Coin Change Problem</li>
+      <li>Matrix Chain Multiplication</li>
+      <li>Longest Increasing Subsequence</li>
+    </ol>
+
+    <h2>🧪 Example: 0/1 Knapsack (C++)</h2>
+    <pre><code>
+int knapsack(int W, int wt[], int val[], int n) {
+    int dp[n+1][W+1];
+    for (int i = 0; i <= n; i++) {
+        for (int w = 0; w <= W; w++) {
+            if (i == 0 || w == 0)
+                dp[i][w] = 0;
+            else if (wt[i-1] <= w)
+                dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w]);
+            else
+                dp[i][w] = dp[i-1][w];
+        }
+    }
+    return dp[n][W];
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
-</main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+    </code></pre>
+
+    <h2>🌐 Real-World Applications</h2>
+    <ul>
+      <li>Resource Allocation</li>
+      <li>Data Compression Algorithms (like LZW)</li>
+      <li>Spell Checking</li>
+      <li>AI & Game Strategy Calculations</li>
+    </ul>
+
+    <h2>🚀 Interview Tips</h2>
+    <ul>
+      <li>Identify overlapping subproblems and optimal substructure</li>
+      <li>Start with recursive → then memoize → then tabulate</li>
+      <li>Practice pattern-based problems (like DP on subsequence, grid, etc.)</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip:</strong> Always visualize the DP table/grid when stuck. It reveals patterns and transitions clearly!
+    </div>
+
+    <h2>🔗 Practice Links</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/dynamic-programming/" target="_blank">LeetCode DP Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/dynamic-programming/" target="_blank">GFG Dynamic Programming</a></li>
+    </ul>
+
+    <a href="programming-topic-75.html" class="btn">Next Topic: Greedy Algorithms ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Your Gateway to Algorithmic Mastery</p>
+  </footer>
+
 </body>
 </html>
+
