@@ -1,19 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #44 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Understand Quick Sort algorithm with Python and C++ examples, real-world use cases, and complexity analysis.">
+  <meta name="keywords" content="Quick Sort, Sorting Algorithm, Python, C++, EduIgnite Programming, DSA">
+  <meta name="author" content="EduIgnite Team">
+  <title>Quick Sort in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #44</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>⚡ Quick Sort Algorithm</h1>
+  <p>One of the fastest and most efficient divide-and-conquer sorting algorithms used in software systems.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📚 Introduction</h2>
+    <p>
+      Quick Sort is a **divide-and-conquer** algorithm. It picks an element as a <strong>pivot</strong> and partitions the array around the pivot such that:
+      <ul>
+        <li>All elements on the left are smaller</li>
+        <li>All elements on the right are larger</li>
+      </ul>
+    </p>
+
+    <h3>📌 Real-World Use Cases:</h3>
+    <ul>
+      <li>Databases & search engines</li>
+      <li>Large-scale enterprise software</li>
+      <li>Gaming engines for sorting scores & levels</li>
+    </ul>
+
+    <h3>🐍 Python Code</h3>
+    <pre><code class="language-python">
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr)//2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+arr = [10, 7, 8, 9, 1, 5]
+print("Sorted Array:", quick_sort(arr))
+    </code></pre>
+
+    <h3>💻 C++ Code</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    for (int j = low; j &lt; high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    quickSort(arr, 0, n - 1);
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📈 Complexity Analysis</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(n log n)</li>
+      <li><strong>Average Case:</strong> O(n log n)</li>
+      <li><strong>Worst Case:</strong> O(n²) — when pivot is smallest/largest every time</li>
+      <li><strong>Space:</strong> O(log n)</li>
+    </ul>
+
+    <h3>✅ Advantages</h3>
+    <ul>
+      <li>Efficient for large datasets</li>
+      <li>In-place sorting (no extra memory needed)</li>
+    </ul>
+
+    <h3>❌ Disadvantages</h3>
+    <ul>
+      <li>Not stable by default</li>
+      <li>Worst-case performance is poor (can be fixed with randomized pivot)</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🧠 Test Your Skills!</h3>
+    <p>Take a quiz to reinforce your understanding of sorting techniques like Quick Sort.</p>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
+
+  <!-- Related Links -->
+  <section class="related-topics">
+    <h3>🔗 Related Articles</h3>
+    <ul>
+      <li><a href="programming-topic-45.html">Merge Sort</a></li>
+      <li><a href="programming-topic-46.html">Insertion Sort</a></li>
+      <li><a href="programming-topic-43.html">Bubble Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+    <ul>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- Highlight.js for syntax -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
