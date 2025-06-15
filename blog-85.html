@@ -1,22 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #85</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Understand Dynamic Programming (DP) with examples like Fibonacci, Knapsack, and Longest Common Subsequence. Learn how to optimize recursive problems using memoization and tabulation." />
+  <meta name="keywords" content="Dynamic Programming, Memoization, Tabulation, Fibonacci, Knapsack, LCS, Algorithms, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Dynamic Programming (DP) - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #85 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🚀 Dynamic Programming (DP)</h1>
+
+    <p>
+      **Dynamic Programming (DP)** is an advanced algorithmic technique used to optimize problems that have **overlapping subproblems** and **optimal substructure**. Instead of solving the same subproblem multiple times, DP stores results to avoid redundant computations.
+    </p>
+
+    <h2>📘 Key Techniques</h2>
+    <ul>
+      <li><strong>Memoization</strong> (Top-Down): Recursion + caching results.</li>
+      <li><strong>Tabulation</strong> (Bottom-Up): Iterative approach storing solutions in a table.</li>
+    </ul>
+
+    <h2>🔢 Example 1: Fibonacci Number (Memoization)</h2>
+    <pre><code>
+int fib(int n, vector&lt;int&gt;& dp) {
+  if (n &lt;= 1) return n;
+  if (dp[n] != -1) return dp[n];
+  return dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
+}
+    </code></pre>
+
+    <h2>📊 Example 2: 0/1 Knapsack Problem</h2>
+    <pre><code>
+int knapsack(vector&lt;int&gt;& wt, vector&lt;int&gt;& val, int W, int n) {
+  vector&lt;vector&lt;int&gt;&gt; dp(n + 1, vector&lt;int&gt;(W + 1, 0));
+  for (int i = 1; i &lt;= n; i++) {
+    for (int w = 1; w &lt;= W; w++) {
+      if (wt[i - 1] &lt;= w)
+        dp[i][w] = max(val[i - 1] + dp[i - 1][w - wt[i - 1]], dp[i - 1][w]);
+      else
+        dp[i][w] = dp[i - 1][w];
+    }
+  }
+  return dp[n][W];
+}
+    </code></pre>
+
+    <h2>🧬 Real-World Problems Solved by DP</h2>
+    <ul>
+      <li>✔️ Longest Common Subsequence (LCS)</li>
+      <li>✔️ Longest Increasing Subsequence (LIS)</li>
+      <li>✔️ Edit Distance (Levenshtein Distance)</li>
+      <li>✔️ Matrix Chain Multiplication</li>
+      <li>✔️ Minimum Cost Path</li>
+      <li>✔️ Palindromic Substrings</li>
+    </ul>
+
+    <h2>⚙️ Tabulation vs Memoization</h2>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Feature</th>
+        <th>Memoization</th>
+        <th>Tabulation</th>
+      </tr>
+      <tr>
+        <td>Approach</td>
+        <td>Top-Down</td>
+        <td>Bottom-Up</td>
+      </tr>
+      <tr>
+        <td>Recursion</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Space Optimization</td>
+        <td>Harder</td>
+        <td>More controllable</td>
+      </tr>
+    </table>
+
+    <h2>📚 Interview Tips</h2>
+    <ul>
+      <li>🧠 Break the problem into subproblems.</li>
+      <li>🧩 Identify overlapping subproblems.</li>
+      <li>🧮 Use a memo table or 2D DP array when necessary.</li>
+      <li>🔁 Start with recursion, then convert to DP.</li>
+    </ul>
+
+    <h2>🔗 Further Reading</h2>
+    <ul>
+      <li><a href="https://www.geeksforgeeks.org/dynamic-programming/" target="_blank">GFG: Dynamic Programming</a></li>
+      <li><a href="https://leetcode.com/tag/dynamic-programming/" target="_blank">LeetCode DP Problems</a></li>
+    </ul>
+
+    <a href="programming-topic-86.html" class="btn">Next Topic: Greedy Algorithms 🪙</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Learn Algorithms The Smart Way</p>
+  </footer>
+
 </body>
 </html>
+
