@@ -1,22 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #80</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Master Graph Algorithms like BFS, DFS, Dijkstra, and more. Learn implementation, use-cases, and complexity analysis in this comprehensive guide by EduIgnite." />
+  <meta name="keywords" content="Graph Algorithms, BFS, DFS, Dijkstra, Topological Sort, Graph Theory, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Graph Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #80 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🌐 Graph Algorithms</h1>
+
+    <p>
+      Graphs are a fundamental part of computer science. They model networks, dependencies, and more. Mastering graph algorithms is essential for cracking competitive coding and interviews.
+    </p>
+
+    <h2>📌 Common Graph Representations</h2>
+    <ul>
+      <li>Adjacency Matrix</li>
+      <li>Adjacency List</li>
+      <li>Edge List</li>
+    </ul>
+
+    <h2>🔍 Breadth First Search (BFS)</h2>
+    <pre><code>
+void bfs(int start, vector&lt;int&gt; adj[], int V) {
+  vector&lt;bool&gt; visited(V, false);
+  queue&lt;int&gt; q;
+
+  visited[start] = true;
+  q.push(start);
+
+  while (!q.empty()) {
+    int node = q.front();
+    q.pop();
+    cout &lt;&lt; node &lt;&lt; " ";
+
+    for (int neighbor : adj[node]) {
+      if (!visited[neighbor]) {
+        visited[neighbor] = true;
+        q.push(neighbor);
+      }
+    }
+  }
+}
+    </code></pre>
+
+    <h2>🧭 Depth First Search (DFS)</h2>
+    <pre><code>
+void dfs(int node, vector&lt;int&gt; adj[], vector&lt;bool&gt; &visited) {
+  visited[node] = true;
+  cout &lt;&lt; node &lt;&lt; " ";
+
+  for (int neighbor : adj[node]) {
+    if (!visited[neighbor]) {
+      dfs(neighbor, adj, visited);
+    }
+  }
+}
+    </code></pre>
+
+    <h2>🚦 Dijkstra’s Algorithm</h2>
+    <p>Finds the shortest path from a source to all vertices in a weighted graph.</p>
+    <pre><code>
+void dijkstra(int V, vector&lt;pair&lt;int,int&gt;&gt; adj[], int src) {
+  vector&lt;int&gt; dist(V, INT_MAX);
+  dist[src] = 0;
+  priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, greater&lt;&gt;&gt; pq;
+
+  pq.push({0, src});
+
+  while (!pq.empty()) {
+    int node = pq.top().second;
+    int d = pq.top().first;
+    pq.pop();
+
+    for (auto edge : adj[node]) {
+      int next = edge.first;
+      int weight = edge.second;
+
+      if (d + weight &lt; dist[next]) {
+        dist[next] = d + weight;
+        pq.push({dist[next], next});
+      }
+    }
+  }
+}
+    </code></pre>
+
+    <h2>🧠 Other Key Algorithms</h2>
+    <ul>
+      <li>Topological Sort</li>
+      <li>Prim’s & Kruskal’s (Minimum Spanning Tree)</li>
+      <li>Bellman-Ford Algorithm</li>
+      <li>Floyd Warshall Algorithm</li>
+      <li>Union-Find (Disjoint Sets)</li>
+    </ul>
+
+    <h2>📈 Time Complexities</h2>
+    <ul>
+      <li>BFS & DFS: O(V + E)</li>
+      <li>Dijkstra (with Min Heap): O(E log V)</li>
+      <li>Bellman-Ford: O(VE)</li>
+      <li>Floyd-Warshall: O(V³)</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Tip:</strong> Always choose the right graph representation (List vs Matrix) based on density and operations.
+    </div>
+
+    <h2>🔗 Practice Links</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/graph/" target="_blank">LeetCode Graph Problems</a></li>
+      <li><a href="https://practice.geeksforgeeks.org/tag/graph/" target="_blank">GFG Graph Practice</a></li>
+    </ul>
+
+    <a href="programming-topic-81.html" class="btn">Next Topic: Dynamic Programming ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Crack Graphs Like a Pro!</p>
+  </footer>
+
 </body>
 </html>
+
