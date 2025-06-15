@@ -1,19 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #46 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Insertion Sort algorithm with code examples in Python and C++. Understand its working, advantages, and time complexity.">
+  <meta name="keywords" content="Insertion Sort, Sorting Algorithm, Python, C++, EduIgnite, Algorithms">
+  <meta name="author" content="EduIgnite Team">
+  <title>Insertion Sort in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #46</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>↪️ Insertion Sort Algorithm</h1>
+  <p>A simple and intuitive algorithm ideal for small or nearly sorted datasets.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 What is Insertion Sort?</h2>
+    <p>
+      Insertion Sort works similarly to how we sort playing cards in our hands. It builds the final sorted array one item at a time by inserting elements into their correct position.
+    </p>
+
+    <h3>📍 Applications:</h3>
+    <ul>
+      <li>Great for small data sets</li>
+      <li>Efficient for nearly sorted arrays</li>
+      <li>Used in teaching basic sorting concepts</li>
+    </ul>
+
+    <h3>🐍 Python Example</h3>
+    <pre><code class="language-python">
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+
+arr = [9, 5, 1, 4, 3]
+insertion_sort(arr)
+print("Sorted array:", arr)
+    </code></pre>
+
+    <h3>💻 C++ Example</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main() {
+    int arr[] = {9, 5, 1, 4, 3};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    insertionSort(arr, n);
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📈 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(n) [Already Sorted]</li>
+      <li><strong>Average Case:</strong> O(n²)</li>
+      <li><strong>Worst Case:</strong> O(n²)</li>
+      <li><strong>Space:</strong> O(1) In-place</li>
+    </ul>
+
+    <h3>✅ Advantages</h3>
+    <ul>
+      <li>Simple to implement</li>
+      <li>No extra memory required</li>
+      <li>Fast for nearly sorted data</li>
+    </ul>
+
+    <h3>⚠️ Limitations</h3>
+    <ul>
+      <li>Not efficient for large datasets</li>
+      <li>O(n²) in worst cases</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🧠 Test Your Sorting Skills</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Solve Quiz Now</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>📚 Explore More</h3>
+    <ul>
+      <li><a href="programming-topic-45.html">Merge Sort</a></li>
+      <li><a href="programming-topic-47.html">Heap Sort</a></li>
+      <li><a href="programming-topic-48.html">Counting Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- Script for Code Highlight -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
