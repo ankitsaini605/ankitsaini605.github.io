@@ -1,16 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #63 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to detect cycles in a graph using DFS and Union-Find algorithms. Code examples in Python and C++ provided. Essential for understanding graph theory and competitive programming." />
+  <meta name="keywords" content="Cycle Detection, Graph Algorithms, DFS, Union-Find, Disjoint Set, EduIgnite, Python, C++" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Cycle Detection in Graphs | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #63</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🔁 Cycle Detection in Graphs</h1>
+  <p>Detect loops in Directed and Undirected Graphs using DFS and Disjoint Sets (Union-Find).</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 What is Cycle Detection?</h2>
+    <p>Cycle detection is used to determine whether a graph contains a cycle. It's an important problem in graph theory and is crucial in applications like deadlock detection, verifying if a prerequisite chain is valid, etc.</p>
+
+    <h3>📌 Methods to Detect Cycles:</h3>
+    <ul>
+      <li><strong>DFS (Depth First Search)</strong> - For both directed and undirected graphs</li>
+      <li><strong>Union-Find (Disjoint Set Union)</strong> - For undirected graphs only</li>
+    </ul>
+
+    <h3>🧠 DFS-based Cycle Detection (Directed Graph):</h3>
+    <pre><code class="language-python">
+def isCyclicDFS(v, visited, recStack, graph):
+    visited[v] = True
+    recStack[v] = True
+    for neighbor in graph[v]:
+        if not visited[neighbor]:
+            if isCyclicDFS(neighbor, visited, recStack, graph):
+                return True
+        elif recStack[neighbor]:
+            return True
+    recStack[v] = False
+    return False
+
+def detectCycle(graph, V):
+    visited = [False] * V
+    recStack = [False] * V
+    for node in range(V):
+        if not visited[node]:
+            if isCyclicDFS(node, visited, recStack, graph):
+                return True
+    return False
+
+# Example:
+V = 4
+graph = [[1], [2], [3], [1]]  # contains cycle
+print("Cycle Detected" if detectCycle(graph, V) else "No Cycle")
+    </code></pre>
+
+    <h3>🛠️ Union-Find Cycle Detection (Undirected Graph in C++):</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int find(int parent[], int i) {
+    if (parent[i] == -1) return i;
+    return parent[i] = find(parent, parent[i]);
+}
+
+bool unionCycle(int parent[], int x, int y) {
+    int xset = find(parent, x);
+    int yset = find(parent, y);
+    if (xset == yset) return true;
+    parent[xset] = yset;
+    return false;
+}
+
+bool isCyclic(vector&lt;pair&lt;int, int&gt;&gt; edges, int V) {
+    int *parent = new int[V];
+    fill(parent, parent + V, -1);
+
+    for (auto edge : edges) {
+        if (unionCycle(parent, edge.first, edge.second)) return true;
+    }
+    return false;
+}
+
+int main() {
+    int V = 3;
+    vector&lt;pair&lt;int, int&gt;&gt; edges = {{0, 1}, {1, 2}, {2, 0}};
+    cout &lt;&lt; (isCyclic(edges, V) ? "Cycle Detected" : "No Cycle");
+}
+    </code></pre>
+
+    <h3>⚠️ Important Notes:</h3>
+    <ul>
+      <li>Use **DFS** for both directed and undirected graphs.</li>
+      <li>Use **Union-Find** for only undirected graphs (faster for sparse graphs).</li>
+    </ul>
+
+    <h3>📊 Time & Space Complexity:</h3>
+    <ul>
+      <li><strong>DFS:</strong> O(V + E)</li>
+      <li><strong>Union-Find:</strong> O(E * α(V)) [α = Inverse Ackermann Function]</li>
+    </ul>
+
+    <h3>🔍 Applications:</h3>
+    <ul>
+      <li>Deadlock prevention in operating systems</li>
+      <li>Validating scheduling constraints</li>
+      <li>Checking for circular dependencies</li>
+    </ul>
+  </article>
+
+  <section class="related-topics">
+    <h3>📎 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-62.html">Topological Sort</a></li>
+      <li><a href="programming-topic-64.html">Shortest Path Algorithms</a></li>
+    </ul>
+  </section>
+
+  <section class="quiz-cta">
+    <h3>📘 Want to Practice More?</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Solve Graph Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Developed by Ankit Saini. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
