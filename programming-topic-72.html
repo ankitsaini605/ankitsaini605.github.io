@@ -1,24 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #72</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Greedy Algorithms in programming with practical examples, coding techniques, and real-life applications.">
+  <meta name="keywords" content="Greedy Algorithms, Programming, Optimization, Algorithmic Thinking, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>Greedy Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Programming Topic #72 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>💰 Greedy Algorithms - Concept & Implementation</h1>
+
+    <p>Greedy algorithms are a class of algorithms that make the optimal choice at each step with the hope that the global optimum will be reached. These are simple, intuitive, and often surprisingly effective.</p>
+
+    <h2>🔍 Key Characteristics of Greedy Algorithms</h2>
+    <ul>
+      <li><strong>Greedy Choice Property:</strong> A global optimum can be arrived at by selecting a local optimum.</li>
+      <li><strong>Optimal Substructure:</strong> The problem can be broken into subproblems which can be solved optimally.</li>
+    </ul>
+
+    <h2>⚙️ Famous Greedy Problems</h2>
+    <ol>
+      <li>Activity Selection</li>
+      <li>Fractional Knapsack</li>
+      <li>Huffman Encoding</li>
+      <li>Minimum Spanning Tree (Prim’s & Kruskal’s)</li>
+      <li>Dijkstra’s Shortest Path</li>
+    </ol>
+
+    <h3>🧠 Example: Activity Selection Problem</h3>
+    <pre><code>// C++ Example
+bool compare(Activity a, Activity b) {
+    return a.finish < b.finish;
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
-</main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+
+void activitySelection(vector<Activity> activities) {
+    sort(activities.begin(), activities.end(), compare);
+    int lastFinish = 0;
+    for (auto act : activities) {
+        if (act.start >= lastFinish) {
+            cout << act.name << " ";
+            lastFinish = act.finish;
+        }
+    }
+}
+    </code></pre>
+
+    <h2>📌 Advantages</h2>
+    <ul>
+      <li>Faster than dynamic programming or exhaustive search</li>
+      <li>Easy to implement and understand</li>
+      <li>Great for problems with clear greedy property</li>
+    </ul>
+
+    <h2>⚠️ When NOT to Use Greedy</h2>
+    <ul>
+      <li>If local optima don’t lead to global optimum</li>
+      <li>If multiple combinations need to be tested</li>
+    </ul>
+
+    <h2>🛠️ Real-Life Applications</h2>
+    <ul>
+      <li>File compression algorithms (like Huffman)</li>
+      <li>Job scheduling in OS</li>
+      <li>Travel route optimization</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip 🧮:</strong> Prove greedy correctness with mathematical induction or by comparing to dynamic programming results.
+    </div>
+
+    <h2>🔗 Practice Platforms</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/greedy/" target="_blank">LeetCode Greedy Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/greedy-algorithms/" target="_blank">GFG Greedy Tutorials</a></li>
+    </ul>
+
+    <a href="programming-topic-73.html" class="btn">Next Topic: Backtracking ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Empowering Minds Through Code</p>
+  </footer>
+
 </body>
 </html>
+
