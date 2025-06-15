@@ -1,24 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #71</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Master Dynamic Programming with practical explanations, examples, and problem-solving tips. Learn how to break complex problems into simpler sub-problems.">
+  <meta name="keywords" content="Dynamic Programming, DP, Algorithms, Programming, Problem Solving, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>Dynamic Programming (DP) - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header><h1>Programming Topic #71 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🧠 Understanding Dynamic Programming (DP)</h1>
+
+    <p><strong>Dynamic Programming (DP)</strong> is a method for solving complex problems by breaking them down into simpler subproblems and solving each subproblem just once, storing its solution. It's an optimization over plain recursion and is widely used in coding interviews and real-world applications.</p>
+
+    <h2>💡 Core Concepts of Dynamic Programming</h2>
+    <ul>
+      <li><strong>Overlapping Subproblems</strong>: Problems where the same subproblems are solved multiple times.</li>
+      <li><strong>Optimal Substructure</strong>: An optimal solution can be constructed from optimal solutions of its subproblems.</li>
+    </ul>
+
+    <h2>✍️ Top-down vs Bottom-up</h2>
+    <ul>
+      <li><strong>Top-Down (Memoization)</strong>: Solve the problem recursively and store the results.</li>
+      <li><strong>Bottom-Up (Tabulation)</strong>: Build a table iteratively and solve from the smallest subproblem up.</li>
+    </ul>
+
+    <h3>⚙️ Example: Fibonacci with DP</h3>
+    <pre><code>// Bottom-Up Approach
+int fib(int n) {
+  int dp[n+1];
+  dp[0] = 0; dp[1] = 1;
+  for (int i = 2; i <= n; i++) {
+    dp[i] = dp[i-1] + dp[i-2];
+  }
+  return dp[n];
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
-</main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+    </code></pre>
+
+    <h2>🚀 Benefits of Using DP</h2>
+    <ul>
+      <li>Drastically improves performance vs brute force</li>
+      <li>Avoids recomputation</li>
+      <li>Ideal for optimization and decision problems</li>
+    </ul>
+
+    <h2>🧪 Common DP Problems</h2>
+    <ol>
+      <li>0/1 Knapsack Problem</li>
+      <li>Longest Common Subsequence (LCS)</li>
+      <li>Coin Change Problem</li>
+      <li>Edit Distance</li>
+      <li>Matrix Chain Multiplication</li>
+    </ol>
+
+    <h2>🔗 Practice Links</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/dynamic-programming/" target="_blank">LeetCode DP Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/dynamic-programming/" target="_blank">GeeksforGeeks DP Guide</a></li>
+    </ul>
+
+    <h2>📌 Real-Life Uses of DP</h2>
+    <ul>
+      <li>Data compression (e.g. LZW, Huffman coding)</li>
+      <li>Game AI strategy planning</li>
+      <li>Route Optimization in Navigation Systems</li>
+      <li>Spell Checkers (Edit Distance)</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip 💼:</strong> Before jumping to code, identify overlapping subproblems and optimal substructure. Then decide whether to use memoization or tabulation.
+    </div>
+
+    <p>Dynamic Programming is an essential skill for anyone aiming to crack coding interviews or solve complex optimization problems. Practice regularly to gain mastery.</p>
+
+    <a href="programming-topic-72.html" class="btn">Next Topic: Greedy Algorithms ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Empowering Minds Through Code</p>
+  </footer>
+
 </body>
 </html>
+
