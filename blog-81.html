@@ -1,22 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #81</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Master Dynamic Programming with top-down and bottom-up approaches. Learn memoization, tabulation, and common DP patterns at EduIgnite." />
+  <meta name="keywords" content="Dynamic Programming, DP, Memoization, Tabulation, DP Interview Questions, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Dynamic Programming (DP) - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #81 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🧠 Dynamic Programming (DP)</h1>
+
+    <p>
+      Dynamic Programming is a powerful technique used to solve complex problems by breaking them down into simpler subproblems. It’s a key topic for technical interviews and competitive programming.
+    </p>
+
+    <h2>📚 What is Dynamic Programming?</h2>
+    <p>
+      DP is an optimization over recursion. It stores the results of subproblems to avoid recomputation — this is called **memoization** or **tabulation**.
+    </p>
+
+    <h2>🔁 Memoization (Top-Down DP)</h2>
+    <pre><code>
+int fib(int n, vector&lt;int&gt;& dp) {
+  if (n &lt;= 1) return n;
+  if (dp[n] != -1) return dp[n];
+  return dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
+}
+    </code></pre>
+
+    <h2>📊 Tabulation (Bottom-Up DP)</h2>
+    <pre><code>
+int fib(int n) {
+  vector&lt;int&gt; dp(n + 1);
+  dp[0] = 0; dp[1] = 1;
+
+  for (int i = 2; i &lt;= n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
+  }
+
+  return dp[n];
+}
+    </code></pre>
+
+    <h2>🎯 Common DP Patterns</h2>
+    <ul>
+      <li>Fibonacci Sequence</li>
+      <li>0/1 Knapsack</li>
+      <li>Longest Common Subsequence (LCS)</li>
+      <li>Matrix Path Problems</li>
+      <li>Coin Change</li>
+      <li>Rod Cutting</li>
+      <li>Palindrome Partitioning</li>
+    </ul>
+
+    <h2>🧪 0/1 Knapsack (Classic DP Problem)</h2>
+    <pre><code>
+int knapsack(int wt[], int val[], int W, int n) {
+  vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(W+1, 0));
+
+  for (int i = 1; i &lt;= n; i++) {
+    for (int w = 1; w &lt;= W; w++) {
+      if (wt[i-1] &lt;= w)
+        dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w]);
+      else
+        dp[i][w] = dp[i-1][w];
+    }
+  }
+  return dp[n][W];
+}
+    </code></pre>
+
+    <div class="tip-box">
+      <strong>Tip:</strong> Always identify overlapping subproblems and optimal substructure before applying DP.
+    </div>
+
+    <h2>⏱️ Time Complexities</h2>
+    <ul>
+      <li>Fibonacci (with memoization): O(n)</li>
+      <li>Knapsack: O(n * W)</li>
+      <li>LCS: O(m * n)</li>
+    </ul>
+
+    <h2>🔗 Practice Sites</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/dynamic-programming/" target="_blank">LeetCode DP Problems</a></li>
+      <li><a href="https://practice.geeksforgeeks.org/tag/dynamic-programming/" target="_blank">GFG Dynamic Programming</a></li>
+    </ul>
+
+    <a href="programming-topic-82.html" class="btn">Next Topic: Greedy Algorithms ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Dynamic Programming Made Simple</p>
+  </footer>
+
 </body>
 </html>
+
