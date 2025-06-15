@@ -1,28 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Programming Functions in C++</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Variables and Data Types in programming with examples and interactive explanations. Ideal for beginners.">
+  <meta name="keywords" content="Variables, Data Types, Programming, Beginner Coding, Python, C++, JavaScript">
+  <meta name="author" content="EduIgnite" />
+  <title>Variables & Data Types - EduIgnite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>🧠 C++ Functions – Syntax + Examples</h1></header>
-<main>
-  <h2>🔹 Syntax</h2>
-  <pre>
-int add(int a, int b) {{
-  return a + b;
-}}
-int main() {{
-  cout << add(2, 3); // Output: 5
-}}
-  </pre>
 
-  <h2>💡 Tips</h2>
-  <ul>
-    <li>Use return type properly</li>
-    <li>Keep function size short</li>
-  </ul>
-</main>
-<footer>Code Better @eduignite_official</footer>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="c-programming.html">C</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <h1>Variables & Data Types</h1>
+    <p>Understand how computers store and use different types of information using variables.</p>
+    <a href="#content" class="btn-primary">Explore Now</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="content">
+    <article>
+      <h2>🧠 What Are Variables?</h2>
+      <p>Variables are named memory locations used to store data. Think of them as labeled containers where you can keep values like numbers, text, or more complex data.</p>
+
+      <h3>Declaring Variables</h3>
+      <pre><code class="language-python">x = 10
+name = "Ankit"
+pi = 3.14</code></pre>
+
+      <p>Above are examples of integer, string, and float variables in Python. Each programming language has different syntax but the logic remains similar.</p>
+
+      <h2>📦 Data Types</h2>
+      <p>Each variable in programming holds a specific type of data. Common data types include:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Integer (int)</td>
+            <td>Whole numbers</td>
+            <td>5, 100, -3</td>
+          </tr>
+          <tr>
+            <td>Float (float)</td>
+            <td>Decimal numbers</td>
+            <td>3.14, -0.99</td>
+          </tr>
+          <tr>
+            <td>String (str)</td>
+            <td>Text</td>
+            <td>"Hello", "EduIgnite"</td>
+          </tr>
+          <tr>
+            <td>Boolean (bool)</td>
+            <td>True/False</td>
+            <td>True, False</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>💡 Type Conversion</h3>
+      <p>Sometimes we need to convert one data type to another. This is known as type casting.</p>
+      <pre><code class="language-python">
+x = "100"
+y = int(x)  # y becomes integer 100
+      </code></pre>
+
+      <h3>🧪 Practice Task</h3>
+      <p>Create 5 variables with different data types and print their values and types using <code>type()</code> in Python.</p>
+
+      <div class="practice-box">
+        <strong>Example:</strong><br />
+        <code>
+num = 50<br />
+text = "EduIgnite"<br />
+flag = True<br />
+pi = 3.141<br />
+print(type(num), type(text), type(flag), type(pi))
+        </code>
+      </div>
+    </article>
+
+    <!-- Quiz CTA -->
+    <section class="quiz-cta">
+      <h3>📝 Quick Quiz: Are You Getting It?</h3>
+      <p>Take a short quiz on variables and data types.</p>
+      <a href="programming-quiz-2.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>🔗 Related Topics</h3>
+      <ul>
+        <li><a href="programming-topic-103.html">Operators in Programming</a></li>
+        <li><a href="programming-topic-104.html">Conditional Statements</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All Rights Reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Highlight.js for code formatting -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
