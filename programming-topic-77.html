@@ -1,25 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #77</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Divide and Conquer algorithm strategy with examples like Merge Sort, Quick Sort, and Binary Search. Perfect for coding interviews and DSA mastery." />
+  <meta name="keywords" content="Divide and Conquer, Algorithms, Merge Sort, Quick Sort, Binary Search, EduIgnite, Programming Tutorials" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Divide and Conquer - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Programming Topic #77 – Functions</h1></header>
-<main>
-  <p><strong>Example:</strong> User-defined C++ Function</p>
-  <pre>
-int add(int a, int b) {
-  return a + b;
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>➗ Divide and Conquer</h1>
+
+    <p>
+      Divide and Conquer is an algorithmic paradigm that breaks a problem into smaller sub-problems, solves them independently, and then combines their results to solve the original problem.
+    </p>
+
+    <h2>🧠 Core Concept</h2>
+    <ol>
+      <li><strong>Divide</strong> – Break the problem into sub-problems</li>
+      <li><strong>Conquer</strong> – Solve each sub-problem recursively</li>
+      <li><strong>Combine</strong> – Merge the results of the sub-problems</li>
+    </ol>
+
+    <h2>⚙️ Popular Examples</h2>
+    <ul>
+      <li>Merge Sort</li>
+      <li>Quick Sort</li>
+      <li>Binary Search</li>
+      <li>Closest Pair of Points</li>
+      <li>Strassen’s Matrix Multiplication</li>
+    </ul>
+
+    <h2>🧾 Code Example: Merge Sort in C++</h2>
+    <pre><code>
+void merge(int arr[], int l, int m, int r) {
+  int n1 = m - l + 1;
+  int n2 = r - m;
+  int L[n1], R[n2];
+  for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+  for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+  int i = 0, j = 0, k = l;
+  while (i < n1 && j < n2) {
+    arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
+  }
+  while (i < n1) arr[k++] = L[i++];
+  while (j < n2) arr[k++] = R[j++];
 }
 
-int main() {
-  cout << add(5, 3); // Output: 8
-  return 0;
+void mergeSort(int arr[], int l, int r) {
+  if (l < r) {
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
+  }
 }
-  </pre>
-</main>
-<footer>Learn Daily – @eduignite_official</footer>
+    </code></pre>
+
+    <h2>📈 Time Complexity</h2>
+    <ul>
+      <li>Best: O(n log n)</li>
+      <li>Average: O(n log n)</li>
+      <li>Worst: O(n log n)</li>
+    </ul>
+
+    <h2>✅ Applications</h2>
+    <ul>
+      <li>Sorting large datasets efficiently</li>
+      <li>Efficient searching (Binary Search)</li>
+      <li>Computational geometry</li>
+      <li>Divide-based numerical simulations</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip:</strong> Use Divide and Conquer when the problem naturally breaks into overlapping or independent subproblems.
+    </div>
+
+    <h2>🔗 Practice Links</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/divide-and-conquer/" target="_blank">LeetCode: Divide and Conquer</a></li>
+      <li><a href="https://www.geeksforgeeks.org/divide-and-conquer/" target="_blank">GFG: D&C Problems</a></li>
+    </ul>
+
+    <a href="programming-topic-78.html" class="btn">Next Topic: Dynamic Programming ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Level Up Your Logic</p>
+  </footer>
+
 </body>
 </html>
+
