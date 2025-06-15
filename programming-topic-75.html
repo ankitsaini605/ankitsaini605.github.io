@@ -1,24 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #75</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Master Greedy Algorithms with real-world examples, problem-solving strategies, and coding techniques. Ideal for interviews and competitive programming." />
+  <meta name="keywords" content="Greedy Algorithm, Algorithm Optimization, Competitive Programming, Coding Interview, Problem Solving" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Greedy Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Programming Topic #75 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>💰 Greedy Algorithms</h1>
+
+    <p>
+      A Greedy Algorithm builds up a solution piece by piece, always choosing the next piece that offers the most immediate benefit. It doesn’t always provide an optimal solution, but when it does, it's usually the most efficient approach.
+    </p>
+
+    <h2>🧠 Key Idea</h2>
+    <p>
+      At each step, choose the option that looks best at that moment. Make a local optimal choice, hoping it leads to a global optimum.
+    </p>
+
+    <h2>🔍 When to Use Greedy</h2>
+    <ul>
+      <li>Problems where future consequences don’t affect the present decision.</li>
+      <li>Optimization problems (maximize or minimize).</li>
+      <li>When the greedy choice property and optimal substructure are satisfied.</li>
+    </ul>
+
+    <h2>⚙️ Popular Greedy Algorithms</h2>
+    <ol>
+      <li>Activity Selection</li>
+      <li>Huffman Coding</li>
+      <li>Job Sequencing with Deadline</li>
+      <li>Fractional Knapsack</li>
+      <li>Dijkstra’s Algorithm</li>
+      <li>Prim’s and Kruskal’s Algorithm</li>
+    </ol>
+
+    <h2>💡 Example: Activity Selection (C++)</h2>
+    <pre><code>
+bool activityCompare(pair<int,int> a, pair<int,int> b) {
+    return a.second < b.second;
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
-</main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+void printActivities(vector<pair<int,int>> activities) {
+    sort(activities.begin(), activities.end(), activityCompare);
+    int lastEnd = activities[0].second;
+    cout << "Selected: (Start: " << activities[0].first << ", End: " << lastEnd << ")\n";
+    for (int i = 1; i < activities.size(); i++) {
+        if (activities[i].first >= lastEnd) {
+            cout << "Selected: (Start: " << activities[i].first << ", End: " << activities[i].second << ")\n";
+            lastEnd = activities[i].second;
+        }
+    }
+}
+    </code></pre>
+
+    <h2>🌐 Real-World Applications</h2>
+    <ul>
+      <li>Scheduling (CPU Jobs, Railway Platforms)</li>
+      <li>Minimum Spanning Tree (Kruskal/Prim)</li>
+      <li>Network Routing</li>
+      <li>Data Compression (Huffman Coding)</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip:</strong> Prove greedy choice property and optimal substructure before using greedy. Otherwise, the result may not be optimal.
+    </div>
+
+    <h2>📝 Key Characteristics</h2>
+    <ul>
+      <li>No backtracking or reconsideration</li>
+      <li>Fast and space-efficient</li>
+      <li>Not guaranteed to be optimal in all problems</li>
+    </ul>
+
+    <h2>🔗 Practice Resources</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/greedy/" target="_blank">LeetCode Greedy Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/greedy-algorithms/" target="_blank">GFG Greedy Tutorials</a></li>
+    </ul>
+
+    <a href="programming-topic-76.html" class="btn">Next Topic: Backtracking ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Empowering Coders Globally</p>
+  </footer>
+
 </body>
 </html>
+
