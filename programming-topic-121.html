@@ -1,14 +1,124 @@
 <!DOCTYPE html>
-<html>
-<head><title>Programming Loops in C++</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Recursion in Programming. Understand how recursive functions work with real-world examples and best practices.">
+  <meta name="keywords" content="Recursion, Programming Concepts, Recursive Function, EduIgnite, C++, Python, Call Stack">
+  <meta name="author" content="EduIgnite" />
+  <title>Recursion in Programming - EduIgnite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+</head>
 <body>
-<h1>💻 C++ Loops</h1>
-<pre>
-for (int i = 0; i < 5; i++) {
-  cout << i << " ";
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="c-programming.html">C</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>🔁 Recursion in Programming</h1>
+    <p>A powerful concept where a function calls itself to solve smaller instances of a problem.</p>
+    <a href="#content" class="btn-primary">Explore Recursion</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="content">
+    <article>
+      <h2>📘 What is Recursion?</h2>
+      <p>Recursion is a technique in programming where a function calls itself repeatedly until a base condition is met. It is especially useful for problems that can be divided into similar sub-problems.</p>
+
+      <h3>🧠 Structure of a Recursive Function</h3>
+      <ul>
+        <li>🔹 A <strong>base case</strong> to stop recursion.</li>
+        <li>🔹 A <strong>recursive case</strong> where the function calls itself.</li>
+      </ul>
+
+      <h3>📍 Example: Factorial (Python)</h3>
+      <pre><code class="language-python">
+def factorial(n):
+    if n == 0 or n == 1:  # Base Case
+        return 1
+    else:
+        return n * factorial(n - 1)  # Recursive Case
+
+print(factorial(5))  # Output: 120
+      </code></pre>
+
+      <h3>📍 Example: Factorial (C++)</h3>
+      <pre><code class="language-cpp">
+int factorial(int n) {
+    if (n == 0 || n == 1)
+        return 1; // Base case
+    else
+        return n * factorial(n - 1); // Recursive call
 }
-// Output: 0 1 2 3 4
-</pre>
-<p>Use loops for efficient iteration over arrays, strings, and more.</p>
+      </code></pre>
+
+      <h3>🔎 Where is Recursion Used?</h3>
+      <ul>
+        <li>Solving mathematical problems (factorial, Fibonacci, GCD)</li>
+        <li>Tree traversals (Inorder, Preorder, Postorder)</li>
+        <li>Backtracking (Maze solving, N-Queens problem)</li>
+        <li>Divide and conquer algorithms (Merge Sort, Quick Sort)</li>
+      </ul>
+
+      <h3>⚠️ Drawbacks</h3>
+      <ul>
+        <li>Consumes more memory due to multiple function calls on the stack</li>
+        <li>Can cause stack overflow if base case is not handled correctly</li>
+        <li>In some cases, iterative solutions are more efficient</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> Always write the base case first to prevent infinite recursion.
+      </div>
+    </article>
+
+    <!-- Quiz CTA -->
+    <section class="quiz-cta">
+      <h3>✅ Test Your Recursion Skills</h3>
+      <p>Take a short quiz on recursion to assess your understanding.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>📂 Related Lessons</h3>
+      <ul>
+        <li><a href="programming-topic-122.html">Fibonacci Series</a></li>
+        <li><a href="programming-topic-125.html">Backtracking</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. Empowering Coders.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Highlight.js -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
