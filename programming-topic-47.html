@@ -1,19 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #47 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Understand Heap Sort with Python and C++ code examples. Learn its working, complexity, and advantages.">
+  <meta name="keywords" content="Heap Sort, Sorting Algorithm, Python, C++, EduIgnite, Algorithms, DSA">
+  <meta name="author" content="EduIgnite Team">
+  <title>Heap Sort Algorithm | Python & C++ Code | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #47</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Banner -->
+<section class="hero-banner">
+  <h1>🧮 Heap Sort Algorithm</h1>
+  <p>Efficient comparison-based sorting using Binary Heaps.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 What is Heap Sort?</h2>
+    <p>
+      Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure. It first builds a max heap and repeatedly removes the largest element from the heap to sort the array.
+    </p>
+
+    <h3>📌 Key Concepts:</h3>
+    <ul>
+      <li>Heap Tree Structure</li>
+      <li>Max Heap & Min Heap</li>
+      <li>In-place sorting (no extra memory)</li>
+    </ul>
+
+    <h3>💡 Applications:</h3>
+    <ul>
+      <li>Embedded systems</li>
+      <li>Real-time scheduling</li>
+      <li>Operating system processes</li>
+    </ul>
+
+    <h3>🐍 Python Code</h3>
+    <pre><code class="language-python">
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+    if l < n and arr[l] > arr[largest]:
+        largest = l
+    if r < n and arr[r] > arr[largest]:
+        largest = r
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heap_sort(arr):
+    n = len(arr)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+arr = [4, 10, 3, 5, 1]
+heap_sort(arr)
+print("Sorted array:", arr)
+    </code></pre>
+
+    <h3>💻 C++ Code</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(int arr[], int n) {
+    for (int i = n/2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+    for (int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
+
+int main() {
+    int arr[] = {4, 10, 3, 5, 1};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    heapSort(arr, n);
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📈 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(n log n)</li>
+      <li><strong>Average Case:</strong> O(n log n)</li>
+      <li><strong>Worst Case:</strong> O(n log n)</li>
+      <li><strong>Space:</strong> O(1)</li>
+    </ul>
+
+    <h3>✅ Benefits:</h3>
+    <ul>
+      <li>Not recursive in final stage</li>
+      <li>Doesn't use extra memory</li>
+      <li>Very predictable performance</li>
+    </ul>
+
+    <h3>⚠️ Drawbacks:</h3>
+    <ul>
+      <li>Not stable (equal elements may change order)</li>
+      <li>Harder to understand for beginners</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🧠 Try a Sorting Quiz</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take the Challenge</a>
+  </section>
+
+  <!-- Related -->
+  <section class="related-topics">
+    <h3>📚 More Sorting Techniques</h3>
+    <ul>
+      <li><a href="programming-topic-46.html">Insertion Sort</a></li>
+      <li><a href="programming-topic-48.html">Counting Sort</a></li>
+      <li><a href="programming-topic-49.html">Radix Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Highlight Script -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
