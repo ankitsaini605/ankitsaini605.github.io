@@ -1,16 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 20</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to write a program to find the factorial of a number in Python and C++. Includes explanation, sample code, and tips.">
+  <meta name="keywords" content="Factorial Program, Python, C++, EduIgnite, Programming Examples">
+  <meta name="author" content="EduIgnite">
+  <title>Factorial Program in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 20</h2>
-  <p>This programming concept #20 explores logic, real-world usage, and examples for student practice.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>📈 Factorial of a Number</h1>
+    <p>Learn how to calculate factorial of any number using Python and C++ step-by-step.</p>
+    <a href="#code-section" class="btn-primary">Jump to Code</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="code-section">
+    <article>
+      <h2>💡 What is a Factorial?</h2>
+      <p>The factorial of a number <strong>n</strong> is the product of all positive integers less than or equal to <strong>n</strong>. It is denoted by <code>n!</code>.</p>
+      <p>Example: <code>5! = 5 × 4 × 3 × 2 × 1 = 120</code></p>
+
+      <h3>✅ Python Code (Using Loop)</h3>
+      <pre><code class="language-python">
+num = int(input("Enter a number: "))
+factorial = 1
+
+if num < 0:
+    print("Factorial does not exist for negative numbers.")
+elif num == 0:
+    print("The factorial of 0 is 1.")
+else:
+    for i in range(1, num + 1):
+        factorial *= i
+    print("The factorial of", num, "is", factorial)
+      </code></pre>
+
+      <h3>⚙️ C++ Code (Using Loop)</h3>
+      <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int num;
+    long long factorial = 1;
+
+    cout << "Enter a number: ";
+    cin >> num;
+
+    if (num < 0)
+        cout << "Factorial does not exist for negative numbers." << endl;
+    else {
+        for (int i = 1; i <= num; ++i) {
+            factorial *= i;
+        }
+        cout << "Factorial of " << num << " = " << factorial << endl;
+    }
+
+    return 0;
+}
+      </code></pre>
+
+      <h3>📘 Tip:</h3>
+      <p>Factorials grow very fast! <code>20!</code> is already a number with 19 digits. Use <code>long long</code> or BigInteger types for large inputs.</p>
+    </article>
+
+    <!-- CTA -->
+    <section class="quiz-cta">
+      <h3>🧠 Want to Practice More?</h3>
+      <p>Try solving related factorial and recursion problems.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>🔗 Related Topics</h3>
+      <ul>
+        <li><a href="programming-topic-19.html">Power of a Number</a></li>
+        <li><a href="programming-topic-21.html">Fibonacci Series</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
