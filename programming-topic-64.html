@@ -1,16 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #64 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn the most efficient Shortest Path Algorithms in Graphs like Dijkstra and Bellman-Ford. Includes code in Python and C++. Perfect for interview prep and DSA practice." />
+  <meta name="keywords" content="Shortest Path, Dijkstra, Bellman-Ford, Graph Algorithms, Python, C++, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Shortest Path Algorithms | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #64</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🛣️ Shortest Path Algorithms in Graphs</h1>
+  <p>Explore the fastest ways to reach your destination in a graph. Learn Dijkstra and Bellman-Ford algorithms with real code examples.</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 What is the Shortest Path Problem?</h2>
+    <p>It involves finding the minimum distance or cost from a source node to all other nodes in a graph. Algorithms like Dijkstra and Bellman-Ford are widely used for solving such problems.</p>
+
+    <h3>🧠 Dijkstra’s Algorithm (Python – Min Heap):</h3>
+    <pre><code class="language-python">
+import heapq
+
+def dijkstra(graph, start):
+    n = len(graph)
+    dist = [float('inf')] * n
+    dist[start] = 0
+    min_heap = [(0, start)]
+
+    while min_heap:
+        cost, u = heapq.heappop(min_heap)
+        for v, weight in graph[u]:
+            if dist[v] > cost + weight:
+                dist[v] = cost + weight
+                heapq.heappush(min_heap, (dist[v], v))
+    
+    return dist
+
+# Graph = adjacency list
+graph = {
+    0: [(1, 4), (2, 1)],
+    1: [(3, 1)],
+    2: [(1, 2), (3, 5)],
+    3: []
+}
+print(dijkstra(graph, 0))  # Output: [0, 3, 1, 4]
+    </code></pre>
+
+    <h3>🛠️ Bellman-Ford Algorithm (C++ – Handles Negative Weights):</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void bellmanFord(int V, int E, vector&lt;tuple&lt;int, int, int&gt;&gt;&amp; edges, int src) {
+    vector&lt;int&gt; dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 0; i &lt; V - 1; ++i) {
+        for (auto [u, v, w] : edges) {
+            if (dist[u] != INT_MAX &amp;&amp; dist[u] + w &lt; dist[v])
+                dist[v] = dist[u] + w;
+        }
+    }
+
+    for (auto [u, v, w] : edges) {
+        if (dist[u] != INT_MAX &amp;&amp; dist[u] + w &lt; dist[v]) {
+            cout &lt;&lt; "Negative cycle detected\n";
+            return;
+        }
+    }
+
+    for (int i = 0; i &lt; V; ++i)
+        cout &lt;&lt; "Distance from " &lt;&lt; src &lt;&lt; " to " &lt;&lt; i &lt;&lt; " is " &lt;&lt; dist[i] &lt;&lt; "\n";
+}
+
+int main() {
+    int V = 5;
+    vector&lt;tuple&lt;int, int, int&gt;&gt; edges = {
+        {0, 1, -1}, {0, 2, 4}, {1, 2, 3}, {1, 3, 2},
+        {1, 4, 2}, {3, 2, 5}, {3, 1, 1}, {4, 3, -3}
+    };
+    bellmanFord(V, edges.size(), edges, 0);
+}
+    </code></pre>
+
+    <h3>📊 Time Complexity:</h3>
+    <ul>
+      <li><strong>Dijkstra:</strong> O((V + E) log V) with Min-Heap</li>
+      <li><strong>Bellman-Ford:</strong> O(V × E)</li>
+    </ul>
+
+    <h3>✅ Use Cases:</h3>
+    <ul>
+      <li><strong>Dijkstra:</strong> Faster, for non-negative edge weights</li>
+      <li><strong>Bellman-Ford:</strong> Can handle negative weights, useful for currency arbitrage or graphs with loss/gain paths</li>
+    </ul>
+
+    <h3>🔗 Related Graph Problems:</h3>
+    <ul>
+      <li><a href="programming-topic-63.html">Cycle Detection in Graph</a></li>
+      <li><a href="programming-topic-65.html">Floyd-Warshall Algorithm</a></li>
+    </ul>
+
+    <div class="quiz-cta">
+      <a href="c-quiz-1.html" class="btn-secondary">🧠 Take Dijkstra Quiz</a>
+    </div>
+  </article>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Crafted by Ankit Saini. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
