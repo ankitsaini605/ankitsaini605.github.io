@@ -1,19 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #50 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Stack Data Structure with real examples in Python and C++. Understand stack operations, LIFO principle, and application areas in data structures.">
+  <meta name="keywords" content="Stack, Data Structure, LIFO, Python Stack, C++ Stack, DSA, EduIgnite">
+  <meta name="author" content="EduIgnite Team" />
+  <title>Stack Data Structure | Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #50</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <h1>📚 Stack Data Structure</h1>
+  <p>Explore Last-In-First-Out (LIFO) structure with practical implementation in Python and C++.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>🔍 What is a Stack?</h2>
+    <p>
+      A stack is a linear data structure that follows the <strong>LIFO (Last In First Out)</strong> principle.
+      The last element inserted is the first one to be removed. It is like a pile of books where you can only take the topmost book.
+    </p>
+
+    <h3>📌 Basic Stack Operations:</h3>
+    <ul>
+      <li><strong>Push:</strong> Add an element</li>
+      <li><strong>Pop:</strong> Remove the top element</li>
+      <li><strong>Peek/Top:</strong> View the top element</li>
+      <li><strong>isEmpty:</strong> Check if stack is empty</li>
+    </ul>
+
+    <h3>🐍 Python Implementation:</h3>
+    <pre><code class="language-python">
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+
+    def peek(self):
+        return self.items[-1] if not self.is_empty() else None
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def display(self):
+        print("Stack:", self.items)
+
+s = Stack()
+s.push(10)
+s.push(20)
+s.display()
+print("Top Element:", s.peek())
+s.pop()
+s.display()
+    </code></pre>
+
+    <h3>💻 C++ Implementation:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+    stack&lt;int&gt; s;
+    s.push(10);
+    s.push(20);
+    cout &lt;&lt; "Top Element: " &lt;&lt; s.top() &lt;&lt; endl;
+    s.pop();
+    cout &lt;&lt; "Stack Size after pop: " &lt;&lt; s.size() &lt;&lt; endl;
+    return 0;
+}
+    </code></pre>
+
+    <h3>🧠 Applications of Stack:</h3>
+    <ul>
+      <li>Function call/recursion handling</li>
+      <li>Undo mechanisms in editors</li>
+      <li>Balancing symbols and expressions</li>
+      <li>Backtracking algorithms</li>
+    </ul>
+
+    <h3>⏱ Time & Space Complexity:</h3>
+    <ul>
+      <li><strong>Push/Pop/Peek:</strong> O(1)</li>
+      <li><strong>Space:</strong> O(n)</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🎯 Test Your Understanding</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take Stack Quiz</a>
+  </section>
+
+  <!-- Related Links -->
+  <section class="related-topics">
+    <h3>📚 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-51.html">Queue Data Structure</a></li>
+      <li><a href="programming-topic-52.html">Linked List</a></li>
+      <li><a href="programming-topic-45.html">Array Basics</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Highlight Script -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
