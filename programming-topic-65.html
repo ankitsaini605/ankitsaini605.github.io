@@ -1,16 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #65 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Floyd-Warshall Algorithm for finding shortest paths between all pairs of nodes in a graph. Includes C++ and Python code examples with explanations." />
+  <meta name="keywords" content="Floyd-Warshall Algorithm, Graph Algorithms, All Pairs Shortest Path, Python, C++, DSA, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Floyd-Warshall Algorithm | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #65</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🌐 Floyd-Warshall Algorithm</h1>
+  <p>Solve the All-Pairs Shortest Path problem efficiently using Dynamic Programming.</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 What is the Floyd-Warshall Algorithm?</h2>
+    <p>It is a **Dynamic Programming-based** algorithm used to find the shortest distances between all pairs of vertices in a weighted graph (with positive or negative weights but no negative cycles).</p>
+
+    <h3>💡 Concept:</h3>
+    <p>The main idea is to iteratively update the shortest path between every pair (i, j) using an intermediate vertex k.</p>
+
+    <h3>⚙️ Python Implementation:</h3>
+    <pre><code class="language-python">
+INF = float('inf')
+
+def floyd_warshall(graph):
+    V = len(graph)
+    dist = list(map(lambda row: list(row), graph))
+
+    for k in range(V):
+        for i in range(V):
+            for j in range(V):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    
+    return dist
+
+graph = [
+    [0, 3, INF, 5],
+    [2, 0, INF, 4],
+    [INF, 1, 0, INF],
+    [INF, INF, 2, 0]
+]
+
+result = floyd_warshall(graph)
+for row in result:
+    print(row)
+    </code></pre>
+
+    <h3>🔧 C++ Code:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+#define INF 99999
+#define V 4
+
+void floydWarshall(int graph[V][V]) {
+    int dist[V][V];
+
+    for (int i = 0; i &lt; V; i++)
+        for (int j = 0; j &lt; V; j++)
+            dist[i][j] = graph[i][j];
+
+    for (int k = 0; k &lt; V; k++) {
+        for (int i = 0; i &lt; V; i++) {
+            for (int j = 0; j &lt; V; j++) {
+                if (dist[i][k] + dist[k][j] &lt; dist[i][j])
+                    dist[i][j] = dist[i][k] + dist[k][j];
+            }
+        }
+    }
+
+    for (int i = 0; i &lt; V; i++) {
+        for (int j = 0; j &lt; V; j++) {
+            if (dist[i][j] == INF)
+                cout &lt;&lt; "INF ";
+            else
+                cout &lt;&lt; dist[i][j] &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+}
+
+int main() {
+    int graph[V][V] = {
+        {0, 5, INF, 10},
+        {INF, 0, 3, INF},
+        {INF, INF, 0,   1},
+        {INF, INF, INF, 0}
+    };
+    floydWarshall(graph);
+    return 0;
+}
+    </code></pre>
+
+    <h3>⏱️ Time Complexity:</h3>
+    <ul>
+      <li>O(V³), where V is the number of vertices.</li>
+    </ul>
+
+    <h3>✅ Use Cases:</h3>
+    <ul>
+      <li>Finding the shortest routes between every pair of cities</li>
+      <li>Routing in computer networks</li>
+      <li>Dynamic programming-based graph applications</li>
+    </ul>
+
+    <h3>🧠 Quiz & Practice:</h3>
+    <p>Try solving problems on platforms like LeetCode, GFG and Hackerrank using Floyd-Warshall.</p>
+
+    <div class="quiz-cta">
+      <a href="c-quiz-1.html" class="btn-secondary">🧪 Take Graph Quiz</a>
+    </div>
+  </article>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite | Designed & Developed by Ankit Saini. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
