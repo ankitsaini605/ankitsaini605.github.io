@@ -1,22 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #83</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Master Backtracking Algorithms: N-Queens, Sudoku Solver, Subset Sum, Maze Solving and more. A powerful algorithmic approach to problem-solving." />
+  <meta name="keywords" content="Backtracking, N-Queens, Sudoku Solver, Maze Solving, Recursion, Algorithms, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Backtracking Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #83 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🔁 Backtracking Algorithms</h1>
+
+    <p>
+      **Backtracking** is a general algorithmic technique that incrementally builds solutions and abandons a path ("backtracks") as soon as it determines the path cannot lead to a valid solution.
+    </p>
+
+    <h2>📌 When to Use Backtracking?</h2>
+    <ul>
+      <li>When problem requires all permutations or combinations.</li>
+      <li>To solve puzzles (e.g., Sudoku, Maze).</li>
+      <li>For constraint satisfaction problems (e.g., N-Queens).</li>
+    </ul>
+
+    <h2>🧠 Core Concept</h2>
+    <p>
+      Backtracking is often implemented using recursion. At each step, we "choose", then "explore", and then "un-choose" (backtrack).
+    </p>
+
+    <h2>👑 Example: N-Queens Problem</h2>
+    <pre><code>
+bool isSafe(vector&lt;string&gt;& board, int row, int col, int n) {
+  for (int i = 0; i &lt; row; i++) {
+    if (board[i][col] == 'Q') return false;
+    if (col - (row - i) &gt;= 0 && board[i][col - (row - i)] == 'Q') return false;
+    if (col + (row - i) &lt; n && board[i][col + (row - i)] == 'Q') return false;
+  }
+  return true;
+}
+
+void solve(int row, vector&lt;string&gt;& board, int n, vector&lt;vector&lt;string&gt;&gt;& solutions) {
+  if (row == n) {
+    solutions.push_back(board);
+    return;
+  }
+  for (int col = 0; col &lt; n; col++) {
+    if (isSafe(board, row, col, n)) {
+      board[row][col] = 'Q';
+      solve(row + 1, board, n, solutions);
+      board[row][col] = '.';
+    }
+  }
+}
+    </code></pre>
+
+    <h2>🧩 Other Backtracking Problems</h2>
+    <ul>
+      <li>🧱 Maze Solving</li>
+      <li>📐 Subset Sum</li>
+      <li>🧩 Sudoku Solver</li>
+      <li>🔢 Generate Permutations</li>
+      <li>⛓️ Word Break Problem</li>
+    </ul>
+
+    <h2>🧪 Subset Sum Example</h2>
+    <pre><code>
+bool isSubsetSum(vector&lt;int&gt;& arr, int n, int sum) {
+  if (sum == 0) return true;
+  if (n == 0) return false;
+
+  if (arr[n-1] &gt; sum)
+    return isSubsetSum(arr, n-1, sum);
+
+  return isSubsetSum(arr, n-1, sum) || isSubsetSum(arr, n-1, sum - arr[n-1]);
+}
+    </code></pre>
+
+    <h2>💡 Tips</h2>
+    <div class="tip-box">
+      <strong>Optimize with:</strong>
+      <ul>
+        <li>Pruning conditions</li>
+        <li>Bitmasking (for subsets/perms)</li>
+        <li>Memoization (Backtracking + DP)</li>
+      </ul>
+    </div>
+
+    <h2>🧠 Time Complexities</h2>
+    <ul>
+      <li>N-Queens: O(N!)</li>
+      <li>Sudoku Solver: Exponential</li>
+      <li>Permutations: O(N!)</li>
+    </ul>
+
+    <h2>🌐 Resources</h2>
+    <ul>
+      <li><a href="https://leetcode.com/tag/backtracking/" target="_blank">LeetCode Backtracking Problems</a></li>
+      <li><a href="https://www.geeksforgeeks.org/backtracking-algorithms/" target="_blank">GeeksforGeeks Backtracking</a></li>
+    </ul>
+
+    <a href="programming-topic-84.html" class="btn">Next Topic: Divide & Conquer ⚔️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Backtracking Algorithms for Interviews & Competitions</p>
+  </footer>
+
 </body>
 </html>
+
