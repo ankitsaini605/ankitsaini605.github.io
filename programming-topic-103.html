@@ -1,17 +1,135 @@
 <!DOCTYPE html>
-<html>
-<head><title>Programming  C++ Arrays</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn about different operators in programming with real-world examples and syntax across various languages like Python, C++, and Java.">
+  <meta name="keywords" content="Operators in programming, Arithmetic, Logical, Relational, Bitwise, Python, C++, Java">
+  <meta name="author" content="EduIgnite" />
+  <title>Programming Operators - EduIgnite</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+</head>
 <body>
-<header><h1>📘 Arrays in C++ – Declaration + Loop</h1></header>
-<main>
-<pre>
-int arr[5] = {{1, 2, 3, 4, 5}};
-for(int i = 0; i < 5; i++) {{
-  cout << arr[i] << " ";
-}} // Output: 1 2 3 4 5
-</pre>
-<h3>💡 Array Tips</h3>
-<ul><li>Use loops</li><li>Start from 0 index</li><li>Watch for overflow</li></ul>
-</main>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="c-programming.html">C</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>Operators in Programming</h1>
+    <p>Learn how to perform operations using arithmetic, logical, relational, and more types of operators.</p>
+    <a href="#content" class="btn-primary">Dive into Logic!</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="content">
+    <article>
+      <h2>🧮 What are Operators?</h2>
+      <p>Operators are symbols used to perform operations on variables and values. They act as the building blocks of logical and mathematical programming expressions.</p>
+
+      <h3>🧠 Types of Operators:</h3>
+      <ul>
+        <li><strong>Arithmetic Operators</strong> — `+`, `-`, `*`, `/`, `%`</li>
+        <li><strong>Relational (Comparison) Operators</strong> — `==`, `!=`, `>`, `<`, `>=`, `<=`</li>
+        <li><strong>Logical Operators</strong> — `and`, `or`, `not` (Python); `&&`, `||`, `!` (C++)</li>
+        <li><strong>Assignment Operators</strong> — `=`, `+=`, `-=`, `*=`, `/=`</li>
+        <li><strong>Bitwise Operators</strong> — `&`, `|`, `^`, `~`, `<<`, `>>`</li>
+      </ul>
+
+      <h3>✨ Arithmetic Operators Example (Python)</h3>
+      <pre><code class="language-python">
+a = 10
+b = 3
+print(a + b)  # Addition
+print(a - b)  # Subtraction
+print(a * b)  # Multiplication
+print(a / b)  # Division
+print(a % b)  # Modulus
+      </code></pre>
+
+      <h3>🔍 Relational Operators</h3>
+      <pre><code class="language-python">
+x = 5
+y = 10
+print(x > y)   # False
+print(x <= y)  # True
+      </code></pre>
+
+      <h3>💡 Logical Operators Example</h3>
+      <pre><code class="language-python">
+a = True
+b = False
+print(a and b)  # False
+print(a or b)   # True
+print(not a)    # False
+      </code></pre>
+
+      <h3>🎯 Bitwise Magic</h3>
+      <p>Bitwise operators work on bits and perform bit-by-bit operations.</p>
+      <pre><code class="language-python">
+a = 5  # 0101
+b = 3  # 0011
+print(a & b)  # 0001 -> 1
+print(a | b)  # 0111 -> 7
+print(a ^ b)  # 0110 -> 6
+      </code></pre>
+
+      <h3>🔍 Practice Challenge</h3>
+      <div class="practice-box">
+        <p>Create two variables. Apply all arithmetic and logical operators and print the results.</p>
+        <code>
+x = 8<br>
+y = 4<br>
+# Your code here...
+        </code>
+      </div>
+    </article>
+
+    <!-- Quiz CTA -->
+    <section class="quiz-cta">
+      <h3>🧪 Test Yourself!</h3>
+      <p>Take a short quiz on programming operators.</p>
+      <a href="programming-quiz-3.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Links -->
+    <section class="related-topics">
+      <h3>🔗 Continue Learning</h3>
+      <ul>
+        <li><a href="programming-topic-104.html">Conditional Statements</a></li>
+        <li><a href="programming-topic-105.html">Loops and Iteration</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Highlight.js -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
