@@ -1,16 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 14</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to check Prime Numbers using efficient algorithms in Python and C++. EduIgnite provides the best coding explanations and practice.">
+  <meta name="keywords" content="Prime Number, Python Prime, C++ Prime, Efficient Algorithm, Programming Basics, EduIgnite">
+  <meta name="author" content="EduIgnite" />
+  <title>Prime Number Check in Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 14</h2>
-  <p>This programming concept #14 explores logic, real-world usage, and examples for student practice.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <h1>🔍 Prime Number Check</h1>
+    <p>Learn how to determine if a number is prime using simple and optimized methods in Python and C++.</p>
+    <a href="#main-content" class="btn-primary">Explore Code</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="main-content">
+    <article>
+      <h2>📘 What is a Prime Number?</h2>
+      <p>A prime number is a number greater than 1 that has no positive divisors other than 1 and itself. For example: 2, 3, 5, 7, 11, 13, ...</p>
+
+      <h3>🔁 Basic Prime Check in Python</h3>
+      <pre><code class="language-python">
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+print(is_prime(11))  # Output: True
+      </code></pre>
+
+      <h3>⚡ Optimized Prime Check (√n logic)</h3>
+      <pre><code class="language-python">
+import math
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+print(is_prime(97))  # Output: True
+      </code></pre>
+
+      <h3>🔷 C++ Prime Check (Optimized)</h3>
+      <pre><code class="language-cpp">
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+bool isPrime(int n) {
+    if(n <= 1) return false;
+    for(int i = 2; i <= sqrt(n); i++) {
+        if(n % i == 0)
+            return false;
+    }
+    return true;
+}
+
+int main() {
+    cout << isPrime(29); // Output: 1 (true)
+    return 0;
+}
+      </code></pre>
+
+      <h3>📌 Notes</h3>
+      <ul>
+        <li>Use √n optimization for faster results.</li>
+        <li>Prime number check is essential for cryptography, algorithms, and competitive programming.</li>
+        <li>Time Complexity (Optimized): O(√n)</li>
+      </ul>
+    </article>
+
+    <!-- Practice CTA -->
+    <section class="quiz-cta">
+      <h3>🎯 Practice Your Skills</h3>
+      <p>Test your understanding with real coding problems based on prime numbers.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>🔗 Related Programming Concepts</h3>
+      <ul>
+        <li><a href="programming-topic-13.html">Fibonacci Series</a></li>
+        <li><a href="programming-topic-15.html">Factorial Using Recursion</a></li>
+        <li><a href="programming-topic-16.html">Palindrome Number</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Highlighting Script -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
