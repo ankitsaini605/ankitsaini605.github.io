@@ -1,22 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #92</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Dynamic Programming concepts, examples, and real-world applications.">
+  <meta name="keywords" content="Dynamic Programming, DP, Algorithms, Memoization, Tabulation, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>Dynamic Programming | Programming Topic 92 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Blog #92 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>📘 Dynamic Programming (DP)</h1>
+    <p><strong>Dynamic Programming</strong> is a technique for solving problems by breaking them down into simpler subproblems and storing the results of these subproblems to avoid redundant work.</p>
+
+    <h2>Why Use DP?</h2>
+    <ul>
+      <li>Reduces time complexity through memoization or tabulation</li>
+      <li>Ideal for optimization problems (maximize or minimize)</li>
+      <li>Used in competitive programming and interviews</li>
+    </ul>
+
+    <h2>🧠 Core Concepts</h2>
+    <ol>
+      <li><strong>Overlapping Subproblems</strong>: Same subproblem solved multiple times</li>
+      <li><strong>Optimal Substructure</strong>: Optimal solution can be constructed from optimal solutions of subproblems</li>
+      <li><strong>Memoization</strong>: Top-down approach using recursion + caching</li>
+      <li><strong>Tabulation</strong>: Bottom-up approach using iteration</li>
+    </ol>
+
+    <h2>🔥 Example: Fibonacci using DP (Memoization)</h2>
+    <pre><code>
+int fib(int n, int dp[]) {
+  if (n <= 1) return n;
+  if (dp[n] != -1) return dp[n];
+  return dp[n] = fib(n-1, dp) + fib(n-2, dp);
+}
+    </code></pre>
+
+    <h2>💻 Tabulation Example</h2>
+    <pre><code>
+int fib(int n) {
+  int dp[n+1];
+  dp[0] = 0; dp[1] = 1;
+  for (int i = 2; i <= n; i++) {
+    dp[i] = dp[i-1] + dp[i-2];
+  }
+  return dp[n];
+}
+    </code></pre>
+
+    <h2>🎯 Popular DP Problems</h2>
+    <ul>
+      <li>0/1 Knapsack Problem</li>
+      <li>Longest Common Subsequence (LCS)</li>
+      <li>Matrix Chain Multiplication</li>
+      <li>Coin Change Problem</li>
+      <li>Longest Increasing Subsequence</li>
+    </ul>
+
+    <h2>🧪 Real-world Applications</h2>
+    <ul>
+      <li>Spell checkers & string alignment</li>
+      <li>Pathfinding in games & maps</li>
+      <li>Financial predictions & resource optimization</li>
+    </ul>
+
+    <div class="tips-box">
+      💡 <strong>Tip:</strong> Always try to identify if a problem can be broken down into subproblems and if the result of subproblems repeat — it might be a good candidate for DP!
+    </div>
+
+    <a href="programming-topic-93.html" class="btn">Next: Backtracking →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Master Programming the Smart Way.</p>
+  </footer>
+
 </body>
 </html>
+
