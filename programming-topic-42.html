@@ -1,19 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #42 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Binary Search algorithm with Python and C++ examples, code, time complexity analysis, and practical use cases.">
+  <meta name="keywords" content="Binary Search, Python Search, C++ Algorithm, Search Techniques, EduIgnite">
+  <meta name="author" content="EduIgnite">
+  <title>Binary Search in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #42</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>⚡ Binary Search Algorithm</h1>
+  <p>Explore the efficient Binary Search algorithm with step-by-step C++ and Python code examples, visual explanation, and time complexity breakdown.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container" id="code-section">
+  <article>
+    <h2>📘 What is Binary Search?</h2>
+    <p>Binary Search is a powerful searching technique used on sorted arrays. It repeatedly divides the search interval in half, making it significantly faster than linear search for large datasets.</p>
+
+    <h3>🧠 Requirements:</h3>
+    <ul>
+      <li>Array must be sorted in ascending or descending order</li>
+      <li>Efficient when dealing with large datasets</li>
+    </ul>
+
+    <h3>🐍 Python Code Example</h3>
+    <pre><code class="language-python">
+def binary_search(arr, key):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == key:
+            return mid
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+data = [5, 10, 15, 20, 25, 30]
+key = int(input("Enter element to search: "))
+index = binary_search(data, key)
+if index != -1:
+    print(f"Element found at index {index}")
+else:
+    print("Element not found")
+    </code></pre>
+
+    <h3>💻 C++ Code Example</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int binarySearch(int arr[], int size, int key) {
+    int low = 0, high = size - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (arr[mid] == key)
+            return mid;
+        else if (arr[mid] < key)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {5, 10, 15, 20, 25, 30};
+    int key;
+    cout << "Enter key to search: ";
+    cin >> key;
+    int result = binarySearch(arr, 6, key);
+    if (result != -1)
+        cout << "Element found at index " << result;
+    else
+        cout << "Element not found";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📊 Time Complexity:</h3>
+    <ul>
+      <li><strong>Best Case:</strong> O(1) — found at mid</li>
+      <li><strong>Average/Worst Case:</strong> O(log n)</li>
+    </ul>
+
+    <h3>⚠️ Common Mistakes:</h3>
+    <ul>
+      <li>Using it on unsorted arrays</li>
+      <li>Forgetting to update `low` or `high` in loop</li>
+    </ul>
+  </article>
+
+  <!-- CTA Section -->
+  <section class="quiz-cta">
+    <h3>🧪 Ready for a Challenge?</h3>
+    <p>Try Binary Search quiz to sharpen your understanding.</p>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
+
+  <!-- Related Links -->
+  <section class="related-topics">
+    <h3>🔗 Explore More:</h3>
+    <ul>
+      <li><a href="programming-topic-41.html">Linear Search</a></li>
+      <li><a href="programming-topic-43.html">Bubble Sort</a></li>
+      <li><a href="programming-topic-44.html">Quick Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Built for coders, by coders.</p>
+    <ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
