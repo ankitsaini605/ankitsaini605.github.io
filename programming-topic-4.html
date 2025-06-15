@@ -1,16 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 4</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to check if a number is a palindrome using Python and C++. Includes examples and step-by-step explanation.">
+  <meta name="keywords" content="Palindrome Number, Python, C++, Programming Examples, EduIgnite">
+  <meta name="author" content="EduIgnite">
+  <title>Palindrome Number in Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 4</h2>
-  <p>This page covers programming topic #4 with syntax, examples, and MCQs.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>🔄 Palindrome Number</h1>
+    <p>Learn how to check if a number is a palindrome using Python and C++ with full logic and examples.</p>
+    <a href="#code-section" class="btn-primary">Jump to Code</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="code-section">
+    <article>
+      <h2>📘 What is a Palindrome Number?</h2>
+      <p>A number is a palindrome if it remains the same when its digits are reversed. Example: 121, 1331, 12321.</p>
+
+      <h3>✅ Python Code</h3>
+      <pre><code class="language-python">
+num = int(input("Enter a number: "))
+temp = num
+rev = 0
+
+while num > 0:
+    digit = num % 10
+    rev = rev * 10 + digit
+    num = num // 10
+
+if temp == rev:
+    print("It's a palindrome!")
+else:
+    print("Not a palindrome.")
+      </code></pre>
+
+      <h3>⚙️ C++ Code</h3>
+      <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int num, rev = 0, temp, digit;
+    cout << "Enter a number: ";
+    cin >> num;
+    temp = num;
+
+    while (num > 0) {
+        digit = num % 10;
+        rev = rev * 10 + digit;
+        num /= 10;
+    }
+
+    if (temp == rev)
+        cout << "It's a palindrome!" << endl;
+    else
+        cout << "Not a palindrome." << endl;
+
+    return 0;
+}
+      </code></pre>
+
+      <h3>💡 Bonus Tip:</h3>
+      <p>You can also use string slicing in Python to check palindromes easily!</p>
+      <pre><code class="language-python">
+num = input("Enter a number: ")
+if num == num[::-1]:
+    print("Palindrome!")
+else:
+    print("Not a palindrome.")
+      </code></pre>
+    </article>
+
+    <!-- CTA -->
+    <section class="quiz-cta">
+      <h3>🧠 Want to Practice?</h3>
+      <p>Take our quiz to test your logic and programming knowledge!</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Take Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>🔗 Related Topics</h3>
+      <ul>
+        <li><a href="programming-topic-3.html">Reverse a Number</a></li>
+        <li><a href="programming-topic-5.html">Armstrong Number</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
