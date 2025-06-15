@@ -1,16 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #61 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Floyd-Warshall Algorithm: All-pairs shortest path algorithm for graphs. Complete guide with Python & C++ code examples, real-world applications, and analysis." />
+  <meta name="keywords" content="Floyd-Warshall, Graph Algorithm, All-Pairs Shortest Path, Dynamic Programming, EduIgnite, C++, Python" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Floyd-Warshall Algorithm | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #61</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🔗 Floyd-Warshall Algorithm</h1>
+  <p>Find shortest paths between all pairs of vertices in a weighted graph (including negative edges).</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 Overview</h2>
+    <p>The <strong>Floyd-Warshall algorithm</strong> is a <strong>dynamic programming</strong> method used to compute the shortest paths between all pairs of vertices in a graph. It works with <strong>positive and negative edge weights</strong>, but no negative cycles.</p>
+
+    <h3>🛠️ Key Concepts:</h3>
+    <ul>
+      <li>Dynamic programming approach</li>
+      <li>Works for directed & undirected graphs</li>
+      <li>Handles negative edges (not cycles)</li>
+      <li>Time Complexity: O(V³)</li>
+    </ul>
+
+    <h3>💻 Python Code:</h3>
+    <pre><code class="language-python">
+INF = float('inf')
+
+def floyd_warshall(graph):
+    V = len(graph)
+    dist = [row[:] for row in graph]  # Deep copy
+
+    for k in range(V):
+        for i in range(V):
+            for j in range(V):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+
+    # Print shortest distance matrix
+    for row in dist:
+        print(" ".join(f"{x if x != INF else 'INF':>5}" for x in row))
+
+# Example graph (Adjacency Matrix)
+graph = [
+    [0,   3,   INF, 5],
+    [2,   0,   INF, 4],
+    [INF, 1,   0,   INF],
+    [INF, INF, 2,   0]
+]
+
+floyd_warshall(graph)
+    </code></pre>
+
+    <h3>💻 C++ Code:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#define INF 99999
+using namespace std;
+
+void floydWarshall(vector&lt;vector&lt;int&gt;&gt; &graph) {
+    int V = graph.size();
+    vector&lt;vector&lt;int&gt;&gt; dist = graph;
+
+    for (int k = 0; k &lt; V; k++)
+        for (int i = 0; i &lt; V; i++)
+            for (int j = 0; j &lt; V; j++)
+                if (dist[i][k] + dist[k][j] &lt; dist[i][j])
+                    dist[i][j] = dist[i][k] + dist[k][j];
+
+    for (int i = 0; i &lt; V; i++) {
+        for (int j = 0; j &lt; V; j++) {
+            if (dist[i][j] == INF)
+                cout &lt;&lt; "INF ";
+            else
+                cout &lt;&lt; dist[i][j] &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+}
+
+int main() {
+    vector&lt;vector&lt;int&gt;&gt; graph = {
+        {0,   3,   INF, 5},
+        {2,   0,   INF, 4},
+        {INF, 1,   0,   INF},
+        {INF, INF, 2,   0}
+    };
+    floydWarshall(graph);
+    return 0;
+}
+    </code></pre>
+
+    <h3>📌 Applications:</h3>
+    <ul>
+      <li>Network routing protocols (OSPF)</li>
+      <li>Flight booking systems</li>
+      <li>Social networks for shortest relationship path</li>
+      <li>Distance matrix for logistics optimization</li>
+    </ul>
+
+    <h3>📈 Pros & Cons:</h3>
+    <ul>
+      <li><strong>✅ Pros:</strong> Simple, works on all-pairs, handles negative weights</li>
+      <li><strong>⚠️ Cons:</strong> Time complexity O(V³) is high for large graphs</li>
+    </ul>
+
+    <h3>📖 Real-Life Example:</h3>
+    <p>Imagine a delivery service with many warehouse locations. The Floyd-Warshall algorithm helps compute the fastest delivery paths between all combinations of warehouses and cities.</p>
+  </article>
+
+  <section class="related-topics">
+    <h3>🧵 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-60.html">Bellman-Ford Algorithm</a></li>
+      <li><a href="programming-topic-62.html">Topological Sort</a></li>
+    </ul>
+  </section>
+
+  <section class="quiz-cta">
+    <h3>🧠 Test Yourself!</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Developed by Ankit Saini. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
