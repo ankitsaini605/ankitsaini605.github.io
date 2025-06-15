@@ -1,16 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #51 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Understand Queue Data Structure with FIFO principle using Python and C++. Learn enqueue, dequeue, and use-cases of queues.">
+  <meta name="keywords" content="Queue, FIFO, Data Structure, Python Queue, C++ Queue, Enqueue, Dequeue, EduIgnite">
+  <meta name="author" content="EduIgnite Team" />
+  <title>Queue Data Structure | Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #51</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>📚 Queue Data Structure</h1>
+  <p>Master FIFO logic using real-world Python and C++ examples.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>🔍 What is a Queue?</h2>
+    <p>
+      A <strong>queue</strong> is a linear data structure that follows the <strong>FIFO (First In First Out)</strong> principle. Elements are added from the rear (enqueue) and removed from the front (dequeue).
+    </p>
+
+    <h3>📌 Basic Operations:</h3>
+    <ul>
+      <li><strong>Enqueue:</strong> Insert element at rear</li>
+      <li><strong>Dequeue:</strong> Remove element from front</li>
+      <li><strong>Peek:</strong> View front element</li>
+      <li><strong>isEmpty:</strong> Check if queue is empty</li>
+    </ul>
+
+    <h3>🐍 Python Implementation:</h3>
+    <pre><code class="language-python">
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def enqueue(self, item):
+        self.items.append(item)
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+
+    def peek(self):
+        return self.items[0] if not self.is_empty() else None
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def display(self):
+        print("Queue:", self.items)
+
+q = Queue()
+q.enqueue(10)
+q.enqueue(20)
+q.display()
+print("Front Element:", q.peek())
+q.dequeue()
+q.display()
+    </code></pre>
+
+    <h3>💻 C++ Implementation:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    queue&lt;int&gt; q;
+    q.push(10);
+    q.push(20);
+    cout &lt;&lt; "Front: " &lt;&lt; q.front() &lt;&lt; endl;
+    q.pop();
+    cout &lt;&lt; "Queue size: " &lt;&lt; q.size() &lt;&lt; endl;
+    return 0;
+}
+    </code></pre>
+
+    <h3>🧠 Applications of Queue:</h3>
+    <ul>
+      <li>Print Spoolers</li>
+      <li>CPU Scheduling</li>
+      <li>Data Stream Buffering</li>
+      <li>Handling Requests in Servers</li>
+    </ul>
+
+    <h3>⏱ Complexity:</h3>
+    <ul>
+      <li><strong>Enqueue/Dequeue:</strong> O(1)</li>
+      <li><strong>Space:</strong> O(n)</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🎯 Practice Now</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Queue Quiz</a>
+  </section>
+
+  <!-- Related Links -->
+  <section class="related-topics">
+    <h3>📚 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-50.html">Stack Data Structure</a></li>
+      <li><a href="programming-topic-52.html">Linked List</a></li>
+      <li><a href="programming-topic-45.html">Arrays</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Highlight Script -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
