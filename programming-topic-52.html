@@ -1,16 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #52 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Linked List data structure with code examples in Python and C++. Understand nodes, pointers, traversal, and operations.">
+  <meta name="keywords" content="Linked List, Data Structure, C++, Python, Nodes, Pointers, Singly Linked List, EduIgnite">
+  <meta name="author" content="EduIgnite Team" />
+  <title>Linked List in C++ & Python | Data Structures | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #52</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>🔗 Linked List</h1>
+  <p>Explore dynamic memory allocation and pointer-based data organization.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 What is a Linked List?</h2>
+    <p>
+      A <strong>Linked List</strong> is a linear data structure in which elements (called <strong>nodes</strong>) are linked using pointers. Each node contains data and a reference to the next node.
+    </p>
+
+    <h3>📦 Node Structure:</h3>
+    <ul>
+      <li><strong>Data:</strong> Value stored in the node</li>
+      <li><strong>Next:</strong> Pointer to the next node in the list</li>
+    </ul>
+
+    <h3>🔧 Types of Linked Lists:</h3>
+    <ul>
+      <li>Singly Linked List</li>
+      <li>Doubly Linked List</li>
+      <li>Circular Linked List</li>
+    </ul>
+
+    <h3>💻 Python Example (Singly Linked List):</h3>
+    <pre><code class="language-python">
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+ll = LinkedList()
+ll.insert(30)
+ll.insert(20)
+ll.insert(10)
+ll.display()
+    </code></pre>
+
+    <h3>💻 C++ Example:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insert(Node*& head, int value) {
+    Node* newNode = new Node{value, head};
+    head = newNode;
+}
+
+void display(Node* head) {
+    while (head) {
+        cout &lt;&lt; head-&gt;data &lt;&lt; " -> ";
+        head = head-&gt;next;
+    }
+    cout &lt;&lt; "NULL" &lt;&lt; endl;
+}
+
+int main() {
+    Node* head = nullptr;
+    insert(head, 10);
+    insert(head, 20);
+    insert(head, 30);
+    display(head);
+    return 0;
+}
+    </code></pre>
+
+    <h3>🧠 Why Use Linked Lists?</h3>
+    <ul>
+      <li>Dynamic memory allocation</li>
+      <li>Efficient insertion/deletion</li>
+      <li>No need to pre-define size like arrays</li>
+    </ul>
+
+    <h3>🧮 Time Complexity:</h3>
+    <ul>
+      <li><strong>Insertion:</strong> O(1) at head</li>
+      <li><strong>Search:</strong> O(n)</li>
+      <li><strong>Deletion:</strong> O(1) at head, O(n) otherwise</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🎯 Test Your Skills</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take Linked List Quiz</a>
+  </section>
+
+  <!-- Related Links -->
+  <section class="related-topics">
+    <h3>📚 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-51.html">Queue</a></li>
+      <li><a href="programming-topic-50.html">Stack</a></li>
+      <li><a href="programming-topic-45.html">Arrays</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
