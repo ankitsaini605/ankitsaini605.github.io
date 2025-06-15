@@ -1,22 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #84</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Divide and Conquer Algorithms with real-world examples like Merge Sort, Quick Sort, and Binary Search. Deep dive into algorithmic efficiency with EduIgnite." />
+  <meta name="keywords" content="Divide and Conquer, Merge Sort, Quick Sort, Binary Search, Algorithms, Programming, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Divide and Conquer Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #84 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>⚔️ Divide and Conquer Algorithms</h1>
+
+    <p>
+      **Divide and Conquer** is an algorithm design paradigm based on multi-branched recursion. It breaks a problem into smaller subproblems, solves each subproblem independently, and combines their results to solve the original problem.
+    </p>
+
+    <h2>🧩 Key Steps</h2>
+    <ol>
+      <li><strong>Divide</strong>: Break the problem into smaller sub-problems.</li>
+      <li><strong>Conquer</strong>: Solve each sub-problem recursively.</li>
+      <li><strong>Combine</strong>: Merge or combine the results.</li>
+    </ol>
+
+    <h2>💻 Example: Merge Sort</h2>
+    <pre><code>
+void merge(vector&lt;int&gt;& arr, int l, int m, int r) {
+  vector&lt;int&gt; left(arr.begin() + l, arr.begin() + m + 1);
+  vector&lt;int&gt; right(arr.begin() + m + 1, arr.begin() + r + 1);
+
+  int i = 0, j = 0, k = l;
+  while (i &lt; left.size() &amp;&amp; j &lt; right.size()) {
+    arr[k++] = (left[i] &lt;= right[j]) ? left[i++] : right[j++];
+  }
+  while (i &lt; left.size()) arr[k++] = left[i++];
+  while (j &lt; right.size()) arr[k++] = right[j++];
+}
+
+void mergeSort(vector&lt;int&gt;& arr, int l, int r) {
+  if (l &lt; r) {
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
+  }
+}
+    </code></pre>
+
+    <h2>⚙️ Other Applications</h2>
+    <ul>
+      <li>📌 <strong>Binary Search</strong>: O(log N) time complexity.</li>
+      <li>📌 <strong>Quick Sort</strong>: Efficient for in-place sorting.</li>
+      <li>📌 <strong>Karatsuba Multiplication</strong>: Fast integer multiplication.</li>
+      <li>📌 <strong>Closest Pair of Points</strong>: O(n log n) geometric problem.</li>
+    </ul>
+
+    <h2>📊 Time Complexities</h2>
+    <ul>
+      <li>🔸 Merge Sort: O(N log N)</li>
+      <li>🔸 Quick Sort: Avg. O(N log N), Worst O(N²)</li>
+      <li>🔸 Binary Search: O(log N)</li>
+    </ul>
+
+    <h2>🔍 Binary Search Example</h2>
+    <pre><code>
+int binarySearch(vector&lt;int&gt;& arr, int target) {
+  int left = 0, right = arr.size() - 1;
+  while (left &lt;= right) {
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    else if (arr[mid] &lt; target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return -1;
+}
+    </code></pre>
+
+    <h2>💡 Benefits of Divide and Conquer</h2>
+    <ul>
+      <li>Efficient for large data sets</li>
+      <li>Used in parallel programming</li>
+      <li>Foundation of many advanced algorithms</li>
+    </ul>
+
+    <h2>🌐 Further Reading</h2>
+    <ul>
+      <li><a href="https://www.geeksforgeeks.org/divide-and-conquer-algorithm-introduction/" target="_blank">GFG: Divide and Conquer Intro</a></li>
+      <li><a href="https://www.topcoder.com/thrive/articles/Divide%20and%20Conquer%20and%20Binary%20Search" target="_blank">TopCoder Guide</a></li>
+    </ul>
+
+    <a href="programming-topic-85.html" class="btn">Next Topic: Dynamic Programming 🔄</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Advanced Programming Algorithms Made Simple</p>
+  </footer>
+
 </body>
 </html>
+
