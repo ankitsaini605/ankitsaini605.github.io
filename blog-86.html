@@ -1,22 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #86</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Greedy Algorithms with examples like Activity Selection, Huffman Coding, and Fractional Knapsack. Understand when and how to use the greedy approach in problem-solving." />
+  <meta name="keywords" content="Greedy Algorithm, Activity Selection, Huffman Coding, Kruskal, Prim, Fractional Knapsack, EduIgnite, Algorithms" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Greedy Algorithms - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #86 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>⚡ Greedy Algorithms</h1>
+
+    <p>
+      A <strong>Greedy Algorithm</strong> makes locally optimal choices at each step with the hope of finding a global optimum. It works best for problems that have the **Greedy Choice Property** and **Optimal Substructure**.
+    </p>
+
+    <h2>🔍 When to Use Greedy</h2>
+    <ul>
+      <li>When each local choice leads to a global solution.</li>
+      <li>When the problem can be proven to have the greedy property (e.g., exchange argument).</li>
+      <li>When you're solving optimization problems efficiently.</li>
+    </ul>
+
+    <h2>📘 Famous Greedy Problems</h2>
+    <ol>
+      <li><strong>Activity Selection Problem</strong></li>
+      <li><strong>Fractional Knapsack</strong></li>
+      <li><strong>Huffman Coding</strong></li>
+      <li><strong>Kruskal's Minimum Spanning Tree</strong></li>
+      <li><strong>Prim's Algorithm</strong></li>
+      <li><strong>Job Sequencing with Deadlines</strong></li>
+    </ol>
+
+    <h2>🧪 Example: Activity Selection</h2>
+    <pre><code>
+// Sort activities by end time
+bool comp(Activity a1, Activity a2) {
+  return a1.end < a2.end;
+}
+
+void activitySelection(vector&lt;Activity&gt;& activities) {
+  sort(activities.begin(), activities.end(), comp);
+  cout &lt;&lt; "Selected: " &lt;&lt; activities[0].id;
+  int lastEnd = activities[0].end;
+
+  for (int i = 1; i &lt; activities.size(); i++) {
+    if (activities[i].start &gt;= lastEnd) {
+      cout &lt;&lt; ", " &lt;&lt; activities[i].id;
+      lastEnd = activities[i].end;
+    }
+  }
+}
+    </code></pre>
+
+    <h2>🧾 Example: Fractional Knapsack</h2>
+    <p>
+      Greedy approach works in the fractional knapsack problem by picking the item with the highest value/weight ratio first.
+    </p>
+
+    <h2>📊 Greedy vs Dynamic Programming</h2>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Aspect</th>
+        <th>Greedy</th>
+        <th>Dynamic Programming</th>
+      </tr>
+      <tr>
+        <td>Approach</td>
+        <td>Top-down with local choice</td>
+        <td>Bottom-up or memoized recursion</td>
+      </tr>
+      <tr>
+        <td>Time Efficiency</td>
+        <td>Very fast (O(n log n) or better)</td>
+        <td>Moderate to high (O(n²) or more)</td>
+      </tr>
+      <tr>
+        <td>Use Cases</td>
+        <td>Simple, optimization problems</td>
+        <td>Complex problems with overlapping subproblems</td>
+      </tr>
+    </table>
+
+    <h2>🧠 Tips for Interviews</h2>
+    <ul>
+      <li>Check if local optimal → global optimal.</li>
+      <li>Use sorting wisely (by value/weight, end time, cost, etc.).</li>
+      <li>Always try both Greedy and DP if unsure.</li>
+    </ul>
+
+    <h2>📚 Further Reading</h2>
+    <ul>
+      <li><a href="https://www.geeksforgeeks.org/greedy-algorithms/" target="_blank">GFG: Greedy Algorithms</a></li>
+      <li><a href="https://leetcode.com/tag/greedy/" target="_blank">LeetCode Greedy Problems</a></li>
+    </ul>
+
+    <a href="programming-topic-87.html" class="btn">Next Topic: Backtracking 🔁</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Master Data Structures & Algorithms</p>
+  </footer>
+
 </body>
 </html>
+
