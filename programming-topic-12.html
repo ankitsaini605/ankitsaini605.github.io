@@ -1,16 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 12</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn about Variables and Data Types in Programming. Understand how to declare, assign, and use different types of variables with examples.">
+  <meta name="keywords" content="Variables, Data Types, Programming Basics, Python Variables, C++ Data Types, EduIgnite">
+  <meta name="author" content="EduIgnite" />
+  <title>Variables and Data Types - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 12</h2>
-  <p>This programming concept #12 explores logic, real-world usage, and examples for student practice.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="c-programming.html">C</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>🧮 Variables and Data Types</h1>
+    <p>Learn how computers store, access, and manipulate different kinds of data.</p>
+    <a href="#content" class="btn-primary">Start Learning</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="content">
+    <article>
+      <h2>📘 What Are Variables?</h2>
+      <p>Variables are containers for storing data values. Think of them as labels attached to data.</p>
+
+      <h3>🔤 Variable Declaration (Python)</h3>
+      <pre><code class="language-python">
+# Python
+name = "Ankit"
+age = 22
+price = 199.99
+is_active = True
+      </code></pre>
+
+      <h3>🔤 Variable Declaration (C++)</h3>
+      <pre><code class="language-cpp">
+// C++
+string name = "Ankit";
+int age = 22;
+float price = 199.99;
+bool isActive = true;
+      </code></pre>
+
+      <h3>📚 Data Types</h3>
+      <p>Each variable in programming has a type that defines the kind of data it holds:</p>
+      <table>
+        <tr>
+          <th>Data Type</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+        <tr>
+          <td>int</td>
+          <td>Integer values</td>
+          <td>10, -5, 1000</td>
+        </tr>
+        <tr>
+          <td>float/double</td>
+          <td>Decimal values</td>
+          <td>3.14, 99.99</td>
+        </tr>
+        <tr>
+          <td>string</td>
+          <td>Text values</td>
+          <td>"Hello", "EduIgnite"</td>
+        </tr>
+        <tr>
+          <td>bool</td>
+          <td>Boolean (True/False)</td>
+          <td>true, false</td>
+        </tr>
+      </table>
+
+      <h3>🔧 Best Practices</h3>
+      <ul>
+        <li>💡 Always give meaningful names to variables (e.g., `userAge`, not `x`)</li>
+        <li>⚠️ Use appropriate data types to save memory</li>
+        <li>🧼 Keep your code readable and well-documented</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> In dynamically typed languages like Python, you don't need to declare the data type explicitly.
+      </div>
+    </article>
+
+    <!-- Quiz CTA -->
+    <section class="quiz-cta">
+      <h3>✅ Ready to Practice?</h3>
+      <p>Try our quiz on variables and data types to solidify your understanding.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Take the Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>📂 Related Lessons</h3>
+      <ul>
+        <li><a href="programming-topic-13.html">Control Structures</a></li>
+        <li><a href="programming-topic-14.html">Functions in Programming</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. Empowering Coders.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Highlight.js -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
