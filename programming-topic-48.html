@@ -1,19 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #48 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Counting Sort with Python and C++ examples. Fast linear-time sorting algorithm for integers and small ranges.">
+  <meta name="keywords" content="Counting Sort, Linear Time Sort, Python, C++, EduIgnite, Algorithms, Sorting, DSA">
+  <meta name="author" content="EduIgnite Team">
+  <title>Counting Sort Algorithm | Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #48</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Banner -->
+<section class="hero-banner">
+  <h1>📊 Counting Sort Algorithm</h1>
+  <p>Efficient non-comparison sorting for integers within a fixed range.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 What is Counting Sort?</h2>
+    <p>
+      Counting Sort is a non-comparison sorting algorithm that works by counting the number of objects having distinct key values. It is ideal for sorting integers or characters when the range of input values is known.
+    </p>
+
+    <h3>🔎 Key Concepts:</h3>
+    <ul>
+      <li>Counts occurrences of each value</li>
+      <li>Works well for small integer ranges</li>
+      <li>Stable and non-comparative</li>
+    </ul>
+
+    <h3>💡 Applications:</h3>
+    <ul>
+      <li>Sorting exam scores</li>
+      <li>Age-based grouping</li>
+      <li>Character frequency analysis</li>
+    </ul>
+
+    <h3>🐍 Python Code</h3>
+    <pre><code class="language-python">
+def counting_sort(arr):
+    max_val = max(arr)
+    count = [0] * (max_val + 1)
+    
+    for num in arr:
+        count[num] += 1
+
+    index = 0
+    for i in range(len(count)):
+        while count[i] > 0:
+            arr[index] = i
+            index += 1
+            count[i] -= 1
+
+arr = [4, 2, 2, 8, 3, 3, 1]
+counting_sort(arr)
+print("Sorted array:", arr)
+    </code></pre>
+
+    <h3>💻 C++ Code</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void countingSort(vector&lt;int&gt;& arr) {
+    int maxVal = *max_element(arr.begin(), arr.end());
+    vector&lt;int&gt; count(maxVal + 1, 0);
+
+    for (int num : arr)
+        count[num]++;
+
+    int index = 0;
+    for (int i = 0; i &lt;= maxVal; i++) {
+        while (count[i]-- > 0)
+            arr[index++] = i;
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {4, 2, 2, 8, 3, 3, 1};
+    countingSort(arr);
+    cout &lt;&lt; "Sorted array: ";
+    for (int num : arr)
+        cout &lt;&lt; num &lt;&lt; " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📈 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Time Complexity:</strong> O(n + k) where k is the range</li>
+      <li><strong>Space Complexity:</strong> O(k)</li>
+    </ul>
+
+    <h3>✅ Advantages:</h3>
+    <ul>
+      <li>Very fast for small ranges</li>
+      <li>Stable (preserves order)</li>
+      <li>No comparisons required</li>
+    </ul>
+
+    <h3>⚠️ Disadvantages:</h3>
+    <ul>
+      <li>Only works on integers or categorical data</li>
+      <li>Not suitable for large range of values</li>
+    </ul>
+  </article>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🧠 Test Your Knowledge</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Start the Quiz</a>
+  </section>
+
+  <!-- Related -->
+  <section class="related-topics">
+    <h3>📚 More on Sorting</h3>
+    <ul>
+      <li><a href="programming-topic-47.html">Heap Sort</a></li>
+      <li><a href="programming-topic-49.html">Radix Sort</a></li>
+      <li><a href="programming-topic-50.html">Bucket Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Syntax Highlighting -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
