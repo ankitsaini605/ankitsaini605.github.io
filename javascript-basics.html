@@ -1,26 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>JavaScript Basics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn JavaScript basics including syntax, variables, and functions. Master JavaScript with EduIgnite's beginner guide." />
+  <meta name="keywords" content="JavaScript, Learn JavaScript, JavaScript Tutorial, JS Basics, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>JavaScript Basics - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f9f9f9; color: #222; }
+    header, footer { background: #111; color: #fff; padding: 15px 30px; }
+    nav a { margin-right: 15px; color: #00e1ff; text-decoration: none; font-weight: bold; }
+    .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+    h1, h2 { color: #0066cc; }
+    .section { margin-bottom: 35px; }
+    .code-box { background: #2d2d2d; color: #eee; padding: 20px; border-radius: 6px; font-family: monospace; overflow-x: auto; }
+    .tip { background: #e0f7fa; padding: 10px; border-left: 5px solid #00796b; margin-top: 10px; }
+    .btn { background: #0072ff; color: #fff; padding: 10px 20px; display: inline-block; text-decoration: none; margin-top: 20px; border-radius: 4px; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>JavaScript Basics</h2>
-  <script>
-let i = 0;
-const slides = document.querySelectorAll(".slide");
-function showSlide() {
-  slides.forEach((s, index) => s.style.display = index === i ? "block" : "none");
-  i = (i + 1) % slides.length;
-}
-setInterval(showSlide, 3000);
-</script>
 
-  <p>JavaScript is a lightweight scripting language used to add interactivity to web pages.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+<header>
+  <h2>EduIgnite - JavaScript Programming</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="programming.html">All Topics</a>
+    <a href="python-syntax.html">Python</a>
+    <a href="java-intro.html">Java</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>📜 JavaScript Basics</h1>
+
+  <div class="section">
+    <h2>🔍 What is JavaScript?</h2>
+    <p>JavaScript is a powerful scripting language used to create dynamic and interactive experiences on web pages. It runs in the browser and allows developers to control HTML content, validate forms, create animations, and more.</p>
+  </div>
+
+  <div class="section">
+    <h2>🧠 Why Learn JavaScript?</h2>
+    <ul>
+      <li>Essential for front-end web development</li>
+      <li>Works with HTML and CSS</li>
+      <li>Used in all modern websites & web apps</li>
+      <li>Can also be used on the server-side (Node.js)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>💡 JavaScript Syntax Example</h2>
+    <div class="code-box">
+<pre>
+// Output a message
+console.log("Hello from EduIgnite!");
+
+// Variables
+let name = "Ankit";
+const age = 22;
+
+// Functions
+function greet(user) {
+  return "Welcome, " + user + "!";
+}
+
+console.log(greet(name));
+</pre>
+    </div>
+    <div class="tip">
+      ✅ Tip: Use <code>let</code> for variables and <code>const</code> for constants in modern JS.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🛠️ Key Concepts You Will Learn:</h2>
+    <ul>
+      <li>Variables & Data Types</li>
+      <li>Functions & Scope</li>
+      <li>DOM Manipulation</li>
+      <li>Events & Event Listeners</li>
+      <li>Conditionals & Loops</li>
+      <li>Array and Object Basics</li>
+    </ul>
+    <a class="btn" href="programming-topic-102.html">Start Full JavaScript Journey →</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 EduIgnite. Learn JavaScript with confidence.</p>
+</footer>
+
 </body>
 </html>
+
