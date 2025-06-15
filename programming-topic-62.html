@@ -1,16 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #62 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Topological Sorting in Graphs: A powerful algorithm to schedule tasks based on dependencies. Learn both DFS and Kahn’s Algorithm with code examples in Python and C++." />
+  <meta name="keywords" content="Topological Sort, Graph Algorithms, DAG, Python, C++, Kahn's Algorithm, DFS, EduIgnite"/>
+  <meta name="author" content="EduIgnite Team" />
+  <title>Topological Sort in Graphs | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #62</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>📊 Topological Sorting</h1>
+  <p>Ordering vertices of a Directed Acyclic Graph (DAG) to respect task dependencies.</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 What is Topological Sort?</h2>
+    <p>Topological sort is an ordering of the vertices in a <strong>DAG (Directed Acyclic Graph)</strong> such that for every directed edge <code>u → v</code>, vertex <code>u</code> comes before <code>v</code> in the ordering.</p>
+
+    <h3>🔍 Applications:</h3>
+    <ul>
+      <li>Task scheduling</li>
+      <li>Build systems (makefile, dependencies)</li>
+      <li>Course prerequisites</li>
+      <li>Deadlock detection</li>
+    </ul>
+
+    <h3>💡 DFS-Based Approach (Python):</h3>
+    <pre><code class="language-python">
+from collections import defaultdict
+
+class Graph:
+    def __init__(self, V):
+        self.graph = defaultdict(list)
+        self.V = V
+
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+
+    def topological_sort_util(self, v, visited, stack):
+        visited[v] = True
+        for neighbor in self.graph[v]:
+            if not visited[neighbor]:
+                self.topological_sort_util(neighbor, visited, stack)
+        stack.insert(0, v)
+
+    def topological_sort(self):
+        visited = [False] * self.V
+        stack = []
+
+        for i in range(self.V):
+            if not visited[i]:
+                self.topological_sort_util(i, visited, stack)
+        print("Topological Order:", stack)
+
+g = Graph(6)
+g.add_edge(5, 2)
+g.add_edge(5, 0)
+g.add_edge(4, 0)
+g.add_edge(4, 1)
+g.add_edge(2, 3)
+g.add_edge(3, 1)
+
+g.topological_sort()
+    </code></pre>
+
+    <h3>⚙️ Kahn’s Algorithm (C++ with BFS):</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+void topologicalSort(int V, vector&lt;vector&lt;int&gt;&gt;&adj) {
+    vector&lt;int&gt; in_degree(V, 0);
+
+    for (int u = 0; u &lt; V; u++)
+        for (int v : adj[u])
+            in_degree[v]++;
+
+    queue&lt;int&gt; q;
+    for (int i = 0; i &lt; V; i++)
+        if (in_degree[i] == 0)
+            q.push(i);
+
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        cout &lt;&lt; u &lt;&lt; " ";
+
+        for (int v : adj[u])
+            if (--in_degree[v] == 0)
+                q.push(v);
+    }
+}
+
+int main() {
+    int V = 6;
+    vector&lt;vector&lt;int&gt;&gt; adj(V);
+    adj[5] = {0, 2};
+    adj[4] = {0, 1};
+    adj[2] = {3};
+    adj[3] = {1};
+
+    topologicalSort(V, adj);
+    return 0;
+}
+    </code></pre>
+
+    <h3>⏱️ Time & Space Complexity:</h3>
+    <ul>
+      <li><strong>Time Complexity:</strong> O(V + E)</li>
+      <li><strong>Space Complexity:</strong> O(V)</li>
+    </ul>
+
+    <h3>❌ Note:</h3>
+    <p>Topological sort is only possible for a Directed Acyclic Graph (DAG). If the graph contains cycles, this algorithm will fail.</p>
+
+    <h3>📌 Real Example:</h3>
+    <p>Consider courses where "Math" is a prerequisite for "AI" and "AI" is a prerequisite for "Robotics". You can model these dependencies using a DAG and determine the correct order to take the courses using topological sort.</p>
+  </article>
+
+  <section class="related-topics">
+    <h3>🧵 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-61.html">Floyd-Warshall Algorithm</a></li>
+      <li><a href="programming-topic-63.html">Cycle Detection in Graphs</a></li>
+    </ul>
+  </section>
+
+  <section class="quiz-cta">
+    <h3>🧠 Test Your Understanding</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Try the Graph Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Created by Ankit Saini. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
