@@ -1,22 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #88</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Master Dynamic Programming (DP): Learn Tabulation, Memoization, and solve classic problems like Knapsack, LIS, LCS, and Matrix Chain Multiplication." />
+  <meta name="keywords" content="Dynamic Programming, Memoization, Tabulation, DP Problems, Algorithms, EduIgnite, Competitive Programming" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Dynamic Programming Explained - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #88 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>📐 Dynamic Programming (DP)</h1>
+
+    <p>
+      <strong>Dynamic Programming</strong> is an optimization technique used for solving complex problems by breaking them down into simpler subproblems and storing the results to avoid redundant computations.
+    </p>
+
+    <h2>🧠 Why Use DP?</h2>
+    <ul>
+      <li>Reduces time complexity in recursive problems</li>
+      <li>Efficient for overlapping subproblems</li>
+      <li>Great for optimization problems like knapsack, LCS, LIS, etc.</li>
+    </ul>
+
+    <h2>📂 Two Main Techniques</h2>
+    <ul>
+      <li><strong>Top-Down (Memoization)</strong>: Recursion + Cache</li>
+      <li><strong>Bottom-Up (Tabulation)</strong>: Iterative + DP Table</li>
+    </ul>
+
+    <h2>🔥 Classic DP Problems</h2>
+    <ol>
+      <li>0/1 Knapsack Problem</li>
+      <li>Longest Common Subsequence (LCS)</li>
+      <li>Longest Increasing Subsequence (LIS)</li>
+      <li>Matrix Chain Multiplication</li>
+      <li>Coin Change</li>
+      <li>Edit Distance</li>
+    </ol>
+
+    <h2>🧪 Example: Fibonacci with DP</h2>
+    <pre><code>
+// Memoization (Top-Down)
+int fib(int n, vector&lt;int&gt;& dp) {
+  if (n &lt;= 1) return n;
+  if (dp[n] != -1) return dp[n];
+  return dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
+}
+
+// Tabulation (Bottom-Up)
+int fib(int n) {
+  vector&lt;int&gt; dp(n + 1);
+  dp[0] = 0; dp[1] = 1;
+  for (int i = 2; i &lt;= n; i++)
+    dp[i] = dp[i - 1] + dp[i - 2];
+  return dp[n];
+}
+    </code></pre>
+
+    <h2>📊 Comparison: Memoization vs Tabulation</h2>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Aspect</th>
+        <th>Memoization</th>
+        <th>Tabulation</th>
+      </tr>
+      <tr>
+        <td>Approach</td>
+        <td>Top-down (recursive)</td>
+        <td>Bottom-up (iterative)</td>
+      </tr>
+      <tr>
+        <td>Function Calls</td>
+        <td>Recursive stack used</td>
+        <td>No recursion</td>
+      </tr>
+      <tr>
+        <td>Performance</td>
+        <td>May be slower due to stack</td>
+        <td>Faster in tight loops</td>
+      </tr>
+    </table>
+
+    <h2>📚 Tips for Mastering DP</h2>
+    <ul>
+      <li>Identify overlapping subproblems</li>
+      <li>Draw a recursion tree or DP table</li>
+      <li>Write base cases clearly</li>
+      <li>Optimize space (sometimes 1D array is enough)</li>
+    </ul>
+
+    <h2>🛠️ Real-World Applications</h2>
+    <ul>
+      <li>Spell Checkers (Edit Distance)</li>
+      <li>Text Prediction (LCS)</li>
+      <li>Route Optimization (Matrix Chain)</li>
+      <li>Stock Profit Calculation</li>
+    </ul>
+
+    <a href="programming-topic-89.html" class="btn">Next: Greedy Algorithms ⚡</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Learn Smart. Code Smarter.</p>
+  </footer>
+
 </body>
 </html>
+
