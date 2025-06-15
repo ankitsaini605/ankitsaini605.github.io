@@ -1,22 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #76</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Understand Backtracking algorithms with real-world coding examples and detailed explanation. Ideal for interview preparation and problem-solving strategies." />
+  <meta name="keywords" content="Backtracking, Algorithms, Problem Solving, Coding Interview, Competitive Programming, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Backtracking - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
 </head>
 <body>
-<header><h1>Blog #76 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="c-programming.html">C</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>🔙 Backtracking</h1>
+
+    <p>
+      Backtracking is an algorithmic paradigm used for solving constraint satisfaction problems by building a solution incrementally and removing those solutions that fail to satisfy the constraints of the problem.
+    </p>
+
+    <h2>🧠 Key Concept</h2>
+    <p>
+      Try out all possibilities. If a path leads to a dead-end, **go back (backtrack)** and try another possibility. Think of it like exploring a maze.
+    </p>
+
+    <h2>📌 Common Problems Using Backtracking</h2>
+    <ul>
+      <li>N-Queens Problem</li>
+      <li>Sudoku Solver</li>
+      <li>Rat in a Maze</li>
+      <li>Subset Sum</li>
+      <li>Graph Coloring</li>
+      <li>Word Search</li>
+    </ul>
+
+    <h2>🧾 Code Example: N-Queens Problem (4x4) in C++</h2>
+    <pre><code>
+bool isSafe(int board[4][4], int row, int col) {
+    for (int i = 0; i < col; i++)
+        if (board[row][i]) return false;
+
+    for (int i=row, j=col; i>=0 && j>=0; i--, j--)
+        if (board[i][j]) return false;
+
+    for (int i=row, j=col; i<4 && j>=0; i++, j--)
+        if (board[i][j]) return false;
+
+    return true;
+}
+
+bool solveNQUtil(int board[4][4], int col) {
+    if (col >= 4) return true;
+    for (int i = 0; i < 4; i++) {
+        if (isSafe(board, i, col)) {
+            board[i][col] = 1;
+            if (solveNQUtil(board, col + 1)) return true;
+            board[i][col] = 0;
+        }
+    }
+    return false;
+}
+    </code></pre>
+
+    <h2>🎯 Features of Backtracking</h2>
+    <ul>
+      <li>Recursive in nature</li>
+      <li>Exponential time complexity in worst case</li>
+      <li>Efficient for small input sizes or heavily constrained problems</li>
+    </ul>
+
+    <h2>🌐 Real-Life Use Cases</h2>
+    <ul>
+      <li>AI Game Solving (like Sudoku)</li>
+      <li>Constraint Programming</li>
+      <li>Path Finding in Games or Maps</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Pro Tip:</strong> Always try to add **pruning techniques** to reduce the number of recursive calls and optimize performance.
+    </div>
+
+    <h2>🛠️ Additional Practice</h2>
+    <ul>
+      <li><a href="https://www.geeksforgeeks.org/backtracking-algorithms/" target="_blank">GFG Backtracking Problems</a></li>
+      <li><a href="https://leetcode.com/tag/backtracking/" target="_blank">LeetCode Backtracking Set</a></li>
+    </ul>
+
+    <a href="programming-topic-77.html" class="btn">Next Topic: Divide and Conquer ➡️</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Unlock Your Coding Potential</p>
+  </footer>
+
 </body>
 </html>
+
