@@ -1,16 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #59 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dijkstra's Algorithm explained with code in Python and C++. Learn how to find the shortest path in graphs using Dijkstra's Algorithm." />
+  <meta name="keywords" content="Dijkstra Algorithm, Shortest Path, Graph Theory, DSA, Python, C++, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Dijkstra's Algorithm | Shortest Path in Graph | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #59</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>📍 Dijkstra’s Algorithm – Shortest Path in Graphs</h1>
+  <p>Find the minimum path cost from one node to all others using a greedy approach.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>🔍 What is Dijkstra’s Algorithm?</h2>
+    <p><strong>Dijkstra’s Algorithm</strong> is a graph search method used to find the shortest path from a single source node to all other nodes in a weighted graph with non-negative edges.</p>
+
+    <h3>💡 Algorithm Steps:</h3>
+    <ol>
+      <li>Start with the source node and assign it distance 0; all others as infinity.</li>
+      <li>Visit the unvisited node with the smallest known distance.</li>
+      <li>Update distances to its neighbors.</li>
+      <li>Mark the current node as visited.</li>
+      <li>Repeat until all nodes are visited.</li>
+    </ol>
+
+    <h3>📘 Time Complexity:</h3>
+    <ul>
+      <li>Using Min Heap (Priority Queue): O((V + E) log V)</li>
+      <li>Where V = vertices, E = edges</li>
+    </ul>
+
+    <h3>💻 Python Code (Using Heap):</h3>
+    <pre><code class="language-python">
+import heapq
+
+def dijkstra(graph, start):
+    distances = {vertex: float('infinity') for vertex in graph}
+    distances[start] = 0
+    pq = [(0, start)]
+
+    while pq:
+        current_distance, current_vertex = heapq.heappop(pq)
+
+        if current_distance > distances[current_vertex]:
+            continue
+
+        for neighbor, weight in graph[current_vertex]:
+            distance = current_distance + weight
+
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(pq, (distance, neighbor))
+
+    return distances
+
+graph = {
+    'A': [('B', 2), ('C', 5)],
+    'B': [('C', 1), ('D', 4)],
+    'C': [('D', 2)],
+    'D': []
+}
+
+print(dijkstra(graph, 'A'))
+    </code></pre>
+
+    <h3>💻 C++ Code (Using STL Priority Queue):</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+typedef pair&lt;int, int&gt; pii;
+
+void dijkstra(int V, vector&lt;pii&gt; adj[], int src) {
+    priority_queue&lt;pii, vector&lt;pii&gt;, greater&lt;pii&gt;&gt; pq;
+    vector&lt;int&gt; dist(V, INT_MAX);
+
+    pq.push({0, src});
+    dist[src] = 0;
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (auto x : adj[u]) {
+            int v = x.first;
+            int weight = x.second;
+
+            if (dist[v] > dist[u] + weight) {
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    for (int i = 0; i &lt; V; ++i)
+        cout &lt;&lt; "Distance from " &lt;&lt; src &lt;&lt; " to " &lt;&lt; i &lt;&lt; " is " &lt;&lt; dist[i] &lt;&lt; endl;
+}
+
+int main() {
+    int V = 4;
+    vector&lt;pii&gt; adj[4];
+    adj[0].push_back({1, 2});
+    adj[0].push_back({2, 5});
+    adj[1].push_back({2, 1});
+    adj[1].push_back({3, 4});
+    adj[2].push_back({3, 2});
+
+    dijkstra(V, adj, 0);
+    return 0;
+}
+    </code></pre>
+
+    <h3>📚 Applications:</h3>
+    <ul>
+      <li>Google Maps (fastest route)</li>
+      <li>Network routing protocols</li>
+      <li>AI pathfinding in games</li>
+    </ul>
+
+    <h3>✅ Pros & Cons:</h3>
+    <ul>
+      <li><strong>✅ Pros:</strong> Efficient, guaranteed shortest path</li>
+      <li><strong>⚠️ Cons:</strong> Doesn't work with negative weights</li>
+    </ul>
+  </article>
+
+  <section class="related-topics">
+    <h3>🔗 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-60.html">Bellman-Ford Algorithm</a></li>
+      <li><a href="programming-topic-58.html">Heap Sort</a></li>
+    </ul>
+  </section>
+
+  <section class="quiz-cta">
+    <h3>🎯 Test Your DSA Knowledge!</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Designed by Ankit Saini. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
