@@ -1,16 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #60 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bellman-Ford Algorithm: Learn how it handles negative weights and detects negative cycles. Complete guide with C++ and Python code examples." />
+  <meta name="keywords" content="Bellman-Ford, Negative Weights, Graph Algorithms, DSA, EduIgnite, C++, Python" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Bellman-Ford Algorithm | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #60</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>📍 Bellman-Ford Algorithm</h1>
+  <p>Handle graphs with negative weights and detect negative cycles effectively.</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>🔍 What is Bellman-Ford Algorithm?</h2>
+    <p>The <strong>Bellman-Ford algorithm</strong> is used to compute the shortest paths from a single source vertex to all other vertices in a weighted graph. Unlike Dijkstra, it works with <strong>negative weight edges</strong>.</p>
+
+    <h3>📘 Key Features:</h3>
+    <ul>
+      <li>Supports graphs with negative weight edges</li>
+      <li>Detects negative weight cycles</li>
+      <li>Time Complexity: O(V * E)</li>
+    </ul>
+
+    <h3>💡 Algorithm Steps:</h3>
+    <ol>
+      <li>Initialize distance to source = 0, and others = ∞</li>
+      <li>Relax all edges (V-1) times</li>
+      <li>Check for negative weight cycles in 1 final iteration</li>
+    </ol>
+
+    <h3>💻 Python Code:</h3>
+    <pre><code class="language-python">
+def bellman_ford(edges, V, src):
+    dist = [float('inf')] * V
+    dist[src] = 0
+
+    for _ in range(V - 1):
+        for u, v, wt in edges:
+            if dist[u] != float('inf') and dist[u] + wt < dist[v]:
+                dist[v] = dist[u] + wt
+
+    # Check for negative weight cycle
+    for u, v, wt in edges:
+        if dist[u] != float('inf') and dist[u] + wt < dist[v]:
+            print("Graph contains negative weight cycle")
+            return
+
+    print("Vertex Distance from Source:", dist)
+
+# Example usage
+edges = [(0, 1, 4), (0, 2, 5), (1, 2, -3), (2, 3, 4)]
+V = 4
+bellman_ford(edges, V, 0)
+    </code></pre>
+
+    <h3>💻 C++ Code:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+struct Edge {
+    int src, dest, weight;
+};
+
+void bellmanFord(vector&lt;Edge&gt;& edges, int V, int src) {
+    vector&lt;int&gt; dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 1; i &lt; V; ++i) {
+        for (auto &e : edges) {
+            if (dist[e.src] != INT_MAX && dist[e.src] + e.weight &lt; dist[e.dest]) {
+                dist[e.dest] = dist[e.src] + e.weight;
+            }
+        }
+    }
+
+    // Check for negative weight cycles
+    for (auto &e : edges) {
+        if (dist[e.src] != INT_MAX && dist[e.src] + e.weight &lt; dist[e.dest]) {
+            cout &lt;&lt; "Graph contains negative weight cycle\n";
+            return;
+        }
+    }
+
+    for (int i = 0; i &lt; V; ++i)
+        cout &lt;&lt; "Distance from " &lt;&lt; src &lt;&lt; " to " &lt;&lt; i &lt;&lt; " is " &lt;&lt; dist[i] &lt;&lt; endl;
+}
+
+int main() {
+    int V = 4;
+    vector&lt;Edge&gt; edges = {{0, 1, 4}, {0, 2, 5}, {1, 2, -3}, {2, 3, 4}};
+    bellmanFord(edges, V, 0);
+    return 0;
+}
+    </code></pre>
+
+    <h3>📚 Real-world Applications:</h3>
+    <ul>
+      <li>Currency arbitrage detection</li>
+      <li>Distance-vector routing (e.g., RIP protocol)</li>
+      <li>Optimizing cost with possible losses</li>
+    </ul>
+
+    <h3>✅ Pros & ⚠️ Cons:</h3>
+    <ul>
+      <li><strong>✅ Pros:</strong> Works with negative weights, simple to implement</li>
+      <li><strong>⚠️ Cons:</strong> Slower than Dijkstra on dense graphs</li>
+    </ul>
+  </article>
+
+  <section class="related-topics">
+    <h3>🔗 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-59.html">Dijkstra's Algorithm</a></li>
+      <li><a href="programming-topic-61.html">Floyd-Warshall Algorithm</a></li>
+    </ul>
+  </section>
+
+  <section class="quiz-cta">
+    <h3>🧠 Ready to Test Your Skills?</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Created by Ankit Saini. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
