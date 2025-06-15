@@ -1,16 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 17</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Check Armstrong numbers using Python and C++. Understand power-based logic to validate three-digit numbers.">
+  <meta name="keywords" content="Armstrong Number, Python, C++, Programming, EduIgnite">
+  <meta name="author" content="EduIgnite">
+  <title>Armstrong Number | Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 17</h2>
-  <p>This programming concept #17 explores logic, real-world usage, and examples for student practice.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>💡 Armstrong Number</h1>
+    <p>Check if a number is an Armstrong number using Python & C++</p>
+    <a href="#main-content" class="btn-primary">Explore Code</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="main-content">
+    <article>
+      <h2>📘 What is an Armstrong Number?</h2>
+      <p>An <strong>Armstrong number</strong> is a number that is equal to the sum of its own digits each raised to the power of the number of digits.</p>
+      <p><strong>Example:</strong> 153 = 1³ + 5³ + 3³ = 153 → Armstrong!</p>
+
+      <h3>🧠 Python Code to Check Armstrong Number</h3>
+      <pre><code class="language-python">
+def is_armstrong(n):
+    num_str = str(n)
+    power = len(num_str)
+    total = sum(int(digit) ** power for digit in num_str)
+    return total == n
+
+num = 9474
+print(f"{num} is Armstrong: {is_armstrong(num)}")
+      </code></pre>
+
+      <h3>🔷 C++ Code to Check Armstrong Number</h3>
+      <pre><code class="language-cpp">
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isArmstrong(int n) {
+    int original = n, sum = 0, digits = 0, temp = n;
+    while(temp) {
+        digits++;
+        temp /= 10;
+    }
+    temp = n;
+    while(temp) {
+        int digit = temp % 10;
+        sum += pow(digit, digits);
+        temp /= 10;
+    }
+    return sum == original;
+}
+
+int main() {
+    int num = 9474;
+    cout << num << " is Armstrong: " << boolalpha << isArmstrong(num);
+    return 0;
+}
+      </code></pre>
+
+      <h3>🧾 Explanation</h3>
+      <ul>
+        <li>Each digit is raised to the power equal to the total digits in the number.</li>
+        <li>In Python, we use list comprehension for clean logic.</li>
+        <li>In C++, we use <code>pow()</code> from the <code>&lt;cmath&gt;</code> library.</li>
+      </ul>
+    </article>
+
+    <!-- Practice CTA -->
+    <section class="quiz-cta">
+      <h3>🧪 Test Your Logic</h3>
+      <p>Take our quiz to test your understanding of Armstrong numbers and power logic.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Take Quiz</a>
+    </section>
+
+    <!-- Related Links -->
+    <section class="related-topics">
+      <h3>🔗 Related Lessons</h3>
+      <ul>
+        <li><a href="programming-topic-16.html">Palindrome Number</a></li>
+        <li><a href="programming-topic-18.html">Fibonacci Series</a></li>
+        <li><a href="programming-topic-19.html">Prime Number</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Highlight.js for Syntax Highlighting -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
