@@ -1,22 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>EduIgnite Blog #89</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Master Greedy Algorithms with real-world examples: Activity Selection, Fractional Knapsack, Huffman Encoding, and more. Learn the logic and when to apply Greedy." />
+  <meta name="keywords" content="Greedy Algorithm, Activity Selection, Huffman Encoding, Fractional Knapsack, EduIgnite, Algorithms" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Greedy Algorithms - Programming Topic 89 | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Blog #89 - Master Strategy</h1></header>
-<main>
-  <h2>5 Techniques to Boost Study Focus</h2>
-  <ul>
-    <li>Use 25/5 Pomodoro sessions</li>
-    <li>Keep distractions away using apps</li>
-    <li>Revise at night before sleeping</li>
-    <li>Test yourself every 3 days</li>
-    <li>Sunday mock + topic revision</li>
-  </ul>
-</main>
-<footer>Follow: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <h1>⚡ Greedy Algorithms</h1>
+
+    <p>
+      A <strong>Greedy Algorithm</strong> builds up a solution piece by piece, always choosing the next piece that offers the most immediate benefit. It doesn't reconsider its choices, unlike Dynamic Programming or Backtracking.
+    </p>
+
+    <h2>🔍 Core Idea</h2>
+    <ul>
+      <li>Make a **locally optimal** choice at each step</li>
+      <li>Hopes that this leads to a **globally optimal** solution</li>
+      <li>Faster than exhaustive techniques, but works only for certain problems</li>
+    </ul>
+
+    <h2>📘 Greedy Algorithm Examples</h2>
+    <ol>
+      <li>Activity Selection Problem</li>
+      <li>Fractional Knapsack Problem</li>
+      <li>Huffman Encoding</li>
+      <li>Job Sequencing Problem</li>
+      <li>Prim’s and Kruskal’s MST Algorithms</li>
+      <li>Dijkstra’s Shortest Path Algorithm</li>
+    </ol>
+
+    <h2>💼 Real-World Use Cases</h2>
+    <ul>
+      <li>Network routing protocols (Dijkstra)</li>
+      <li>Data compression (Huffman Coding)</li>
+      <li>Project scheduling</li>
+      <li>Task prioritization systems</li>
+    </ul>
+
+    <h2>📌 Example: Activity Selection</h2>
+    <p>Given start and end times of N activities, select the maximum number of non-overlapping activities.</p>
+    <pre><code>
+void activitySelection(int start[], int end[], int n) {
+  vector&lt;pair&lt;int,int&gt;&gt; activities;
+  for (int i = 0; i &lt; n; i++)
+    activities.push_back({end[i], start[i]});
+  
+  sort(activities.begin(), activities.end());
+  
+  cout &lt;&lt; "Selected Activities:\n";
+  int count = 1, lastEnd = activities[0].first;
+  cout &lt;&lt; "(" &lt;&lt; activities[0].second &lt;&lt; "," &lt;&lt; lastEnd &lt;&lt; ")\n";
+  
+  for (int i = 1; i &lt; n; i++) {
+    if (activities[i].second &gt;= lastEnd) {
+      cout &lt;&lt; "(" &lt;&lt; activities[i].second &lt;&lt; "," &lt;&lt; activities[i].first &lt;&lt; ")\n";
+      lastEnd = activities[i].first;
+      count++;
+    }
+  }
+}
+    </code></pre>
+
+    <h2>⚖️ Greedy vs Dynamic Programming</h2>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>Aspect</th>
+        <th>Greedy</th>
+        <th>Dynamic Programming</th>
+      </tr>
+      <tr>
+        <td>Approach</td>
+        <td>Local optimization</td>
+        <td>Global optimization</td>
+      </tr>
+      <tr>
+        <td>Backtracking Required?</td>
+        <td>No</td>
+        <td>Sometimes</td>
+      </tr>
+      <tr>
+        <td>Performance</td>
+        <td>Faster</td>
+        <td>Slower but accurate</td>
+      </tr>
+      <tr>
+        <td>Use Cases</td>
+        <td>When greedy works optimally</td>
+        <td>Overlapping subproblems</td>
+      </tr>
+    </table>
+
+    <h2>🧠 Key Tips to Master Greedy Algorithms</h2>
+    <ul>
+      <li>Try proving the greedy choice is optimal (Greedy-choice property)</li>
+      <li>Check if the problem has **optimal substructure**</li>
+      <li>Simulate the problem manually to observe patterns</li>
+      <li>Sort wisely — many greedy problems require sorted inputs</li>
+    </ul>
+
+    <a href="programming-topic-90.html" class="btn">Next: Backtracking Algorithms 🔍</a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EduIgnite | Code. Learn. Grow.</p>
+  </footer>
+
 </body>
 </html>
+
