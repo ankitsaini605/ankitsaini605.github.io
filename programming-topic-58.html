@@ -1,16 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #58 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Heap Sort Algorithm with examples in C++ and Python. Understand how Heap Sort works using Min/Max Heaps in Data Structures." />
+  <meta name="keywords" content="Heap Sort, Max Heap, Min Heap, Sorting Algorithm, DSA, Python, C++, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Heap Sort Algorithm | Min/Max Heap | DSA | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #58</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-banner">
+  <h1>📊 Heap Sort Algorithm in DSA</h1>
+  <p>Efficient comparison-based sorting using a binary heap data structure.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>🔍 What is Heap Sort?</h2>
+    <p><strong>Heap Sort</strong> is a popular <em>comparison-based sorting algorithm</em> that uses a binary heap data structure. It divides its input into a sorted and an unsorted region and iteratively shrinks the unsorted region by extracting the maximum element.</p>
+
+    <h3>🧠 Why Use Heap Sort?</h3>
+    <ul>
+      <li>Efficient: O(n log n) time complexity</li>
+      <li>In-place sorting (no extra memory)</li>
+      <li>Guaranteed performance (unlike Quick Sort's worst-case)</li>
+    </ul>
+
+    <h3>💡 How Heap Sort Works:</h3>
+    <ol>
+      <li>Build a Max Heap from the input data</li>
+      <li>Swap the root (maximum) with the last item</li>
+      <li>Reduce heap size and heapify the root</li>
+      <li>Repeat until sorted</li>
+    </ol>
+
+    <h3>💻 Python Code for Heap Sort:</h3>
+    <pre><code class="language-python">
+def heapify(arr, n, i):
+    largest = i
+    left = 2*i + 1
+    right = 2*i + 2
+
+    if left &lt; n and arr[left] &gt; arr[largest]:
+        largest = left
+    if right &lt; n and arr[right] &gt; arr[largest]:
+        largest = right
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heap_sort(arr):
+    n = len(arr)
+    for i in range(n//2 - 1, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+arr = [12, 11, 13, 5, 6, 7]
+heap_sort(arr)
+print("Sorted array is", arr)
+    </code></pre>
+
+    <h3>💻 C++ Code for Heap Sort:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int left = 2*i + 1;
+    int right = 2*i + 2;
+
+    if (left &lt; n && arr[left] &gt; arr[largest])
+        largest = left;
+    if (right &lt; n && arr[right] &gt; arr[largest])
+        largest = right;
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(int arr[], int n) {
+    for (int i = n/2 - 1; i &gt;= 0; i--)
+        heapify(arr, n, i);
+    for (int i = n - 1; i &gt; 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    heapSort(arr, n);
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; n; ++i)
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>📌 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Time Complexity:</strong> O(n log n)</li>
+      <li><strong>Space Complexity:</strong> O(1)</li>
+      <li><strong>Stable:</strong> ❌ No</li>
+    </ul>
+
+    <h3>📚 Real-Life Use Cases:</h3>
+    <ul>
+      <li>Operating system schedulers</li>
+      <li>Priority queues</li>
+      <li>Load balancing and simulations</li>
+    </ul>
+  </article>
+
+  <section class="related-topics">
+    <h3>🔗 Related Topics</h3>
+    <ul>
+      <li><a href="programming-topic-57.html">Binary Heap</a></li>
+      <li><a href="programming-topic-59.html">Dijkstra's Algorithm</a></li>
+    </ul>
+  </section>
+
+  <section class="quiz-cta">
+    <h3>🧠 Take the DSA Challenge!</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Try Heap-Based Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Created with 💡 by Ankit Saini.</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
