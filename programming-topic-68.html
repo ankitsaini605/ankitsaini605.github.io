@@ -1,24 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #68</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to detect cycles in both directed and undirected graphs using DFS and Union-Find. Includes C++ and Python implementations." />
+  <meta name="keywords" content="Cycle Detection, Directed Graph, Undirected Graph, DFS, Union-Find, Disjoint Set, Graph Algorithms, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Cycle Detection in Graphs | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #68 – Loops & Conditions</h1></header>
-<main>
-  <h2>💡 C++ While Loop</h2>
-  <p><strong>Syntax:</strong></p>
-  <pre>
-int i = 1;
-while(i <= 5) {
-  cout << i << " ";
-  i++;
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <h1>🔄 Cycle Detection in Graphs</h1>
+  <p>Check for the presence of cycles in both Directed and Undirected Graphs using DFS and Union-Find.</p>
+</section>
+
+<main class="container">
+  <article>
+    <h2>📘 Cycle Detection in Undirected Graph using Union-Find (Disjoint Set)</h2>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+int find(int parent[], int i) {
+    if (parent[i] == -1)
+        return i;
+    return find(parent, parent[i]);
 }
-  </pre>
-  <p>Output: 1 2 3 4 5</p>
+
+void unionSet(int parent[], int x, int y) {
+    int xset = find(parent, x);
+    int yset = find(parent, y);
+    if (xset != yset)
+        parent[xset] = yset;
+}
+
+bool hasCycle(vector&lt;pair&lt;int, int&gt;&gt; edges, int V) {
+    int* parent = new int[V];
+    for (int i = 0; i &lt; V; ++i)
+        parent[i] = -1;
+
+    for (auto edge : edges) {
+        int x = find(parent, edge.first);
+        int y = find(parent, edge.second);
+        if (x == y)
+            return true;
+        unionSet(parent, x, y);
+    }
+    return false;
+}
+
+int main() {
+    int V = 4;
+    vector&lt;pair&lt;int, int&gt;&gt; edges = {{0, 1}, {1, 2}, {2, 3}, {3, 0}};
+    cout &lt;&lt; (hasCycle(edges, V) ? "Cycle Detected" : "No Cycle") &lt;&lt; endl;
+}
+    </code></pre>
+
+    <h2>📘 Cycle Detection in Directed Graph using DFS (Recursion Stack)</h2>
+    <pre><code class="language-python">
+def is_cyclic_util(v, visited, rec_stack, graph):
+    visited[v] = True
+    rec_stack[v] = True
+
+    for neighbour in graph[v]:
+        if not visited[neighbour]:
+            if is_cyclic_util(neighbour, visited, rec_stack, graph):
+                return True
+        elif rec_stack[neighbour]:
+            return True
+
+    rec_stack[v] = False
+    return False
+
+def is_cyclic(graph, V):
+    visited = [False] * V
+    rec_stack = [False] * V
+    for node in range(V):
+        if not visited[node]:
+            if is_cyclic_util(node, visited, rec_stack, graph):
+                return True
+    return False
+
+# Example usage
+graph = {0: [1], 1: [2], 2: [0]}
+print("Cycle Detected" if is_cyclic(graph, 3) else "No Cycle")
+    </code></pre>
+
+    <h3>📌 Real-World Applications:</h3>
+    <ul>
+      <li>Deadlock detection in Operating Systems</li>
+      <li>Checking for valid course scheduling</li>
+      <li>Detecting infinite loops in compilers</li>
+    </ul>
+
+    <h3>✅ Tips:</h3>
+    <ul>
+      <li>Use DFS + recursion stack for directed graphs</li>
+      <li>Use Union-Find for undirected graphs</li>
+    </ul>
+
+    <div class="quiz-cta">
+      <a href="c-quiz-1.html" class="btn-secondary">🧠 Practice Cycle Detection Quiz</a>
+    </div>
+  </article>
 </main>
-<footer>Code Smarter – Follow @eduignite_official</footer>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite | Designed by Ankit Saini | All Rights Reserved</p>
+  </div>
+</footer>
+
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </body>
 </html>
+
