@@ -1,19 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #49 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Radix Sort with full examples in Python and C++. Understand how it sorts integers using digit-based bucketing.">
+  <meta name="keywords" content="Radix Sort, Sorting Algorithms, Python, C++, DSA, EduIgnite">
+  <meta name="author" content="EduIgnite Team" />
+  <title>Radix Sort Algorithm | Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Concept #49</h1></header>
-<main>
-  <p>This topic explains file handling in C++. Use <code>fstream</code> to read/write files.</p>
-  <pre>
-#include &lt;fstream&gt;
-ifstream file("data.txt");
-  </pre>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Banner -->
+<section class="hero-banner">
+  <h1>🔢 Radix Sort Algorithm</h1>
+  <p>Digit-wise sorting approach for non-comparison-based sorting.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>📘 What is Radix Sort?</h2>
+    <p>
+      Radix Sort is a non-comparative sorting algorithm that processes integers digit by digit. It uses a stable intermediate sort (like Counting Sort) to sort numbers based on each digit, starting from the least significant digit (LSD).
+    </p>
+
+    <h3>✨ Features:</h3>
+    <ul>
+      <li>Stable sorting algorithm</li>
+      <li>Efficient for integers with small digit counts</li>
+      <li>Best suited for fixed-length numeric data</li>
+    </ul>
+
+    <h3>🐍 Python Example:</h3>
+    <pre><code class="language-python">
+def counting_sort_for_radix(arr, exp):
+    n = len(arr)
+    output = [0] * n
+    count = [0] * 10
+
+    for i in arr:
+        index = (i // exp) % 10
+        count[index] += 1
+
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+
+    i = n - 1
+    while i >= 0:
+        index = (arr[i] // exp) % 10
+        output[count[index] - 1] = arr[i]
+        count[index] -= 1
+        i -= 1
+
+    for i in range(n):
+        arr[i] = output[i]
+
+def radix_sort(arr):
+    max_num = max(arr)
+    exp = 1
+    while max_num // exp > 0:
+        counting_sort_for_radix(arr, exp)
+        exp *= 10
+
+arr = [170, 45, 75, 90, 802, 24, 2, 66]
+radix_sort(arr)
+print("Sorted:", arr)
+    </code></pre>
+
+    <h3>💻 C++ Example:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void countingSort(vector&lt;int&gt;& arr, int exp) {
+    vector&lt;int&gt; output(arr.size());
+    int count[10] = {0};
+
+    for (int i = 0; i &lt; arr.size(); i++)
+        count[(arr[i] / exp) % 10]++;
+
+    for (int i = 1; i &lt; 10; i++)
+        count[i] += count[i - 1];
+
+    for (int i = arr.size() - 1; i &gt;= 0; i--) {
+        int idx = (arr[i] / exp) % 10;
+        output[count[idx] - 1] = arr[i];
+        count[idx]--;
+    }
+
+    for (int i = 0; i &lt; arr.size(); i++)
+        arr[i] = output[i];
+}
+
+void radixSort(vector&lt;int&gt;& arr) {
+    int maxVal = *max_element(arr.begin(), arr.end());
+    for (int exp = 1; maxVal / exp &gt; 0; exp *= 10)
+        countingSort(arr, exp);
+}
+
+int main() {
+    vector&lt;int&gt; arr = {170, 45, 75, 90, 802, 24, 2, 66};
+    radixSort(arr);
+    cout &lt;&lt; "Sorted array: ";
+    for (int num : arr) cout &lt;&lt; num &lt;&lt; " ";
+    return 0;
+}
+    </code></pre>
+
+    <h3>🧠 Time & Space Complexity</h3>
+    <ul>
+      <li><strong>Time:</strong> O(nk) where n is the number of elements and k is the number of digits</li>
+      <li><strong>Space:</strong> O(n + k)</li>
+    </ul>
+
+    <h3>✅ Pros:</h3>
+    <ul>
+      <li>Efficient for sorting large number of small-digit integers</li>
+      <li>Faster than comparison-based algorithms in certain scenarios</li>
+    </ul>
+
+    <h3>⚠️ Cons:</h3>
+    <ul>
+      <li>Not suitable for floating-point numbers or strings without preprocessing</li>
+      <li>Uses additional memory for intermediate sorting</li>
+    </ul>
+
+  </article>
+
+  <!-- CTA Section -->
+  <section class="quiz-cta">
+    <h3>🧪 Ready to Test Your Skills?</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take the DSA Quiz</a>
+  </section>
+
+  <!-- Related Topics -->
+  <section class="related-topics">
+    <h3>📘 Related Algorithms</h3>
+    <ul>
+      <li><a href="programming-topic-48.html">Counting Sort</a></li>
+      <li><a href="programming-topic-50.html">Bucket Sort</a></li>
+      <li><a href="programming-topic-47.html">Heap Sort</a></li>
+    </ul>
+  </section>
 </main>
-<footer>Follow us: Insta @eduignite_in | Telegram t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Highlight Script -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
