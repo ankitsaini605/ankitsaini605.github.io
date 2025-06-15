@@ -1,16 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming #57 - EduIgnite</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Binary Heap in Data Structures with code examples in Python and C++. Understand heap types, operations, and applications." />
+  <meta name="keywords" content="Binary Heap, Min Heap, Max Heap, DSA, Python, C++, Priority Queue, EduIgnite" />
+  <meta name="author" content="EduIgnite Team" />
+  <title>Binary Heap | Min & Max Heap in DSA with Examples | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" />
 </head>
 <body>
-<header><h1>Programming Topic #57</h1></header>
-<main>
-  <h2>Pointer Concept in C++</h2>
-  <p>int a = 5;<br>int *ptr = &a;<br>cout &lt;&lt; *ptr; // prints 5</p>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">EduIgnite</a>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Programming</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero-banner">
+  <h1>🧮 Binary Heap in DSA</h1>
+  <p>Understand the working of Min Heap and Max Heap with practical code examples and use cases.</p>
+</section>
+
+<!-- Main Content -->
+<main class="container">
+  <article>
+    <h2>🔍 What is a Binary Heap?</h2>
+    <p>
+      A <strong>Binary Heap</strong> is a complete binary tree that satisfies the <strong>heap property</strong>:
+    </p>
+    <ul>
+      <li><strong>Min Heap:</strong> Parent node ≤ child nodes</li>
+      <li><strong>Max Heap:</strong> Parent node ≥ child nodes</li>
+    </ul>
+
+    <h3>🧰 Applications:</h3>
+    <ul>
+      <li>Implementing <strong>Priority Queues</strong></li>
+      <li><strong>Dijkstra’s Algorithm</strong></li>
+      <li><strong>Heap Sort</strong></li>
+      <li>Real-time scheduling systems</li>
+    </ul>
+
+    <h3>💻 Python Min Heap Example:</h3>
+    <pre><code class="language-python">
+import heapq
+
+min_heap = []
+heapq.heappush(min_heap, 10)
+heapq.heappush(min_heap, 5)
+heapq.heappush(min_heap, 20)
+
+print("Min element:", heapq.heappop(min_heap))
+    </code></pre>
+
+    <h3>💻 C++ Max Heap Example:</h3>
+    <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    priority_queue&lt;int&gt; maxHeap;
+
+    maxHeap.push(10);
+    maxHeap.push(30);
+    maxHeap.push(20);
+
+    cout &lt;&lt; "Max element: " &lt;&lt; maxHeap.top() &lt;&lt; endl;
+    return 0;
+}
+    </code></pre>
+
+    <h3>🛠️ Heap Operations & Time Complexities</h3>
+    <ul>
+      <li><strong>Insert:</strong> O(log n)</li>
+      <li><strong>Delete (Extract Root):</strong> O(log n)</li>
+      <li><strong>Peek:</strong> O(1)</li>
+    </ul>
+
+    <h3>🔄 Binary Heap vs Binary Tree:</h3>
+    <table>
+      <tr>
+        <th>Binary Heap</th>
+        <th>Binary Tree</th>
+      </tr>
+      <tr>
+        <td>Complete tree</td>
+        <td>Can be incomplete</td>
+      </tr>
+      <tr>
+        <td>Follows heap property</td>
+        <td>No such restriction</td>
+      </tr>
+    </table>
+
+  </article>
+
+  <!-- Related Section -->
+  <section class="related-topics">
+    <h3>📚 Explore More</h3>
+    <ul>
+      <li><a href="programming-topic-56.html">Priority Queue</a></li>
+      <li><a href="programming-topic-58.html">Heap Sort</a></li>
+      <li><a href="programming-topic-59.html">Dijkstra Algorithm</a></li>
+    </ul>
+  </section>
+
+  <!-- CTA -->
+  <section class="quiz-cta">
+    <h3>🧠 Ready to Test Yourself?</h3>
+    <a href="c-quiz-1.html" class="btn-secondary">Take DSA Quiz</a>
+  </section>
 </main>
-<footer>Instagram: @eduignite_in | Telegram: t.me/eduigniteofficial</footer>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 EduIgnite. Built with ❤️ by Ankit Saini.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 </body>
 </html>
+
