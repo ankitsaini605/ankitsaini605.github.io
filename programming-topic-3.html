@@ -1,16 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 3</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to reverse a number using Python and C++ with step-by-step explanation and examples.">
+  <meta name="keywords" content="Reverse Number, Python, C++, Programming Examples, EduIgnite">
+  <meta name="author" content="EduIgnite">
+  <title>Reverse a Number in Python and C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 3</h2>
-  <p>This page covers programming topic #3 with syntax, examples, and MCQs.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <h1>🔁 Reverse a Number</h1>
+    <p>Explore how to reverse a given number using both Python and C++ programming languages.</p>
+    <a href="#code-section" class="btn-primary">Jump to Code</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="code-section">
+    <article>
+      <h2>📘 Problem Statement:</h2>
+      <p>Given an integer, reverse the digits of the number.</p>
+      <p>Example: If input = 4567, Output = 7654</p>
+
+      <h3>✅ Python Code</h3>
+      <pre><code class="language-python">
+num = int(input("Enter a number: "))
+rev = 0
+
+while num > 0:
+    digit = num % 10
+    rev = rev * 10 + digit
+    num = num // 10
+
+print("Reversed Number is:", rev)
+      </code></pre>
+
+      <h3>⚙️ C++ Code</h3>
+      <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int num, rev = 0;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    while (num > 0) {
+        int digit = num % 10;
+        rev = rev * 10 + digit;
+        num /= 10;
+    }
+
+    cout << "Reversed Number is: " << rev << endl;
+    return 0;
+}
+      </code></pre>
+
+      <h3>💡 Tip:</h3>
+      <p>To reverse a number with negative sign, handle the sign separately or convert the number to string and use slicing in Python.</p>
+    </article>
+
+    <!-- CTA -->
+    <section class="quiz-cta">
+      <h3>🧠 Practice More?</h3>
+      <p>Test your understanding by attempting related quizzes and practice sets!</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Topics -->
+    <section class="related-topics">
+      <h3>🔗 Related Topics</h3>
+      <ul>
+        <li><a href="programming-topic-2.html">Check Prime Number</a></li>
+        <li><a href="programming-topic-4.html">Palindrome Number</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
