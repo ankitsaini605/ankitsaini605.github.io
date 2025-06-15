@@ -2,20 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Basic HTML Tags</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Complete guide to essential HTML tags with examples. Learn how to use headings, paragraphs, images, links, and more.">
+  <meta name="keywords" content="HTML, HTML Tags, Web Development, Learn HTML, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>HTML Tags - EduIgnite</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; line-height: 1.6; background: #f5f7fa; }
+    header, footer { background: #0a0a0a; color: white; padding: 15px; }
+    h1, h2, h3 { color: #00bfff; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    pre { background: #eee; padding: 15px; overflow-x: auto; border-left: 4px solid #00bfff; }
+    code { font-family: 'Courier New', monospace; }
+    nav a { margin-right: 10px; color: white; text-decoration: none; }
+  </style>
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>HTML Tags</h2>
-  <ul>
-    <li>&lt;h1&gt; to &lt;h6&gt; – Heading tags</li>
-    <li>&lt;p&gt; – Paragraph</li>
-    <li>&lt;a&gt; – Anchor link</li>
-    <li>&lt;img&gt; – Image embed</li>
-  </ul>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+<!-- Header -->
+<header>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div><a href="index.html" style="color: #00bfff; font-size: 24px; text-decoration: none;">EduIgnite</a></div>
+    <nav>
+      <a href="programming.html">Programming</a>
+      <a href="current-affairs.html">Current Affairs</a>
+      <a href="exam-tips.html">Exam Tips</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <h1>🔥 HTML Tags You Must Know</h1>
+  <p>HTML (HyperText Markup Language) uses tags to structure content on the web. Below are some of the most important tags explained with examples:</p>
+
+  <h2>1. Headings</h2>
+  <pre><code>&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;h2&gt;Subheading&lt;/h2&gt;</code></pre>
+
+  <h2>2. Paragraph</h2>
+  <pre><code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</code></pre>
+
+  <h2>3. Links</h2>
+  <pre><code>&lt;a href="https://www.eduignite.com"&gt;Visit EduIgnite&lt;/a&gt;</code></pre>
+
+  <h2>4. Images</h2>
+  <pre><code>&lt;img src="logo.png" alt="EduIgnite Logo"&gt;</code></pre>
+
+  <h2>5. Lists</h2>
+  <pre><code>&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+  <h2>6. Tables</h2>
+  <pre><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Ankit&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+  <h2>7. Forms</h2>
+  <pre><code>&lt;form action="/submit" method="post"&gt;
+  &lt;input type="text" name="username" placeholder="Enter Name"&gt;
+  &lt;input type="submit"&gt;
+&lt;/form&gt;</code></pre>
+
+  <h2>8. Semantic Tags</h2>
+  <pre><code>&lt;header&gt;, &lt;footer&gt;, &lt;section&gt;, &lt;article&gt;, &lt;nav&gt;, &lt;main&gt;</code></pre>
+
+  <h2>🔔 Pro Tip</h2>
+  <p>Use semantic tags for better accessibility and SEO!</p>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p style="text-align: center;">&copy; 2025 EduIgnite. All rights reserved. | <a href="contact.html" style="color: #00bfff;">Contact Us</a></p>
+</footer>
+
 </body>
 </html>
+
