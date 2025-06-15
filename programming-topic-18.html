@@ -1,16 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic 18</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn how to generate a Fibonacci Series using Python and C++. Step-by-step explanation, sample programs, and interactive quiz.">
+  <meta name="keywords" content="Fibonacci Series, Python, C++, Loops, Recursion, EduIgnite Programming">
+  <meta name="author" content="EduIgnite">
+  <title>Fibonacci Series in Python & C++ | EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
 </head>
 <body>
-<header><h1>EduIgnite</h1></header>
-<main>
-  <h2>Programming Topic 18</h2>
-  <p>This programming concept #18 explores logic, real-world usage, and examples for student practice.</p>
-</main>
-<footer>&copy; 2025 EduIgnite | Ankit Saini</footer>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">EduIgnite</a>
+      <nav>
+        <ul>
+          <li><a href="programming.html">Home</a></li>
+          <li><a href="python-syntax.html">Python</a></li>
+          <li><a href="cpp-basic.html">C++</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-banner">
+    <h1>🔢 Fibonacci Series</h1>
+    <p>Generate Fibonacci numbers in Python and C++ – for beginners to pros!</p>
+    <a href="#code-section" class="btn-primary">View Code</a>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" id="code-section">
+    <article>
+      <h2>📘 What is the Fibonacci Series?</h2>
+      <p>The <strong>Fibonacci Series</strong> is a series of numbers where each number is the sum of the two preceding ones.</p>
+      <p><strong>Sequence:</strong> 0, 1, 1, 2, 3, 5, 8, 13, 21, ...</p>
+
+      <h3>🧠 Python Code: Fibonacci Using Loop</h3>
+      <pre><code class="language-python">
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        print(a, end=" ")
+        a, b = b, a + b
+
+fibonacci(10)
+      </code></pre>
+
+      <h3>🔁 Python Code: Fibonacci Using Recursion</h3>
+      <pre><code class="language-python">
+def fib_recursive(n):
+    if n <= 1:
+        return n
+    return fib_recursive(n-1) + fib_recursive(n-2)
+
+for i in range(10):
+    print(fib_recursive(i), end=" ")
+      </code></pre>
+
+      <h3>🔷 C++ Code: Fibonacci Using Loop</h3>
+      <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+using namespace std;
+
+void fibonacci(int n) {
+    int a = 0, b = 1, c;
+    for (int i = 0; i < n; i++) {
+        cout << a << " ";
+        c = a + b;
+        a = b;
+        b = c;
+    }
+}
+
+int main() {
+    fibonacci(10);
+    return 0;
+}
+      </code></pre>
+
+      <h3>🧾 Explanation</h3>
+      <ul>
+        <li><strong>Loop Method:</strong> Efficient for generating series quickly.</li>
+        <li><strong>Recursion:</strong> Useful for understanding function calls, but slow for large <code>n</code>.</li>
+        <li>Both codes follow clean and readable structures, ideal for beginners.</li>
+      </ul>
+    </article>
+
+    <!-- Call to Action -->
+    <section class="quiz-cta">
+      <h3>🧪 Practice Time!</h3>
+      <p>Test your Fibonacci knowledge with our interactive quiz.</p>
+      <a href="c-quiz-1.html" class="btn-secondary">Start Quiz</a>
+    </section>
+
+    <!-- Related Lessons -->
+    <section class="related-topics">
+      <h3>🔗 Related Lessons</h3>
+      <ul>
+        <li><a href="programming-topic-17.html">Armstrong Number</a></li>
+        <li><a href="programming-topic-19.html">Prime Number</a></li>
+        <li><a href="programming-topic-20.html">Factorial Program</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 EduIgnite. All rights reserved.</p>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
+
