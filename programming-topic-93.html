@@ -1,39 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #93 – C++ OOP Basics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Master Backtracking in programming with practical examples and real-world applications.">
+  <meta name="keywords" content="Backtracking, Algorithms, Programming, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>Backtracking | Programming Topic 93 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Programming Topic #93 – C++ Classes & Objects</h1></header>
-<main>
-  <h2>📦 Class & Object</h2>
-  <pre>
-class Student {
-public:
-  string name;
-  int age;
-  void show() {
-    cout << name << " " << age;
+
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>🔍 Backtracking - The Art of Smart Searching</h1>
+
+    <p><strong>Backtracking</strong> is an algorithmic technique for solving problems recursively by trying to build a solution incrementally, one piece at a time, and removing those solutions that fail to satisfy the problem constraints at any point of time.</p>
+
+    <h2>📌 Key Principles of Backtracking</h2>
+    <ul>
+      <li>Explore all possibilities recursively.</li>
+      <li>Abandon paths that do not lead to a solution (pruning).</li>
+      <li>Used when brute force is too costly.</li>
+      <li>Follows the **Depth First Search (DFS)** pattern.</li>
+    </ul>
+
+    <h2>🔧 Structure of a Backtracking Algorithm</h2>
+    <pre><code>
+bool solve(problem_state) {
+  if (solution_found) return true;
+  for (each possibility) {
+    if (is_valid(possibility)) {
+      make_move(possibility);
+      if (solve(next_state)) return true;
+      undo_move(possibility);
+    }
   }
-};
-int main() {
-  Student s1;
-  s1.name = "Ankit";
-  s1.age = 22;
-  s1.show(); // Output: Ankit 22
-  return 0;
+  return false;
 }
-  </pre>
-  <h2>🔁 OOP Concepts</h2>
-  <ul>
-    <li>Encapsulation</li>
-    <li>Abstraction</li>
-    <li>Inheritance</li>
-    <li>Polymorphism</li>
-  </ul>
-</main>
-<footer>@eduignite_official – C++ Simplified</footer>
+    </code></pre>
+
+    <h2>📚 Famous Problems using Backtracking</h2>
+    <ol>
+      <li>N-Queens Problem 👑</li>
+      <li>Sudoku Solver 🔢</li>
+      <li>Maze Solving 🚪</li>
+      <li>Rat in a Maze 🐭</li>
+      <li>Word Search in a Matrix 🔤</li>
+      <li>Subset Sum & Permutations ➗</li>
+    </ol>
+
+    <h2>💡 Example: N-Queens in C++</h2>
+    <pre><code>
+bool isSafe(vector&lt;string&gt;& board, int row, int col, int n) {
+  // Check column and diagonals
+}
+void solve(int row, vector&lt;string&gt;& board, int n) {
+  if (row == n) {
+    print(board);
+    return;
+  }
+  for (int col = 0; col < n; col++) {
+    if (isSafe(board, row, col, n)) {
+      board[row][col] = 'Q';
+      solve(row + 1, board, n);
+      board[row][col] = '.';
+    }
+  }
+}
+    </code></pre>
+
+    <h2>📈 Real-World Applications</h2>
+    <ul>
+      <li>Game AI (chess, sudoku solvers)</li>
+      <li>Constraint Satisfaction Problems</li>
+      <li>Combinatorial Optimization</li>
+      <li>Decision making in robotics and AI</li>
+    </ul>
+
+    <h2>✅ Advantages</h2>
+    <ul>
+      <li>Elegant and simple implementation</li>
+      <li>Easy to debug and understand</li>
+      <li>Works for a wide range of problems</li>
+    </ul>
+
+    <h2>⚠️ Limitations</h2>
+    <ul>
+      <li>May explore too many branches (exponential complexity)</li>
+      <li>Needs smart pruning for efficiency</li>
+    </ul>
+
+    <div class="tips-box">
+      💡 <strong>Pro Tip:</strong> Always try to prune the recursion tree early. The sooner you detect invalid paths, the faster your algorithm runs!
+    </div>
+
+    <a href="programming-topic-94.html" class="btn">Next: Greedy Algorithms →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Empowering Coders Everywhere.</p>
+  </footer>
+
 </body>
 </html>
+
