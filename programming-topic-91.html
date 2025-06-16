@@ -1,40 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #91 – Functions, Loops, Arrays</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Divide and Conquer Algorithms with examples and implementation.">
+  <meta name="keywords" content="Divide and Conquer, Merge Sort, Quick Sort, Algorithms, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>Divide and Conquer Algorithms | Programming Topic 91 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>C++ Essentials – Functions, Loops, Arrays</h1></header>
-<main>
-  <h2>🧩 Functions</h2>
-  <pre>
-int add(int a, int b) {
-  return a + b;
-}
-int main() {
-  cout << add(5, 3); // Output: 8
-}
-  </pre>
 
-  <h2>🔁 Loops (for)</h2>
-  <pre>
-for(int i = 1; i <= 5; i++) {
-  cout << i << " ";
-}
-// Output: 1 2 3 4 5
-  </pre>
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <h2>📊 Arrays</h2>
-  <pre>
-int arr[3] = {10, 20, 30};
-for(int i = 0; i < 3; i++) {
-  cout << arr[i] << " ";
+  <main class="container">
+    <h1>⚡ Divide and Conquer Algorithms</h1>
+    <p><strong>Divide and Conquer</strong> is a powerful algorithmic technique used to solve problems by breaking them into smaller subproblems, solving them independently, and then combining the results.</p>
+
+    <h2>Steps Involved:</h2>
+    <ol>
+      <li><strong>Divide</strong>: Break the problem into smaller subproblems.</li>
+      <li><strong>Conquer</strong>: Solve each subproblem recursively.</li>
+      <li><strong>Combine</strong>: Merge the results to solve the main problem.</li>
+    </ol>
+
+    <h2>🌟 Famous Divide and Conquer Algorithms</h2>
+    <ul>
+      <li>Merge Sort</li>
+      <li>Quick Sort</li>
+      <li>Binary Search</li>
+      <li>Closest Pair of Points</li>
+      <li>Matrix Multiplication (Strassen’s Algorithm)</li>
+    </ul>
+
+    <h2>🔥 Example: Merge Sort</h2>
+    <pre><code>
+void merge(int arr[], int l, int m, int r) {
+  int n1 = m - l + 1;
+  int n2 = r - m;
+  int L[n1], R[n2];
+
+  for (int i = 0; i < n1; i++) L[i] = arr[l + i];
+  for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+
+  int i = 0, j = 0, k = l;
+  while (i < n1 && j < n2) {
+    arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
+  }
+
+  while (i < n1) arr[k++] = L[i++];
+  while (j < n2) arr[k++] = R[j++];
 }
-// Output: 10 20 30
-  </pre>
-</main>
-<footer>Insta: @eduignite_official | Telegram: t.me/eduigniteofficial</footer>
+
+void mergeSort(int arr[], int l, int r) {
+  if (l < r) {
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
+  }
+}
+    </code></pre>
+
+    <h2>🔎 Binary Search Example</h2>
+    <pre><code>
+int binarySearch(int arr[], int l, int r, int x) {
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    if (arr[m] == x) return m;
+    else if (arr[m] < x) l = m + 1;
+    else r = m - 1;
+  }
+  return -1;
+}
+    </code></pre>
+
+    <h2>Advantages</h2>
+    <ul>
+      <li>Reduces time complexity (e.g., O(n log n))</li>
+      <li>Efficient for large datasets</li>
+      <li>Ideal for parallel computation</li>
+    </ul>
+
+    <h2>Real-life Applications</h2>
+    <ul>
+      <li>Search engines (Binary Search)</li>
+      <li>Databases (Sorting large data)</li>
+      <li>Computational geometry</li>
+    </ul>
+
+    <a href="programming-topic-92.html" class="btn">Next: Dynamic Programming →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Master Algorithms with Confidence.</p>
+  </footer>
+
 </body>
 </html>
+
