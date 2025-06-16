@@ -1,39 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #96 – C++ OOP Basics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn Backtracking Algorithm in depth with real-life examples, C++ code, and use cases.">
+  <meta name="keywords" content="Backtracking, Programming, Algorithms, N-Queens, EduIgnite, Optimization">
+  <meta name="author" content="EduIgnite Team">
+  <title>Backtracking Algorithm | Programming Topic 96 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Programming Topic #96 – C++ Classes & Objects</h1></header>
-<main>
-  <h2>📦 Class & Object</h2>
-  <pre>
-class Student {
-public:
-  string name;
-  int age;
-  void show() {
-    cout << name << " " << age;
-  }
-};
-int main() {
-  Student s1;
-  s1.name = "Ankit";
-  s1.age = 22;
-  s1.show(); // Output: Ankit 22
-  return 0;
+
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>🔄 Backtracking Algorithm</h1>
+
+    <p><strong>Backtracking</strong> is a general algorithmic technique that considers searching every possible combination to solve a problem and eliminates options that don’t satisfy the problem constraints.</p>
+
+    <h2>🧠 Concept</h2>
+    <p>Backtracking builds the solution incrementally and abandons a solution (backtracks) as soon as it determines that the current path cannot lead to a valid solution.</p>
+
+    <h2>🎯 Common Backtracking Problems</h2>
+    <ul>
+      <li>N-Queens Problem</li>
+      <li>Sudoku Solver</li>
+      <li>Rat in a Maze</li>
+      <li>Word Search</li>
+      <li>Subset Sum</li>
+      <li>Graph Coloring</li>
+    </ul>
+
+    <h2>🧪 Example: N-Queens Problem (C++)</h2>
+    <pre><code>
+bool isSafe(int board[10][10], int row, int col, int n) {
+    for(int i=0; i<row; i++) {
+        if(board[i][col] == 1) return false;
+        if(col - (row - i) >= 0 && board[i][col - (row - i)] == 1) return false;
+        if(col + (row - i) < n && board[i][col + (row - i)] == 1) return false;
+    }
+    return true;
 }
-  </pre>
-  <h2>🔁 OOP Concepts</h2>
-  <ul>
-    <li>Encapsulation</li>
-    <li>Abstraction</li>
-    <li>Inheritance</li>
-    <li>Polymorphism</li>
-  </ul>
-</main>
-<footer>@eduignite_official – C++ Simplified</footer>
+bool solveNQueen(int board[10][10], int row, int n) {
+    if(row == n) return true;
+    for(int col=0; col<n; col++) {
+        if(isSafe(board, row, col, n)) {
+            board[row][col] = 1;
+            if(solveNQueen(board, row+1, n)) return true;
+            board[row][col] = 0;
+        }
+    }
+    return false;
+}
+    </code></pre>
+
+    <h2>📌 Key Points</h2>
+    <ul>
+      <li>Backtracking is often implemented via recursion.</li>
+      <li>It works well when the number of possible solutions is manageable.</li>
+      <li>It avoids brute-force by pruning invalid solutions early.</li>
+    </ul>
+
+    <h2>💻 Real-World Applications</h2>
+    <ul>
+      <li>Solving puzzles like Sudoku or crosswords</li>
+      <li>AI pathfinding and decision trees</li>
+      <li>Compilers for parsing</li>
+      <li>Automated planning and scheduling systems</li>
+    </ul>
+
+    <div class="tips-box">
+      💡 <strong>Pro Tip:</strong> Combine backtracking with heuristics like forward checking or MRV (minimum remaining value) for smarter search.
+    </div>
+
+    <a href="programming-topic-97.html" class="btn">Next: Greedy Algorithm →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Learn Smart. Code Smart.</p>
+  </footer>
+
 </body>
 </html>
+
