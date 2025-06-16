@@ -1,39 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #94 – C++ OOP Basics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Understand Greedy Algorithms with examples, advantages, and applications in computer science.">
+  <meta name="keywords" content="Greedy Algorithms, Programming, EduIgnite, Algorithm Design">
+  <meta name="author" content="EduIgnite Team">
+  <title>Greedy Algorithms | Programming Topic 94 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Programming Topic #94 – C++ Classes & Objects</h1></header>
-<main>
-  <h2>📦 Class & Object</h2>
-  <pre>
-class Student {
-public:
-  string name;
-  int age;
-  void show() {
-    cout << name << " " << age;
-  }
-};
-int main() {
-  Student s1;
-  s1.name = "Ankit";
-  s1.age = 22;
-  s1.show(); // Output: Ankit 22
-  return 0;
+
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>💡 Greedy Algorithm - Making Locally Optimal Choices</h1>
+
+    <p><strong>Greedy algorithms</strong> build up a solution piece by piece, always choosing the next piece that offers the most immediate benefit (locally optimal), without worrying about future consequences.</p>
+
+    <h2>🧠 Concept Behind Greedy</h2>
+    <ul>
+      <li>At each step, pick the best option currently available.</li>
+      <li>Never backtrack or revise previous decisions.</li>
+      <li>Works well for problems with <strong>greedy-choice property</strong> and <strong>optimal substructure</strong>.</li>
+    </ul>
+
+    <h2>🔧 Structure of a Greedy Algorithm</h2>
+    <pre><code>
+1. Sort the input based on a specific strategy.
+2. Initialize result = 0 or empty set.
+3. Iterate through elements:
+    - Pick the best local option.
+    - If feasible, include it in the solution.
+4. Return the result.
+    </code></pre>
+
+    <h2>✅ Common Greedy Problems</h2>
+    <ol>
+      <li>Fractional Knapsack</li>
+      <li>Activity Selection Problem</li>
+      <li>Huffman Coding</li>
+      <li>Job Sequencing with Deadlines</li>
+      <li>Minimum Spanning Tree (Prim’s & Kruskal’s)</li>
+      <li>Dijkstra’s Algorithm for Shortest Path</li>
+    </ol>
+
+    <h2>📘 Example: Activity Selection Problem in C++</h2>
+    <pre><code>
+bool activityCompare(Activity a1, Activity a2) {
+    return (a1.finish < a2.finish);
 }
-  </pre>
-  <h2>🔁 OOP Concepts</h2>
-  <ul>
-    <li>Encapsulation</li>
-    <li>Abstraction</li>
-    <li>Inheritance</li>
-    <li>Polymorphism</li>
-  </ul>
-</main>
-<footer>@eduignite_official – C++ Simplified</footer>
+void selectActivities(vector&lt;Activity&gt; activities) {
+    sort(activities.begin(), activities.end(), activityCompare);
+    cout << "Selected Activities: ";
+    int lastFinish = activities[0].finish;
+    cout << "(" << activities[0].start << "," << activities[0].finish << ")";
+    for (int i = 1; i < activities.size(); i++) {
+        if (activities[i].start >= lastFinish) {
+            cout << ", (" << activities[i].start << "," << activities[i].finish << ")";
+            lastFinish = activities[i].finish;
+        }
+    }
+}
+    </code></pre>
+
+    <h2>🏆 Advantages</h2>
+    <ul>
+      <li>Simple and fast implementation</li>
+      <li>Efficient for certain problem types</li>
+      <li>Often optimal for real-time systems</li>
+    </ul>
+
+    <h2>⚠️ Limitations</h2>
+    <ul>
+      <li>Does not always guarantee the global optimum</li>
+      <li>Fails for problems requiring future foresight (like 0/1 Knapsack)</li>
+    </ul>
+
+    <h2>🌍 Real-World Applications</h2>
+    <ul>
+      <li>Network routing algorithms</li>
+      <li>Resource allocation in operating systems</li>
+      <li>Scheduling systems (airlines, sports, events)</li>
+      <li>Data compression (Huffman coding)</li>
+    </ul>
+
+    <div class="tips-box">
+      💡 <strong>Pro Tip:</strong> Before choosing greedy, check if your problem has the **greedy-choice property** and **optimal substructure**.
+    </div>
+
+    <a href="programming-topic-95.html" class="btn">Next: Dynamic Programming →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Empowering Coders Everywhere.</p>
+  </footer>
+
 </body>
 </html>
+
