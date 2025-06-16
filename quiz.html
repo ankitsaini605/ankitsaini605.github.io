@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz with Google Sheet</title>
+  <script>
+    function submitQuiz() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const selected = document.querySelector('input[name="q1"]:checked');
+      const score = selected && selected.value === "b" ? 1 : 0;
+
+      fetch("YOUR_GOOGLE_SCRIPT_URL", {
+        method: "POST",
+        body: JSON.stringify({ name, email, score }),
+        headers: { "Content-Type": "application/json" }
+      }).then(res => {
+        document.getElementById("result").innerText = "Quiz submitted successfully! 🎉";
+      });
+    }
+  </script>
+</head>
+<body>
+  <h2>MCQ Quiz</h2>
+  <input id="name" type="text" placeholder="Your Name"><br>
+  <input id="email" type="email" placeholder="Your Email"><br><br>
+  <p>1. What is 2 + 2?</p>
+  <input type="radio" name="q1" value="a"> 3<br>
+  <input type="radio" name="q1" value="b"> 4<br>
+  <input type="radio" name="q1" value="c"> 5<br><br>
+  <button onclick="submitQuiz()">Submit</button>
+  <p id="result"></p>
+</body>
+</html>
