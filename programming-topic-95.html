@@ -1,39 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #95 – C++ OOP Basics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Understand Dynamic Programming in depth with examples, applications, and key techniques.">
+  <meta name="keywords" content="Dynamic Programming, DP, Programming, EduIgnite, Optimization, Algorithms">
+  <meta name="author" content="EduIgnite Team">
+  <title>Dynamic Programming | Programming Topic 95 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Programming Topic #95 – C++ Classes & Objects</h1></header>
-<main>
-  <h2>📦 Class & Object</h2>
-  <pre>
-class Student {
-public:
-  string name;
-  int age;
-  void show() {
-    cout << name << " " << age;
-  }
-};
-int main() {
-  Student s1;
-  s1.name = "Ankit";
-  s1.age = 22;
-  s1.show(); // Output: Ankit 22
-  return 0;
+
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>🔁 Dynamic Programming (DP)</h1>
+
+    <p><strong>Dynamic Programming (DP)</strong> is an optimization technique used to solve complex problems by breaking them into smaller subproblems, solving each subproblem only once, and storing its result for future use (memoization or tabulation).</p>
+
+    <h2>🔍 Why DP?</h2>
+    <ul>
+      <li>Overcomes **overlapping subproblems** issue seen in recursion.</li>
+      <li>Improves efficiency by **avoiding repeated computation**.</li>
+      <li>Uses either **top-down (memoization)** or **bottom-up (tabulation)** approach.</li>
+    </ul>
+
+    <h2>📘 Classic DP Problems</h2>
+    <ol>
+      <li>Fibonacci Series (Optimized)</li>
+      <li>0/1 Knapsack Problem</li>
+      <li>Longest Common Subsequence (LCS)</li>
+      <li>Edit Distance</li>
+      <li>Matrix Chain Multiplication</li>
+      <li>Coin Change Problem</li>
+    </ol>
+
+    <h2>🧪 Example: Fibonacci with Memoization (C++)</h2>
+    <pre><code>
+int fib(int n, vector&lt;int&gt; &dp) {
+    if(n <= 1) return n;
+    if(dp[n] != -1) return dp[n];
+    return dp[n] = fib(n-1, dp) + fib(n-2, dp);
 }
-  </pre>
-  <h2>🔁 OOP Concepts</h2>
-  <ul>
-    <li>Encapsulation</li>
-    <li>Abstraction</li>
-    <li>Inheritance</li>
-    <li>Polymorphism</li>
-  </ul>
-</main>
-<footer>@eduignite_official – C++ Simplified</footer>
+int main() {
+    int n = 10;
+    vector&lt;int&gt; dp(n+1, -1);
+    cout << fib(n, dp);
+}
+    </code></pre>
+
+    <h2>📊 Memoization vs Tabulation</h2>
+    <table border="1" cellpadding="8">
+      <tr>
+        <th>Memoization</th>
+        <th>Tabulation</th>
+      </tr>
+      <tr>
+        <td>Top-down approach</td>
+        <td>Bottom-up approach</td>
+      </tr>
+      <tr>
+        <td>Uses recursion + caching</td>
+        <td>Uses loops to build solution</td>
+      </tr>
+      <tr>
+        <td>Easier to write, but can use more stack space</td>
+        <td>Faster in space-critical scenarios</td>
+      </tr>
+    </table>
+
+    <h2>🏆 Benefits</h2>
+    <ul>
+      <li>Improves efficiency from exponential to polynomial</li>
+      <li>Ensures optimal substructure is fully utilized</li>
+      <li>Handles wide range of optimization problems</li>
+    </ul>
+
+    <h2>🌐 Real-World Use Cases</h2>
+    <ul>
+      <li>Spell checkers (Edit Distance)</li>
+      <li>Data compression algorithms</li>
+      <li>Bioinformatics (DNA sequence alignment)</li>
+      <li>Stock market prediction models</li>
+      <li>AI planning and games (minimax with memoization)</li>
+    </ul>
+
+    <div class="tips-box">
+      💡 <strong>Tip:</strong> Identify overlapping subproblems and optimal substructure to apply DP correctly.
+    </div>
+
+    <a href="programming-topic-96.html" class="btn">Next: Backtracking →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Learn Smart. Code Smart.</p>
+  </footer>
+
 </body>
 </html>
+
