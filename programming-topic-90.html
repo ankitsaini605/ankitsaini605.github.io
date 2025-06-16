@@ -1,25 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Programming Topic #90</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Understand Backtracking Algorithms with examples, code snippets, and problems like N-Queens and Sudoku.">
+  <meta name="keywords" content="Backtracking, N-Queens, Sudoku Solver, Recursion, Programming, EduIgnite">
+  <meta name="author" content="EduIgnite Team">
+  <title>Backtracking Algorithms | Programming Topic 90 - EduIgnite</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header><h1>Programming Topic #90 – Functions</h1></header>
-<main>
-  <p><strong>Example:</strong> User-defined C++ Function</p>
-  <pre>
-int add(int a, int b) {
-  return a + b;
+
+  <header>
+    <div class="logo"><a href="index.html">EduIgnite</a></div>
+    <nav>
+      <ul>
+        <li><a href="programming.html">Home</a></li>
+        <li><a href="cpp-basic.html">C++</a></li>
+        <li><a href="python-syntax.html">Python</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>🧠 Backtracking Algorithms</h1>
+    <p>Backtracking is a general algorithmic technique that tries out all possible solutions and abandons a path as soon as it determines that the path cannot lead to a valid solution.</p>
+
+    <h2>How it Works:</h2>
+    <ol>
+      <li>Choose - Make a choice</li>
+      <li>Explore - Move forward with the choice</li>
+      <li>Unchoose - If it leads to failure, undo and try another option</li>
+    </ol>
+
+    <h2>Popular Backtracking Problems:</h2>
+    <ul>
+      <li>N-Queens Problem</li>
+      <li>Sudoku Solver</li>
+      <li>Rat in a Maze</li>
+      <li>Permutations & Combinations</li>
+      <li>Word Search in Matrix</li>
+    </ul>
+
+    <h2>🔥 Example: Solving N-Queens Problem</h2>
+    <pre><code>
+bool isSafe(vector&lt;string&gt; &board, int row, int col, int n) {
+  for (int i = 0; i &lt; row; i++) {
+    if (board[i][col] == 'Q') return false;
+    if (col - (row - i) &gt;= 0 && board[i][col - (row - i)] == 'Q') return false;
+    if (col + (row - i) &lt; n && board[i][col + (row - i)] == 'Q') return false;
+  }
+  return true;
 }
 
-int main() {
-  cout << add(5, 3); // Output: 8
-  return 0;
+void solve(int row, int n, vector&lt;string&gt;& board, vector&lt;vector&lt;string&gt;&gt;& ans) {
+  if (row == n) {
+    ans.push_back(board);
+    return;
+  }
+
+  for (int col = 0; col &lt; n; col++) {
+    if (isSafe(board, row, col, n)) {
+      board[row][col] = 'Q';
+      solve(row + 1, n, board, ans);
+      board[row][col] = '.'; // Backtrack
+    }
+  }
 }
-  </pre>
-</main>
-<footer>Learn Daily – @eduignite_official</footer>
+    </code></pre>
+
+    <h2>Real-life Application</h2>
+    <p>Backtracking is widely used in game-solving, puzzle generation, configuration problems, and even AI logic-based systems.</p>
+
+    <h2>Tips for Backtracking</h2>
+    <ul>
+      <li>Use recursion smartly</li>
+      <li>Always backtrack after a recursive call</li>
+      <li>Use pruning techniques (like forward checking)</li>
+    </ul>
+
+    <a href="programming-topic-91.html" class="btn">Next: Divide & Conquer →</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EduIgnite | Unlocking Logic Through Code.</p>
+  </footer>
+
 </body>
 </html>
+
