@@ -84,8 +84,26 @@
 </div>
 
 <footer>
-  <p>&copy; 2025 EduIgnite. All rights reserved. Crafted with ❤️ by Team EduIgnite.</p>
+  <p>&copy; 2025 EduIgnite. All rights reserved. Crafted with ❤️ by Ankit Saini.</p>
 </footer>
+<section id="quiz-section">
+  <h2>Aptitude Quiz: What’s 7 × 8?</h2>
+  <form id="quizForm">
+    <label><input type="radio" name="q1" value="54"> 54</label><br>
+    <label><input type="radio" name="q1" value="56"> 56</label><br>
+    <label><input type="radio" name="q1" value="60"> 60</label><br>
+    <button type="submit">Check Answer</button>
+  </form>
+  <p id="quizResult"></p>
+</section>
+
+<script>
+document.getElementById("quizForm").onsubmit = e => {
+  e.preventDefault();
+  const ans = document.querySelector('input[name="q1"]:checked').value;
+  document.getElementById("quizResult").textContent = ans === "56" ? "✅ Correct!" : "❌ Try again.";
+};
+</script>
 
 </body>
 </html>
