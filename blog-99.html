@@ -109,6 +109,23 @@
   <footer>
     <p>&copy; 2025 EduIgnite. All rights reserved. | Developed by Ankit Saini</p>
   </footer>
+<section id="comments">
+  <h2>Leave a Comment</h2>
+  <textarea id="commentText" rows="3" placeholder="Write your comment..."></textarea><br>
+  <button onclick="postComment()">Post</button>
+  <div id="commentList"></div>
+</section>
+
+<script>
+function postComment() {
+  const c = document.getElementById('commentText').value.trim();
+  if (!c) return alert('Please write something!');
+  const p = document.createElement('p');
+  p.textContent = c;
+  document.getElementById('commentList').appendChild(p);
+  document.getElementById('commentText').value = '';
+}
+</script>
 
 </body>
 </html>
