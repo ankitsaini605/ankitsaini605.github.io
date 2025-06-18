@@ -1722,3 +1722,18 @@ body.dark-mode footer {
 .sidebar-social {
   margin-top: 30px;
 }
+/* ✅ Responsive Navigation */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+nav li {
+  flex: 1;
+  margin: 5px;
+}
+button, input, textarea {
+  font-size: 1rem;
+  padding: 10px;
+  width: 100%;
+}
