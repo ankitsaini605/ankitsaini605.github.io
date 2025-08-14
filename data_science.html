@@ -1,0 +1,519 @@
+<!-- File: datascience.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduIgnite • Data Science & Analytics Lab (Python in Browser)</title>
+
+  <!-- Primary SEO -->
+  <meta name="title" content="EduIgnite • Data Science & Analytics Lab (Python in Browser)" />
+  <meta name="description" content="Run Python (pandas, numpy) in your browser with Pyodide. Upload CSV, do EDA, visualize, and try a quick ML regression demo. Built for recruiters: see real skills live." />
+  <link rel="canonical" href="https://ankitsaini605.github.io/datascience.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="EduIgnite" />
+  <meta property="og:title" content="EduIgnite • Data Science & Analytics Lab" />
+  <meta property="og:description" content="Interactive DS playground: EDA, charts, and ML demos in your browser." />
+  <meta property="og:url" content="https://ankitsaini605.github.io/datascience.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EduIgnite • Data Science & Analytics Lab" />
+  <meta name="twitter:description" content="Interactive DS playground: EDA, charts, and ML demos in your browser." />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"EduIgnite • Data Science & Analytics Lab",
+    "about":["Data Science","Python","pandas","EDA","Visualization","Machine Learning"],
+    "author":{"@type":"Person","name":"Ankit Saini"},
+    "publisher":{"@type":"Organization","name":"EduIgnite"},
+    "inLanguage":"en",
+    "datePublished":"2025-01-01"
+  }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="study-plan.jpg">
+
+  <!-- Chart.js for quick charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+
+  <!-- Pyodide: Python in browser -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#0f1530;
+      --brand:#6cf;
+      --accent:#9dff57;
+      --text:#e8eefc;
+      --muted:#9fb3d9;
+      --card:#121a3a;
+      --border:#223058;
+      --bad:#ff6b6b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,Arial,sans-serif}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header.hero{
+      padding:56px 20px 24px;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(108,255,255,0.12), transparent 70%),
+                  radial-gradient(900px 500px at 10% -10%, rgba(157,255,87,0.10), transparent 60%);
+      border-bottom:1px solid var(--border);
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .hero h1{font-weight:800;letter-spacing:-0.02em;margin:0 0 8px;font-size: clamp(28px, 5vw, 44px)}
+    .hero p{margin:0;color:var(--muted);max-width:900px}
+    .cta-row{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:linear-gradient(180deg,#121a3a,#0f1530);color:var(--text);cursor:pointer}
+    .btn.primary{border-color:transparent;background:linear-gradient(180deg,#3aa2ff,#0077ff)}
+    .btn:hover{filter:brightness(1.05)}
+    .grid{display:grid;gap:16px}
+    .features{grid-template-columns: repeat(12,1fr);margin-top:24px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .span-6{grid-column: span 6}
+    .span-4{grid-column: span 4}
+    .span-8{grid-column: span 8}
+    .span-12{grid-column: span 12}
+    @media (max-width:900px){.span-6,.span-4,.span-8,.span-12{grid-column:1/-1}}
+    h2{margin:0 0 12px;font-size:22px}
+    h3{margin:16px 0 10px;font-size:18px}
+    label{font-size:13px;color:var(--muted)}
+    input[type="file"],input[type="text"],textarea,select{
+      width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#0b1330;color:var(--text)
+    }
+    textarea{min-height:140px;resize:vertical}
+    .kbd{font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#a7c7ff;background:#0b1330;border:1px solid var(--border);padding:2px 6px;border-radius:6px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+    .status{font-size:12px;color:var(--muted)}
+    .mono{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;background:#0a1226;border:1px dashed var(--border);padding:10px;border-radius:10px}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:900px){.two-col{grid-template-columns:1fr}}
+    footer{
+      margin-top:40px;border-top:1px solid var(--border);background:#0a1226
+    }
+    .footer-inner{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:20px 0;flex-wrap:wrap}
+    .social a{margin-right:10px}
+    .chip{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .ok{color:var(--accent)}
+    .bad{color:var(--bad)}
+    .muted{color:var(--muted)}
+    .hint{font-size:12px;color:var(--muted);margin-top:6px}
+    .table-wrap{overflow:auto;border:1px solid var(--border);border-radius:10px}
+    table{border-collapse:collapse;width:100%;min-width:640px}
+    th,td{border-bottom:1px solid var(--border);padding:8px 10px;text-align:left}
+    th{color:#bcd2ff;background:#0e1734;position:sticky;top:0}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#0e2148;color:#9ed0ff;border:1px solid #1c3c78}
+    .srch{display:flex;gap:8px}
+    .srch button{min-width:44px}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="chip">EduIgnite • Data Science & Analytics</div>
+      <h1>Interactive DS Lab — <span class="ok">Python runs in your browser</span></h1>
+      <p>
+        Upload a CSV, run pandas/NumPy with Pyodide, get instant EDA, charts, and a
+        quick ML regression demo. Built to showcase real, hands-on skills for recruiters.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#playground">Open Playground</a>
+        <a class="btn" href="index.html">← Back to Home</a>
+        <a class="btn" href="mailto:ankitsaini24082002@gmail.com">Hire Me</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Search (with basic voice support via Web Speech API) -->
+    <section class="card span-12" id="search">
+      <h2>Global Search (with Voice)</h2>
+      <div class="srch">
+        <input id="q" type="text" placeholder="Search topics: pandas, regression, visualization..." />
+        <button class="btn" id="voiceBtn" title="Voice Search 🎤">🎤</button>
+        <button class="btn" onclick="doSearch()">Search</button>
+      </div>
+      <div id="searchResults" class="hint">Tip: try “correlation”, “linear regression”, “time series”.</div>
+    </section>
+
+    <!-- Playground -->
+    <section class="grid features" id="playground" aria-label="Interactive Python Playground">
+      <div class="card span-8">
+        <h2>Python Playground (Pyodide)</h2>
+        <div class="toolbar">
+          <button class="btn" onclick="loadSnippet('eda')">Load EDA Snippet</button>
+          <button class="btn" onclick="loadSnippet('corr')">Correlation Matrix</button>
+          <button class="btn" onclick="loadSnippet('linreg')">Linear Regression</button>
+          <button class="btn" onclick="loadSnippet('clean')">Missing-Values Clean</button>
+          <button class="btn" onclick="runPython()">▶ Run (<span class="kbd">Shift+Enter</span>)</button>
+        </div>
+        <label for="code">Python Code</label>
+        <textarea id="code" spellcheck="false"></textarea>
+        <div class="hint">
+          This runs client-side using <b>Pyodide</b>. You can use <code>import pandas as pd</code>, <code>import numpy as np</code>.
+        </div>
+        <h3>Output</h3>
+        <pre id="pyOut" class="mono" aria-live="polite">Loading Python runtime…</pre>
+        <div class="status" id="status">Status: <span class="bad">Python not ready</span></div>
+      </div>
+
+      <div class="card span-4">
+        <h2>Dataset Panel</h2>
+        <label for="uploader">Upload CSV</label>
+        <input id="uploader" type="file" accept=".csv,text/csv" />
+        <div class="hint">Uploaded file becomes available at Python path <code>/uploads/data.csv</code></div>
+
+        <h3>Quick Stats</h3>
+        <div id="quickStats" class="mono">No file yet.</div>
+
+        <h3>Chart (Preview)</h3>
+        <canvas id="quickChart" height="220"></canvas>
+      </div>
+
+      <div class="card span-12">
+        <h2>Auto EDA (1-click)</h2>
+        <div class="toolbar">
+          <button class="btn primary" onclick="autoEDA()">Run Auto-EDA on Uploaded CSV</button>
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>Head (top rows)</h3>
+            <div class="table-wrap"><table id="tblHead"></table></div>
+            <h3>Describe (summary)</h3>
+            <div class="table-wrap"><table id="tblDesc"></table></div>
+          </div>
+          <div>
+            <h3>Missing Values</h3>
+            <div class="table-wrap"><table id="tblMissing"></table></div>
+            <h3>Correlation (|r| ≥ 0.5)</h3>
+            <div class="table-wrap"><table id="tblCorr"></table></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio highlights -->
+    <section class="card span-12">
+      <h2>Portfolio Highlights</h2>
+      <p class="muted">Handpicked projects that match real DS job expectations.</p>
+      <ul>
+        <li><span class="pill">EDA</span> Retail Sales Insights — cohort analysis, seasonality, promo lift.</li>
+        <li><span class="pill">Forecasting</span> ARIMA/Prophet-style weekly demand prediction (demo logic included).</li>
+        <li><span class="pill">ML</span> Linear & Logistic Regression baselines with cross-validation.</li>
+        <li><span class="pill">Dashboards</span> KPI drill-downs and anomaly flags (chart previews above).</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>&copy; 2025 <strong>EduIgnite</strong> — Data Science & Analytics by Ankit Saini</div>
+      <div class="social">
+        <a href="https://t.me/eduigniteofficial" target="_blank" rel="noopener">Telegram: @eduigniteofficial</a>
+        <a href="https://instagram.com/eduignite_official" target="_blank" rel="noopener">Instagram: @eduignite_official</a>
+        <a href="mailto:ankitsaini24082002@gmail.com">ankitsaini24082002@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ------------------------
+    // Voice Search (Web Speech)
+    // ------------------------
+    const voiceBtn = document.getElementById('voiceBtn');
+    let recognition;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SR();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      voiceBtn.addEventListener('click', () => {
+        recognition.start();
+        voiceBtn.textContent = '🎤…';
+      });
+      recognition.onresult = (e) => {
+        document.getElementById('q').value = e.results[0][0].transcript;
+        voiceBtn.textContent = '🎤';
+        doSearch();
+      };
+      recognition.onend = () => voiceBtn.textContent = '🎤';
+    } else {
+      voiceBtn.disabled = true;
+      voiceBtn.title = 'Voice not supported';
+    }
+
+    function doSearch(){
+      const q = document.getElementById('q').value.toLowerCase();
+      const box = document.getElementById('searchResults');
+      if(!q){ box.textContent = 'Type topic keywords above.'; return; }
+      const map = {
+        'pandas':'Use Auto-EDA or load EDA snippet to run pandas.',
+        'regression':'Load the Linear Regression snippet, then Run.',
+        'visualization':'Use quick chart preview or write matplotlib-style code (text output).',
+        'correlation':'Load Correlation snippet then Run.',
+        'time series':'Try seasonal decomposition idea in code editor.',
+        'cleaning':'Use Missing-Values Clean snippet or Auto-EDA.'
+      };
+      box.innerHTML = '<b>Suggestion:</b> ' + (map[q] || 'Try EDA / corr / regression snippets, or upload your CSV.');
+    }
+
+    // ------------------------
+    // Pyodide boot
+    // ------------------------
+    let pyodideReady = false;
+    let pyodide;
+    const statusEl = document.getElementById('status');
+    const outEl = document.getElementById('pyOut');
+
+    (async () => {
+      outEl.textContent = 'Downloading Pyodide… (first load may take ~10–20s on slow networks)';
+      pyodide = await loadPyodide({ stdout: s => appendOut(s), stderr: s => appendOut(s) });
+      await pyodide.loadPackage(['micropip','numpy','pandas']); // prebundled in full build
+      pyodide.FS.mkdir('/uploads');
+      pyodideReady = true;
+      statusEl.innerHTML = 'Status: <span class="ok">Python ready</span>';
+      appendOut('Pyodide ready. import pandas as pd, import numpy as np');
+      // Prefill editor
+      loadSnippet('eda');
+    })();
+
+    function appendOut(s){
+      outEl.textContent += (s.endsWith('\n')? s : s + '\n');
+      outEl.scrollTop = outEl.scrollHeight;
+    }
+
+    async function runPython(){
+      if(!pyodideReady){ appendOut('Python not ready yet.'); return; }
+      const code = document.getElementById('code').value;
+      try{
+        outEl.textContent = '';
+        const result = await pyodide.runPythonAsync(code);
+        if(result !== undefined) appendOut(String(result));
+      }catch(err){
+        appendOut('⚠ ' + err);
+      }
+    }
+
+    // keyboard shortcut
+    document.addEventListener('keydown', e=>{
+      if(e.key === 'Enter' && e.shiftKey){ e.preventDefault(); runPython(); }
+    });
+
+    // ------------------------
+    // Snippets
+    // ------------------------
+    const SNIPPETS = {
+      eda: `# --- EDA Starter ---
+import pandas as pd, numpy as np, io, os
+path = '/uploads/data.csv'
+if os.path.exists(path):
+    df = pd.read_csv(path)
+else:
+    csv = '''date,visitors,orders,revenue
+2025-01-01,1200,64,19400
+2025-01-02,980,50,16100
+2025-01-03,1430,72,22650
+2025-01-04,1110,58,17820
+2025-01-05,1660,90,29500
+'''
+    df = pd.read_csv(io.StringIO(csv))
+print('Shape:', df.shape)
+print('\\nColumns:', df.columns.tolist())
+print('\\nHead:\\n', df.head())
+print('\\nDescribe:\\n', df.describe(include='all', datetime_is_numeric=True))
+print('\\nMissing values per column:\\n', df.isna().sum())
+`,
+      corr: `# --- Correlation Matrix ---
+import pandas as pd, numpy as np, os
+path = '/uploads/data.csv'
+df = pd.read_csv(path) if os.path.exists(path) else pd.DataFrame({
+    'x':[1,2,3,4,5,6,7,8],
+    'y':[1.2,2.1,2.9,4.2,5.1,5.8,7.2,7.9],
+    'z':[7,6,7,3,2,5,8,1]
+})
+corr = df.select_dtypes('number').corr().round(3)
+print(corr)
+# Export to JS (for Chart/Heatmap later if needed)
+`,
+      linreg: `# --- Linear Regression (numpy) ---
+# Goal: predict y from x using closed-form solution
+import pandas as pd, numpy as np, os, io
+path = '/uploads/data.csv'
+if os.path.exists(path):
+    df = pd.read_csv(path)
+    # pick first 2 numeric columns as (x,y)
+    num = df.select_dtypes('number')
+    if num.shape[1] < 2:
+        raise ValueError("Need at least 2 numeric columns.")
+    X = num.iloc[:,0].to_numpy()
+    y = num.iloc[:,1].to_numpy()
+else:
+    X = np.array([1,2,3,4,5,6,7,8,9])
+    y = np.array([3,4,2,5,6,7,8,9,10])
+
+# normalize
+Xn = (X - X.mean())/X.std()
+X_design = np.c_[np.ones_like(Xn), Xn]  # add bias
+# theta = (X^T X)^-1 X^T y
+theta = np.linalg.inv(X_design.T @ X_design) @ (X_design.T @ y)
+b, w = theta
+pred = b + w*Xn
+
+from math import sqrt
+rmse = sqrt(np.mean((y - pred)**2))
+print(f"Model: y = {b:.3f} + {w:.3f} * x_norm")
+print(f"RMSE: {rmse:.3f}")
+print("First 5 predictions:", pred[:5])
+`,
+      clean: `# --- Missing-Values Cleaner ---
+import pandas as pd, numpy as np, os
+path = '/uploads/data.csv'
+if not os.path.exists(path):
+    raise FileNotFoundError("Upload a CSV first.")
+df = pd.read_csv(path)
+before = df.isna().sum()
+# Simple strategy: numeric -> median, categorical -> mode
+for c in df.columns:
+    if df[c].dtype.kind in 'biufc':
+        df[c] = df[c].fillna(df[c].median())
+    else:
+        df[c] = df[c].fillna(df[c].mode().iloc[0] if not df[c].mode().empty else '')
+after = df.isna().sum()
+df.to_csv('/uploads/data_clean.csv', index=False)
+print("Saved cleaned -> /uploads/data_clean.csv")
+print("\\nMissing values before:\\n", before)
+print("\\nMissing values after:\\n", after)
+`
+    };
+    function loadSnippet(key){
+      document.getElementById('code').value = SNIPPETS[key] || '# snippet not found';
+    }
+
+    // ------------------------
+    // File upload + quick stats + chart
+    // ------------------------
+    const uploader = document.getElementById('uploader');
+    const quickStats = document.getElementById('quickStats');
+    const chartCtx = document.getElementById('quickChart');
+    let chart;
+
+    uploader.addEventListener('change', async (e)=>{
+      const file = e.target.files?.[0];
+      if(!file){return;}
+      const text = await file.text();
+      // write to Pyodide FS
+      if(!pyodideReady){quickStats.textContent='Wait: Python not ready'; return;}
+      pyodide.FS.writeFile('/uploads/data.csv', text);
+      quickStats.textContent = Uploaded: ${file.name} (${(file.size/1024).toFixed(1)} KB)\nPath: /uploads/data.csv;
+
+      // quick JS-based preview: pick first two numeric columns
+      const lines = text.split(/\r?\n/).filter(Boolean);
+      const headers = lines[0].split(',');
+      const rows = lines.slice(1).map(r => r.split(',').map(v => +v || NaN));
+      // find two most numeric columns
+      const numericIdx = [];
+      for (let i=0;i<headers.length;i++){
+        let nums = 0;
+        for (let r=0;r<Math.min(rows.length,50);r++){
+          if (!Number.isNaN(rows[r][i])) nums++;
+        }
+        if (nums>=Math.min(rows.length,10)) numericIdx.push(i);
+        if (numericIdx.length===2) break;
+      }
+      if(numericIdx.length<2){ return; }
+      const [ix, iy] = numericIdx;
+      const xs = rows.map(r=>r[ix]).filter(v=>!Number.isNaN(v)).slice(0,100);
+      const ys = rows.map(r=>r[iy]).filter(v=>!Number.isNaN(v)).slice(0,100);
+
+      if(chart) chart.destroy();
+      chart = new Chart(chartCtx, {
+        type: 'line',
+        data: {
+          labels: xs.map((_,i)=>i+1),
+          datasets: [{label: ${headers[iy]} (preview), data: ys }]
+        },
+        options: {responsive:true, plugins:{legend:{display:true}}, scales:{x:{title:{display:true,text:'Index'}},y:{title:{display:true,text:headers[iy]}}}}
+      });
+    });
+
+    // ------------------------
+    // Auto EDA (uses Python, returns HTML tables)
+    // ------------------------
+    async function autoEDA(){
+      if(!pyodideReady){ alert('Python not ready yet'); return; }
+      try{
+        const head = await pyodide.runPythonAsync(`
+import pandas as pd, os
+p = '/uploads/data.csv'
+df = pd.read_csv(p) if os.path.exists(p) else pd.DataFrame()
+df.head(10).to_html(classes=['table','striped'], border=0)
+        `);
+        fillTableHTML('tblHead', head);
+
+        const desc = await pyodide.runPythonAsync(`
+import pandas as pd, os
+p = '/uploads/data.csv'
+df = pd.read_csv(p) if os.path.exists(p) else pd.DataFrame()
+df.describe(include='all', datetime_is_numeric=True).to_html(classes=['table'], border=0)
+        `);
+        fillTableHTML('tblDesc', desc);
+
+        const missing = await pyodide.runPythonAsync(`
+import pandas as pd, os
+p = '/uploads/data.csv'
+df = pd.read_csv(p) if os.path.exists(p) else pd.DataFrame()
+df.isna().sum().to_frame('missing').reset_index(names='column').to_html(classes=['table'], index=False, border=0)
+        `);
+        fillTableHTML('tblMissing', missing);
+
+        const corr = await pyodide.runPythonAsync(`
+import pandas as pd, numpy as np, os
+p = '/uploads/data.csv'
+df = pd.read_csv(p) if os.path.exists(p) else pd.DataFrame()
+num = df.select_dtypes('number')
+c = num.corr().abs()
+pairs = []
+for i in range(len(c.columns)):
+    for j in range(i+1,len(c.columns)):
+        if c.iloc[i,j] >= 0.5 and c.iloc[i,j] < 1:
+            pairs.append((c.columns[i], c.columns[j], round(float(c.iloc[i,j]),3)))
+pd.DataFrame(pairs, columns=['feature_1','feature_2','|r|']).to_html(classes=['table'], index=False, border=0)
+        `);
+        fillTableHTML('tblCorr', corr);
+      } catch (e){
+        console.error(e);
+        alert('Auto-EDA failed. Make sure a valid CSV is uploaded.');
+      }
+    }
+
+    function fillTableHTML(id, html){
+      const tbl = document.getElementById(id);
+      tbl.innerHTML = '';
+      // extract table rows from returned html
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      const t = temp.querySelector('table');
+      if(!t){ tbl.innerHTML = '<tr><td>No data.</td></tr>'; return; }
+      // move head
+      const thead = t.querySelector('thead');
+      const tbody = t.querySelector('tbody');
+      const out = document.createElement('table');
+      if(thead) out.appendChild(thead.cloneNode(true));
+      if(tbody) out.appendChild(tbody.cloneNode(true));
+      tbl.replaceWith(out);
+      out.id = id;
+      out.className = 'table';
+    }
+  </script>
+</body>
+</html>
