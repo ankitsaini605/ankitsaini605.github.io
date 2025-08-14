@@ -1,143 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ✅ SEO & Google Ranking Boost -->
-<title>EduIgnite | Learn Programming & Aptitude</title>
-<meta name="description" content="Free tutorials on programming, aptitude, current affairs & more for students and job aspirants.">
-<meta name="keywords" content="Programming, Aptitude, Coding, Current Affairs, EduIgnite, Free learning" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- ✅ For social media sharing -->
-<meta property="og:title" content="EduIgnite – Learn Smart. Rise Faster." />
-<meta property="og:description" content="Master coding & aptitude for free. Build your career today!" />
-<meta property="og:image" content="https://ankitsaini605.github.io/assets/cover.jpg" />
-<meta property="og:url" content="https://ankitsaini605.github.io/" />
-<meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us - Eduignite</title>
-  <meta name="description" content="Get in touch with Eduignite for queries, feedback, or collaboration.">
-  <meta name="keywords" content="Eduignite Contact, Eduignite Help, Eduignite Support">
-  <meta name="author" content="Ankit Saini - Eduignite">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="favicon.ico" />
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111111" />
+  <meta name="description" content="Get in touch. Sign in for a faster, personalized experience." />
+  <title>Contact — Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      padding: 20px;
+    :root{
+      --bg:#0d0f12; --card:#141821; --muted:#8a93a6; --text:#eef2ff; --accent:#6ea8fe; --accent-2:#5eead4;
+      --border:#242a36; --danger:#ff6b6b; --success:#22c55e; --warn:#fbbf24;
+      --radius:12px; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    h1, h2 {
-      text-align: center;
-      color: #003366;
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    a{color:var(--accent);text-decoration:none}
+    .container{width:min(1200px,92%);margin-inline:auto}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;background:#1b2230;color:var(--text);border:1px solid var(--border);padding:.8rem 1.1rem;border-radius:10px;cursor:pointer;transition:.2s}
+    .btn:hover{transform:translateY(-1px);border-color:#2e3545}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),#3b82f6);border-color:#3b82f6}
+    .btn-ghost{background:transparent}
+    .btn-danger{background:#2a1b1d;border-color:#3a2225}
+    .badge{display:inline-flex;gap:.4rem;align-items:center;color:#cbd5e1;background:#101521;border:1px solid var(--border);padding:.25rem .6rem;border-radius:999px;font-size:.8rem}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:1.2rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    header.nav{position:sticky;top:0;z-index:50;background:rgba(13,15,18,.65);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+    .brand{display:flex;align-items:center;gap:.7rem;font-weight:700}
+    .brand-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    .nav-links{display:flex;gap:1rem;align-items:center}
+    .nav-links a{color:var(--muted)}
+    .hero{padding:3.5rem 0 2rem 0}
+    .hero h1{font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 .6rem}
+    .hero p{margin:0;color:var(--muted)}
+    .two-col{grid-template-columns:1.1fr .9fr}
+    @media (max-width:900px){.two-col{grid-template-columns:1fr}}
+    .form{display:grid;gap:1rem}
+    .field{position:relative}
+    .label{display:block;margin-bottom:.35rem;color:#c7d2fe;font-size:.9rem}
+    .input,.textarea,select{
+      width:100%;background:#0f1218;border:1px solid var(--border);color:var(--text);
+      padding:.9rem 1rem;border-radius:10px;outline:none;transition:border .2s
     }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    form button {
-      background: #003366;
-      color: #fff;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .info-box {
-      background: #eef;
-      padding: 15px;
-      margin-top: 20px;
-      border-left: 5px solid #003366;
-    }
-    .map-container {
-      margin-top: 30px;
-      height: 300px;
-    }
-    .social-links a {
-      margin: 0 10px;
-      text-decoration: none;
-      font-size: 20px;
-      color: #003366;
-    }
-    .faq {
-      margin-top: 30px;
-    }
-    .faq h3 {
-      margin-bottom: 10px;
-    }
-    .success-message {
-      color: green;
-      font-weight: bold;
-    }
+    .input:focus,.textarea:focus,select:focus{border-color:#3b82f6}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media (max-width:640px){.row{grid-template-columns:1fr}}
+    .help{font-size:.8rem;color:var(--muted);margin-top:.35rem}
+    .error{color:var(--danger);font-size:.85rem;margin-top:.35rem;display:none}
+    .show{display:block}
+    .small{font-size:.85rem}
+    .contact-card{padding:1.2rem}
+    .info-item{display:flex;gap:.8rem;align-items:flex-start;padding:.8rem;border:1px dashed var(--border);border-radius:10px}
+    .map{height:280px;border:0;width:100%;border-radius:10px;filter:grayscale(.2) saturate(.9) contrast(1.05)}
+    .faq details{background:#0f1218;border:1px solid var(--border);border-radius:10px;padding:1rem}
+    .faq summary{cursor:pointer;font-weight:600}
+    footer{margin-top:2.5rem;padding:1.2rem 0;border-top:1px solid var(--border);color:var(--muted)}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:100}
+    .modal{width:min(520px,92%);padding:1.2rem}
+    .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+    .close{background:transparent;border:0;color:var(--muted);font-size:1.5rem;cursor:pointer}
+    .auth-actions{display:grid;gap:.6rem;margin:.6rem 0}
+    .divider{display:flex;align-items:center;gap:.8rem;color:var(--muted);font-size:.85rem}
+    .divider:before,.divider:after{content:"";height:1px;background:var(--border);flex:1}
+    .avatar{width:32px;height:32px;border-radius:50%;background:#1f2937;display:grid;place-items:center;font-size:.9rem;border:1px solid var(--border)}
+    .user-chip{display:flex;align-items:center;gap:.6rem;background:#0f1218;border:1px solid var(--border);padding:.4rem .6rem;border-radius:999px}
+    /* Toasts */
+    .toasts{position:fixed;right:16px;bottom:16px;display:grid;gap:.6rem;z-index:120}
+    .toast{min-width:260px;max-width:360px;background:#0f1218;border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;border-radius:10px;box-shadow:var(--shadow);display:flex;gap:.6rem;align-items:flex-start}
+    .toast.success{border-color:#1f8f4a}
+    .toast.error{border-color:#6b1f1f}
+    .toast.warn{border-color:#8a6a1f}
+    /* Loading */
+    .loading{opacity:.7;pointer-events:none}
+    .spinner{width:16px;height:16px;border:2px solid #2b3345;border-top-color:#7aa2ff;border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    /* Utility */
+    .flex{display:flex;gap:.6rem;align-items:center}
+    .space{flex:1}
+    .mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}.mt-4{margin-top:1.25rem}
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>📞 Contact Eduignite</h1>
-    <p style="text-align:center;">We'd love to hear from you! Fill the form below or reach out directly.</p>
 
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="email" id="email" placeholder="Your Email" required />
-      <textarea id="message" placeholder="Your Message..." rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-      <p class="success-message" id="successMsg" style="display:none;">✅ Thank you! We'll get back to you soon.</p>
-    </form>
-
-    <div class="info-box">
-  <h2>📌 Official Info</h2>
-  <p><strong>Name:</strong> Ankit Saini</p>
-  <p><strong>Email:</strong> <a href="mailto:ankitsaini24082002@gmail.com">Contact via Email</a></p>
-  <p><strong>Phone:</strong> <em>Available upon request</em></p>
-  <p><strong>Address:</strong> <em>Hidden for privacy reasons</em></p>
-  <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ankit-saini-512a252b6" target="_blank">Click here</a></p>
-</div>
-
-      <div class="map-container">
-      <iframe src="https://maps.google.com/maps?q=Manpur%20Narayanpur%20Moradabad&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-        width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+  <!-- Nav -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <a href="/" aria-label="Home">NovaLabs</a>
+        <span class="badge"><span>●</span> Pro</span>
+      </div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/about.html">About</a>
+        <button id="open-auth" class="btn btn-ghost small" aria-haspopup="dialog">Sign in</button>
+        <div id="user-chip" class="user-chip" style="display:none">
+          <div id="avatar" class="avatar">U</div>
+          <span id="chip-email" class="small muted">user@site.com</span>
+          <button id="logout" class="btn small btn-danger">Logout</button>
+        </div>
+      </nav>
     </div>
+  </header>
 
-    <div class="faq">
-      <h2>📖 FAQs</h2>
-      <h3>Q. How quickly do you respond to messages?</h3>
-      <p>A. Usually within 24–48 hours.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container grid two-col">
+      <div>
+        <h1>Let’s build something impactful</h1>
+        <p>Sign in for instant autofill and faster replies. We respond within 24 hours.</p>
+        <div class="flex mt-3">
+          <span class="badge"><strong>SLA:</strong> <span>24h</span></span>
+          <span class="badge"><strong>Hours:</strong> <span>Mon–Sat</span></span>
+          <span class="badge"><strong>Location:</strong> <span>UP, India</span></span>
+        </div>
+      </div>
+      <div class="card contact-card">
+        <form id="contact-form" class="form" novalidate>
+          <div class="row">
+            <div class="field">
+              <label class="label" for="name">Full name</label>
+              <input class="input" id="name" name="name" type="text" autocomplete="name" placeholder="e.g., Ankit Yadav" required />
+              <div class="error" id="err-name">Name is required.</div>
+            </div>
+            <div class="field">
+              <label class="label" for="email">Email</label>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+              <div class="error" id="err-email">Valid email required.</div>
+            </div>
+          </div>
 
-      <h3>Q. Can I collaborate with Eduignite?</h3>
-      <p>A. Yes! We welcome partnerships and collaborations. Just message us.</p>
+          <div class="row">
+            <div class="field">
+              <label class="label" for="phone">Phone</label>
+              <input class="input" id="phone" name="phone" type="tel" inputmode="tel" placeholder="+91 98xxxxxxx" />
+              <div class="help">Optional. Include country code.</div>
+            </div>
+            <div class="field">
+              <label class="label" for="subject">Subject</label>
+              <input class="input" id="subject" name="subject" type="text" placeholder="Project inquiry, Support, etc." required />
+              <div class="error" id="err-subject">Subject is required.</div>
+            </div>
+          </div>
 
-      <h3>Q. Where is Eduignite based?</h3>
-      <p>A. Currently operating from Moradabad, UP, India.</p>
+          <div class="field">
+            <label class="label" for="message">Message</label>
+            <textarea class="textarea" id="message" name="message" rows="6" placeholder="Tell us about your goal, timeline, and budget." required></textarea>
+            <div class="error" id="err-message">Message should be at least 20 characters.</div>
+          </div>
+
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="company" id="company" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
+
+          <div class="flex">
+            <label class="small flex"><input type="checkbox" id="consent" required style="margin-right:.5rem"> I agree to be contacted about my request.</label>
+            <div class="space"></div>
+            <button id="submit-btn" type="submit" class="btn btn-primary">
+              <span class="btn-text">Send message</span>
+              <span class="spinner" style="display:none"></span>
+            </button>
+          </div>
+          <p class="help">We’ll never share your details. You can request deletion anytime.</p>
+        </form>
+      </div>
     </div>
+  </section>
 
-    <h2>🔗 Connect with us</h2>
-    <div class="social-links" style="text-align:center;">
-      <a href="https://www.instagram.com/eduignite_official" target="_blank">📷 Instagram</a>
-      <a href="https://t.me/eduignite_official" target="_blank">📢 Telegram</a>
-      <a href="mailto:ankitsaini24082002@gmail.com">📧 Email</a>
+  <!-- Highlights -->
+  <section class="container grid" style="margin-top:1rem">
+    <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:1rem">
+      <div class="card contact-card">
+        <div class="info-item">
+          <div>📧</div>
+          <div>
+            <strong>Email</strong>
+            <div class="muted small">hello@novalabs.dev</div>
+          </div>
+        </div>
+      </div>
+      <div class="card contact-card">
+        <div class="info-item">
+          <div>📞</div>
+          <div>
+            <strong>Phone</strong>
+            <div class="muted small">+91 98XX‑XXXXXX</div>
+          </div>
+        </div>
+      </div>
+      <div class="card contact-card">
+        <div class="info-item">
+          <div>📍</div>
+          <div>
+            <strong>Location</strong>
+            <div class="muted small">Dadri, Uttar Pradesh</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map + FAQ -->
+  <section class="container grid two-col" style="margin-top:1rem">
+    <div class="card contact-card">
+      <iframe class="map" title="Map" loading="lazy"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.281!2d77.55!3d28.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1">
+      </iframe>
+      <p class="help mt-2">Approximate location for reference.</p>
+    </div>
+    <div class="grid faq">
+      <details open>
+        <summary>Do I need an account to contact you?</summary>
+        <p class="muted mt-1">No, but signing in autofills your details and speeds up follow‑ups.</p>
+      </details>
+      <details>
+        <summary>What happens after I submit?</summary>
+        <p class="muted mt-1">You’ll get a confirmation email and we’ll reply within 24 hours with next steps.</p>
+      </details>
+      <details>
+        <summary>Can I attach files?</summary>
+        <p class="muted mt-1">Yes, via follow‑up link we share. Attachments are scanned for safety.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container flex">
+      <div>© <span id="year"></span> NovaLabs</div>
+      <div class="space"></div>
+      <div class="small">Privacy • Terms</div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal card">
+      <div class="modal-header">
+        <div>
+          <div class="badge">Secure sign in</div>
+          <h3 id="auth-title" style="margin:.4rem 0 0">Welcome back</h3>
+          <p class="muted small">Use Google or your email.</p>
+        </div>
+        <button id="close-auth" class="close" aria-label="Close">×</button>
+      </div>
+      <div class="auth-actions">
+        <button id="google-btn" class="btn btn-primary">Continue with Google</button>
+        <div class="divider">or</div>
+        <input class="input" id="auth-email" type="email" placeholder="you@example.com" autocomplete="email">
+        <input class="input" id="auth-pass" type="password" placeholder="Password" autocomplete="current-password">
+        <div class="flex">
+          <button id="email-signin" class="btn">Sign in</button>
+          <button id="email-signup" class="btn">Create account</button>
+          <div class="space"></div>
+          <button id="reset-pass" class="btn btn-ghost small">Forgot?</button>
+        </div>
+      </div>
+      <p class="help">By continuing, you agree to our terms and acknowledge the privacy policy.</p>
     </div>
   </div>
 
-  <!-- JS -->
+  <!-- Toasts -->
+  <div id="toasts" class="toasts" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <!-- App Script -->
   <script>
-    document.getElementById("contactForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      document.getElementById("successMsg").style.display = "block";
-      setTimeout(() => {
-        document.getElementById("contactForm").reset();
-        document.getElementById("successMsg").style.display = "none";
-      }, 5000);
+    // --- Replace with your Firebase project configuration ---
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // --- Helpers ---
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const toasts = $("#toasts");
+    const toast = (msg, type="success") => {
+      const el = document.createElement("div");
+      el.className = `toast ${type}`;
+      el.innerHTML = `<div>🔔</div><div>${msg}</div>`;
+      toasts.appendChild(el);
+      setTimeout(()=>{ el.remove(); }, 4000);
+    };
+    const setLoading = (btn, state) => {
+      const spinner = btn.querySelector(".spinner");
+      const text = btn.querySelector(".btn-text");
+      if(state){ btn.classList.add("loading"); spinner.style.display="inline-block"; text.style.display="none"; }
+      else { btn.classList.remove("loading"); spinner.style.display="none"; text.style.display="inline"; }
+    };
+
+    // --- Year ---
+    $("#year").textContent = new Date().getFullYear();
+
+    // --- Modal controls ---
+    const authModal = $("#auth-modal");
+    $("#open-auth").addEventListener("click", ()=> authModal.style.display="flex");
+    $("#close-auth").addEventListener("click", ()=> authModal.style.display="none");
+    authModal.addEventListener("click", (e)=>{ if(e.target === authModal) authModal.style.display="none"; });
+
+    // --- Auth actions ---
+    $("#google-btn").addEventListener("click", async ()=>{
+      try{
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await auth.signInWithPopup(provider);
+        toast("Signed in with Google");
+        authModal.style.display="none";
+      }catch(e){ toast(e.message, "error"); }
     });
+
+    $("#email-signin").addEventListener("click", async ()=>{
+      const email = $("#auth-email").value.trim();
+      const pass = $("#auth-pass").value;
+      if(!email || !pass) return toast("Email and password required", "warn");
+      try{
+        await auth.signInWithEmailAndPassword(email, pass);
+        toast("Welcome back");
+        authModal.style.display="none";
+      }catch(e){ toast(e.message, "error"); }
+    });
+
+    $("#email-signup").addEventListener("click", async ()=>{
+      const email = $("#auth-email").value.trim();
+      const pass = $("#auth-pass").value;
+      if(!email || pass.length < 6) return toast("Use a valid email and 6+ char password", "warn");
+      try{
+        await auth.createUserWithEmailAndPassword(email, pass);
+        toast("Account created");
+        authModal.style.display="none";
+      }catch(e){ toast(e.message, "error"); }
+    });
+
+    $("#reset-pass").addEventListener("click", async ()=>{
+      const email = $("#auth-email").value.trim();
+      if(!email) return toast("Enter email to reset password", "warn");
+      try{
+        await auth.sendPasswordResetEmail(email);
+        toast("Password reset link sent");
+      }catch(e){ toast(e.message, "error"); }
+    });
+
+    // --- Auth state UI sync ---
+    const userChip = $("#user-chip");
+    const chipEmail = $("#chip-email");
+    const avatar = $("#avatar");
+    const openAuthBtn = $("#open-auth");
+    $("#logout").addEventListener("click", ()=> auth.signOut().then(()=> toast("Logged out")));
+
+    auth.onAuthStateChanged(user=>{
+      if(user){
+        openAuthBtn.style.display="none";
+        userChip.style.display="flex";
+        chipEmail.textContent = user.email || "Account";
+        const name = user.displayName || (user.email ? user.email.split("@")[0] : "U");
+        avatar.textContent = (name || "U").slice(0,1).toUpperCase();
+        // Autofill contact form
+        $("#name").value = user.displayName || "";
+        $("#email").value = user.email || "";
+      } else {
+        userChip.style.display="none";
+        openAuthBtn.style.display="inline-flex";
+      }
+    });
+
+    // --- Form validation ---
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const minMsgLen = 20;
+
+    const showErr = (id, show) => {
+      const el = $("#"+id);
+      if(!el) return;
+      if(show) el.classList.add("show"); else el.classList.remove("show");
+    };
+
+    const validate = () => {
+      const name = $("#name").value.trim();
+      const email = $("#email").value.trim();
+      const subject = $("#subject").value.trim();
+      const message = $("#message").value.trim();
+      let ok = true;
+      showErr("err-name", !name); ok = ok && !!name;
+      showErr("err-email", !emailRegex.test(email)); ok = ok && emailRegex.test(email);
+      showErr("err-subject", !subject); ok = ok && !!subject;
+      showErr("err-message", message.length < minMsgLen); ok = ok && message.length >= minMsgLen;
+      const consent = $("#consent").checked; ok = ok && consent;
+      return ok;
+    };
+
+    // --- Submit handler ---
+    const form = $("#contact-form");
+    const submitBtn = $("#submit-btn");
+
+    form.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      if($("#company").value) { // Honeypot
+        return;
+      }
+      if(!validate()){
+        toast("Please fix highlighted fields", "warn");
+        return;
+      }
+
+      setLoading(submitBtn, true);
+      const payload = {
+        name: $("#name").value.trim(),
+        email: $("#email").value.trim(),
+        phone: $("#phone").value.trim(),
+        subject: $("#subject").value.trim(),
+        message: $("#message").value.trim(),
+        // Optional: attach uid if logged in
+        uid: auth.currentUser ? auth.currentUser.uid : null,
+        ts: new Date().toISOString()
+      };
+
+      try{
+        // Replace with your backend endpoint or Formspree/Supabase Edge Function
+        const ENDPOINT = "https://your-api.example.com/contact";
+        const res = await fetch(ENDPOINT, {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify(payload)
+        });
+        if(!res.ok) throw new Error("Failed to send message");
+        toast("Message sent successfully");
+        form.reset();
+      }catch(err){
+        toast(err.message || "Something went wrong", "error");
+      }finally{
+        setLoading(submitBtn, false);
+      }
+    });
+
+    // --- Optional: reCAPTCHA v3/hCaptcha integration (placeholder) ---
+    // Load the script and call token provider before fetch, then include token in payload.
+    // Example:
+    // const token = await grecaptcha.execute('SITE_KEY', {action: 'submit'});
+    // payload.recaptchaToken = token;
+
   </script>
 </body>
 </html>
+
