@@ -1,126 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ✅ SEO & Google Ranking Boost -->
-<title>EduIgnite | Learn Programming & Aptitude</title>
-<meta name="description" content="Free tutorials on programming, aptitude, current affairs & more for students and job aspirants.">
-<meta name="keywords" content="Programming, Aptitude, Coding, Current Affairs, EduIgnite, Free learning" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- ✅ For social media sharing -->
-<meta property="og:title" content="EduIgnite – Learn Smart. Rise Faster." />
-<meta property="og:description" content="Master coding & aptitude for free. Build your career today!" />
-<meta property="og:image" content="https://ankitsaini605.github.io/assets/cover.jpg" />
-<meta property="og:url" content="https://ankitsaini605.github.io/" />
-<link rel="stylesheet" href="style.css" />
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; }
-    header, footer { background: #141414; color: white; padding: 20px; }
-    nav a { color: #00bfff; margin-right: 15px; text-decoration: none; font-weight: bold; }
-    .hero { text-align: center; padding: 80px 20px; background: linear-gradient(to right, #0072ff, #00c6ff); color: white; }
-    .hero h1 { font-size: 3em; margin-bottom: 10px; }
-    .hero p { font-size: 1.2em; }
-    .btn { background-color: white; color: #0072ff; padding: 12px 25px; font-size: 16px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
-    .container { max-width: 1100px; margin: auto; padding: 30px 20px; }
-    .section { margin-bottom: 50px; }
-    .section h2 { color: #0072ff; }
-    .card { background: white; box-shadow: 0 0 10px rgba(0,0,0,0.05); padding: 20px; margin: 10px 0; border-left: 5px solid #0072ff; }
-    footer p { text-align: center; margin: 0; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111111" />
+  <meta name="description" content="EduIgnite — Learn Data Science, AI, and Programming with world-class resources and tools." />
+  <meta property="og:title" content="EduIgnite — Learn & Build Projects" />
+  <meta property="og:description" content="Pro-level projects, interactive learning, and secure authentication for a future-ready portfolio." />
+  <meta property="og:type" content="website" />
+  <title>EduIgnite — Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="/assets/css/shared.css" />
+
+  <noscript>
+    <style>
+      .requires-js { display: none !important; }
+    </style>
+  </noscript>
 </head>
 <body>
 
-<header>
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <h2>EduIgnite</h2>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="programming.html">Programming</a>
-      <a href="current-affairs.html">Current Affairs</a>
-      <a href="exam-tips.html">Exam Tips</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <a href="/" aria-label="EduIgnite Home">EduIgnite</a>
+        <span class="badge">🚀 Pro</span>
+      </div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/contact.html">Contact</a>
+
+        <button id="open-auth" class="btn btn-ghost small requires-js" aria-haspopup="dialog">Sign in</button>
+
+        <div id="user-chip" class="user-chip" style="display:none">
+          <div id="avatar" class="avatar" aria-hidden="true">U</div>
+          <span id="chip-email" class="small muted">user@eduignite.com</span>
+          <button id="logout" class="btn small btn-danger">Logout</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container grid two-col">
+      <div>
+        <h1>Data Science & AI Learning Like Never Before</h1>
+        <p>From interactive dashboards to cutting‑edge AI demos, EduIgnite gives you the tools and skills to stand out in the industry.</p>
+
+        <div class="grid" style="grid-template-columns: auto auto; gap:.6rem; margin-top:1rem">
+          <a href="/contact.html" class="btn btn-primary">Get Started</a>
+          <button id="cta-auth" class="btn requires-js">Sign in for Personalization</button>
+        </div>
+
+        <div class="grid" style="grid-template-columns: repeat(3,auto); gap:.6rem; margin-top:1rem">
+          <span class="badge"><strong>SLA:</strong> 24h</span>
+          <span class="badge"><strong>Stack:</strong> Python + JS + AI</span>
+          <span class="badge"><strong>Location:</strong> India</span>
+        </div>
+      </div>
+
+      <div class="card" style="padding:1.2rem">
+        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop" alt="Data Visualization" style="border-radius:8px">
+        <p class="help" style="margin-top:.6rem">Our real‑time data dashboards in action.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Offer -->
+  <section class="container grid" style="margin-top:1rem">
+    <h2>What we offer</h2>
+    <div class="grid" style="grid-template-columns: repeat(3,1fr); gap:1rem">
+      <div class="card" style="padding:1rem">
+        <h3 style="margin:.2rem 0">Practical learning</h3>
+        <p class="muted small">Hands‑on projects that simulate real industry challenges.</p>
+      </div>
+      <div class="card" style="padding:1rem">
+        <h3 style="margin:.2rem 0">Latest tools</h3>
+        <p class="muted small">Work with TensorFlow.js, Chart.js, D3.js, and more.</p>
+      </div>
+      <div class="card" style="padding:1rem">
+        <h3 style="margin:.2rem 0">Expert support</h3>
+        <p class="muted small">Personalized guidance from experts in Data Science & AI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="container grid" style="margin-top:1rem">
+    <h2>Featured projects</h2>
+    <div class="grid" style="grid-template-columns: repeat(3,1fr); gap:1rem">
+      <article class="card" style="padding:1rem">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="Sales Dashboard" style="border-radius:8px;margin-bottom:.6rem">
+        <strong>Sales Insights Dashboard</strong>
+        <p class="muted small">Interactive RFM analysis and forecasting with Chart.js.</p>
+      </article>
+      <article class="card" style="padding:1rem">
+        <img src="https://images.unsplash.com/photo-1521747116042-5a810fda9664?q=80&w=1200&auto=format&fit=crop" alt="Churn Model" style="border-radius:8px;margin-bottom:.6rem">
+        <strong>Customer Churn Model</strong>
+        <p class="muted small">Predict churn with scikit‑learn + interpretability tools.</p>
+      </article>
+      <article class="card" style="padding:1rem">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" alt="A/B Testing Simulator" style="border-radius:8px;margin-bottom:.6rem">
+        <strong>A/B Testing Simulator</strong>
+        <p class="muted small">Bayesian & Frequentist test comparison in browser.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container card" style="margin-top:1rem; padding:1.2rem">
+    <div class="grid two-col">
+      <div>
+        <h3>Want to see more? Join now.</h3>
+        <p class="muted small">Sign in to access exclusive content, project files, and private datasets.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:auto auto; gap:.6rem; align-content:center">
+        <a href="/contact.html" class="btn btn-primary">Contact Us</a>
+        <button class="btn requires-js" id="cta-auth-2">Sign in</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container" style="margin-top:1rem">
+    <h2>FAQs</h2>
+    <div class="accordion">
+      <details>
+        <summary>Are the projects beginner friendly?</summary>
+        <p class="muted small">Yes. Each project includes starter code, walkthroughs, and advanced extensions.</p>
+      </details>
+      <details>
+        <summary>Do you offer certificates?</summary>
+        <p class="muted small">You’ll get project completion certificates you can showcase in your portfolio.</p>
+      </details>
+      <details>
+        <summary>Is there mentor support?</summary>
+        <p class="muted small">Yes, via email and optional 1:1 sessions for complex blockers.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display:flex;align-items:center;gap:.6rem">
+      <div>© <span id="year"></span> EduIgnite</div>
+      <div style="flex:1"></div>
+      <div class="small">Follow:
+        <a href="https://instagram.com/eduignite_official" target="_blank" rel="noopener">Instagram</a> •
+        <a href="https://t.me/eduigniteofficial" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="auth-title" style="display:none">
+    <div class="modal card" role="document">
+      <div class="modal-header">
+        <div>
+          <div class="badge">Secure sign in</div>
+          <h3 id="auth-title" style="margin:.4rem 0 0">Welcome back</h3>
+          <p class="muted small">Use Google or your email.</p>
+        </div>
+        <button id="close-auth" class="close" aria-label="Close">×</button>
+      </div>
+      <div class="auth-actions">
+        <button id="google-btn" class="btn btn-primary">Continue with Google</button>
+        <div class="divider">or</div>
+        <label class="sr-only" for="auth-email">Email</label>
+        <input class="input" id="auth-email" type="email" placeholder="you@example.com" autocomplete="email">
+        <label class="sr-only" for="auth-pass">Password</label>
+        <input class="input" id="auth-pass" type="password" placeholder="Password" autocomplete="current-password">
+        <div style="display:flex;gap:.6rem;align-items:center;justify-content:space-between">
+          <button id="email-btn" class="btn">Sign in with Email</button>
+          <a class="small" href="/forgot.html">Forgot password?</a>
+        </div>
+        <p id="auth-error" class="error small" style="display:none;margin-top:.4rem">Invalid credentials. Try again.</p>
+      </div>
+    </div>
   </div>
-</header>
-<button onclick="document.body.classList.toggle('dark-mode')">🌙 Toggle Dark Mode</button>
 
-<section class="hero">
-  <h1>Welcome to EduIgnite</h1>
-  <p>Learn. Code. Grow. Everything you need to boost your knowledge in tech, current affairs, and competitive exams.</p>
-  <a href="programming.html" class="btn">Explore Programming</a>
-</section>
+  <!-- Shared components/scripts -->
+  <script src="/assets/js/components.js" defer></script>
 
-<div class="container">
-  <div class="section">
-    <h2>🔥 Trending Programming Topics</h2>
-    <div class="card">
-      <h3><a href="python-syntax.html">Python Syntax Explained</a></h3>
-      <p>Get started with Python by mastering its basic syntax. Designed for beginners.</p>
-    </div>
-    <div class="card">
-      <h3><a href="cpp-basic.html">C++ Basics & OOP Concepts</a></h3>
-      <p>Master classes, objects, constructors, and more. A must-read for all C++ learners.</p>
-    </div>
-    <div class="card">
-      <h3><a href="c-programming.html">C Programming Foundations</a></h3>
-      <p>Build your fundamentals with flow control, loops, arrays, and functions.</p>
-    </div>
-  </div>
+  <!-- Page script -->
+  <script>
+    (function () {
+      const $ = (sel) => document.querySelector(sel);
 
-  <div class="section">
-    <h2>🧠 Latest Current Affairs</h2>
-    <div class="card">
-      <h3><a href="current-affairs-may.html">May 2025 Highlights</a></h3>
-      <p>Stay updated with the most important news and developments from May 2025.</p>
-    </div>
-  </div>
+      // Elements
+      const authModal = $('#auth-modal');
+      const openAuth = $('#open-auth');
+      const ctaAuth = $('#cta-auth');
+      const ctaAuth2 = $('#cta-auth-2');
+      const closeAuth = $('#close-auth');
+      const googleBtn = $('#google-btn');
+      const emailBtn = $('#email-btn');
+      const emailInput = $('#auth-email');
+      const passInput = $('#auth-pass');
+      const authError = $('#auth-error');
+      const userChip = $('#user-chip');
+      const chipEmail = $('#chip-email');
+      const avatar = $('#avatar');
+      const logoutBtn = $('#logout');
 
-  <div class="section">
-    <h2>🎯 Boost Exam Performance</h2>
-    <div class="card">
-      <h3><a href="exam-tips.html">Exam Success Tips</a></h3>
-      <p>Proven strategies to manage time, stay focused, and perform well in exams.</p>
-    </div>
-  </div>
-</div>
+      // Helpers
+      const show = (el) => { if (el) el.style.display = ''; };
+      const hide = (el) => { if (el) el.style.display = 'none'; };
+      const openModal = () => { show(authModal); emailInput && emailInput.focus(); };
+      const closeModal = () => { hide(authModal); authError && hide(authError); };
 
-<footer>
-  <p>&copy; 2025 EduIgnite. All rights reserved. Crafted with ❤️ by Ankit Saini.</p>
-</footer>
-<section id="quiz-section">
-  <h2>Aptitude Quiz: What’s 7 × 8?</h2>
-  <form id="quizForm">
-    <label><input type="radio" name="q1" value="54"> 54</label><br>
-    <label><input type="radio" name="q1" value="56"> 56</label><br>
-    <label><input type="radio" name="q1" value="60"> 60</label><br>
-    <button type="submit">Check Answer</button>
-  </form>
-  <p id="quizResult"></p>
-</section>
+      // Year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-<script>
-document.getElementById("quizForm").onsubmit = e => {
-  e.preventDefault();
-  const ans = document.querySelector('input[name="q1"]:checked').value;
-  document.getElementById("quizResult").textContent = ans === "56" ? "✅ Correct!" : "❌ Try again.";
-};
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const lazyImages = document.querySelectorAll("img.lazy");
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.classList.remove("lazy");
-        observer.unobserve(img);
+      // Persisted auth (demo)
+      const state = {
+        get user() {
+          try { return JSON.parse(localStorage.getItem('ei_user') || 'null'); }
+          catch { return null; }
+        },
+        set user(val) {
+          if (val) localStorage.setItem('ei_user', JSON.stringify(val));
+          else localStorage.removeItem('ei_user');
+        }
+      };
+
+      // Render auth state
+      function renderAuth() {
+        const u = state.user;
+        if (u) {
+          hide(openAuth);
+          hide(ctaAuth);
+          hide(ctaAuth2);
+          chipEmail.textContent = u.email;
+          avatar.textContent = (u.email[0] || 'U').toUpperCase();
+          show(userChip);
+        } else {
+          show(openAuth);
+          show(ctaAuth);
+          show(ctaAuth2);
+          hide(userChip);
+        }
       }
-    });
-  });
-  lazyImages.forEach(img => observer.observe(img));
-});
-</script>
 
+      // Event wiring
+      [openAuth, ctaAuth, ctaAuth2].forEach(btn => btn && btn.addEventListener('click', openModal));
+      closeAuth && closeAuth.addEventListener('click', closeModal);
+
+      // Close on backdrop click
+      authModal && authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) closeModal();
+      });
+
+      // Escape to close
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && authModal && authModal.style.display !== 'none') closeModal();
+      });
+
+      // Demo sign-in flows
+      googleBtn && googleBtn.addEventListener('click', () => {
+        state.user = { email: 'you@gmail.com', provider: 'google' };
+        renderAuth();
+        closeModal();
+      });
+
+      emailBtn && emailBtn.addEventListener('click', () => {
+        const email = (emailInput.value || '').trim();
+        const pass = (passInput.value || '').trim();
+        if (!email || !pass || !email.includes('@') || pass.length < 4) {
+          show(authError);
+          return;
+        }
+        state.user = { email, provider: 'password' };
+        renderAuth();
+        closeModal();
+      });
+
+      logoutBtn && logoutBtn.addEventListener('click', () => {
+        state.user = null;
+        renderAuth();
+      });
+
+      // Init
+      renderAuth();
+    })();
+  </script>
 </body>
 </html>
-
