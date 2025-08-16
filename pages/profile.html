@@ -1,0 +1,28 @@
+<section class="section">
+  <div class="kicker">Account</div>
+  <h2 class="h1">Your profile</h2>
+  <p class="muted">Personalized space for progress and saved items.</p>
+</section>
+
+<div class="card" style="margin-top:18px;">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <strong>Status:</strong>
+      <span id="authStatus">
+        <script>
+          document.currentScript.parentElement.querySelector('#authStatus').textContent =
+            (localStorage.getItem('signedIn') === 'true') ? 'Signed in' : 'Guest';
+        </script>
+      </span>
+    </div>
+    <button class="btn" id="signToggle">
+      <script>
+        document.currentScript.parentElement.textContent =
+          (localStorage.getItem('signedIn') === 'true') ? 'Sign out' : 'Sign in';
+      </script>
+    </button>
+  </div>
+  <div style="margin-top:12px;">
+    <p class="muted">Next pass will wire real Firebase Auth (Google/GitHub) with JWT and protected routes.</p>
+  </div>
+</div>
