@@ -1,297 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#111111" />
-  <meta name="description" content="EduIgnite — Learn Data Science, AI, and Programming with world-class resources and tools." />
-  <meta property="og:title" content="EduIgnite — Learn & Build Projects" />
-  <meta property="og:description" content="Pro-level projects, interactive learning, and secure authentication for a future-ready portfolio." />
+  <title>EduIgnite — Data Science, ML, and Interactive Analytics</title>
+  <meta name="description" content="EduIgnite: world-class portfolio and learning hub for Data Science, Machine Learning, and interactive analytics demos." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  <meta property="og:title" content="EduIgnite — Data Science, ML, and Interactive Analytics" />
+  <meta property="og:description" content="Projects, courses, tools, research. Built to impress recruiters and inspire learners." />
   <meta property="og:type" content="website" />
-  <title>EduIgnite — Home</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Shared styles -->
-  <link rel="stylesheet" href="/assets/css/shared.css" />
-
-  <noscript>
-    <style>
-      .requires-js { display: none !important; }
-    </style>
-  </noscript>
+  <meta property="og:url" content="https://your-domain.example" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0f172a/ffffff&text=EduIgnite" />
 </head>
 <body>
+  <a class="skip-link" href="#app">Skip to content</a>
 
-  <!-- Navigation -->
-  <header class="nav">
-    <div class="container nav-inner">
-      <div class="brand">
-        <span class="brand-dot"></span>
-        <a href="/" aria-label="EduIgnite Home">EduIgnite</a>
-        <span class="badge">🚀 Pro</span>
-      </div>
-      <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/contact.html">Contact</a>
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="#/" class="brand" aria-label="EduIgnite Home">
+        <span class="logo">🔥</span>
+        <span class="brand-text">EduIgnite</span>
+      </a>
 
-        <button id="open-auth" class="btn btn-ghost small requires-js" aria-haspopup="dialog">Sign in</button>
+      <nav class="nav" aria-label="Primary">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="#/" data-link>Home</a>
+          </li>
 
-        <div id="user-chip" class="user-chip" style="display:none">
-          <div id="avatar" class="avatar" aria-hidden="true">U</div>
-          <span id="chip-email" class="small muted">user@eduignite.com</span>
-          <button id="logout" class="btn small btn-danger">Logout</button>
-        </div>
+          <li class="menu-item mega-parent">
+            <button class="mega-toggle" aria-expanded="false">Projects</button>
+            <div class="mega-menu" role="menu" aria-label="Projects mega menu">
+              <div class="mega-col">
+                <h4>Machine Learning</h4>
+                <a href="#/projects?cat=ml" data-link>All ML Projects</a>
+                <a href="#/projects?cat=classification" data-link>Classification</a>
+                <a href="#/projects?cat=regression" data-link>Regression</a>
+                <a href="#/projects?cat=timeseries" data-link>Time Series</a>
+              </div>
+              <div class="mega-col">
+                <h4>Analytics & BI</h4>
+                <a href="#/projects?cat=dashboards" data-link>Dashboards</a>
+                <a href="#/projects?cat=ab" data-link>A/B Testing</a>
+                <a href="#/projects?cat=forecast" data-link>Forecasting</a>
+              </div>
+              <div class="mega-col">
+                <h4>NLP & CV</h4>
+                <a href="#/projects?cat=nlp" data-link>NLP</a>
+                <a href="#/projects?cat=cv" data-link>Computer Vision</a>
+                <a href="#/projects?cat=llm" data-link>LLM Apps</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="menu-item mega-parent">
+            <button class="mega-toggle" aria-expanded="false">Courses</button>
+            <div class="mega-menu" role="menu" aria-label="Courses mega menu">
+              <div class="mega-col">
+                <h4>Foundations</h4>
+                <a href="#/courses?track=python" data-link>Python</a>
+                <a href="#/courses?track=sql" data-link>SQL</a>
+                <a href="#/courses?track=eda" data-link>EDA</a>
+              </div>
+              <div class="mega-col">
+                <h4>Machine Learning</h4>
+                <a href="#/courses?track=ml" data-link>ML Essentials</a>
+                <a href="#/courses?track=sklearn" data-link>scikit-learn</a>
+                <a href="#/courses?track=feature" data-link>Feature Engineering</a>
+              </div>
+              <div class="mega-col">
+                <h4>Deep Learning</h4>
+                <a href="#/courses?track=tensorflow" data-link>TensorFlow</a>
+                <a href="#/courses?track=cv" data-link>Computer Vision</a>
+                <a href="#/courses?track=nlp" data-link>NLP</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="menu-item"><a href="#/tools" data-link>Tools</a></li>
+          <li class="menu-item"><a href="#/research" data-link>Research</a></li>
+          <li class="menu-item"><a href="#/about" data-link>About</a></li>
+          <li class="menu-item"><a href="#/contact" data-link>Contact</a></li>
+        </ul>
       </nav>
+
+      <div class="actions">
+        <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <a class="btn btn-primary" href="#/profile" data-link>Sign in</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container grid two-col">
+  <main id="app" class="container" tabindex="-1" aria-live="polite">
+    <!-- SPA content loads here -->
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
       <div>
-        <h1>Data Science & AI Learning Like Never Before</h1>
-        <p>From interactive dashboards to cutting‑edge AI demos, EduIgnite gives you the tools and skills to stand out in the industry.</p>
-
-        <div class="grid" style="grid-template-columns: auto auto; gap:.6rem; margin-top:1rem">
-          <a href="/contact.html" class="btn btn-primary">Get Started</a>
-          <button id="cta-auth" class="btn requires-js">Sign in for Personalization</button>
+        <div class="brand foot">
+          <span class="logo">🔥</span><span class="brand-text">EduIgnite</span>
         </div>
-
-        <div class="grid" style="grid-template-columns: repeat(3,auto); gap:.6rem; margin-top:1rem">
-          <span class="badge"><strong>SLA:</strong> 24h</span>
-          <span class="badge"><strong>Stack:</strong> Python + JS + AI</span>
-          <span class="badge"><strong>Location:</strong> India</span>
-        </div>
+        <p class="muted">World-class data science portfolio, courses, and interactive demos.</p>
       </div>
-
-      <div class="card" style="padding:1.2rem">
-        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop" alt="Data Visualization" style="border-radius:8px">
-        <p class="help" style="margin-top:.6rem">Our real‑time data dashboards in action.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- What We Offer -->
-  <section class="container grid" style="margin-top:1rem">
-    <h2>What we offer</h2>
-    <div class="grid" style="grid-template-columns: repeat(3,1fr); gap:1rem">
-      <div class="card" style="padding:1rem">
-        <h3 style="margin:.2rem 0">Practical learning</h3>
-        <p class="muted small">Hands‑on projects that simulate real industry challenges.</p>
-      </div>
-      <div class="card" style="padding:1rem">
-        <h3 style="margin:.2rem 0">Latest tools</h3>
-        <p class="muted small">Work with TensorFlow.js, Chart.js, D3.js, and more.</p>
-      </div>
-      <div class="card" style="padding:1rem">
-        <h3 style="margin:.2rem 0">Expert support</h3>
-        <p class="muted small">Personalized guidance from experts in Data Science & AI.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Projects -->
-  <section class="container grid" style="margin-top:1rem">
-    <h2>Featured projects</h2>
-    <div class="grid" style="grid-template-columns: repeat(3,1fr); gap:1rem">
-      <article class="card" style="padding:1rem">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop" alt="Sales Dashboard" style="border-radius:8px;margin-bottom:.6rem">
-        <strong>Sales Insights Dashboard</strong>
-        <p class="muted small">Interactive RFM analysis and forecasting with Chart.js.</p>
-      </article>
-      <article class="card" style="padding:1rem">
-        <img src="https://images.unsplash.com/photo-1521747116042-5a810fda9664?q=80&w=1200&auto=format&fit=crop" alt="Churn Model" style="border-radius:8px;margin-bottom:.6rem">
-        <strong>Customer Churn Model</strong>
-        <p class="muted small">Predict churn with scikit‑learn + interpretability tools.</p>
-      </article>
-      <article class="card" style="padding:1rem">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop" alt="A/B Testing Simulator" style="border-radius:8px;margin-bottom:.6rem">
-        <strong>A/B Testing Simulator</strong>
-        <p class="muted small">Bayesian & Frequentist test comparison in browser.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="container card" style="margin-top:1rem; padding:1.2rem">
-    <div class="grid two-col">
-      <div>
-        <h3>Want to see more? Join now.</h3>
-        <p class="muted small">Sign in to access exclusive content, project files, and private datasets.</p>
-      </div>
-      <div class="grid" style="grid-template-columns:auto auto; gap:.6rem; align-content:center">
-        <a href="/contact.html" class="btn btn-primary">Contact Us</a>
-        <button class="btn requires-js" id="cta-auth-2">Sign in</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="container" style="margin-top:1rem">
-    <h2>FAQs</h2>
-    <div class="accordion">
-      <details>
-        <summary>Are the projects beginner friendly?</summary>
-        <p class="muted small">Yes. Each project includes starter code, walkthroughs, and advanced extensions.</p>
-      </details>
-      <details>
-        <summary>Do you offer certificates?</summary>
-        <p class="muted small">You’ll get project completion certificates you can showcase in your portfolio.</p>
-      </details>
-      <details>
-        <summary>Is there mentor support?</summary>
-        <p class="muted small">Yes, via email and optional 1:1 sessions for complex blockers.</p>
-      </details>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container" style="display:flex;align-items:center;gap:.6rem">
-      <div>© <span id="year"></span> EduIgnite</div>
-      <div style="flex:1"></div>
-      <div class="small">Follow:
-        <a href="https://instagram.com/eduignite_official" target="_blank" rel="noopener">Instagram</a> •
-        <a href="https://t.me/eduigniteofficial" target="_blank" rel="noopener">Telegram</a>
+      <nav aria-label="Footer">
+        <ul class="foot-links">
+          <li><a href="#/" data-link>Home</a></li>
+          <li><a href="#/projects" data-link>Projects</a></li>
+          <li><a href="#/courses" data-link>Courses</a></li>
+          <li><a href="#/tools" data-link>Tools</a></li>
+          <li><a href="#/research" data-link>Research</a></li>
+          <li><a href="#/about" data-link>About</a></li>
+          <li><a href="#/contact" data-link>Contact</a></li>
+        </ul>
+      </nav>
+      <div class="foot-meta">
+        <span>© <span id="year"></span> EduIgnite</span>
+        <span>Built by Ankit Saini</span>
       </div>
     </div>
   </footer>
 
-  <!-- Auth Modal -->
-  <div id="auth-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="auth-title" style="display:none">
-    <div class="modal card" role="document">
-      <div class="modal-header">
-        <div>
-          <div class="badge">Secure sign in</div>
-          <h3 id="auth-title" style="margin:.4rem 0 0">Welcome back</h3>
-          <p class="muted small">Use Google or your email.</p>
-        </div>
-        <button id="close-auth" class="close" aria-label="Close">×</button>
-      </div>
-      <div class="auth-actions">
-        <button id="google-btn" class="btn btn-primary">Continue with Google</button>
-        <div class="divider">or</div>
-        <label class="sr-only" for="auth-email">Email</label>
-        <input class="input" id="auth-email" type="email" placeholder="you@example.com" autocomplete="email">
-        <label class="sr-only" for="auth-pass">Password</label>
-        <input class="input" id="auth-pass" type="password" placeholder="Password" autocomplete="current-password">
-        <div style="display:flex;gap:.6rem;align-items:center;justify-content:space-between">
-          <button id="email-btn" class="btn">Sign in with Email</button>
-          <a class="small" href="/forgot.html">Forgot password?</a>
-        </div>
-        <p id="auth-error" class="error small" style="display:none;margin-top:.4rem">Invalid credentials. Try again.</p>
-      </div>
-    </div>
-  </div>
+  <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
 
-  <!-- Shared components/scripts -->
-  <script src="/assets/js/components.js" defer></script>
-
-  <!-- Page script -->
-  <script>
-    (function () {
-      const $ = (sel) => document.querySelector(sel);
-
-      // Elements
-      const authModal = $('#auth-modal');
-      const openAuth = $('#open-auth');
-      const ctaAuth = $('#cta-auth');
-      const ctaAuth2 = $('#cta-auth-2');
-      const closeAuth = $('#close-auth');
-      const googleBtn = $('#google-btn');
-      const emailBtn = $('#email-btn');
-      const emailInput = $('#auth-email');
-      const passInput = $('#auth-pass');
-      const authError = $('#auth-error');
-      const userChip = $('#user-chip');
-      const chipEmail = $('#chip-email');
-      const avatar = $('#avatar');
-      const logoutBtn = $('#logout');
-
-      // Helpers
-      const show = (el) => { if (el) el.style.display = ''; };
-      const hide = (el) => { if (el) el.style.display = 'none'; };
-      const openModal = () => { show(authModal); emailInput && emailInput.focus(); };
-      const closeModal = () => { hide(authModal); authError && hide(authError); };
-
-      // Year
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-      // Persisted auth (demo)
-      const state = {
-        get user() {
-          try { return JSON.parse(localStorage.getItem('ei_user') || 'null'); }
-          catch { return null; }
-        },
-        set user(val) {
-          if (val) localStorage.setItem('ei_user', JSON.stringify(val));
-          else localStorage.removeItem('ei_user');
-        }
-      };
-
-      // Render auth state
-      function renderAuth() {
-        const u = state.user;
-        if (u) {
-          hide(openAuth);
-          hide(ctaAuth);
-          hide(ctaAuth2);
-          chipEmail.textContent = u.email;
-          avatar.textContent = (u.email[0] || 'U').toUpperCase();
-          show(userChip);
-        } else {
-          show(openAuth);
-          show(ctaAuth);
-          show(ctaAuth2);
-          hide(userChip);
-        }
-      }
-
-      // Event wiring
-      [openAuth, ctaAuth, ctaAuth2].forEach(btn => btn && btn.addEventListener('click', openModal));
-      closeAuth && closeAuth.addEventListener('click', closeModal);
-
-      // Close on backdrop click
-      authModal && authModal.addEventListener('click', (e) => {
-        if (e.target === authModal) closeModal();
-      });
-
-      // Escape to close
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && authModal && authModal.style.display !== 'none') closeModal();
-      });
-
-      // Demo sign-in flows
-      googleBtn && googleBtn.addEventListener('click', () => {
-        state.user = { email: 'you@gmail.com', provider: 'google' };
-        renderAuth();
-        closeModal();
-      });
-
-      emailBtn && emailBtn.addEventListener('click', () => {
-        const email = (emailInput.value || '').trim();
-        const pass = (passInput.value || '').trim();
-        if (!email || !pass || !email.includes('@') || pass.length < 4) {
-          show(authError);
-          return;
-        }
-        state.user = { email, provider: 'password' };
-        renderAuth();
-        closeModal();
-      });
-
-      logoutBtn && logoutBtn.addEventListener('click', () => {
-        state.user = null;
-        renderAuth();
-      });
-
-      // Init
-      renderAuth();
-    })();
-  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
+
