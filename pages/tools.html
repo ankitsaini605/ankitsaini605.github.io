@@ -1,55 +1,94 @@
+<style>
+  .table { width:100%; border-collapse: collapse; }
+  .table th, .table td { padding:8px 10px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); text-align:left; }
+  .table-wrap { overflow:auto; }
+  .subgrid { display:grid; gap:16px; grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px){ .subgrid{ grid-template-columns: 1fr; } }
+</style>
+
 <section class="section">
   <div class="kicker">Playground</div>
   <h2 class="h1">Interactive tools & demos</h2>
-  <p class="muted">Try concepts live in your browser. Private datasets never leave your machine.</p>
+  <p class="muted">Run real data science in your browser. Your CSVs stay private — nothing uploads to a server.</p>
 </section>
 
-<div class="grid grid-3" style="margin-top:18px;">
-  <article class="card">
-    <h3>RFM Clustering (CSV)</h3>
-    <p class="muted">Upload CSV with columns: customer_id, order_date (YYYY-MM-DD), revenue.</p>
-    <input type="file" id="rfmCsv" accept=".csv"/>
-    <button class="btn btn-primary" id="runRfm" style="margin-top:8px;">Run segmentation</button>
-    <pre id="rfmOut" style="margin-top:10px; white-space:pre-wrap;"></pre>
-  </article>
-
-  <article class="card">
-    <h3>A/B Testing Simulator</h3>
-    <form id="abForm">
-      <div class="row">
-        <div>
-          <label>Variant A — Visitors</label>
-          <input name="nA" type="number" min="1" value="1000"/>
-        </div>
-        <div>
-          <label>Variant A — Conversions</label>
-          <input name="cA" type="number" min="0" value="120"/>
-        </div>
+<!-- CSV EDA -->
+<section class="card" style="margin-top:18px;">
+  <h3>CSV EDA (profile your data)</h3>
+  <p class="muted">Upload a CSV with headers. We’ll compute summary stats, missing values, histograms, and correlations.</p>
+  <div class="subgrid">
+    <div>
+      <input type="file" id="edaCsv" accept=".csv"/>
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <button class="btn btn-primary" id="runEda">Profile CSV</button>
+        <select id="edaColSelect" title="Numeric column for histogram"></select>
       </div>
-      <div class="row" style="margin-top:8px;">
-        <div>
-          <label>Variant B — Visitors</label>
-          <input name="nB" type="number" min="1" value="1000"/>
-        </div>
-        <div>
-          <label>Variant B — Conversions</label>
-          <input name="cB" type="number" min="0" value="150"/>
-        </div>
-      </div>
-    </form>
-    <canvas id="abChart" height="160" style="margin-top:10px;"></canvas>
-    <div id="abOut" class="muted" style="margin-top:8px;"></div>
-  </article>
+      <canvas id="histChart" height="140" style="margin-top:12px;"></canvas>
+    </div>
+    <div>
+      <h4>Summary</h4>
+      <div id="edaSummary"></div>
+      <h4 style="margin-top:12px;">Correlation (numeric cols)</h4>
+      <div id="corrTable"></div>
+    </div>
+  </div>
+  <h4 style="margin-top:12px;">Preview (first 5 rows)</h4>
+  <div id="edaHead" class="table-wrap"></div>
+</section>
 
-  <article class="card">
-    <h3>Mini ML with TensorFlow.js</h3>
-    <p class="muted">Train a tiny dense model on a synthetic dataset in your browser.</p>
-    <button class="btn btn-primary" id="tfRun">Train & Predict</button>
-    <pre id="tfOut" style="margin-top:10px;"></pre>
-    <hr class="hr"/>
-    <h4>Optional: Python-in-browser (Pyodide)</h4>
-    <button class="btn" id="pyRun">Run Python EDA</button>
-    <pre id="pyOut" style="margin-top:10px;"></pre>
-  </article>
-</div>
+<!-- A/B Testing Simulator -->
+<section class="card" style="margin-top:18px;">
+  <h3>A/B testing simulator (frequentist + Bayesian)</h3>
+  <form id="abForm">
+    <div class="row">
+      <div>
+        <label>Variant A — Visitors</label>
+        <input name="nA" type="number" min="1" value="1000"/>
+      </div>
+      <div>
+        <label>Variant A — Conversions</label>
+        <input name="cA" type="number" min="0" value="120"/>
+      </div>
+    </div>
+    <div class="row" style="margin-top:8px;">
+      <div>
+        <label>Variant B — Visitors</label>
+        <input name="nB" type="number" min="1" value="1000"/>
+      </div>
+      <div>
+        <label>Variant B — Conversions</label>
+        <input name="cB" type="number" min="0" value="150"/>
+      </div>
+    </div>
+  </form>
+  <canvas id="abChart" height="160" style="margin-top:10px;"></canvas>
+  <div id="abOut" class="muted" style="margin-top:8px;"></div>
+</section>
+
+<!-- TensorFlow.js + Pyodide -->
+<section class="card" style="margin-top:18px;">
+  <h3>Mini ML with TensorFlow.js + optional Python (Pyodide)</h3>
+  <div style="display:flex; gap:10px; flex-wrap:wrap">
+    <div style="flex:1; min-width:260px;">
+      <p class="muted">Train a tiny regression model on synthetic data in your browser.</p>
+      <button class="btn btn-primary" id="tfRun">Train & Predict</button>
+      <pre id="tfOut" style="margin-top:10px;"></pre>
+    </div>
+    <div style="flex:1; min-width:260px;">
+      <p class="muted">Run quick Python EDA via WebAssembly (no server needed).</p>
+      <button class="btn" id="pyRun">Run Python EDA</button>
+      <pre id="pyOut" style="margin-top:10px;"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- SQL Lab -->
+<section class="card" style="margin-top:18px;">
+  <h3>SQL lab (in-browser SQLite)</h3>
+  <p id="sqlInfo" class="muted">Loading SQL engine…</p>
+  <textarea id="sqlQuery" rows="5" placeholder="SELECT category, SUM(revenue) AS rev FROM sales GROUP BY category ORDER BY rev DESC;"></textarea>
+  <div style="margin-top:10px;"><button class="btn btn-primary" id="sqlRun">Run query</button></div>
+  <div id="sqlOut" class="table-wrap" style="margin-top:10px;"></div>
+</section>
+
 
