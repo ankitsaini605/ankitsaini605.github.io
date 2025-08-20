@@ -4,20 +4,52 @@
   <p class="muted">Try concepts live in your browser. Private datasets never leave your machine.</p>
 </section>
 
-<section class="grid grid-3" style="margin-top:18px;">
+<div class="grid grid-3" style="margin-top:18px;">
   <article class="card">
-    <h3>RFM Clustering</h3>
-    <p class="muted">Upload CSV sales and view auto-segmentation results.</p>
-    <button class="btn btn-primary" id="rfmDemo">Launch</button>
+    <h3>RFM Clustering (CSV)</h3>
+    <p class="muted">Upload CSV with columns: customer_id, order_date (YYYY-MM-DD), revenue.</p>
+    <input type="file" id="rfmCsv" accept=".csv"/>
+    <button class="btn btn-primary" id="runRfm" style="margin-top:8px;">Run segmentation</button>
+    <pre id="rfmOut" style="margin-top:10px; white-space:pre-wrap;"></pre>
   </article>
+
   <article class="card">
-    <h3>Churn Probability</h3>
-    <p class="muted">Estimate churn risk with a simple feature form.</p>
-    <button class="btn">Open</button>
+    <h3>A/B Testing Simulator</h3>
+    <form id="abForm">
+      <div class="row">
+        <div>
+          <label>Variant A — Visitors</label>
+          <input name="nA" type="number" min="1" value="1000"/>
+        </div>
+        <div>
+          <label>Variant A — Conversions</label>
+          <input name="cA" type="number" min="0" value="120"/>
+        </div>
+      </div>
+      <div class="row" style="margin-top:8px;">
+        <div>
+          <label>Variant B — Visitors</label>
+          <input name="nB" type="number" min="1" value="1000"/>
+        </div>
+        <div>
+          <label>Variant B — Conversions</label>
+          <input name="cB" type="number" min="0" value="150"/>
+        </div>
+      </div>
+    </form>
+    <canvas id="abChart" height="160" style="margin-top:10px;"></canvas>
+    <div id="abOut" class="muted" style="margin-top:8px;"></div>
   </article>
+
   <article class="card">
-    <h3>A/B Test Simulator</h3>
-    <p class="muted">Frequentist vs Bayesian comparison with visuals.</p>
-    <button class="btn">Open</button>
+    <h3>Mini ML with TensorFlow.js</h3>
+    <p class="muted">Train a tiny dense model on a synthetic dataset in your browser.</p>
+    <button class="btn btn-primary" id="tfRun">Train & Predict</button>
+    <pre id="tfOut" style="margin-top:10px;"></pre>
+    <hr class="hr"/>
+    <h4>Optional: Python-in-browser (Pyodide)</h4>
+    <button class="btn" id="pyRun">Run Python EDA</button>
+    <pre id="pyOut" style="margin-top:10px;"></pre>
   </article>
-</section>
+</div>
+
