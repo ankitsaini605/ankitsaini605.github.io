@@ -1,5 +1,8 @@
 // 1) Add this route to the routes object (near others)
 '/project-sales': { file: 'pages/project-sales.html', title: 'Sales Insights — EduIgnite', desc: 'Cohorts, RFM, KPIs, and forecasts from transactional data.' },
+// In routes object:
+'/project-churn': { file: 'pages/project-churn.html', title: 'Churn Prediction — EduIgnite', desc: 'Predict churn, explain drivers, and simulate retention levers.' },
+
 
 // 2) Inside enhance(path), add this block:
 if (path === '/project-sales') {
