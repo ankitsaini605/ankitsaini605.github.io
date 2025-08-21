@@ -1,0 +1,40 @@
+name: Export Sales JSON
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-json:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas
+
+      - name: Run exporter
+        run: |
+          if [ -f sales.csv ]; then
+            python sales_export.py
+          else
+            echo "No sales.csv found; skipping export."
+          fi
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/sales/*.json || true
+          git commit -m "Update sales JSON [ci skip]" || echo "No changes"
+          git push
