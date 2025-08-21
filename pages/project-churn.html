@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="kicker">Case study</div>
+  <h2 class="h1">Churn prediction & retention lab</h2>
+  <p class="muted">Predict which customers might churn, why they churn, and how to reduce it — with explainable drivers and “what‑if” simulation.</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Executive summary</h3>
+  <ul>
+    <li><strong>Lift levers:</strong> Frequent, recent, higher‑value customers churn significantly less. Improve post‑purchase touchpoints.</li>
+    <li><strong>Action:</strong> Discount + engagement combo for mid‑risk cohorts brings fastest ROI.</li>
+    <li><strong>Monitoring:</strong> Track risk distribution weekly to catch spikes early.</li>
+  </ul>
+
+  <div id="churn-kpis" class="kpis" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px"></div>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Churn probability distribution</h3>
+  <canvas id="churnDist" height="140"></canvas>
+  <p class="muted" style="margin-top:8px;">Low‑risk customers concentrate near 0.1–0.3; spikes near 0.6+ need win‑back.</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Top churn drivers</h3>
+  <canvas id="churnImportances" height="140"></canvas>
+  <p class="muted" style="margin-top:8px;">Higher bar = stronger influence on churn risk (model‑based importance).</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>What‑if simulator</h3>
+  <p class="muted">Adjust the sliders to test how changing recency, frequency, or spend might affect churn probability.</p>
+  <div id="whatIfCtrls" style="display:grid;gap:10px;"></div>
+  <div style="margin-top:12px;">
+    <strong>Predicted churn probability:</strong> <span id="whatIfProb">—</span>
+  </div>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Method</h3>
+  <p class="muted">
+    Data cleaned and encoded. Baseline Logistic Regression + Gradient Boosting trained offline in CI.
+    We export metrics, feature importances, probability histograms, and a small linear model for in‑browser what‑if analysis.
+  </p>
+</section>
