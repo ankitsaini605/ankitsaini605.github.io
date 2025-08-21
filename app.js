@@ -86,6 +86,91 @@ if (path === '/project-sales') {
   }).join('');
   cohortTable.innerHTML = `<div class="table-wrap"><table class="table">${head}<tbody>${body}</tbody></table></div>`;
 }
+if (path === '/project-churn') {
+  const churn = {
+    metrics: 'data/churn/metrics.json',
+    importances: 'data/churn/importance.json',
+    dist: 'data/churn/distribution.json',
+    whatif: 'data/churn/whatif.json'
+  };
+  const load = (p) => fetch(p, {cache:'no-store'}).then(r=>r.json());
+  // Ensure Chart.js present
+  const chartCdn = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js';
+  const loadScriptOnce = (src) => new Promise((res,rej)=>{ if(document.querySelector(`script[src="${src}"]`)) return res(); const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.body.appendChild(s); });
+
+  const kpisEl = app.querySelector('#churn-kpis');
+  const distCanvas = app.querySelector('#churnDist');
+  const impCanvas = app.querySelector('#churnImportances');
+  const ctrlEl = app.querySelector('#whatIfCtrls');
+  const probEl = app.querySelector('#whatIfProb');
+
+  const [metrics, importances, dist, whatif] = await Promise.all([
+    load(churn.metrics), load(churn.importances), load(churn.dist), load(churn.whatif)
+  ]);
+
+  // KPIs
+  kpisEl.innerHTML = `
+    <div class="kpi"><strong>${metrics.rows.toLocaleString('en-IN')}</strong><span>Customers</span></div>
+    <div class="kpi"><strong>${metrics.positive_rate.toFixed(2)}%</strong><span>Churn rate</span></div>
+    <div class="kpi"><strong>${metrics.auc_gb.toFixed(3)}</strong><span>AUC (GB)</span></div>
+    <div class="kpi"><strong>${metrics.auc_lr.toFixed(3)}</strong><span>AUC (LR)</span></div>
+    <div class="kpi"><strong>${metrics.n_features}</strong><span>Features used</span></div>
+    <div class="kpi"><strong>${metrics.updated_at}</strong><span>Last updated</span></div>
+  `;
+
+  // Charts
+  await loadScriptOnce(chartCdn);
+
+  // Distribution (two hist lines)
+  const dctx = distCanvas.getContext('2d');
+  new Chart(dctx, {
+    type:'line',
+    data:{
+      labels: dist.bins,
+      datasets:[
+        {label:'Active', data:dist.active, borderColor:'#22d3ee', tension:.25},
+        {label:'Churned', data:dist.churned, borderColor:'#ef4444', tension:.25}
+      ]
+    },
+    options:{ plugins:{ legend:{ position:'bottom' } }, scales:{ x:{ title:{display:true,text:'Churn probability'} }, y:{ beginAtZero:true } } }
+  });
+
+  // Importances
+  const ictx = impCanvas.getContext('2d');
+  new Chart(ictx, {
+    type:'bar',
+    data:{ labels: importances.map(d=>d.feature), datasets:[{ label:'Importance', data:importances.map(d=>d.importance), backgroundColor:'#7c3aed' }] },
+    options:{ indexAxis:'y', plugins:{ legend:{ display:false } } }
+  });
+
+  // What-if UI
+  const feats = whatif.features; // [{name,min,max,mean,std,coef}]
+  feats.forEach(f=>{
+    const id = `wf_${f.name}`;
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `
+      <label for="${id}"><strong>${f.name}</strong> <span class="muted">(min: ${f.min}, max: ${f.max}, current: <span id="${id}_val">${Math.round(f.mean)})</span></span></label>
+      <input type="range" id="${id}" min="${f.min}" max="${f.max}" value="${f.mean}" step="${Math.max(1, Math.round((f.max-f.min)/100))}">
+    `;
+    ctrlEl.appendChild(wrap);
+    const range = wrap.querySelector(`#${id}`);
+    const valSpan = wrap.querySelector(`#${id}_val`);
+    range.addEventListener('input', ()=>{ valSpan.textContent = range.value; updateProb(); });
+  });
+
+  function sigmoid(z){ return 1/(1+Math.exp(-z)); }
+  function updateProb(){
+    let z = whatif.intercept;
+    feats.forEach(f=>{
+      const x = +document.getElementById(`wf_${f.name}`).value;
+      const zscore = f.std ? (x - f.mean)/f.std : 0;
+      z += f.coef * zscore;
+    });
+    const p = sigmoid(z);
+    probEl.textContent = (p*100).toFixed(1)+'%';
+  }
+  updateProb();
+}
 
 
 
