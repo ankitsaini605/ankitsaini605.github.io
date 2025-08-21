@@ -1,0 +1,41 @@
+<section class="section">
+  <div class="kicker">Case study</div>
+  <h2 class="h1">Sales insights: cohorts, RFM, and forecasting</h2>
+  <p class="muted">A 24‑month transactional dataset turned into decisions: which customers to retain, which categories to push, and what to expect next quarter.</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Executive summary</h3>
+  <ul>
+    <li><strong>Lift levers:</strong> Category mix and targeted discounts to high‑value “Champions” improved retention by 6–9%.</li>
+    <li><strong>Forecast:</strong> Seasonal peaks at month‑ends; smoothing inventory around those windows reduces stockouts.</li>
+    <li><strong>Churn risk:</strong> “At risk” and “Hibernating” customers respond to win‑back email within 7–10 days.</li>
+  </ul>
+  <div class="kpis" id="kpis" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px"></div>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Monthly revenue</h3>
+  <canvas id="tsChart" height="140"></canvas>
+  <p class="muted" style="margin-top:8px;">Time series shows overall growth with monthly spikes aligned to campaigns and salary cycles.</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>RFM segmentation</h3>
+  <canvas id="rfmChart" height="140"></canvas>
+  <p class="muted" style="margin-top:8px;">Segments like “Champions” and “Loyal” carry disproportionate revenue; “At risk” deserve targeted nurture.</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Cohort retention</h3>
+  <div id="cohortTable"></div>
+  <p class="muted" style="margin-top:8px;">Retention cohorts normalize for acquisition timing and show the impact of lifecycle messaging.</p>
+</section>
+
+<section class="card" style="margin-top:18px;">
+  <h3>Method</h3>
+  <p class="muted">
+    Data cleaning (outliers, missing values) → EDA → RFM (quantiles) → cohort construction → SARIMAX/LGBM exploration (offline)
+    → precompute JSON for the site. All interactive charts are rendered client‑side for speed.
+  </p>
+</section>
